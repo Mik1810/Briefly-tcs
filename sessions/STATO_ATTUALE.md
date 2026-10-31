@@ -61,3 +61,7 @@ L’utente richiede sito in inglese e nessun periodo coperto visibile negli arti
 ## Aggiornamento 2026-10-31T18:59:08+01:00 — nome e delega attiva
 
 Proposte di nome registrate in [2026-10-31_18-59-08_proposte-nome.md](2026-10-31_18-59-08_proposte-nome.md); preferenza Codex TCS Brief, nessuna scelta dell’utente ancora. Non applicare nomi al codice come se approvati. La delega di traduzione inglese è risultata in corso (processo Claude PID 64967); il vecchio handle terminale 6428 non è disponibile, perciò controllare processo e OUTPUT_04_CLAUDE.md prima di avviare altre CLI. Traduzione e rimozione del periodo coperto non sono ancora verificate.
+
+## Aggiornamento 2026-10-31T19:03:43+01:00 — proposta Briefly.tcs
+
+L’utente propone Briefly.tcs e chiede un parere; Codex suggerisce Briefly.tcs per la testata e briefly-tcs per il repository. Nome non ancora applicato, disponibilità non verificata. Vedere il registro delle proposte di nome.
