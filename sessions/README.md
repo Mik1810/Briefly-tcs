@@ -27,6 +27,8 @@ Tutte le attività del progetto vengono registrate qui in Markdown, con data e o
 
 | [2026-10-31_20-09-58_ripresa-permessi-github.md](2026-10-31_20-09-58_ripresa-permessi-github.md) | GitHub sbloccato: scrittura interattiva e task automatico verificati |
 
+| [2026-10-31_20-15-21_supabase-cloud.md](2026-10-31_20-15-21_supabase-cloud.md) | Preparazione Supabase cloud; scelta organizzazione e verifica costi pendenti |
+
 Ultima prova conclusa: [2026-10-31_20-09-58_ripresa-permessi-github.md](2026-10-31_20-09-58_ripresa-permessi-github.md). Scrittura GitHub programmata riuscita; publisher Supabase/Vercel ancora da implementare.
 
 ## Regole del registro
@@ -49,3 +51,5 @@ Ultima prova conclusa: [2026-10-31_20-09-58_ripresa-permessi-github.md](2026-10-
 Codex mantiene riepilogo e checkpoint. Claude, per ogni nuovo incarico, scrive il proprio registro datato in questa cartella e lo comunica a Codex.
 Codex collega il registro e gli esiti della revisione nella sessione principale.
 I report preesistenti in `docs/coordination/` restano conservati e sono richiamati dal primo riepilogo.
+
+Ultima attività: [2026-10-31_20-15-21_supabase-cloud.md](2026-10-31_20-15-21_supabase-cloud.md), in attesa della scelta organizzazione Supabase.

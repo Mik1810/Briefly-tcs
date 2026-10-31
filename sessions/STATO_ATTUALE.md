@@ -117,3 +117,13 @@ Registro: [2026-10-31_20-09-58_ripresa-permessi-github.md](2026-10-31_20-09-58_r
 - Verificati file remoto e main invariato (5804afa). Evidenza ../docs/testing/chatgpt-unattended-write-20261031.jpg.
 - Risultato limitato a questa chat/autorizzazioni e una corsa; puntualità oraria non certificata. Nessuna garanzia che future scritture non chiedano conferma.
 - Da implementare/provare: schema post e publisher GitHub → Supabase → build sito. Nessun deployment o post reale, nessun codice applicativo cambiato. App code sempre a Claude CLI in WSL.
+
+## Preparazione Supabase cloud — 2026-10-31T20:15:55+01:00
+
+Registro: [2026-10-31_20-15-21_supabase-cloud.md](2026-10-31_20-15-21_supabase-cloud.md). Utente chiede aiuto per collegare Supabase prima di Vercel.
+
+- Connettore collegato: solo organizzazione Mik1810; progetti PaperDeck e Portfolio+FuelRadar, nessun Briefly-tcs.
+- Chiesta scelta organizzazione con proposta Briefly-tcs separato in Francoforte; risposta pendente. Nessun progetto creato o modificato.
+- Schema locale letto e pronto per revisione/applicazione; sorgente del sito rifiuta ancora host cloud e richiederà adeguamento da Claude CLI.
+- Prima della creazione verificare preventivo nell'organizzazione scelta; nessun costo non zero autorizzato. Non confondere la quota Free documentata con il piano effettivo non ancora accertato.
+- Nessun segreto recuperato, nessuna migrazione cloud, nessun deployment o push.
