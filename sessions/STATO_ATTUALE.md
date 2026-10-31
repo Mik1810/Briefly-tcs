@@ -1,78 +1,61 @@
 # Stato attuale e ripresa
 
-Aggiornato: 2026-10-31T18:56:48+01:00 — Europe/Rome.
+Aggiornato: 2026-10-31T19:23:25+01:00 — Europe/Rome.
 
-## Leggere per primo
+## Punto da cui ripartire
 
-- Registro principale: [2026-10-31_13-47-21_riepilogo-e-registro.md](2026-10-31_13-47-21_riepilogo-e-registro.md).
-- Decisioni: [docs/DECISIONI.md](../docs/DECISIONI.md).
-- Avvio e comandi: [README del progetto](../README.md).
-- QA: [VERIFICA_PROTOTIPO.md](../docs/coordination/VERIFICA_PROTOTIPO.md).
+- Sessione principale: [2026-10-31_18-56-48_sito-in-inglese.md](2026-10-31_18-56-48_sito-in-inglese.md).
+- [Indice completo](README.md), inclusi i registri di Claude e le lavorazioni parallele per nome/GitHub.
+- [Decisioni](../docs/DECISIONI.md), [comandi di avvio](../README.md), [report inglese](../docs/coordination/REPORT_04_CLAUDE.md), [report nome](../docs/coordination/REPORT_05_CLAUDE.md).
 
-## Risultato disponibile
+## Stato effettivo
 
-Prototipo locale in stile A — Rivista. Astro statico + React + Supabase locale nativo sperimentale.
-Home, briefing, archivio, argomenti, Metodo, formule e controlli di esclusione bozze.
-Tre briefing dimostrativi pubblicati e una bozza di controllo nel database.
-Nessun articolo reale importato; nessuna redazione AI o attività giornaliera automatica configurata.
+- Nome approvato e applicato: **Briefly.tcs**.
+- Sito in inglese: interfaccia, date, contenuti dimostrativi, metadati e accessibilità; html lang=en.
+- Il periodo coperto non compare nei blog post; campi interni coverage e validazione conservati.
+- Stile A invariato: avorio/bordeaux, serif, articolo in evidenza. Sottotitolo inglese esistente conservato.
+- Astro statico + React; nessun JavaScript necessario per leggere le pagine.
+- Supabase locale nativo sperimentale; 3 briefing dimostrativi pubblicati e 1 bozza di controllo, ora in inglese.
+- Schema, RLS, date, ID, URL e ancore conservati. Demo aggiornati senza reset (30 righe riconosciute).
+- Nessuna acquisizione di notizie reali, redazione AI, automazione giornaliera o hosting attivato.
 
-## Ambiente
+## Verifiche completate
 
-- Progetto Windows: `C:\Users\micha\Desktop\sito tcs`.
-- Percorso WSL: `/mnt/c/Users/micha/Desktop/sito tcs`.
-- Ubuntu su WSL; Node v24.18.0 tramite nvm.
-- Claude CLI disponibile. Claude scrive il codice; Codex coordina e revisiona.
-- Branch main, nessun remote all'ultima verifica.
-- Ultimo commit funzionale prima del registro: 26335f2. Ultimo commit prima di questa sessione: cf64630.
-- Per il commit del registro e le modifiche successive usare `git log -5 --oneline`.
+Claude: check 0 errori, 25 test, db:verify e build da Supabase superati; 12 pagine generate.
+Codex: controllo DB a vuoto (0 righe residue da tradurre), revisione del codice di aggiornamento e dell'articolo,
+verifica nel browser di home/articolo in inglese e senza coverage visibile; zero script; mobile 360 px senza overflow globale.
+Schermate finali: docs/design/qa/article-english-desktop.jpg e article-english-mobile.jpg.
+Dettagli ed eventuali limiti nei registri e nei report; non considerare la traduzione una verifica scientifica dei demo.
 
-## Servizi verificati all'aggiornamento
+## Ambiente e Git
 
-- http://localhost:4321/ — HTTP 200, anteprima statica.
-- http://127.0.0.1:55321/rest/v1/ — HTTP 200, API Supabase locale.
-- DB: 55322; Studio configurato: 55323, non verificato nel browser.
-- Non assumere che restino attivi dopo riavvio o sospensione.
+- Windows: C:\Users\micha\Desktop\sito tcs.
+- WSL: /mnt/c/Users/micha/Desktop/sito tcs, Ubuntu, Node v24.18.0 tramite nvm.
+- Codex coordina/revisiona/documenta; Claude CLI scrive il codice. Leggere AGENTS.md e CLAUDE.md.
+- Branch main. Remote origin: https://github.com/Mik1810/Briefly-tcs.git.
+- Collegamento GitHub e primo push effettuati nella lavorazione parallela e registrati nella sessione 19-11-19_push-github-main.
+- Ultimo commit applicativo di questa sessione: b836896. I nuovi commit di questa sessione sono locali; nessun push qui eseguito.
+- Questo checkpoint viene versionato nel successivo commit documentale. Usare git log -5 --oneline e git status per HEAD e allineamento corrente.
 
-## Come riprendere
+## Servizi lasciati attivi
 
-1. Leggere questo checkpoint e il registro principale; controllare git status e git log.
-2. Creare un nuovo file datato in sessions e registrare l'obiettivo della sessione.
-3. Se necessario avviare il DB con npm run db:start; non fare db:reset come normale avvio, perché riapplica seed e schema.
-4. Usare npm run db:verify per i controlli DB quando pertinenti.
-5. Per modifiche usare npm run dev; per generare e vedere lo statico npm run build e npm run preview.
-6. Se la porta 4321 è occupata dall'anteprima precedente, identificarne il processo prima di avviare un altro server.
-7. Annotare azioni, verifiche, commit e stato finale; aggiornare questo checkpoint.
+- http://localhost:4321/ — anteprima statica, verificata nel browser.
+- API locale 127.0.0.1:55321, DB 55322, Studio configurato 55323.
+- Non assumere disponibilità dopo riavvio/sospensione. Stack nativo, nessuna dipendenza dal socket Docker per questo progetto.
 
-## Prossimo obiettivo
+## Ripresa operativa
 
-Definire e provare un flusso editoriale reale con fonti e bozze revisionabili, prima dell'automazione.
-Modello/integrazione, credenziali, costi, scheduler e hosting restano da definire.
-Non sostituire i demo con testi non verificati del briefing originale.
+1. Leggere checkpoint e registri, verificare git status e git log; controllare eventuali lavori concorrenti.
+2. Aprire un nuovo registro datato in sessions prima di agire.
+3. Se necessario avviare DB con npm run db:start. Non usare db:reset come normale avvio: ripristina schema e seed.
+4. Per lo sviluppo npm run dev; per generare npm run build; per vedere lo statico npm run preview.
+5. Controllare chi occupa 4321 prima di avviare un secondo server.
+6. Aggiornare registro e checkpoint con azioni, verifiche, servizi e commit reali, senza credenziali.
 
-## Limiti da ricordare
+## Prossimo obiettivo e limiti
 
-Runtime Supabase sperimentale; build con più letture DB; sostituzione output con due rinomine.
-Zoom 200% e Studio non verificati. Vedere report e registro per dettagli e prove effettive.
-
-## Aggiornamento 2026-10-31T18:56:48+01:00
-
-L’utente richiede sito in inglese e nessun periodo coperto visibile negli articoli. Implementazione ancora da fare. Sessione corrente: [2026-10-31_18-56-48_sito-in-inglese.md](2026-10-31_18-56-48_sito-in-inglese.md). Il registro retrospettivo precedente è stato completato; ora si passa alla traduzione tramite Claude.
-
-## Aggiornamento 2026-10-31T18:59:08+01:00 — nome e delega attiva
-
-Proposte di nome registrate in [2026-10-31_18-59-08_proposte-nome.md](2026-10-31_18-59-08_proposte-nome.md); preferenza Codex TCS Brief, nessuna scelta dell’utente ancora. Non applicare nomi al codice come se approvati. La delega di traduzione inglese è risultata in corso (processo Claude PID 64967); il vecchio handle terminale 6428 non è disponibile, perciò controllare processo e OUTPUT_04_CLAUDE.md prima di avviare altre CLI. Traduzione e rimozione del periodo coperto non sono ancora verificate.
-
-## Aggiornamento 2026-10-31T19:03:43+01:00 — proposta Briefly.tcs
-
-L’utente propone Briefly.tcs e chiede un parere; Codex suggerisce Briefly.tcs per la testata e briefly-tcs per il repository. Nome non ancora applicato, disponibilità non verificata. Vedere il registro delle proposte di nome.
-
-## Aggiornamento 2026-10-31T19:04:52+01:00 — nome confermato
-
-**Briefly.tcs** è il nome scelto dall’utente; **briefly-tcs** è il nome del repository GitHub previsto. Supera tutte le proposte e i nomi provvisori precedenti. Scelta registrata in docs/DECISIONI.md. Nessuna registrazione di dominio o repository remoto. Prima di aggiornare la testata controllare la delega inglese in corso, senza avviare scritture concorrenti. Il nome non viene dichiarato già applicato al sito.
-
-## Aggiornamento 2026-10-31T19:14:15+01:00 — GitHub collegato e push riuscito
-
-Repository creato dall'utente: https://github.com/Mik1810/Briefly-tcs. Remote origin già configurato, ora main segue origin/main.
-Risolti upstream mancante e assenza di helper credenziali HTTPS; riutilizzata l'autenticazione gh esistente tramite configurazione locale del solo repository.
-Primo push riuscito per 26bf0fc. Verificare git log e git status per commit successivi e modifiche di Claude ancora in corso.
-Diagnosi e dettagli: [2026-10-31_19-11-19_push-github-main.md](2026-10-31_19-11-19_push-github-main.md). Nessun force push o modifica globale Git. La precedente indicazione «nessun remote» è superata.
+Definire un flusso editoriale con fonti, bozze revisionabili e una prova su un briefing reale.
+Modello/integrazione, credenziali, eventuali costi, scheduler e hosting restano da definire prima dell'automazione.
+Restano: runtime Supabase sperimentale, più letture DB per build, sostituzione output con due rinomine,
+zoom browser 200% e Studio non verificati, RSS e approfondimenti autonomi non implementati.
+Gli URL italiani rimangono per conservare i permalink; i testi pubblici sono inglesi.

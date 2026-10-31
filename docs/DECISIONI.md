@@ -1,7 +1,7 @@
 # Decisioni aggiornate — 31 ottobre 2026
 
 Questo documento prevale sulle proposte iniziali in PIANO.md e sulla prima revisione di Claude.
-Le sezioni seguenti registrano la storia delle decisioni; lo stato reale del codice è in fondo, nella sezione "Stato reale dopo l'incarico 01".
+Le sezioni seguenti conservano la storia delle decisioni. Per lo stato corrente e il punto di ripresa leggere sessions/STATO_ATTUALE.md e le ultime voci di questo documento.
 
 ## Confermato dall'utente
 

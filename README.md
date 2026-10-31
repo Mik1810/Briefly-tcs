@@ -4,7 +4,7 @@ Blog di informatica teorica per studenti magistrali e ricercatori. Nome del sito
 Nomi interni invariati: pacchetto npm `tcs-quotidiano`, stack Supabase `tcs-quotidiano`.
 **Lingua pubblica: inglese** (interfaccia, Metodo, 404, etichette di accessibilità, metadati, demo; `lang="en"`, date come "October 31, 2026").
 Commenti tecnici, documentazione interna e registri restano in italiano. URL e ID non sono cambiati (es. `/archivio/`, `/metodo/`, `#risultato-<id>`).
-Stato: **prototipo locale navigabile** con database Supabase locale e contenuti dimostrativi. Nessun deployment, nessun remote Git.
+Stato: **prototipo locale navigabile** con database Supabase locale e contenuti dimostrativi. Sito ancora locale; remote GitHub origin collegato a https://github.com/Mik1810/Briefly-tcs, senza hosting attivato.
 
 ## Database: Supabase locale
 
@@ -105,3 +105,8 @@ potrebbe non accorgersi di file salvati da editor Windows. In quel caso riavviar
 
 I testi dimostrativi non sono notizie di ricerca reali: descrivono risultati classici da manuale.
 Tavola generata con ImageGen; prompt in docs/design/PROMPT_IMMAGINE.txt.
+
+## Registro delle sessioni
+
+Per riprendere leggere [sessions/STATO_ATTUALE.md](sessions/STATO_ATTUALE.md) e [indice dei registri](sessions/README.md).
+Ogni sessione di Codex e Claude registra attività, esiti, errori, commit e prossimi passi con data e ora Europe/Rome.

@@ -5,20 +5,21 @@ Tutte le attività del progetto vengono registrate qui in Markdown, con data e o
 ## Da dove ripartire
 
 1. Leggere [STATO_ATTUALE.md](STATO_ATTUALE.md).
-2. Leggere l'ultima sessione elencata sotto e gli eventuali registri di Claude collegati.
-3. Controllare `git status`, commit e disponibilità dei servizi prima di assumere che lo stato sia ancora identico.
+2. Leggere la sessione principale indicata nel checkpoint e i registri Claude collegati.
+3. Controllare git status, commit e servizi: gli stati storici possono essere superati da sessioni successive.
 
 ## Sessioni
 
 | File | Contenuto |
 | --- | --- |
-| [2026-10-31_13-47-21_riepilogo-e-registro.md](2026-10-31_13-47-21_riepilogo-e-registro.md) | Riepilogo retrospettivo completo, situazione verificata e introduzione del registro |
+| [2026-10-31_13-47-21_riepilogo-e-registro.md](2026-10-31_13-47-21_riepilogo-e-registro.md) | Sessione: riepilogo del progetto e introduzione del registro |
+| [2026-10-31_18-56-48_sito-in-inglese.md](2026-10-31_18-56-48_sito-in-inglese.md) | Sessione: sito in inglese e metadati degli articoli |
+| [2026-10-31_18-57-46_claude-sito-in-inglese.md](2026-10-31_18-57-46_claude-sito-in-inglese.md) | Sessione Claude — sito in inglese, periodo coperto nascosto |
+| [2026-10-31_18-59-08_proposte-nome.md](2026-10-31_18-59-08_proposte-nome.md) | Sessione: nome del sito e repository |
+| [2026-10-31_19-11-19_push-github-main.md](2026-10-31_19-11-19_push-github-main.md) | Sessione: diagnosi e collegamento GitHub main |
+| [2026-10-31_19-17-57_claude-nome-briefly-tcs.md](2026-10-31_19-17-57_claude-nome-briefly-tcs.md) | Sessione Claude — applicazione del nome Briefly.tcs |
 
-Ultima sessione in corso: [2026-10-31_18-56-48_sito-in-inglese.md](2026-10-31_18-56-48_sito-in-inglese.md).
-
-Confronto sul nome: [2026-10-31_18-59-08_proposte-nome.md](2026-10-31_18-59-08_proposte-nome.md).
-
-Diagnosi push GitHub: [2026-10-31_19-11-19_push-github-main.md](2026-10-31_19-11-19_push-github-main.md).
+Ultima sessione principale conclusa: [2026-10-31_18-56-48_sito-in-inglese.md](2026-10-31_18-56-48_sito-in-inglese.md).
 
 ## Regole del registro
 
