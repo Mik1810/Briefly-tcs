@@ -45,8 +45,8 @@ const results = briefing.results.map((result) => ({
     {
       briefing.demo ? (
         <p class="demo-notice">
-          Questo è un esempio di impaginazione. I risultati descritti sono classici da manuale, non novità di ricerca, e
-          servono solo a provare il prototipo.
+          This is a layout example. The results described are classic textbook results, not research news, and serve
+          only to test the prototype.
         </p>
       ) : null
     }
@@ -64,7 +64,7 @@ const results = briefing.results.map((result) => ({
     <CorrectionList corrections={briefing.corrections} results={briefing.results} variant="full" />
 
     <section class="disclosure" aria-labelledby="ai-titolo">
-      <h2 id="ai-titolo" class="section-heading">Ruolo dell’AI e revisione</h2>
+      <h2 id="ai-titolo" class="section-heading">Role of AI and review</h2>
       <p>{briefing.aiDisclosure}</p>
     </section>
   </article>

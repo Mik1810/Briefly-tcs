@@ -10,10 +10,10 @@ interface Props {
 export default function BriefingNav({ newer, older }: Props) {
   if (!newer && !older) return null;
   return (
-    <nav className="briefing-nav" aria-label="Briefing precedente e successivo">
+    <nav className="briefing-nav" aria-label="Previous and next briefing">
       {older ? (
         <a href={briefingPath(older)} rel="prev">
-          <span className="briefing-nav-label">Precedente</span>
+          <span className="briefing-nav-label">Previous</span>
           <span className="briefing-nav-title">{older.title}</span>
           <DateText date={older.date} />
         </a>
@@ -22,7 +22,7 @@ export default function BriefingNav({ newer, older }: Props) {
       )}
       {newer ? (
         <a href={briefingPath(newer)} rel="next" className="briefing-nav-next">
-          <span className="briefing-nav-label">Successivo</span>
+          <span className="briefing-nav-label">Next</span>
           <span className="briefing-nav-title">{newer.title}</span>
           <DateText date={newer.date} />
         </a>

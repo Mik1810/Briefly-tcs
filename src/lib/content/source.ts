@@ -11,7 +11,7 @@ export type ContentSourceKind = 'fixture' | 'supabase';
 
 export interface ContentSource {
   readonly kind: ContentSourceKind;
-  /** Descrizione mostrata nel piè di pagina e nel log della build. */
+  /** Descrizione pubblica (inglese) mostrata nel piè di pagina, in Metodo e nel log della build. */
   readonly description: string;
   load(): Promise<RawContent>;
 }

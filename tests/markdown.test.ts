@@ -33,7 +33,7 @@ test('i link con protocolli pericolosi perdono l’href; quelli sicuri restano',
 
 test('le formule in blocco sono regioni etichettate raggiungibili da tastiera', () => {
   const html = renderMarkdown('Testo.\n\n$$\nn^2\n$$', 'qui');
-  assert.match(html, /<div class="katex-display" tabindex="0" role="region" aria-label="Formula in blocco">/);
+  assert.match(html, /<div class="katex-display" tabindex="0" role="region" aria-label="Display formula">/);
   // Le formule in linea restano nel flusso del testo, senza tabindex.
   assert.doesNotMatch(renderMarkdown('In linea $n^2$.', 'qui'), /tabindex/);
 });

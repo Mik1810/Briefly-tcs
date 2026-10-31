@@ -8,17 +8,17 @@ const entries = entriesByTopic(site);
 const topics = site.topics.filter((topic) => entries.has(topic.slug));
 ---
 
-<BaseLayout title="Argomenti" description="I risultati pubblicati, raggruppati per argomento." current="argomenti">
+<BaseLayout title="Topics" description="Published results, grouped by topic." current="argomenti">
   <header class="page-header">
-    <h1 class="page-title">Argomenti</h1>
+    <h1 class="page-title">Topics</h1>
     <p class="page-intro">
-      Ogni risultato di un briefing ha i propri argomenti. Le pagine elencano i singoli risultati con un collegamento alla
-      loro sezione.
+      Each result in a briefing has its own topics. Topic pages list individual results, each linking to its own
+      section.
     </p>
   </header>
   {
     topics.length === 0 ? (
-      <p class="empty">Nessun risultato pubblicato.</p>
+      <p class="empty">No published results.</p>
     ) : (
       <ul class="topic-list">
         {topics.map((topic) => {
@@ -29,7 +29,7 @@ const topics = site.topics.filter((topic) => entries.has(topic.slug));
                 <a href={topicPath(topic)}>{topic.name}</a>
               </h2>
               <p class="row-summary">
-                {topic.description} <span class="meta">{count === 1 ? '1 risultato' : `${count} risultati`}</span>
+                {topic.description} <span class="meta">{count === 1 ? '1 result' : `${count} results`}</span>
               </p>
             </li>
           );

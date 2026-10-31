@@ -15,10 +15,10 @@ export default function CorrectionList({ corrections, results, variant }: Props)
     const substantial = corrections.filter((correction) => correction.kind === 'sostanziale');
     if (substantial.length === 0) return null;
     return (
-      <aside className="correction-notice" aria-label="Avviso di correzione">
+      <aside className="correction-notice" aria-label="Correction notice">
         <p>
-          <strong>Questo briefing è stato corretto</strong> in modo sostanziale dopo la pubblicazione.{' '}
-          <a href="#correzioni">Leggi le correzioni</a>.
+          <strong>This briefing has been substantively corrected</strong> since publication.{' '}
+          <a href="#correzioni">Read the corrections</a>.
         </p>
       </aside>
     );
@@ -28,10 +28,10 @@ export default function CorrectionList({ corrections, results, variant }: Props)
   return (
     <section className="corrections" id="correzioni" aria-labelledby="correzioni-titolo">
       <h2 id="correzioni-titolo" className="section-heading">
-        Correzioni e aggiornamenti
+        Corrections and updates
       </h2>
       {corrections.length === 0 ? (
-        <p>Nessuna correzione dalla pubblicazione.</p>
+        <p>No corrections since publication.</p>
       ) : (
         <ol>
           {corrections.map((correction, index) => {

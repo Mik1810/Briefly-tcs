@@ -8,43 +8,30 @@ interface Props {
 }
 
 export default function ArticleMeta({ briefing, topics }: Props) {
-  const { coverage } = briefing;
   return (
     <dl className="article-meta">
       <div>
-        <dt>Pubblicato</dt>
+        <dt>Published</dt>
         <dd>
           <DateText date={briefing.date} />
         </dd>
       </div>
       {briefing.updatedOn ? (
         <div>
-          <dt>Aggiornato</dt>
+          <dt>Updated</dt>
           <dd>
-            <DateText date={briefing.updatedOn} /> · <a href="#correzioni">vedi correzioni</a>
+            <DateText date={briefing.updatedOn} /> · <a href="#correzioni">see corrections</a>
           </dd>
         </div>
       ) : null}
       <div>
-        <dt>Periodo coperto</dt>
-        <dd>
-          {coverage.from === coverage.to ? (
-            <DateText date={coverage.from} />
-          ) : (
-            <>
-              dal <DateText date={coverage.from} /> al <DateText date={coverage.to} />
-            </>
-          )}
-        </dd>
-      </div>
-      <div>
-        <dt>Argomenti</dt>
+        <dt>Topics</dt>
         <dd>
           <TopicLinks topics={topics} />
         </dd>
       </div>
       <div>
-        <dt>Risultati</dt>
+        <dt>Results</dt>
         <dd>{briefing.results.length}</dd>
       </div>
     </dl>

@@ -23,11 +23,11 @@ const { topic, entries } = Astro.props;
 
 <BaseLayout title={topic.name} description={topic.description} current="argomenti" currentIsPage={false}>
   <header class="page-header">
-    <p class="eyebrow"><a href="/argomenti/">Argomenti</a></p>
+    <p class="eyebrow"><a href="/argomenti/">Topics</a></p>
     <h1 class="page-title">{topic.name}</h1>
     <p class="page-intro">{topic.description}</p>
   </header>
-  <section class="list" aria-label={`Risultati su ${topic.name}`}>
+  <section class="list" aria-label={`Results on ${topic.name}`}>
     {entries.map(({ briefing, result }) => <ResultRow briefing={briefing} result={result} />)}
   </section>
 </BaseLayout>

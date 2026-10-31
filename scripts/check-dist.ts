@@ -10,11 +10,33 @@ import { fileURLToPath } from 'node:url';
 import { gzipSync } from 'node:zlib';
 
 import { loadValidatedContent } from '../src/lib/content/repository.ts';
+import { formatDate } from '../src/lib/dates.ts';
 
 // Cartella da controllare: argomento facoltativo (scripts/build.ts passa dist-staging), altrimenti dist/.
 const DIST = resolve(fileURLToPath(new URL('..', import.meta.url)), process.argv[2] ?? 'dist');
 const DRAFT_MARKER = 'MARCATORE-BOZZA-NON-PUBBLICARE';
 const TEXT_EXTENSIONS = ['.html', '.css', '.js', '.xml', '.txt', '.json', '.svg'];
+// Termini dell'interfaccia italiana precedente e parole funzionali italiane: non devono comparire nel testo
+// visibile, nei titoli, nelle meta description né nelle etichette di accessibilità (sito solo in inglese).
+const ITALIAN_TERMS = [
+  'contenuto', 'dimostrativo', 'pubblicato', 'aggiornato', 'periodo', 'coperto', 'argomenti', 'fonti', 'correzioni',
+  'risultato', 'risultati', 'archivio', 'metodo', 'precedente', 'successivo', 'quotidiano', 'questo', 'della', 'delle',
+  'degli', 'nessun', 'nessuna', 'pagina', 'ottobre', 'novembre', 'dicembre', 'gennaio', 'formula in blocco',
+];
+const ITALIAN_PATTERN = new RegExp(`\\b(${ITALIAN_TERMS.join('|')})\\b`, 'i');
+// Etichette con cui il periodo coperto era (o potrebbe essere) mostrato nei metadati dell'articolo.
+const COVERAGE_LABEL = /periodo coperto|coverage|covered|period/i;
+
+/** Testo che il lettore vede o che le tecnologie assistive leggono, senza markup né MathML. */
+function readableText(html: string): string {
+  const attributes = [...html.matchAll(/\s(?:aria-label|alt|title)="([^"]*)"/g)].map((m) => m[1]);
+  const description = html.match(/<meta name="description" content="([^"]*)"/)?.[1] ?? '';
+  const body = html
+    .replace(/<span class="katex-mathml">[\s\S]*?<\/math><\/span>/g, ' ')
+    .replace(/<(script|style)[\s\S]*?<\/\1>/g, ' ')
+    .replace(/<[^>]+>/g, ' ');
+  return [body, description, ...attributes].join(' ').replace(/&[a-z#0-9]+;/gi, ' ');
+}
 
 const problems: string[] = [];
 const fail = (message: string) => problems.push(message);
@@ -87,13 +109,27 @@ for (const briefing of published) {
     continue;
   }
   const html = textFiles.get(file) ?? '';
-  const timeAttr = new RegExp(`<time datetime="${briefing.date}"`, 'i');
-  if (!timeAttr.test(html)) fail(`briefing ${briefing.date}: manca <time datetime="${briefing.date}">`);
+  // Data in <time datetime> con testo inglese leggibile, per esempio "October 29, 2026".
+  const timeAttr = new RegExp(`<time datetime="${briefing.date}">${formatDate(briefing.date)}</time>`, 'i');
+  if (!timeAttr.test(html)) fail(`briefing ${briefing.date}: manca <time datetime="${briefing.date}">${formatDate(briefing.date)}</time>`);
   if (briefing.updatedOn && !new RegExp(`<time datetime="${briefing.updatedOn}"`, 'i').test(html)) {
     fail(`briefing ${briefing.date}: data di aggiornamento non mostrata`);
   }
-  if (briefing.demo && !html.includes('Contenuto dimostrativo')) {
-    fail(`briefing ${briefing.date}: manca l’etichetta "Contenuto dimostrativo"`);
+  if (briefing.demo && !html.includes('Demo content')) {
+    fail(`briefing ${briefing.date}: manca l’etichetta "Demo content"`);
+  }
+  // Il periodo coperto resta nei dati ma non deve comparire nei metadati visibili dell'articolo.
+  const meta = html.match(/<dl class="article-meta">[\s\S]*?<\/dl>/)?.[0];
+  if (!meta || !meta.includes('<dt>Published</dt>')) {
+    fail(`briefing ${briefing.date}: metadati dell’articolo assenti o non in inglese`);
+  } else {
+    if (COVERAGE_LABEL.test(meta)) fail(`briefing ${briefing.date}: i metadati mostrano un’etichetta di periodo coperto`);
+    const shown = new Set([briefing.date, briefing.updatedOn]);
+    for (const date of [briefing.coverage.from, briefing.coverage.to]) {
+      if (!shown.has(date) && new RegExp(`<time datetime="${date}"`, 'i').test(meta)) {
+        fail(`briefing ${briefing.date}: i metadati mostrano la data del periodo coperto ${date}`);
+      }
+    }
   }
   const ids = idsOf(html);
   for (const result of briefing.results) {
@@ -112,7 +148,10 @@ const idCache = new Map<string, Set<string>>();
 for (const file of htmlFiles) {
   const html = textFiles.get(file)!;
   const name = rel(file);
-  if (!html.includes('<html lang="it">')) fail(`${name}: manca lang="it"`);
+  if (!html.includes('<html lang="en">')) fail(`${name}: manca lang="en"`);
+  if (!/<meta name="description" content="[^"]+"/.test(html)) fail(`${name}: manca la meta description`);
+  const italian = readableText(html).match(ITALIAN_PATTERN);
+  if (italian) fail(`${name}: testo visibile non inglese ("${italian[0]}")`);
   if (!/<title>[^<]+<\/title>/.test(html)) fail(`${name}: manca <title>`);
   const h1 = html.match(/<h1[\s>]/g)?.length ?? 0;
   if (h1 !== 1) fail(`${name}: ${h1} elementi h1 invece di 1`);

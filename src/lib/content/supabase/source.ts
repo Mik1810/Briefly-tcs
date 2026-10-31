@@ -164,7 +164,7 @@ async function getRows<T>(config: SupabaseConfig, table: string, params: Record<
 export function createSupabaseSource(config: SupabaseConfig): ContentSource {
   return {
     kind: 'supabase',
-    description: 'database Supabase locale (lettura anonima, solo contenuti pubblicati)',
+    description: 'local Supabase database (anonymous read, published content only)',
     load: async (): Promise<RawContent> => {
       const [topicRows, briefingRows] = await Promise.all([
         getRows<TopicRow>(config, 'topics', { select: 'slug,name,description', order: 'position' }),

@@ -42,7 +42,7 @@ function rehypeFocusableMathBlocks() {
         node.tagName = 'div';
         node.properties.tabIndex = 0;
         node.properties.role = 'region';
-        node.properties.ariaLabel = 'Formula in blocco';
+        node.properties.ariaLabel = 'Display formula';
         return;
       }
     }

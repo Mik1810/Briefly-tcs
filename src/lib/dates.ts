@@ -3,18 +3,18 @@
 const ISO_DATE = /^(\d{4})-(\d{2})-(\d{2})$/;
 
 const MONTHS = [
-  'gennaio',
-  'febbraio',
-  'marzo',
-  'aprile',
-  'maggio',
-  'giugno',
-  'luglio',
-  'agosto',
-  'settembre',
-  'ottobre',
-  'novembre',
-  'dicembre',
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
 ];
 
 /** Vero solo per date `YYYY-MM-DD` esistenti nel calendario (rifiuta per esempio 2026-02-30). */
@@ -27,10 +27,10 @@ export function isIsoDate(value: unknown): value is string {
   return utc.getUTCFullYear() === y && utc.getUTCMonth() === m - 1 && utc.getUTCDate() === d;
 }
 
-/** "2026-10-31" → "31 ottobre 2026". Presuppone una data già validata. */
-export function formatItalianDate(date: string): string {
+/** "2026-10-31" → "October 31, 2026" (inglese). Presuppone una data già validata. */
+export function formatDate(date: string): string {
   const [y, m, d] = date.split('-').map(Number) as [number, number, number];
-  return `${d} ${MONTHS[m - 1]} ${y}`;
+  return `${MONTHS[m - 1]} ${d}, ${y}`;
 }
 
 export function yearOf(date: string): string {

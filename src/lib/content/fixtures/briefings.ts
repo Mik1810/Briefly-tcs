@@ -1,16 +1,16 @@
 import type { Briefing, ScientificStatus, Source } from '../types.ts';
 
-// CONTENUTI DIMOSTRATIVI. Servono solo a giudicare impaginazione, formule, correzioni ed esclusione
-// delle bozze. Descrivono risultati classici da manuale: nessuna novità di ricerca, nessuna
-// rivendicazione tratta dal briefing originale.
+// CONTENUTI DIMOSTRATIVI, in inglese (lingua pubblica del sito). Servono solo a giudicare impaginazione,
+// formule, correzioni ed esclusione delle bozze. Descrivono risultati classici da manuale: nessuna novità
+// di ricerca, nessuna rivendicazione tratta dal briefing originale. ID, slug e date restano invariati.
 
 // String.raw conserva le barre rovesciate del LaTeX. Non scrivere mai il dollaro seguito da graffa aperta.
 const md = String.raw;
 
 const DEMO_DISCLOSURE =
-  'Testo dimostrativo redatto con l’assistenza di un modello AI (Claude) durante lo sviluppo del prototipo. ' +
-  'Descrive risultati classici da manuale; non è passato per il processo editoriale previsto e nessuna revisione ' +
-  'scientifica è stata svolta.';
+  'Demo text drafted with the assistance of an AI model (Claude) while developing the prototype. ' +
+  'It describes classic textbook results; it has not gone through the planned editorial process and no scientific ' +
+  'review has been carried out.';
 
 const CLASSIC: ScientificStatus = {
   publication: 'risultato-classico',
@@ -22,7 +22,7 @@ const CLRS: Source = {
   title: 'Introduction to Algorithms',
   authors: ['Thomas H. Cormen', 'Charles E. Leiserson', 'Ronald L. Rivest', 'Clifford Stein'],
   year: 2022,
-  venue: 'MIT Press, 4ª edizione',
+  venue: 'MIT Press, 4th edition',
   kind: 'libro',
   lang: 'en',
 };
@@ -31,7 +31,7 @@ const KNUTH_VOL3: Source = {
   title: 'The Art of Computer Programming, Volume 3: Sorting and Searching',
   authors: ['Donald E. Knuth'],
   year: 1998,
-  venue: 'Addison-Wesley, 2ª edizione',
+  venue: 'Addison-Wesley, 2nd edition',
   kind: 'libro',
   lang: 'en',
 };
@@ -41,42 +41,42 @@ export const briefings: Briefing[] = [
     date: '2026-10-29',
     status: 'pubblicato',
     demo: true,
-    title: 'Ordinamento per confronti: il limite inferiore e gli algoritmi che lo raggiungono',
+    title: 'Comparison sorting: the lower bound and the algorithms that meet it',
     summary:
-      'Esempio di briefing lungo con risultati classici: il limite inferiore per l’ordinamento per confronti, ' +
-      'merge sort e il caso peggiore quadratico di insertion sort.',
+      'A long example briefing with classic results: the lower bound for comparison sorting, ' +
+      'merge sort, and the quadratic worst case of insertion sort.',
     coverage: { from: '2026-10-28', to: '2026-10-28' },
     updatedOn: '2026-10-30',
-    intro: md`Questo briefing mostra come appare un numero lungo, con formule in linea e in blocco, fonti per ogni risultato e una correzione. I tre risultati sono teoremi da manuale, scelti perché facili da controllare; la [pagina Metodo](/metodo/) descrive come saranno trattate le novità reali.`,
+    intro: md`This briefing shows what a long issue looks like, with inline and display formulas, sources for every result, and a correction. The three results are textbook theorems, chosen because they are easy to check; the [Method page](/metodo/) describes how real news will be handled.`,
     results: [
       {
         id: 'limite-inferiore-ordinamento-confronti',
-        title: 'Ogni ordinamento per confronti richiede Ω(n log n) confronti nel caso peggiore',
+        title: 'Every comparison sort needs Ω(n log n) comparisons in the worst case',
         summary:
-          'L’argomento dell’albero di decisione: n! permutazioni da distinguere impongono un albero di altezza almeno log₂ n!.',
+          'The decision-tree argument: n! permutations to tell apart force a tree of height at least log₂ n!.',
         topics: ['complessita', 'algoritmi'],
         status: CLASSIC,
-        body: md`Un algoritmo che accede agli elementi solo tramite confronti $a_i \le a_j$ può essere descritto da un **albero di decisione**: ogni nodo interno è un confronto, ogni foglia una permutazione dell'input. Per ordinare correttamente ogni input di $n$ elementi distinti l'albero deve avere almeno $n!$ foglie raggiungibili.
+        body: md`An algorithm that accesses the elements only through comparisons $a_i \le a_j$ can be described by a **decision tree**: every internal node is a comparison, every leaf a permutation of the input. To sort every input of $n$ distinct elements correctly, the tree must have at least $n!$ reachable leaves.
 
-Un albero binario di altezza $h$ ha al più $2^h$ foglie, quindi $2^h \ge n!$, cioè $h \ge \log_2 n!$. Basta stimare dal basso il fattoriale:
+A binary tree of height $h$ has at most $2^h$ leaves, so $2^h \ge n!$, that is $h \ge \log_2 n!$. It is enough to bound the factorial from below:
 
 $$
 \log_2 n! \;=\; \sum_{k=1}^{n} \log_2 k \;\ge\; \sum_{k=\lceil n/2 \rceil}^{n} \log_2 k \;\ge\; \frac{n}{2}\,\log_2 \frac{n}{2} \;=\; \Omega(n \log n).
 $$
 
-La formula di Stirling fornisce anche i termini successivi. È un buon esempio di formula lunga: su schermi stretti scorre dentro il proprio blocco, senza spostare la pagina.
+Stirling's formula also gives the next terms. It is a good example of a long formula: on narrow screens it scrolls inside its own block without moving the page.
 
 $$
 \log_2 n! \;=\; n \log_2 n \;-\; n \log_2 e \;+\; \frac{1}{2}\log_2(2\pi n) \;+\; \frac{\log_2 e}{12\,n} \;-\; \frac{\log_2 e}{360\,n^{3}} \;+\; O\!\left(\frac{1}{n^{5}}\right)
 $$
 
-Il limite vale **solo nel modello a confronti**. Algoritmi che leggono le chiavi, come il counting sort su interi in $\{0, \dots, k\}$, impiegano tempo $O(n + k)$ e non sono soggetti a questo vincolo.`,
+The bound holds **only in the comparison model**. Algorithms that read the keys, such as counting sort on integers in $\{0, \dots, k\}$, run in time $O(n + k)$ and are not subject to this constraint.`,
         sources: [
           KNUTH_VOL3,
           CLRS,
           {
             title: 'Comparison sort',
-            authors: ['Contributori di Wikipedia'],
+            authors: ['Wikipedia contributors'],
             kind: 'pagina-web',
             url: 'https://en.wikipedia.org/wiki/Comparison_sort',
             lang: 'en',
@@ -85,24 +85,24 @@ Il limite vale **solo nel modello a confronti**. Algoritmi che leggono le chiavi
       },
       {
         id: 'merge-sort-ottimo',
-        title: 'Merge sort ordina con O(n log n) confronti ed è quindi ottimo tra gli ordinamenti per confronti',
-        summary: 'La ricorrenza T(n) = 2T(n/2) + Θ(n) dà Θ(n log n), che coincide con il limite inferiore.',
+        title: 'Merge sort uses O(n log n) comparisons and is therefore optimal among comparison sorts',
+        summary: 'The recurrence T(n) = 2T(n/2) + Θ(n) gives Θ(n log n), which matches the lower bound.',
         topics: ['algoritmi'],
         status: CLASSIC,
-        body: md`Merge sort divide l'input in due metà, le ordina ricorsivamente e le fonde in tempo lineare. Il suo costo soddisfa
+        body: md`Merge sort splits the input into two halves, sorts them recursively, and merges them in linear time. Its cost satisfies
 
 $$
 T(n) = 2\,T\!\left(\frac{n}{2}\right) + \Theta(n), \qquad T(1) = \Theta(1),
 $$
 
-che per il teorema principale (caso con $a = b = 2$, $f(n) = \Theta(n)$) dà $T(n) = \Theta(n \log n)$.
+which by the master theorem (case $a = b = 2$, $f(n) = \Theta(n)$) gives $T(n) = \Theta(n \log n)$.
 
-Per $n$ potenza di due il numero di confronti nel caso peggiore è esattamente $n \log_2 n - n + 1$. Confrontandolo con il [limite inferiore del risultato precedente](#risultato-limite-inferiore-ordinamento-confronti) si ottiene l'ottimalità asintotica: nessun ordinamento per confronti fa meglio di un fattore costante.`,
+For $n$ a power of two, the worst-case number of comparisons is exactly $n \log_2 n - n + 1$. Comparing it with the [lower bound of the previous result](#risultato-limite-inferiore-ordinamento-confronti) gives asymptotic optimality: no comparison sort does better by more than a constant factor.`,
         sources: [
           CLRS,
           {
             title: 'Merge sort',
-            authors: ['Contributori di Wikipedia'],
+            authors: ['Wikipedia contributors'],
             kind: 'pagina-web',
             url: 'https://en.wikipedia.org/wiki/Merge_sort',
             lang: 'en',
@@ -111,17 +111,17 @@ Per $n$ potenza di due il numero di confronti nel caso peggiore è esattamente $
       },
       {
         id: 'insertion-sort-quadratico',
-        title: 'Insertion sort impiega Θ(n²) confronti nel caso peggiore',
-        summary: 'Su un input in ordine inverso ogni elemento attraversa tutti i precedenti: n(n−1)/2 confronti.',
+        title: 'Insertion sort takes Θ(n²) comparisons in the worst case',
+        summary: 'On reverse-sorted input every element moves past all the previous ones: n(n−1)/2 comparisons.',
         topics: ['algoritmi'],
         status: CLASSIC,
-        body: md`Insertion sort inserisce l'elemento $i$-esimo nella parte già ordinata, scorrendola da destra. Su un input in ordine decrescente l'elemento $i$-esimo viene confrontato con tutti gli $i - 1$ precedenti, per un totale di
+        body: md`Insertion sort inserts the $i$-th element into the already sorted prefix, scanning it from the right. On decreasing input the $i$-th element is compared with all $i - 1$ previous ones, for a total of
 
 $$
 \sum_{i=2}^{n} (i - 1) \;=\; \frac{n(n-1)}{2} \;=\; \Theta(n^2).
 $$
 
-Più in generale il tempo è $\Theta(n + I)$, dove $I$ è il numero di inversioni dell'input. Per questo insertion sort resta competitivo su input quasi ordinati, mentre il suo caso peggiore è quadratico.`,
+More generally the running time is $\Theta(n + I)$, where $I$ is the number of inversions in the input. This is why insertion sort stays competitive on nearly sorted input, while its worst case is quadratic.`,
         sources: [KNUTH_VOL3, CLRS],
       },
     ],
@@ -131,14 +131,14 @@ Più in generale il tempo è $\Theta(n + I)$, dove $I$ è il numero di inversion
         kind: 'sostanziale',
         resultId: 'limite-inferiore-ordinamento-confronti',
         text:
-          'Correzione dimostrativa. La prima versione affermava che il limite inferiore vale anche per il counting sort. ' +
-          'È falso: il counting sort non è un ordinamento per confronti. Il paragrafo finale è stato riscritto.',
+          'Demo correction. The first version stated that the lower bound also applies to counting sort. ' +
+          'That is false: counting sort is not a comparison sort. The final paragraph has been rewritten.',
       },
       {
         date: '2026-10-30',
         kind: 'minore',
         resultId: 'merge-sort-ottimo',
-        text: 'Correzione dimostrativa. Precisato che il conteggio esatto dei confronti vale per n potenza di due.',
+        text: 'Demo correction. Clarified that the exact comparison count holds for n a power of two.',
       },
     ],
     aiDisclosure: DEMO_DISCLOSURE,
@@ -147,19 +147,19 @@ Più in generale il tempo è $\Theta(n + I)$, dove $I$ è il numero di inversion
     date: '2026-10-30',
     status: 'pubblicato',
     demo: true,
-    title: 'Cammini minimi: l’algoritmo di Dijkstra con uno heap binario',
-    summary: 'Esempio di briefing breve con un solo risultato classico sui cammini minimi.',
+    title: 'Shortest paths: Dijkstra’s algorithm with a binary heap',
+    summary: 'A short example briefing with a single classic result on shortest paths.',
     coverage: { from: '2026-10-29', to: '2026-10-29' },
     results: [
       {
         id: 'dijkstra-heap-binario',
-        title: 'Con uno heap binario Dijkstra calcola i cammini minimi in O((n + m) log n)',
-        summary: 'Su un grafo con pesi non negativi ogni operazione sulla coda di priorità costa O(log n).',
+        title: 'With a binary heap, Dijkstra computes shortest paths in O((n + m) log n)',
+        summary: 'On a graph with non-negative weights, every priority-queue operation costs O(log n).',
         topics: ['grafi', 'algoritmi'],
         status: CLASSIC,
-        body: md`Su un grafo orientato con $n$ vertici, $m$ archi e pesi non negativi, l'algoritmo di Dijkstra estrae ogni vertice una volta dalla coda di priorità ed esegue al più un decremento di chiave per arco. Con uno heap binario entrambe le operazioni costano $O(\log n)$, per un totale di $O((n + m)\log n)$.
+        body: md`On a directed graph with $n$ vertices, $m$ edges, and non-negative weights, Dijkstra's algorithm extracts each vertex once from the priority queue and performs at most one decrease-key per edge. With a binary heap both operations cost $O(\log n)$, for a total of $O((n + m)\log n)$.
 
-L'ipotesi sui pesi è essenziale: con archi negativi la scelta greedy del vertice più vicino non è più corretta e servono algoritmi diversi, come Bellman–Ford.`,
+The assumption on the weights is essential: with negative edges, the greedy choice of the closest vertex is no longer correct and different algorithms are needed, such as Bellman–Ford.`,
         sources: [
           {
             title: 'A note on two problems in connexion with graphs',
@@ -180,30 +180,30 @@ L'ipotesi sui pesi è essenziale: con archi negativi la scelta greedy del vertic
     date: '2026-10-31',
     status: 'pubblicato',
     demo: true,
-    title: 'Moltiplicare interi più velocemente di n² e contare gli alberi binari',
+    title: 'Multiplying integers faster than n² and counting binary trees',
     summary:
-      'Esempio di briefing con due risultati classici: l’algoritmo di Karatsuba e il conteggio degli alberi binari ' +
-      'tramite i numeri di Catalan.',
+      'An example briefing with two classic results: Karatsuba’s algorithm and the count of binary trees ' +
+      'via the Catalan numbers.',
     coverage: { from: '2026-10-30', to: '2026-10-30' },
     results: [
       {
         id: 'karatsuba',
-        title: 'L’algoritmo di Karatsuba moltiplica due interi di n cifre con tre prodotti ricorsivi invece di quattro',
-        summary: 'Il risparmio di un prodotto per livello porta l’esponente del costo da 2 a log₂ 3, circa 1,585.',
+        title: 'Karatsuba’s algorithm multiplies two n-digit integers with three recursive products instead of four',
+        summary: 'Saving one product per level lowers the exponent of the cost from 2 to log₂ 3, about 1.585.',
         topics: ['algoritmi'],
         status: CLASSIC,
-        body: md`Il metodo scolastico moltiplica due interi di $n$ cifre con $\Theta(n^2)$ operazioni elementari. Karatsuba scrive $x = x_1 B^{m} + x_0$ e $y = y_1 B^{m} + y_0$ e osserva che
+        body: md`The schoolbook method multiplies two $n$-digit integers with $\Theta(n^2)$ elementary operations. Karatsuba writes $x = x_1 B^{m} + x_0$ and $y = y_1 B^{m} + y_0$ and observes that
 
 $$
 x y = z_2 B^{2m} + z_1 B^{m} + z_0, \qquad z_1 = (x_1 + x_0)(y_1 + y_0) - z_2 - z_0,
 $$
 
-con $z_2 = x_1 y_1$ e $z_0 = x_0 y_0$. Bastano quindi tre moltiplicazioni ricorsive di metà dimensione, da cui $T(n) = 3\,T(n/2) + O(n)$ e $T(n) = O(n^{\log_2 3}) \approx O(n^{1{,}585})$.`,
+with $z_2 = x_1 y_1$ and $z_0 = x_0 y_0$. Three recursive multiplications of half the size are therefore enough, giving $T(n) = 3\,T(n/2) + O(n)$ and $T(n) = O(n^{\log_2 3}) \approx O(n^{1.585})$.`,
         sources: [
           CLRS,
           {
             title: 'Karatsuba algorithm',
-            authors: ['Contributori di Wikipedia'],
+            authors: ['Wikipedia contributors'],
             kind: 'pagina-web',
             url: 'https://en.wikipedia.org/wiki/Karatsuba_algorithm',
             lang: 'en',
@@ -212,21 +212,21 @@ con $z_2 = x_1 y_1$ e $z_0 = x_0 y_0$. Bastano quindi tre moltiplicazioni ricors
       },
       {
         id: 'alberi-binari-catalan',
-        title: 'Gli alberi binari con n nodi sono contati dall’n-esimo numero di Catalan',
-        summary: 'Una ricorrenza sulla radice porta alla formula chiusa e alla crescita asintotica 4ⁿ.',
+        title: 'Binary trees with n nodes are counted by the n-th Catalan number',
+        summary: 'A recurrence on the root leads to the closed form and to 4ⁿ asymptotic growth.',
         topics: ['combinatoria'],
         status: CLASSIC,
-        body: md`Scegliendo quanti nodi stanno nel sottoalbero sinistro della radice si ottiene la ricorrenza $C_0 = 1$, $C_{n+1} = \sum_{i=0}^{n} C_i\, C_{n-i}$, la cui soluzione è
+        body: md`Choosing how many nodes lie in the left subtree of the root gives the recurrence $C_0 = 1$, $C_{n+1} = \sum_{i=0}^{n} C_i\, C_{n-i}$, whose solution is
 
 $$
 C_n = \frac{1}{n+1}\binom{2n}{n} \sim \frac{4^n}{n^{3/2}\sqrt{\pi}}.
 $$
 
-I primi valori sono $1, 1, 2, 5, 14, 42$. Gli stessi numeri contano molte altre strutture, per esempio le parentesizzazioni corrette.`,
+The first values are $1, 1, 2, 5, 14, 42$. The same numbers count many other structures, for example well-formed parenthesizations.`,
         sources: [
           {
             title: 'Catalan number',
-            authors: ['Contributori di Wikipedia'],
+            authors: ['Wikipedia contributors'],
             kind: 'pagina-web',
             url: 'https://en.wikipedia.org/wiki/Catalan_number',
             lang: 'en',
@@ -239,21 +239,21 @@ I primi valori sono $1, 1, 2, 5, 14, 42$. Gli stessi numeri contano molte altre 
   },
   {
     // Bozza di controllo: non deve comparire in home, archivio, argomenti né in dist/.
-    // scripts/check-dist.mjs cerca il marcatore, la data, l'id del risultato e la pagina dell'argomento.
+    // scripts/check-dist.ts cerca il marcatore (invariato, è un dato di controllo), la data, l'id e la pagina dell'argomento.
     date: '2026-11-01',
     status: 'bozza',
     demo: true,
-    title: 'MARCATORE-BOZZA-NON-PUBBLICARE titolo della bozza di controllo',
-    summary: 'MARCATORE-BOZZA-NON-PUBBLICARE sommario della bozza di controllo.',
+    title: 'MARCATORE-BOZZA-NON-PUBBLICARE title of the control draft',
+    summary: 'MARCATORE-BOZZA-NON-PUBBLICARE summary of the control draft.',
     coverage: { from: '2026-10-31', to: '2026-10-31' },
     results: [
       {
         id: 'bozza-di-controllo',
-        title: 'MARCATORE-BOZZA-NON-PUBBLICARE risultato della bozza',
-        summary: 'Unico risultato con argomento Logica: la sua pagina non deve essere generata.',
+        title: 'MARCATORE-BOZZA-NON-PUBBLICARE draft result',
+        summary: 'The only result with the Logic topic: its page must not be generated.',
         topics: ['logica'],
         status: CLASSIC,
-        body: md`MARCATORE-BOZZA-NON-PUBBLICARE corpo della bozza, con una formula $n^2$.`,
+        body: md`MARCATORE-BOZZA-NON-PUBBLICARE body of the draft, with a formula $n^2$.`,
         sources: [CLRS],
       },
     ],

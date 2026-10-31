@@ -18,20 +18,20 @@ export default function ResultSection({ result, topics, bodyHtml, position }: Pr
   const { status } = result;
   return (
     <section className="result" id={anchor} aria-labelledby={`${anchor}-titolo`}>
-      <p className="result-number">Risultato {position}</p>
+      <p className="result-number">Result {position}</p>
       <h2 id={`${anchor}-titolo`} className="result-title">
         {result.title}
       </h2>
       <dl className="result-meta">
         <div>
-          <dt>Stato</dt>
+          <dt>Status</dt>
           <dd>
             {PUBLICATION_LABELS[status.publication]} · {FORMALIZATION_LABELS[status.formalization]} ·{' '}
             {VERIFICATION_LABELS[status.verification]}
           </dd>
         </div>
         <div>
-          <dt>Argomenti</dt>
+          <dt>Topics</dt>
           <dd>
             <TopicLinks topics={topics} />
           </dd>
@@ -40,7 +40,7 @@ export default function ResultSection({ result, topics, bodyHtml, position }: Pr
       <HtmlBody html={bodyHtml} />
       <SourceList sources={result.sources} headingId={`${anchor}-fonti`} />
       <p className="permalink">
-        <a href={`#${anchor}`}>Link a questo risultato</a>
+        <a href={`#${anchor}`}>Link to this result</a>
       </p>
     </section>
   );

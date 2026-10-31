@@ -10,7 +10,7 @@ export default function SourceList({ sources, headingId }: Props) {
   return (
     <section className="sources" aria-labelledby={headingId}>
       <h3 id={headingId} className="small-heading">
-        Fonti
+        Sources
       </h3>
       <ol>
         {sources.map((source, index) => (

@@ -6,35 +6,36 @@ import type {
   VerificationStatus,
 } from './types.ts';
 
-// Etichette testuali sobrie, senza colori per categoria.
+// Etichette pubbliche (inglese) dei valori del vocabolario. I valori interni restano invariati.
+// Testo sobrio, senza colori per categoria.
 
 export const PUBLICATION_LABELS: Record<PublicationStatus, string> = {
-  'risultato-classico': 'risultato classico da manuale',
-  preprint: 'preprint, non sottoposto a revisione',
-  accettato: 'accettato per la pubblicazione',
-  pubblicato: 'pubblicato',
+  'risultato-classico': 'classic textbook result',
+  preprint: 'preprint, not peer reviewed',
+  accettato: 'accepted for publication',
+  pubblicato: 'published',
 };
 
 export const FORMALIZATION_LABELS: Record<FormalizationStatus, string> = {
-  'non-indicata': 'formalizzazione non indicata',
-  formalizzato: 'formalizzato in un assistente di prova',
+  'non-indicata': 'formalization not stated',
+  formalizzato: 'formalized in a proof assistant',
 };
 
 export const VERIFICATION_LABELS: Record<VerificationStatus, string> = {
-  'non-verificato': 'nessuna verifica redazionale registrata',
-  'controllo-automatico': 'solo controllo automatico',
-  'revisione-redazionale': 'rivisto dalla redazione',
-  'revisione-indipendente': 'verificato in modo indipendente',
+  'non-verificato': 'no editorial check recorded',
+  'controllo-automatico': 'automated check only',
+  'revisione-redazionale': 'reviewed by the editors',
+  'revisione-indipendente': 'independently verified',
 };
 
 export const SOURCE_KIND_LABELS: Record<SourceKind, string> = {
-  libro: 'Libro',
-  articolo: 'Articolo',
+  libro: 'Book',
+  articolo: 'Article',
   preprint: 'Preprint',
-  'pagina-web': 'Pagina web',
+  'pagina-web': 'Web page',
 };
 
 export const CORRECTION_KIND_LABELS: Record<CorrectionKind, string> = {
-  sostanziale: 'Correzione sostanziale',
-  minore: 'Correzione minore',
+  sostanziale: 'Substantive correction',
+  minore: 'Minor correction',
 };

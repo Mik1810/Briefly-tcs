@@ -10,7 +10,7 @@ export default function ResultIndex({ results }: Props) {
   return (
     <nav className="result-index" aria-labelledby="indice-titolo">
       <h2 id="indice-titolo" className="small-heading">
-        In questo briefing
+        In this briefing
       </h2>
       <ol>
         {results.map((result) => (

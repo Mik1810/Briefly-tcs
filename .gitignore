@@ -15,3 +15,6 @@ Thumbs.db
 # Cartelle temporanee di scripts/build.ts
 dist-staging/
 dist-previous/
+
+# Copie locali di confronto (es. fixture italiane di partenza per la traduzione dei demo)
+.local/

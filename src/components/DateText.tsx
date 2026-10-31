@@ -1,9 +1,9 @@
-import { formatItalianDate } from '../lib/dates.ts';
+import { formatDate } from '../lib/dates.ts';
 
 interface Props {
   date: string;
 }
 
 export default function DateText({ date }: Props) {
-  return <time dateTime={date}>{formatItalianDate(date)}</time>;
+  return <time dateTime={date}>{formatDate(date)}</time>;
 }

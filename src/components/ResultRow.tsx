@@ -14,11 +14,11 @@ export default function ResultRow({ briefing, result }: Props) {
       <p className="meta">
         <DateText date={briefing.date} />
         <span aria-hidden="true"> — </span>
-        <a href={briefingPath(briefing)}>dal briefing del giorno</a>
+        <a href={briefingPath(briefing)}>from the daily briefing</a>
         {briefing.demo ? (
           <>
             <span aria-hidden="true"> — </span>
-            <span className="meta-demo">Contenuto dimostrativo</span>
+            <span className="meta-demo">Demo content</span>
           </>
         ) : null}
       </p>

@@ -22,7 +22,7 @@ export default function BriefingRow({ briefing, topics, headingLevel }: Props) {
         {briefing.demo ? (
           <>
             <span aria-hidden="true"> — </span>
-            <span className="meta-demo">Contenuto dimostrativo</span>
+            <span className="meta-demo">Demo content</span>
           </>
         ) : null}
       </p>

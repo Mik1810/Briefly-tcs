@@ -7,15 +7,15 @@ interface Props {
 }
 
 const NAV_ITEMS: { key: Section; href: string; label: string }[] = [
-  { key: 'articoli', href: '/', label: 'Articoli' },
-  { key: 'archivio', href: '/archivio/', label: 'Archivio' },
-  { key: 'argomenti', href: '/argomenti/', label: 'Argomenti' },
-  { key: 'metodo', href: '/metodo/', label: 'Metodo' },
+  { key: 'articoli', href: '/', label: 'Articles' },
+  { key: 'archivio', href: '/archivio/', label: 'Archive' },
+  { key: 'argomenti', href: '/argomenti/', label: 'Topics' },
+  { key: 'metodo', href: '/metodo/', label: 'Method' },
 ];
 
 const MASTHEAD_NAME = (
   <>
-    <span className="masthead-accent">TCS</span> quotidiano
+    <span className="masthead-accent">TCS</span> Daily
   </>
 );
 
@@ -32,9 +32,9 @@ export default function SiteHeader({ current, currentIsPage }: Props) {
             {MASTHEAD_NAME}
           </a>
         )}
-        <p className="masthead-tagline">Briefing di informatica teorica per studenti magistrali e ricercatori.</p>
+        <p className="masthead-tagline">Theoretical computer science briefings for graduate students and researchers.</p>
       </div>
-      <nav className="site-nav" aria-label="Sezioni">
+      <nav className="site-nav" aria-label="Sections">
         <ul>
           {NAV_ITEMS.map((item) => (
             <li key={item.key}>

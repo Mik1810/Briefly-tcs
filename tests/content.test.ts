@@ -4,7 +4,7 @@
 import assert from 'node:assert/strict';
 import { describe, test } from 'node:test';
 
-import { formatItalianDate, isIsoDate } from '../src/lib/dates.ts';
+import { formatDate, isIsoDate } from '../src/lib/dates.ts';
 import { entriesByTopic, getSite } from '../src/lib/content/repository.ts';
 import { briefings as fixtureBriefings } from '../src/lib/content/fixtures/briefings.ts';
 import { topics as fixtureTopics } from '../src/lib/content/fixtures/topics.ts';
@@ -64,8 +64,8 @@ describe('date editoriali', () => {
 
   test('la formattazione non dipende dal fuso orario', () => {
     // Una data a mezzanotte convertita con un fuso negativo slitterebbe al giorno prima.
-    assert.equal(formatItalianDate('2026-01-01'), '1 gennaio 2026');
-    assert.equal(formatItalianDate('2026-12-31'), '31 dicembre 2026');
+    assert.equal(formatDate('2026-01-01'), 'January 1, 2026');
+    assert.equal(formatDate('2026-12-31'), 'December 31, 2026');
   });
 });
 

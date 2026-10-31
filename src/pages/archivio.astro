@@ -7,14 +7,14 @@ const site = await getSite();
 const years = briefingsByYear(site);
 ---
 
-<BaseLayout title="Archivio" description="Tutti i briefing pubblicati, dal più recente." current="archivio">
+<BaseLayout title="Archive" description="All published briefings, most recent first." current="archivio">
   <header class="page-header">
-    <h1 class="page-title">Archivio</h1>
-    <p class="page-intro">Tutti i briefing pubblicati, dal più recente, raggruppati per anno.</p>
+    <h1 class="page-title">Archive</h1>
+    <p class="page-intro">All published briefings, most recent first, grouped by year.</p>
   </header>
   {
     years.length === 0 ? (
-      <p class="empty">Nessun briefing pubblicato.</p>
+      <p class="empty">No published briefings.</p>
     ) : (
       years.map(([year, briefings]) => (
         <section class="list" aria-labelledby={`anno-${year}`}>

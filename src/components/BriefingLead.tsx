@@ -23,7 +23,7 @@ export default function BriefingLead({ briefing, topics }: Props) {
         <span aria-hidden="true"> — </span>
         <TopicLinks topics={topics} />
       </p>
-      <h3 className="lead-results-heading">In questo briefing</h3>
+      <h3 className="lead-results-heading">In this briefing</h3>
       <ol className="lead-results">
         {briefing.results.map((result) => (
           <li key={result.id}>
