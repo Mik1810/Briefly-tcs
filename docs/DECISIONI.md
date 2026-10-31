@@ -191,3 +191,11 @@ Non sono decisioni dell'utente; restano modificabili.
 - Redazione e controllo automatici, con salvataggio pubblicato e rigenerazione del sito; non ancora implementati.
 - Da scegliere/provare: strumento collegato all’attività ChatGPT esistente oppure job del progetto con API OpenAI. Non è stata verificata la compatibilità unattended di un'app personalizzata con il task dell'account.
 - Non sono state create automazioni, configurate chiavi o esposti servizi locali. Il task originario resta invariato.
+
+## Solo abbonamento ChatGPT, niente API OpenAI — 2026-10-31T19:51:20+01:00
+
+- L’utente non ha accesso alle API OpenAI e vuole evitarle. La proposta di generazione tramite API OpenAI è esclusa.
+- Direzione da provare: automazione locale Codex con autenticazione ChatGPT e uso incluso nel piano, entro i relativi limiti.
+- Rimangono pubblicazione automatica senza revisione umana, post inglesi, stile A e lavoro locale.
+- Richiede PC acceso e app desktop attiva per operare sul progetto locale; non è il cron ChatGPT online già esistente.
+- Nessuna ricorrenza creata o chiamata API a pagamento effettuata. Prima verificare un ciclo locale reale.

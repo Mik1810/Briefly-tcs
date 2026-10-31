@@ -1,6 +1,6 @@
 # Stato attuale e ripresa
 
-Aggiornato: 2026-10-31T19:48:47+01:00 — Europe/Rome.
+Aggiornato: 2026-10-31T19:51:20+01:00 — Europe/Rome.
 
 ## Punto da cui ripartire
 
@@ -73,3 +73,10 @@ L’utente non vuole un passaggio di revisione umana. Prossimo obiettivo: redazi
 La precedente proposta di ciclo con approvazione umana è superata. La bozza può essere solo uno stato tecnico intermedio, non un blocco per attendere l’utente.
 Da provare/scegliere: task ChatGPT con strumento di pubblicazione collegato o job locale con API OpenAI (uso separato dall’abbonamento).
 Nessuna automazione o integrazione nuova è attiva. Ultimo registro: [2026-10-31_19-48-47_pubblicazione-automatica-fattibilita.md](2026-10-31_19-48-47_pubblicazione-automatica-fattibilita.md).
+
+## Vincolo prevalente del 2026-10-31T19:51:20+01:00: solo abbonamento
+
+Niente API OpenAI o credenziali API: l’utente dispone del solo abbonamento ChatGPT e vuole usarlo.
+La precedente opzione API è scartata. Da provare un'automazione locale Codex autenticata con ChatGPT che rediga/controlli/pubblici e rigeneri il sito senza revisione umana.
+Servono PC e app attivi; le esecuzioni consumano i limiti del piano. La Task online resta intatta. Nessuna nuova automazione ancora attiva.
+Ultimo registro: [2026-10-31_19-51-20_solo-abbonamento-senza-api-openai.md](2026-10-31_19-51-20_solo-abbonamento-senza-api-openai.md).

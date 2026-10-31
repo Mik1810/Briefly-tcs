@@ -20,8 +20,9 @@ Tutte le attività del progetto vengono registrate qui in Markdown, con data e o
 | [2026-10-31_19-17-57_claude-nome-briefly-tcs.md](2026-10-31_19-17-57_claude-nome-briefly-tcs.md) | Sessione Claude — applicazione del nome Briefly.tcs |
 | [2026-10-31_19-43-49_stato-e-prossimi-passi.md](2026-10-31_19-43-49_stato-e-prossimi-passi.md) | Sessione: cosa manca per il blog quotidiano |
 | [2026-10-31_19-48-47_pubblicazione-automatica-fattibilita.md](2026-10-31_19-48-47_pubblicazione-automatica-fattibilita.md) | Sessione: fattibilità della pubblicazione automatica |
+| [2026-10-31_19-51-20_solo-abbonamento-senza-api-openai.md](2026-10-31_19-51-20_solo-abbonamento-senza-api-openai.md) | Solo abbonamento ChatGPT, API OpenAI escluse |
 
-Ultima sessione principale conclusa: [2026-10-31_19-48-47_pubblicazione-automatica-fattibilita.md](2026-10-31_19-48-47_pubblicazione-automatica-fattibilita.md).
+Ultima sessione principale conclusa: [2026-10-31_19-51-20_solo-abbonamento-senza-api-openai.md](2026-10-31_19-51-20_solo-abbonamento-senza-api-openai.md).
 
 ## Regole del registro
 
