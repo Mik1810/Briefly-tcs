@@ -25,7 +25,9 @@ Tutte le attività del progetto vengono registrate qui in Markdown, con data e o
 | [2026-10-31_19-59-23_vercel-supabase-hosting-previsto.md](2026-10-31_19-59-23_vercel-supabase-hosting-previsto.md) | Hosting previsto: Vercel e Supabase |
 | [2026-10-31_20-01-00_test-automazione-chatgpt.md](2026-10-31_20-01-00_test-automazione-chatgpt.md) | Test ChatGPT: corsa/lettura osservata, scrittura bloccata 403 |
 
-Ultima prova conclusa: [2026-10-31_20-01-00_test-automazione-chatgpt.md](2026-10-31_20-01-00_test-automazione-chatgpt.md). Diagnosi permessi GitHub in attesa di autenticazione utente.
+| [2026-10-31_20-09-58_ripresa-permessi-github.md](2026-10-31_20-09-58_ripresa-permessi-github.md) | GitHub sbloccato: scrittura interattiva e task automatico verificati |
+
+Ultima prova conclusa: [2026-10-31_20-09-58_ripresa-permessi-github.md](2026-10-31_20-09-58_ripresa-permessi-github.md). Scrittura GitHub programmata riuscita; publisher Supabase/Vercel ancora da implementare.
 
 ## Regole del registro
 

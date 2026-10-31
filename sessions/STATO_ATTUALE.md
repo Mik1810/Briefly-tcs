@@ -106,3 +106,14 @@ Registro: [2026-10-31_20-01-00_test-automazione-chatgpt.md](2026-10-31_20-01-00_
 - Permessi installazione GitHub non ancora ispezionabili: Configure richiede autenticazione utente. Scheda lasciata aperta, chiesta autenticazione senza modificare permessi.
 - Pubblicazione DB/build/Vercel e scrittura unattended non verificate; publisher non implementato. Nessun cambiamento applicativo o deployment in questa prova.
 - Prossimo passo: sbloccare autenticazione, leggere permessi e diagnosticare 403 prima di riprovare scrittura singola e programmata. Evidenza: ../docs/testing/chatgpt-scheduler-probe-20261031.jpg.
+
+## Scrittura ChatGPT online sbloccata e provata — 2026-10-31T20:13:35+01:00
+
+Registro: [2026-10-31_20-09-58_ripresa-permessi-github.md](2026-10-31_20-09-58_ripresa-permessi-github.md). Il precedente blocco 403 è superato per il test attuale.
+
+- Dopo intervento dell'utente su GitHub, UI mostra read/write code e Briefly-tcs selezionato. Codex non ha modificato permessi.
+- Prova interattiva: branch automation-probe/chatgpt-20261031-2001 e primo JSON creati; richiesta una conferma Consenti una volta.
+- Prova task singolo: secondo JSON scheduled-20261031-2018.json creato automaticamente e contenuto verificato indipendentemente. Nessuna conferma durante la corsa. Task di prova ora In pausa; briefing TCS originale attivo e invariato.
+- Verificati file remoto e main invariato (5804afa). Evidenza ../docs/testing/chatgpt-unattended-write-20261031.jpg.
+- Risultato limitato a questa chat/autorizzazioni e una corsa; puntualità oraria non certificata. Nessuna garanzia che future scritture non chiedano conferma.
+- Da implementare/provare: schema post e publisher GitHub → Supabase → build sito. Nessun deployment o post reale, nessun codice applicativo cambiato. App code sempre a Claude CLI in WSL.
