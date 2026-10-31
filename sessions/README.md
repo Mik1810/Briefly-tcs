@@ -53,3 +53,5 @@ Codex collega il registro e gli esiti della revisione nella sessione principale.
 I report preesistenti in `docs/coordination/` restano conservati e sono richiamati dal primo riepilogo.
 
 Ultima attività: [2026-10-31_20-15-21_supabase-cloud.md](2026-10-31_20-15-21_supabase-cloud.md), in attesa della scelta organizzazione Supabase.
+
+Ultima attività: [2026-10-31_20-21-01_supabase-cambio-account.md](2026-10-31_20-21-01_supabase-cambio-account.md); nuovo account non ancora visibile al connettore Supabase.

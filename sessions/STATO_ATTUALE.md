@@ -127,3 +127,7 @@ Registro: [2026-10-31_20-15-21_supabase-cloud.md](2026-10-31_20-15-21_supabase-c
 - Schema locale letto e pronto per revisione/applicazione; sorgente del sito rifiuta ancora host cloud e richiederà adeguamento da Claude CLI.
 - Prima della creazione verificare preventivo nell'organizzazione scelta; nessun costo non zero autorizzato. Non confondere la quota Free documentata con il piano effettivo non ancora accertato.
 - Nessun segreto recuperato, nessuna migrazione cloud, nessun deployment o push.
+
+## Cambio account Supabase — 2026-10-31T20:21:01+01:00
+
+L'utente riferisce nuovo account e organizzazione appena creata. Il connettore continua a restituire il precedente Mik1810: non creare lì il progetto. Necessario ricollegare Supabase al nuovo account e identificare la nuova organizzazione prima di riprendere. Nessuna modifica remota. Registro: [2026-10-31_20-21-01_supabase-cambio-account.md](2026-10-31_20-21-01_supabase-cambio-account.md).
