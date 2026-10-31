@@ -29,6 +29,8 @@ Tutte le attività del progetto vengono registrate qui in Markdown, con data e o
 
 | [2026-10-31_20-15-21_supabase-cloud.md](2026-10-31_20-15-21_supabase-cloud.md) | Preparazione Supabase cloud; scelta organizzazione e verifica costi pendenti |
 
+| [2026-10-31_20-23-56_supabase-invito-account.md](2026-10-31_20-23-56_supabase-invito-account.md) | Invito vecchio account come Developer inviato; accettazione pendente |
+
 Ultima prova conclusa: [2026-10-31_20-09-58_ripresa-permessi-github.md](2026-10-31_20-09-58_ripresa-permessi-github.md). Scrittura GitHub programmata riuscita; publisher Supabase/Vercel ancora da implementare.
 
 ## Regole del registro
@@ -55,3 +57,5 @@ I report preesistenti in `docs/coordination/` restano conservati e sono richiama
 Ultima attività: [2026-10-31_20-15-21_supabase-cloud.md](2026-10-31_20-15-21_supabase-cloud.md), in attesa della scelta organizzazione Supabase.
 
 Ultima attività: [2026-10-31_20-21-01_supabase-cambio-account.md](2026-10-31_20-21-01_supabase-cambio-account.md); nuovo account non ancora visibile al connettore Supabase.
+
+Ultima attività: [2026-10-31_20-23-56_supabase-invito-account.md](2026-10-31_20-23-56_supabase-invito-account.md); invito inviato e verificato nella UI, attesa accettazione del destinatario.

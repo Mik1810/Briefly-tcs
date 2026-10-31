@@ -131,3 +131,8 @@ Registro: [2026-10-31_20-15-21_supabase-cloud.md](2026-10-31_20-15-21_supabase-c
 ## Cambio account Supabase — 2026-10-31T20:21:01+01:00
 
 L'utente riferisce nuovo account e organizzazione appena creata. Il connettore continua a restituire il precedente Mik1810: non creare lì il progetto. Necessario ricollegare Supabase al nuovo account e identificare la nuova organizzazione prima di riprendere. Nessuna modifica remota. Registro: [2026-10-31_20-21-01_supabase-cambio-account.md](2026-10-31_20-21-01_supabase-cambio-account.md).
+
+## Invito al vecchio account — 2026-10-31T20:24:50+01:00
+
+Registro: [2026-10-31_20-23-56_supabase-invito-account.md](2026-10-31_20-23-56_supabase-invito-account.md). Verificato via browser: nuova organizzazione wiuuqjjwctaxgfubwshx (Free), progetto briefly.tcs dvjrhqkqyfkxaejwydog in eu-west-3 già creato dall'utente, schema public senza tabelle.
+Dopo email e conferma esplicita dell'utente, inviato invito al vecchio account come Developer. Team mostra Invited / Developer. Serve accettazione nell'account destinatario prima di controllare connettore. Nessuna modifica schema/dati o progetto creato da Codex. Evidenza privata in .local, esclusa da Git.
