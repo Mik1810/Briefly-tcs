@@ -150,3 +150,11 @@ Non sono decisioni dell'utente; restano modificabili.
 - Non mostrare il periodo coperto nei blog post. I campi interni possono restare per acquisizione e deduplicazione.
 - Stile A e architettura invariati; nessuna richiesta di rinominare gli URL esistenti.
 - Tutto il lavoro va registrato in sessions con data e ora Europe/Rome.
+
+## Nome approvato dall’utente — 2026-10-31T19:04:52+01:00
+
+- Nome del sito: **Briefly.tcs**. Supera TCS quotidiano e TCS Daily, entrambi provvisori.
+- Nome scelto per il futuro repository GitHub: **briefly-tcs**.
+- Sottotitolo proposto, non ancora esplicitamente approvato: Research updates in theoretical computer science.
+- L’istruzione «registralo» conferma la scelta del nome nel progetto; non autorizza acquisto di domini o creazione del repository remoto.
+- Applicazione della testata da coordinare con la traduzione inglese attualmente affidata a Claude, senza interventi concorrenti sul codice.

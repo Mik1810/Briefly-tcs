@@ -65,3 +65,7 @@ Proposte di nome registrate in [2026-10-31_18-59-08_proposte-nome.md](2026-10-31
 ## Aggiornamento 2026-10-31T19:03:43+01:00 — proposta Briefly.tcs
 
 L’utente propone Briefly.tcs e chiede un parere; Codex suggerisce Briefly.tcs per la testata e briefly-tcs per il repository. Nome non ancora applicato, disponibilità non verificata. Vedere il registro delle proposte di nome.
+
+## Aggiornamento 2026-10-31T19:04:52+01:00 — nome confermato
+
+**Briefly.tcs** è il nome scelto dall’utente; **briefly-tcs** è il nome del repository GitHub previsto. Supera tutte le proposte e i nomi provvisori precedenti. Scelta registrata in docs/DECISIONI.md. Nessuna registrazione di dominio o repository remoto. Prima di aggiornare la testata controllare la delega inglese in corso, senza avviare scritture concorrenti. Il nome non viene dichiarato già applicato al sito.
