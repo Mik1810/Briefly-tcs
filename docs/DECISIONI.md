@@ -199,3 +199,10 @@ Non sono decisioni dell'utente; restano modificabili.
 - Rimangono pubblicazione automatica senza revisione umana, post inglesi, stile A e lavoro locale.
 - Richiede PC acceso e app desktop attiva per operare sul progetto locale; non è il cron ChatGPT online già esistente.
 - Nessuna ricorrenza creata o chiamata API a pagamento effettuata. Prima verificare un ciclo locale reale.
+
+## Preferenza per il solo ChatGPT nella pubblicazione — 2026-10-31T19:54:42+01:00
+
+- L’utente chiede di evitare Codex per il lavoro quotidiano e usare ChatGPT. Non attivare l’automazione Codex proposta come opzione precedente.
+- Le API OpenAI restano escluse. Un task ChatGPT resta soggetto all’uso/limiti del prodotto ChatGPT; non si promette consumo zero di ogni quota.
+- Percorso da provare: task ChatGPT online con strumento di pubblicazione dedicato. Compatibilità dell’account e scrittura senza conferme ripetute non ancora verificate.
+- Il publisher non richiede un modello AI: può scrivere DB e avviare build. Collegamento al progetto locale da progettare, senza esporre servizi in questa fase.

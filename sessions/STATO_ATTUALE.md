@@ -1,6 +1,6 @@
 # Stato attuale e ripresa
 
-Aggiornato: 2026-10-31T19:51:20+01:00 — Europe/Rome.
+Aggiornato: 2026-10-31T19:54:42+01:00 — Europe/Rome.
 
 ## Punto da cui ripartire
 
@@ -80,3 +80,10 @@ Niente API OpenAI o credenziali API: l’utente dispone del solo abbonamento Cha
 La precedente opzione API è scartata. Da provare un'automazione locale Codex autenticata con ChatGPT che rediga/controlli/pubblici e rigeneri il sito senza revisione umana.
 Servono PC e app attivi; le esecuzioni consumano i limiti del piano. La Task online resta intatta. Nessuna nuova automazione ancora attiva.
 Ultimo registro: [2026-10-31_19-51-20_solo-abbonamento-senza-api-openai.md](2026-10-31_19-51-20_solo-abbonamento-senza-api-openai.md).
+
+## Preferenza prevalente del 2026-10-31T19:54:42+01:00: solo ChatGPT, niente Codex quotidiano
+
+Non attivare la proposta di automazione Codex. L’utente vuole il task ChatGPT online come autore, senza API OpenAI.
+Da verificare un collegamento di pubblicazione tramite strumento/plugin: accesso nell’account, compatibilità col task e conferme sulle scritture. Nessuna prova unattended ancora eseguita.
+Il task usa comunque ChatGPT e i relativi limiti: non confondere l’esclusione di Codex con consumo nullo dell’abbonamento.
+Ultimo registro: [2026-10-31_19-54-42_solo-chatgpt-senza-codex.md](2026-10-31_19-54-42_solo-chatgpt-senza-codex.md).
