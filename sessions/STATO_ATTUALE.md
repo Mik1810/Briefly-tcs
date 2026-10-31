@@ -1,6 +1,6 @@
 # Stato attuale e ripresa
 
-Aggiornato: 2026-10-31T19:43:49+01:00 — Europe/Rome.
+Aggiornato: 2026-10-31T19:48:47+01:00 — Europe/Rome.
 
 ## Punto da cui ripartire
 
@@ -66,3 +66,10 @@ Ultima sessione: [2026-10-31_19-43-49_stato-e-prossimi-passi.md](2026-10-31_19-4
 La prossima attività proposta è un ciclo editoriale reale, da fonti a bozza revisionata e pubblicazione locale.
 Origine dei briefing, integrazione/modello e automazione restano da definire; nessuna nuova implementazione avviata.
 Questa ricognizione ha controllato Git e documenti, senza ricontrollare l'attuale disponibilità dei servizi.
+
+## Decisione prevalente del 2026-10-31T19:48:47+01:00: pubblicazione automatica
+
+L’utente non vuole un passaggio di revisione umana. Prossimo obiettivo: redazione, controlli e pubblicazione automatici di post inglesi.
+La precedente proposta di ciclo con approvazione umana è superata. La bozza può essere solo uno stato tecnico intermedio, non un blocco per attendere l’utente.
+Da provare/scegliere: task ChatGPT con strumento di pubblicazione collegato o job locale con API OpenAI (uso separato dall’abbonamento).
+Nessuna automazione o integrazione nuova è attiva. Ultimo registro: [2026-10-31_19-48-47_pubblicazione-automatica-fattibilita.md](2026-10-31_19-48-47_pubblicazione-automatica-fattibilita.md).

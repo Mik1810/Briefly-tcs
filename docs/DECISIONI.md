@@ -184,3 +184,10 @@ Non sono decisioni dell'utente; restano modificabili.
 - Sottotitolo invariato: "Theoretical computer science briefings for graduate students and researchers." Il sottotitolo solo proposto non è stato applicato.
 - Invariati: CSS, URL, schema, dati, pacchetto npm e stack Supabase interni (`tcs-quotidiano`), inglese e assenza del periodo coperto.
 - Verificati: `npm run check` e `npm run build` da Supabase. Dettagli in docs/coordination/REPORT_05_CLAUDE.md.
+
+## Pubblicazione automatica — decisione dell’utente del 2026-10-31T19:48:47+01:00
+
+- Nessuna revisione umana obbligatoria: ChatGPT deve produrre il testo in forma di blog post e pubblicarlo automaticamente. Supera la precedente proposta di bozze da approvare.
+- Redazione e controllo automatici, con salvataggio pubblicato e rigenerazione del sito; non ancora implementati.
+- Da scegliere/provare: strumento collegato all’attività ChatGPT esistente oppure job del progetto con API OpenAI. Non è stata verificata la compatibilità unattended di un'app personalizzata con il task dell'account.
+- Non sono state create automazioni, configurate chiavi o esposti servizi locali. Il task originario resta invariato.
