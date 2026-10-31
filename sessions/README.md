@@ -16,6 +16,8 @@ Tutte le attività del progetto vengono registrate qui in Markdown, con data e o
 
 Ultima sessione in corso: [2026-10-31_18-56-48_sito-in-inglese.md](2026-10-31_18-56-48_sito-in-inglese.md).
 
+Confronto sul nome: [2026-10-31_18-59-08_proposte-nome.md](2026-10-31_18-59-08_proposte-nome.md).
+
 ## Regole del registro
 
 - All'inizio di ogni nuova sessione creare `YYYY-MM-DD_HH-MM-SS_<argomento>.md` usando l'ora di Roma.

@@ -57,3 +57,7 @@ Zoom 200% e Studio non verificati. Vedere report e registro per dettagli e prove
 ## Aggiornamento 2026-10-31T18:56:48+01:00
 
 L’utente richiede sito in inglese e nessun periodo coperto visibile negli articoli. Implementazione ancora da fare. Sessione corrente: [2026-10-31_18-56-48_sito-in-inglese.md](2026-10-31_18-56-48_sito-in-inglese.md). Il registro retrospettivo precedente è stato completato; ora si passa alla traduzione tramite Claude.
+
+## Aggiornamento 2026-10-31T18:59:08+01:00 — nome e delega attiva
+
+Proposte di nome registrate in [2026-10-31_18-59-08_proposte-nome.md](2026-10-31_18-59-08_proposte-nome.md); preferenza Codex TCS Brief, nessuna scelta dell’utente ancora. Non applicare nomi al codice come se approvati. La delega di traduzione inglese è risultata in corso (processo Claude PID 64967); il vecchio handle terminale 6428 non è disponibile, perciò controllare processo e OUTPUT_04_CLAUDE.md prima di avviare altre CLI. Traduzione e rimozione del periodo coperto non sono ancora verificate.
