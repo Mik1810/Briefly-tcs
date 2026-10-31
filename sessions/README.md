@@ -18,6 +18,8 @@ Ultima sessione in corso: [2026-10-31_18-56-48_sito-in-inglese.md](2026-10-31_18
 
 Confronto sul nome: [2026-10-31_18-59-08_proposte-nome.md](2026-10-31_18-59-08_proposte-nome.md).
 
+Diagnosi push GitHub: [2026-10-31_19-11-19_push-github-main.md](2026-10-31_19-11-19_push-github-main.md).
+
 ## Regole del registro
 
 - All'inizio di ogni nuova sessione creare `YYYY-MM-DD_HH-MM-SS_<argomento>.md` usando l'ora di Roma.

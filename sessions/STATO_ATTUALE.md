@@ -69,3 +69,10 @@ L’utente propone Briefly.tcs e chiede un parere; Codex suggerisce Briefly.tcs 
 ## Aggiornamento 2026-10-31T19:04:52+01:00 — nome confermato
 
 **Briefly.tcs** è il nome scelto dall’utente; **briefly-tcs** è il nome del repository GitHub previsto. Supera tutte le proposte e i nomi provvisori precedenti. Scelta registrata in docs/DECISIONI.md. Nessuna registrazione di dominio o repository remoto. Prima di aggiornare la testata controllare la delega inglese in corso, senza avviare scritture concorrenti. Il nome non viene dichiarato già applicato al sito.
+
+## Aggiornamento 2026-10-31T19:14:15+01:00 — GitHub collegato e push riuscito
+
+Repository creato dall'utente: https://github.com/Mik1810/Briefly-tcs. Remote origin già configurato, ora main segue origin/main.
+Risolti upstream mancante e assenza di helper credenziali HTTPS; riutilizzata l'autenticazione gh esistente tramite configurazione locale del solo repository.
+Primo push riuscito per 26bf0fc. Verificare git log e git status per commit successivi e modifiche di Claude ancora in corso.
+Diagnosi e dettagli: [2026-10-31_19-11-19_push-github-main.md](2026-10-31_19-11-19_push-github-main.md). Nessun force push o modifica globale Git. La precedente indicazione «nessun remote» è superata.
