@@ -95,7 +95,7 @@ Non sono decisioni dell'utente; restano modificabili.
 - Correzioni strutturate (data, tipo sostanziale/minore, risultato); quelle sostanziali segnalate in testa all'articolo.
 - Font di sistema; nessun font dedicato.
 
-## Stato reale dopo l'incarico 01 — 31 ottobre 2026
+## Stato reale dopo l'incarico 01 — 31 ottobre 2026 (superato per il database dalla sezione successiva)
 
 - Esiste un prototipo Astro + React navigabile in locale; `npm run check` e `npm run build` superati in WSL.
 - **I contenuti sono fixture TypeScript dimostrative, non dati da database.** Supabase non è installato, avviato né collegato.
@@ -109,3 +109,37 @@ Non sono decisioni dell'utente; restano modificabili.
 - Non realizzati: Supabase, RSS, approfondimenti autonomi come tipo di contenuto separato,
   sostituzione atomica di dist/ in caso di build fallita, processo editoriale e qualunque integrazione AI.
 - Dettagli, misure e limiti: docs/coordination/REPORT_01_CLAUDE.md.
+
+## Scelte tecniche dell'incarico 02 (proposte di Claude, da revisionare da Codex)
+
+- CLI Supabase 2.122.0 come dipendenza di sviluppo esatta, con telemetria disattivata dagli script.
+- **Runtime nativo sperimentale** dei comandi `stack` invece di Docker. Motivi verificati:
+  - in questa WSL `/var/run/docker.sock` non esiste e `docker` richiama `docker.exe`;
+  - la CLI 2.122.0 con Docker pubblica le porte senza indirizzo (`-p porta:porta`), cioè su tutte le interfacce.
+
+  Per limitarle a loopback servirebbe cambiare la configurazione globale di Docker, cosa vietata.
+  Il runtime nativo ascolta solo su 127.0.0.1. È escluso dalla promessa di compatibilità della CLI.
+- Schema relazionale con sei tabelle piccole (topics, briefings, results, result_topics, sources, corrections),
+  con vincoli e RLS per riga. Motivazione nella migrazione.
+- Lettura in build via REST con chiave publishable (ruolo anon); nessun SDK, nessuna chiave privilegiata.
+- Sorgente scelta da `TCS_CONTENT_SOURCE`, sempre impostata dagli script; nessun valore predefinito.
+- Build con generazione in `dist-staging/` e sostituzione di `dist/` solo dopo i controlli.
+
+## Stato reale dopo l'incarico 02 — 31 ottobre 2026
+
+- **Integrazione Supabase implementata e verificata sull'istanza locale** (`npm run db:verify`).
+  - La build legge i contenuti dal database: tre briefing pubblicati, identici alle fixture.
+  - La bozza esiste nel database ma non è leggibile dal ruolo anon.
+  - Le scritture anonime ricevono HTTP 401 con codice 42501 e i dati restano invariati.
+- Stack locale `tcs-quotidiano` su 127.0.0.1: API/REST 55321, Postgres 55322, Studio 55323.
+  Dati in `~/.supabase/stacks/`, fuori dal repository.
+- Database fermo: la build fallisce con un messaggio chiaro e `dist/` resta invariato (verificato).
+  Lo stesso vale se falliscono i controlli dopo la generazione (verificato).
+- La modalità fixture resta solo come scelta esplicita (`build:fixture`, `dev:fixture`, test).
+- Corretti i rilievi di Codex:
+  - link Markdown con protocolli pericolosi neutralizzati tramite rehype-sanitize;
+  - formule in blocco focalizzabili da tastiera;
+  - correzione nello stesso giorno della pubblicazione ammessa (già dall'incarico 01).
+- Ancora non realizzati: flusso editoriale di scrittura nel database, RSS, approfondimenti come tipo separato,
+  hosting. La verifica visiva in browser resta alla QA di Codex.
+- Dettagli: docs/coordination/REPORT_02_CLAUDE.md.

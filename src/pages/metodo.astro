@@ -31,8 +31,13 @@ const statusGroups = [
         risultati classici da manuale per provare impaginazione, formule e correzioni. Non sono notizie di ricerca.
       </p>
       <p>
-        Dati in uso: {site.sourceDescription}. Il database previsto è Supabase in locale, ma non è ancora collegato. Il
-        processo editoriale descritto sotto è un impegno di progetto, non ancora una procedura in funzione.
+        Dati di questa build: {site.sourceDescription}.{' '}
+        {
+          site.sourceKind === 'supabase'
+            ? 'Le pagine sono generate leggendo il database Supabase locale.'
+            : 'È una build dimostrativa offline: il database di riferimento è Supabase in locale.'
+        }{' '}
+        Il processo editoriale descritto sotto è un impegno di progetto, non ancora una procedura in funzione.
       </p>
 
       <h2>Un briefing al giorno</h2>

@@ -1,16 +1,18 @@
 // Controlli sull'output generato in dist/, eseguiti da `npm run build` dopo astro build.
 // Verifica ciò che il lettore riceverebbe: bozze assenti, metadati presenti, link interni validi,
 // nessuna risorsa remota né JavaScript nelle pagine. Stampa anche le misure delle risorse.
-// Uscita con codice 1 al primo insieme di errori.
+// Uscita con codice 1 al primo insieme di errori. Con Supabase le bozze non arrivano alla build (RLS):
+// restano il controllo del marcatore e quello sugli argomenti senza risultati pubblicati.
 
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
-import { join, relative, sep } from 'node:path';
+import { join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { gzipSync } from 'node:zlib';
 
 import { loadValidatedContent } from '../src/lib/content/repository.ts';
 
-const DIST = fileURLToPath(new URL('../dist/', import.meta.url));
+// Cartella da controllare: argomento facoltativo (scripts/build.ts passa dist-staging), altrimenti dist/.
+const DIST = resolve(fileURLToPath(new URL('..', import.meta.url)), process.argv[2] ?? 'dist');
 const DRAFT_MARKER = 'MARCATORE-BOZZA-NON-PUBBLICARE';
 const TEXT_EXTENSIONS = ['.html', '.css', '.js', '.xml', '.txt', '.json', '.svg'];
 
@@ -25,7 +27,7 @@ function walk(dir: string): string[] {
 }
 
 if (!existsSync(DIST)) {
-  console.error('dist/ non esiste: eseguire prima astro build.');
+  console.error(`${DIST} non esiste: eseguire prima la build.`);
   process.exit(1);
 }
 

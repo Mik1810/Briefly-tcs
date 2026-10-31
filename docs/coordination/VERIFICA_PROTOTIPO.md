@@ -52,3 +52,24 @@ Registrare esiti, limiti reali, comando di avvio, commit finale e indirizzo loca
 - Home HTML 3,9 kB + CSS 8,2 kB non compressi. Nessuno script collegato dalle pagine prodotte.
 - Non verificato lo zoom browser al 200%; non confonderlo con la prova responsive.
 - Da correggere nel secondo incarico: URL Markdown con protocolli pericolosi e accesso tastiera ai blocchi matematici.
+
+## Esiti finali di Codex dopo Supabase e correzioni
+
+- Supabase locale nativo attivo su loopback; nessun progetto cloud collegato.
+- npm run db:verify inizialmente falliva nel terminale ordinario: formato CLI implicito.
+  Correzione affidata a Claude e poi riprovata da Codex: comando superato dal terminale WSL ordinario.
+- Verifica reale: 3 pubblicati e 1 bozza presenti nel database; lettura anonima vede solo i 3 pubblicati.
+  Dati completi confrontati con i demo previsti. Bozza e relative righe non leggibili; cinque scritture anonime negate.
+- npm run db:env eseguito da Codex: genera configurazione locale senza stampare chiavi; file ignorato da Git.
+- TCS_CONTENT_SOURCE=supabase node scripts/check-dist.ts: nessun problema, 12 pagine.
+  Le bozze sono filtrate dal database prima della build: il conteggio 0 del controllo statico non significa che manchino dal DB.
+- Verifica diretta Markdown: URL javascript rimosso, formule ancora renderizzate e regioni matematiche con tabindex.
+- Browser sulla build finale: footer indica database Supabase locale; zero script presenti nella home.
+- Home finale a 1440 px e articolo lungo a 360 px: nessun overflow orizzontale globale.
+- Prova tastiera sulla prima formula larga: focus su Formula in blocco, ArrowRight porta scrollLeft da 0 a 40 px.
+  Larghezza del blocco 305 px, contenuto 545 px; larghezza della pagina 345 px nel viewport di 360 px.
+- Screenshot aggiornati in docs/design/qa/: home-desktop.jpg e articolo-mobile.jpg.
+- Claude riporta check finale con 0 errori di tipo e 25 test superati; build finale da Supabase superata.
+  Dettagli riproducibili nel Report 02, inclusa la correzione del formato CLI.
+- Restano non verificati lo zoom browser al 200% e Studio nel browser.
+- Nessuna generazione AI di articoli o schedulazione quotidiana attivata; nessun articolo reale importato.

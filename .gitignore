@@ -11,3 +11,7 @@ supabase/.branches/
 *.log
 .DS_Store
 Thumbs.db
+
+# Cartelle temporanee di scripts/build.ts
+dist-staging/
+dist-previous/

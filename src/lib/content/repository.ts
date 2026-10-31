@@ -2,9 +2,10 @@
 // tutti i dati (bozze comprese) e si escludono le bozze prima che qualunque pagina le veda.
 
 import { yearOf } from '../dates.ts';
-import { CONTENT_SOURCE } from './config.ts';
+import { contentSourceKind } from './config.ts';
 import { fixtureSource } from './fixtures/source.ts';
 import type { ContentSource, ContentSourceKind } from './source.ts';
+import { createSupabaseSource, readSupabaseConfig } from './supabase/source.ts';
 import type { Briefing, RawContent, Result, Topic } from './types.ts';
 import { assertValidContent } from './validate.ts';
 
@@ -27,17 +28,18 @@ function selectSource(kind: ContentSourceKind): ContentSource {
     case 'fixture':
       return fixtureSource;
     case 'supabase':
-      // Intenzionale: nessun ripiego sulle fixture se il database non è disponibile.
-      throw new Error('Sorgente "supabase" non ancora implementata. La build si interrompe senza usare le fixture.');
+      // Un errore del database interrompe la build: nessun ripiego sulle fixture.
+      return createSupabaseSource(readSupabaseConfig());
   }
 }
 
 /**
- * Tutti i contenuti validati, bozze comprese. Solo per i controlli sull'output
- * (scripts/check-dist.ts): le pagine usano getSite().
+ * Tutti i contenuti validati restituiti dalla sorgente. Con le fixture include le bozze;
+ * con Supabase le bozze non arrivano mai (RLS). Usato da scripts/build.ts e scripts/check-dist.ts:
+ * le pagine usano getSite().
  */
 export async function loadValidatedContent(): Promise<{ source: ContentSource; raw: RawContent }> {
-  const source = selectSource(CONTENT_SOURCE);
+  const source = selectSource(contentSourceKind());
   const raw = await source.load();
   assertValidContent(raw);
   return { source, raw };

@@ -19,3 +19,21 @@ test('l’HTML grezzo nel Markdown non arriva alla pagina', () => {
   const html = renderMarkdown('Testo <script>alert(1)</script> <b>grassetto</b>', 'qui');
   assert.doesNotMatch(html, /<script|<b>/);
 });
+
+test('i link con protocolli pericolosi perdono l’href; quelli sicuri restano', () => {
+  const html = renderMarkdown(
+    '[a](javascript:alert%281%29) [b](JaVaScRiPt:alert(1)) [c](data:text/html,x) [d](/metodo/) [e](#risultato-x) [f](https://example.org)',
+    'qui',
+  );
+  assert.doesNotMatch(html, /javascript:|data:/i);
+  assert.match(html, /href="\/metodo\/"/);
+  assert.match(html, /href="#risultato-x"/);
+  assert.match(html, /href="https:\/\/example\.org"/);
+});
+
+test('le formule in blocco sono regioni etichettate raggiungibili da tastiera', () => {
+  const html = renderMarkdown('Testo.\n\n$$\nn^2\n$$', 'qui');
+  assert.match(html, /<div class="katex-display" tabindex="0" role="region" aria-label="Formula in blocco">/);
+  // Le formule in linea restano nel flusso del testo, senza tabindex.
+  assert.doesNotMatch(renderMarkdown('In linea $n^2$.', 'qui'), /tabindex/);
+});

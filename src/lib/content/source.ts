@@ -3,8 +3,8 @@ import type { RawContent } from './types.ts';
 /**
  * Confine tra il sito e l'origine dei contenuti. Le pagine non sanno da dove arrivano i dati.
  *
- * Oggi esiste soltanto la sorgente `fixture` (dati dimostrativi in memoria).
- * `supabase` è la sorgente prevista ma NON implementata: selezionarla interrompe la build.
+ * `supabase`: database locale letto via REST durante la build (src/lib/content/supabase/source.ts).
+ * `fixture`: dati dimostrativi in memoria, solo se richiesti esplicitamente (demo e test offline).
  * Non deve mai esistere un ripiego automatico da database a fixture.
  */
 export type ContentSourceKind = 'fixture' | 'supabase';
