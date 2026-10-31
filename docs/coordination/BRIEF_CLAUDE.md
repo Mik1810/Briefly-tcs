@@ -21,3 +21,10 @@ Restituisci in italiano, in Markdown, una revisione con:
 Non scrivere codice. Non modificare i file. Non usare altri agenti, non leggere credenziali e non chiamare servizi esterni.
 Puoi leggere i due documenti e restituire il parere. Codex salverà la risposta e consoliderà il piano.
 Non inventare verifiche scientifiche del briefing originario: non ti sono stati forniti i paper.
+
+
+## Aggiornamento successivo alla prima revisione
+
+Leggere prima docs/DECISIONI.md: l’utente ha scelto A, componenti React, Supabase e Git locale.
+La precedente proposta Eleventy non è più corrente. Valutare Astro+React con Supabase locale.
+Non implementare finché il piano non è consolidato; il primo incarico era soltanto di revisione.

@@ -1,21 +1,25 @@
 # TCS quotidiano
 
 Progetto in fase di pianificazione. Tutto locale, tramite Ubuntu su WSL.
-Non esiste ancora un sito eseguibile: non sono state installate dipendenze né avviati job.
+Non esiste ancora un sito eseguibile: nessuna dipendenza installata né job avviato.
+
+## Scelte correnti
+
+Direzione grafica A — Rivista. Componenti React, Supabase previsto in locale, Git locale su main.
+Astro con React è la proposta tecnica aggiornata, ancora da consolidare.
+Codex coordina e revisiona; Claude CLI scriverà il codice.
 
 ## Documenti
 
-- [Piano di lavoro](docs/PIANO.md)
+- [Decisioni aggiornate, prevalenti](docs/DECISIONI.md)
+- [Piano iniziale e fasi](docs/PIANO.md)
 - [Proposte grafiche](docs/design/PROPOSTE.md)
 - [Tavola di confronto](docs/design/CONFRONTO.png)
-- [Incarico di revisione a Claude](docs/coordination/BRIEF_CLAUDE.md)
-- [Risposta di Claude](docs/coordination/CLAUDE_REVIEW.md)
-- [Sintesi delle decisioni](docs/coordination/SINTESI.md), dopo la revisione.
+- [Incarico a Claude e aggiornamenti](docs/coordination/BRIEF_CLAUDE.md)
+- [Prima revisione di Claude](docs/coordination/CLAUDE_REVIEW.md)
+- [Sintesi della prima revisione](docs/coordination/SINTESI.md)
 
-## Collaborazione
-
-Codex coordina e revisiona; Claude CLI scriverà il codice dopo la scelta del piano e della grafica.
-Nella fase corrente Claude è incaricato di una revisione in sola lettura.
-Non usare i testi dimostrativi come notizie di ricerca reali.
-La tavola grafica è stata generata con ImageGen; il prompt è conservato in docs/design/PROMPT_IMMAGINE.txt.
-Il nome del progetto e la preferenza per Eleventy restano proposte.
+La prima proposta Eleventy è superata dalle preferenze successive dell'utente.
+I testi dimostrativi non sono notizie di ricerca reali.
+Tavola generata con ImageGen; prompt in docs/design/PROMPT_IMMAGINE.txt.
+Nessun remote GitHub configurato. Il repository GitHub sarà creato dall'utente.

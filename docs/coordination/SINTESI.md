@@ -1,5 +1,7 @@
 # Sintesi di Codex dopo la revisione di Claude
 
+> Documento della proposta iniziale. Per React, Supabase, grafica A e Git prevale docs/DECISIONI.md.
+
 Data: 31 ottobre 2026. Stato: proposta consolidata, da discutere con l'utente.
 Leggere insieme a docs/PIANO.md. Questo documento precisa e aggiorna la proposta iniziale senza cancellarla.
 La risposta integrale di Claude è conservata in CLAUDE_REVIEW.md; è una revisione, non una fonte tecnica verificata.

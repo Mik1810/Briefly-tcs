@@ -1,6 +1,6 @@
 # Tre direzioni grafiche
 
-Stato: esplorazione. Nome provvisorio: TCS quotidiano.
+Stato: direzione A scelta dall’utente; B e C conservate come alternative esplorate. Nome provvisorio: TCS quotidiano.
 La tavola raster è un riferimento visivo, non una specifica pixel per pixel o un sito funzionante.
 Testi della tavola solo dimostrativi; la specifica testuale guida l'implementazione futura.
 

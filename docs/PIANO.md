@@ -1,5 +1,7 @@
 # TCS quotidiano — piano di lavoro
 
+> Documento della proposta iniziale. Per React, Supabase, grafica A e Git prevale docs/DECISIONI.md.
+
 Stato: proposta da discutere, non specifica approvata. Data: 31 ottobre 2026.
 Nome provvisorio. Questa fase produce documenti e proposte visive, non codice applicativo.
 
