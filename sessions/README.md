@@ -18,8 +18,9 @@ Tutte le attività del progetto vengono registrate qui in Markdown, con data e o
 | [2026-10-31_18-59-08_proposte-nome.md](2026-10-31_18-59-08_proposte-nome.md) | Sessione: nome del sito e repository |
 | [2026-10-31_19-11-19_push-github-main.md](2026-10-31_19-11-19_push-github-main.md) | Sessione: diagnosi e collegamento GitHub main |
 | [2026-10-31_19-17-57_claude-nome-briefly-tcs.md](2026-10-31_19-17-57_claude-nome-briefly-tcs.md) | Sessione Claude — applicazione del nome Briefly.tcs |
+| [2026-10-31_19-43-49_stato-e-prossimi-passi.md](2026-10-31_19-43-49_stato-e-prossimi-passi.md) | Sessione: cosa manca per il blog quotidiano |
 
-Ultima sessione principale conclusa: [2026-10-31_18-56-48_sito-in-inglese.md](2026-10-31_18-56-48_sito-in-inglese.md).
+Ultima sessione principale conclusa: [2026-10-31_19-43-49_stato-e-prossimi-passi.md](2026-10-31_19-43-49_stato-e-prossimi-passi.md).
 
 ## Regole del registro
 

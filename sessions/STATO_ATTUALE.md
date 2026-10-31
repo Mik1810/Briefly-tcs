@@ -1,6 +1,6 @@
 # Stato attuale e ripresa
 
-Aggiornato: 2026-10-31T19:23:25+01:00 — Europe/Rome.
+Aggiornato: 2026-10-31T19:43:49+01:00 — Europe/Rome.
 
 ## Punto da cui ripartire
 
@@ -59,3 +59,10 @@ Modello/integrazione, credenziali, eventuali costi, scheduler e hosting restano 
 Restano: runtime Supabase sperimentale, più letture DB per build, sostituzione output con due rinomine,
 zoom browser 200% e Studio non verificati, RSS e approfondimenti autonomi non implementati.
 Gli URL italiani rimangono per conservare i permalink; i testi pubblici sono inglesi.
+
+## Ricognizione del 2026-10-31T19:43:49+01:00
+
+Ultima sessione: [2026-10-31_19-43-49_stato-e-prossimi-passi.md](2026-10-31_19-43-49_stato-e-prossimi-passi.md). Stato del codice invariato rispetto alla consegna inglese.
+La prossima attività proposta è un ciclo editoriale reale, da fonti a bozza revisionata e pubblicazione locale.
+Origine dei briefing, integrazione/modello e automazione restano da definire; nessuna nuova implementazione avviata.
+Questa ricognizione ha controllato Git e documenti, senza ricontrollare l'attuale disponibilità dei servizi.
