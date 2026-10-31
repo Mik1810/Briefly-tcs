@@ -1,7 +1,7 @@
 # Decisioni aggiornate — 31 ottobre 2026
 
 Questo documento prevale sulle proposte iniziali in PIANO.md e sulla prima revisione di Claude.
-La fase resta di progettazione: nessun incarico di implementazione è stato inviato.
+Le sezioni seguenti registrano la storia delle decisioni; lo stato reale del codice è in fondo, nella sezione "Stato reale dopo l'incarico 01".
 
 ## Confermato dall'utente
 
@@ -65,3 +65,47 @@ Non eseguire push finché l'utente non fornisce o collega il repository GitHub.
 
 - https://docs.astro.build/en/guides/integrations-guide/react/ — supporto per React e rendering HTML dei componenti.
 - https://supabase.com/docs/guides/local-development — stack locale tramite CLI e runtime compatibile Docker.
+
+## Conferma successiva dell'utente
+
+Con 'ottimo, continua' l'utente ha approvato Astro + React e Supabase locale,
+un briefing giornaliero con approfondimenti separati, pubblico magistrali/ricercatori,
+e bozze da revisionare prima della pubblicazione. Si passa al prototipo locale.
+Primo incarico: UI con fixture dichiarate, senza integrazione AI o DB non verificata.
+
+## Decisioni approvate dall'utente (riepilogo)
+
+- Grafica A — Rivista, esatta e non ibrida: avorio, bordeaux, testata serif, articolo in evidenza.
+- Astro statico con componenti React; Supabase locale come database previsto.
+- Un briefing al giorno con più risultati; approfondimenti autonomi possibili.
+- Pubblico: studenti magistrali e ricercatori. Testi prodotti come bozze da revisionare prima della pubblicazione.
+- Tutto locale, Git locale su main senza remote, nessun deployment.
+
+## Scelte tecniche dell'incarico 01 (proposte di Claude, da revisionare da Codex)
+
+Non sono decisioni dell'utente; restano modificabili.
+- Versioni esatte: astro 7.4.4, @astrojs/react 7.1.2, react/react-dom 19.3.1, katex 0.19.1, typescript 6.0.3.
+  TypeScript 7 escluso perché @astrojs/check 0.9.12 richiede ^5 o ^6. `overrides` forza una sola copia di KaTeX.
+- Formule: unified + remark-math + rehype-katex in build, delimitatori `$…$` e `$$…$$`, output HTML+MathML.
+- URL: `/briefing/YYYY-MM-DD/` con ancore `#risultato-<id>`, `/archivio/`, `/argomenti/<slug>/`, `/metodo/`.
+- Argomenti, stato scientifico e fonti appartengono al singolo risultato.
+  Stato scientifico su tre dimensioni (pubblicazione, formalizzazione, verifica), con vocabolari chiusi.
+- Home: ultimo briefing in evidenza e al massimo 9 precedenti; archivio per anno.
+- Pagine per argomento generate solo con almeno un risultato pubblicato.
+- Correzioni strutturate (data, tipo sostanziale/minore, risultato); quelle sostanziali segnalate in testa all'articolo.
+- Font di sistema; nessun font dedicato.
+
+## Stato reale dopo l'incarico 01 — 31 ottobre 2026
+
+- Esiste un prototipo Astro + React navigabile in locale; `npm run check` e `npm run build` superati in WSL.
+- **I contenuti sono fixture TypeScript dimostrative, non dati da database.** Supabase non è installato, avviato né collegato.
+  La sorgente si sceglie in `src/lib/content/config.ts`; il valore `'supabase'` oggi interrompe la build.
+  Non esiste alcun ripiego automatico da database a fixture, e non deve esistere in futuro.
+- Tre briefing pubblicati dimostrativi e una bozza di controllo, esclusa dall'output e verificata da `scripts/check-dist.ts`.
+  Tutti etichettati "Contenuto dimostrativo"; descrivono risultati classici da manuale, non novità di ricerca.
+- Le pagine non includono JavaScript. Astro emette comunque in `dist/_astro/` il runtime client di React (circa 216 kB)
+  perché l'integrazione lo registra sempre; nessuna pagina lo collega, quindi il browser non lo scarica.
+- La revisione visiva in browser (360/768/1440 px, zoom, tastiera) non è stata svolta da Claude: è affidata alla QA di Codex.
+- Non realizzati: Supabase, RSS, approfondimenti autonomi come tipo di contenuto separato,
+  sostituzione atomica di dist/ in caso di build fallita, processo editoriale e qualunque integrazione AI.
+- Dettagli, misure e limiti: docs/coordination/REPORT_01_CLAUDE.md.

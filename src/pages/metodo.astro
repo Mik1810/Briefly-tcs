@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { FORMALIZATION_LABELS, PUBLICATION_LABELS, VERIFICATION_LABELS } from '../lib/content/labels.ts';
+import { getSite } from '../lib/content/repository.ts';
+
+const site = await getSite();
+const statusGroups = [
+  { name: 'Pubblicazione', labels: Object.values(PUBLICATION_LABELS) },
+  { name: 'Formalizzazione', labels: Object.values(FORMALIZATION_LABELS) },
+  { name: 'Verifica', labels: Object.values(VERIFICATION_LABELS) },
+];
+---
+
+<BaseLayout
+  title="Metodo"
+  description="Come vengono scelte le fonti, quale ruolo ha l’AI e come funzionano revisione e correzioni."
+  current="metodo"
+>
+  <article class="article">
+    <header class="article-header">
+      <h1 class="article-title">Metodo</h1>
+      <p class="article-summary">
+        Come saranno scelte le fonti, quale ruolo avrà l’AI e come funzionano revisione e correzioni.
+      </p>
+    </header>
+
+    <div class="prose">
+      <h2>Stato attuale</h2>
+      <p>
+        Il sito è un prototipo locale. Tutti gli articoli presenti sono <strong>contenuti dimostrativi</strong>: descrivono
+        risultati classici da manuale per provare impaginazione, formule e correzioni. Non sono notizie di ricerca.
+      </p>
+      <p>
+        Dati in uso: {site.sourceDescription}. Il database previsto è Supabase in locale, ma non è ancora collegato. Il
+        processo editoriale descritto sotto è un impegno di progetto, non ancora una procedura in funzione.
+      </p>
+
+      <h2>Un briefing al giorno</h2>
+      <p>
+        L’unità di pubblicazione è il briefing giornaliero, con uno o più risultati. Ogni risultato ha argomenti, stato
+        scientifico e fonti propri, e un collegamento diretto alla sua sezione. Approfondimenti autonomi potranno
+        affiancare i briefing quando un tema lo richiede. Se un giorno non ci sono novità significative, non si pubblica
+        nulla per riempire lo spazio.
+      </p>
+
+      <h2>Fonti</h2>
+      <p>
+        Si preferiscono fonti primarie: manoscritti, arXiv, ECCC, atti di conferenza e pagine degli autori. Si cita la
+        versione consultata. Un link raggiungibile non basta a verificare un teorema: occorre controllare che il contenuto
+        sostenga l’enunciato riportato.
+      </p>
+
+      <h2>Stato scientifico</h2>
+      <p>
+        Lo stato di un risultato ha tre dimensioni indipendenti, indicate come testo accanto al risultato. Un preprint, per
+        esempio, può essere già formalizzato.
+      </p>
+      <dl class="status-vocabulary">
+        {
+          statusGroups.map((group) => (
+            <div>
+              <dt>{group.name}</dt>
+              <dd>{group.labels.join(' · ')}</dd>
+            </div>
+          ))
+        }
+      </dl>
+
+      <h2>Ruolo dell’AI</h2>
+      <p>
+        L’AI potrà aiutare nella raccolta e nella stesura, mai durante la lettura del sito: le pagine sono generate prima
+        e servite come HTML statico. Ogni articolo dichiara il ruolo effettivo dell’AI e il livello di revisione svolto.
+        Un controllo automatico viene presentato come tale, senza chiamarlo revisione matematica.
+      </p>
+
+      <h2>Revisione e bozze</h2>
+      <p>
+        I testi nascono come bozze e vengono pubblicati solo dopo una revisione. Le bozze non compaiono in nessuna pagina
+        del sito.
+      </p>
+
+      <h2>Correzioni</h2>
+      <p>
+        Ogni correzione riporta data e descrizione e aggiorna la data dell’articolo. Le correzioni sostanziali sono
+        segnalate anche in testa all’articolo; quelle minori solo nell’elenco finale.
+      </p>
+    </div>
+  </article>
+</BaseLayout>

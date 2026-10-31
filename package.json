@@ -1,0 +1,39 @@
+{
+  "name": "tcs-quotidiano",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Prototipo locale del blog TCS quotidiano: Astro statico con componenti React renderizzati in build.",
+  "engines": {
+    "node": ">=24.18.0"
+  },
+  "scripts": {
+    "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
+    "check": "ASTRO_TELEMETRY_DISABLED=1 astro check && node --test \"tests/*.test.ts\"",
+    "build": "ASTRO_TELEMETRY_DISABLED=1 astro build && node scripts/check-dist.ts",
+    "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview"
+  },
+  "dependencies": {
+    "@astrojs/react": "7.1.2",
+    "astro": "7.4.4",
+    "katex": "0.19.1",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "rehype-katex": "7.0.1",
+    "rehype-stringify": "10.0.1",
+    "remark-math": "6.0.0",
+    "remark-parse": "11.0.0",
+    "remark-rehype": "11.1.2",
+    "unified": "11.0.5"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.12",
+    "@types/node": "24.19.2",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "typescript": "6.0.3"
+  },
+  "overrides": {
+    "katex": "$katex"
+  }
+}

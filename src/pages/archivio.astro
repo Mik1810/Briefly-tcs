@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BriefingRow from '../components/BriefingRow.tsx';
+import { briefingTopics, briefingsByYear, getSite } from '../lib/content/repository.ts';
+
+const site = await getSite();
+const years = briefingsByYear(site);
+---
+
+<BaseLayout title="Archivio" description="Tutti i briefing pubblicati, dal più recente." current="archivio">
+  <header class="page-header">
+    <h1 class="page-title">Archivio</h1>
+    <p class="page-intro">Tutti i briefing pubblicati, dal più recente, raggruppati per anno.</p>
+  </header>
+  {
+    years.length === 0 ? (
+      <p class="empty">Nessun briefing pubblicato.</p>
+    ) : (
+      years.map(([year, briefings]) => (
+        <section class="list" aria-labelledby={`anno-${year}`}>
+          <h2 id={`anno-${year}`} class="section-heading">
+            {year}
+          </h2>
+          {briefings.map((briefing) => (
+            <BriefingRow briefing={briefing} topics={briefingTopics(site, briefing)} headingLevel={3} />
+          ))}
+        </section>
+      ))
+    )
+  }
+</BaseLayout>

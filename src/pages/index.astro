@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BriefingLead from '../components/BriefingLead.tsx';
+import BriefingRow from '../components/BriefingRow.tsx';
+import { briefingTopics, getSite } from '../lib/content/repository.ts';
+
+// La home mostra l'ultimo briefing in evidenza e un numero limitato di precedenti; il resto è in archivio.
+const HOME_LIMIT = 10;
+
+const site = await getSite();
+const [lead, ...others] = site.briefings;
+const recent = others.slice(0, HOME_LIMIT - 1);
+---
+
+<BaseLayout
+  title="TCS quotidiano"
+  description="Briefing di informatica teorica in italiano per studenti magistrali e ricercatori."
+  current="articoli"
+>
+  {
+    lead ? (
+      <BriefingLead briefing={lead} topics={briefingTopics(site, lead)} />
+    ) : (
+      <p class="empty">Nessun briefing pubblicato.</p>
+    )
+  }
+  {
+    recent.length > 0 ? (
+      <section class="list" aria-labelledby="precedenti">
+        <h2 id="precedenti" class="section-heading">
+          Briefing precedenti
+        </h2>
+        {recent.map((briefing) => (
+          <BriefingRow briefing={briefing} topics={briefingTopics(site, briefing)} headingLevel={3} />
+        ))}
+      </section>
+    ) : null
+  }
+  <p class="more"><a href="/archivio/">Tutti i briefing nell’archivio</a></p>
+</BaseLayout>

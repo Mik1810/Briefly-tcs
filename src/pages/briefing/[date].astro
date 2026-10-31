@@ -1,0 +1,72 @@
+---
+// KaTeX: CSS e font serviti localmente, inclusi solo nelle pagine articolo.
+import 'katex/dist/katex.min.css';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleMeta from '../../components/ArticleMeta.tsx';
+import BriefingNav from '../../components/BriefingNav.tsx';
+import CorrectionList from '../../components/CorrectionList.tsx';
+import DemoLabel from '../../components/DemoLabel.tsx';
+import HtmlBody from '../../components/HtmlBody.tsx';
+import ResultIndex from '../../components/ResultIndex.tsx';
+import ResultSection from '../../components/ResultSection.tsx';
+import { adjacentBriefings, briefingTopics, getSite, resultTopics } from '../../lib/content/repository.ts';
+import type { Briefing } from '../../lib/content/types.ts';
+import { renderMarkdown } from '../../lib/markdown.ts';
+
+export async function getStaticPaths() {
+  const site = await getSite();
+  return site.briefings.map((briefing) => ({ params: { date: briefing.date }, props: { briefing } }));
+}
+
+interface Props {
+  briefing: Briefing;
+}
+
+const { briefing } = Astro.props;
+const site = await getSite();
+const { newer, older } = adjacentBriefings(site, briefing.date);
+const introHtml = briefing.intro ? renderMarkdown(briefing.intro, `briefing ${briefing.date} › intro`) : null;
+const results = briefing.results.map((result) => ({
+  result,
+  topics: resultTopics(site, result),
+  bodyHtml: renderMarkdown(result.body, `briefing ${briefing.date} › risultato ${result.id}`),
+}));
+---
+
+<BaseLayout title={briefing.title} description={briefing.summary} current="articoli" currentIsPage={false}>
+  <article class="article">
+    <header class="article-header">
+      <DemoLabel demo={briefing.demo} />
+      <h1 class="article-title">{briefing.title}</h1>
+      <p class="article-summary">{briefing.summary}</p>
+      <ArticleMeta briefing={briefing} topics={briefingTopics(site, briefing)} />
+    </header>
+
+    {
+      briefing.demo ? (
+        <p class="demo-notice">
+          Questo è un esempio di impaginazione. I risultati descritti sono classici da manuale, non novità di ricerca, e
+          servono solo a provare il prototipo.
+        </p>
+      ) : null
+    }
+
+    <CorrectionList corrections={briefing.corrections} results={briefing.results} variant="notice" />
+    <ResultIndex results={briefing.results} />
+    {introHtml ? <HtmlBody html={introHtml} className="prose article-intro" /> : null}
+
+    {
+      results.map(({ result, topics, bodyHtml }, index) => (
+        <ResultSection result={result} topics={topics} bodyHtml={bodyHtml} position={index + 1} />
+      ))
+    }
+
+    <CorrectionList corrections={briefing.corrections} results={briefing.results} variant="full" />
+
+    <section class="disclosure" aria-labelledby="ai-titolo">
+      <h2 id="ai-titolo" class="section-heading">Ruolo dell’AI e revisione</h2>
+      <p>{briefing.aiDisclosure}</p>
+    </section>
+  </article>
+  <BriefingNav newer={newer} older={older} />
+</BaseLayout>

@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { entriesByTopic, getSite, topicPath } from '../../lib/content/repository.ts';
+
+const site = await getSite();
+const entries = entriesByTopic(site);
+// Solo argomenti con almeno un risultato pubblicato: nessuna pagina vuota.
+const topics = site.topics.filter((topic) => entries.has(topic.slug));
+---
+
+<BaseLayout title="Argomenti" description="I risultati pubblicati, raggruppati per argomento." current="argomenti">
+  <header class="page-header">
+    <h1 class="page-title">Argomenti</h1>
+    <p class="page-intro">
+      Ogni risultato di un briefing ha i propri argomenti. Le pagine elencano i singoli risultati con un collegamento alla
+      loro sezione.
+    </p>
+  </header>
+  {
+    topics.length === 0 ? (
+      <p class="empty">Nessun risultato pubblicato.</p>
+    ) : (
+      <ul class="topic-list">
+        {topics.map((topic) => {
+          const count = entries.get(topic.slug)?.length ?? 0;
+          return (
+            <li>
+              <h2 class="row-title">
+                <a href={topicPath(topic)}>{topic.name}</a>
+              </h2>
+              <p class="row-summary">
+                {topic.description} <span class="meta">{count === 1 ? '1 risultato' : `${count} risultati`}</span>
+              </p>
+            </li>
+          );
+        })}
+      </ul>
+    )
+  }
+</BaseLayout>

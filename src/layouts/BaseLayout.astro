@@ -1,0 +1,44 @@
+---
+import '../styles/global.css';
+import SiteHeader, { type Section } from '../components/SiteHeader.tsx';
+import { getSite } from '../lib/content/repository.ts';
+
+interface Props {
+  title: string;
+  description: string;
+  current: Section | null;
+  currentIsPage?: boolean;
+}
+
+const { title, description, current, currentIsPage = true } = Astro.props;
+const site = await getSite();
+const fullTitle = title === 'TCS quotidiano' ? title : `${title} · TCS quotidiano`;
+---
+
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <!-- Nessuna favicon nel prototipo: evita una richiesta che fallirebbe. -->
+    <link rel="icon" href="data:," />
+  </head>
+  <body>
+    <a class="skip-link" href="#contenuto">Vai al contenuto</a>
+    <div class="page">
+      <SiteHeader current={current} currentIsPage={currentIsPage} />
+      <main id="contenuto" tabindex="-1">
+        <slot />
+      </main>
+      <footer class="site-footer">
+        <p>
+          TCS quotidiano — prototipo locale. Dati: {site.sourceDescription}. I contenuti marcati come dimostrativi
+          non sono notizie di ricerca. <a href="/metodo/">Come lavoriamo</a>.
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>
