@@ -23,8 +23,9 @@ Tutte le attività del progetto vengono registrate qui in Markdown, con data e o
 | [2026-10-31_19-51-20_solo-abbonamento-senza-api-openai.md](2026-10-31_19-51-20_solo-abbonamento-senza-api-openai.md) | Solo abbonamento ChatGPT, API OpenAI escluse |
 | [2026-10-31_19-54-42_solo-chatgpt-senza-codex.md](2026-10-31_19-54-42_solo-chatgpt-senza-codex.md) | Solo ChatGPT: pubblicazione tramite strumento collegato da verificare |
 | [2026-10-31_19-59-23_vercel-supabase-hosting-previsto.md](2026-10-31_19-59-23_vercel-supabase-hosting-previsto.md) | Hosting previsto: Vercel e Supabase |
+| [2026-10-31_20-01-00_test-automazione-chatgpt.md](2026-10-31_20-01-00_test-automazione-chatgpt.md) | Test ChatGPT: corsa/lettura osservata, scrittura bloccata 403 |
 
-Ultima sessione principale conclusa: [2026-10-31_19-59-23_vercel-supabase-hosting-previsto.md](2026-10-31_19-59-23_vercel-supabase-hosting-previsto.md).
+Ultima prova conclusa: [2026-10-31_20-01-00_test-automazione-chatgpt.md](2026-10-31_20-01-00_test-automazione-chatgpt.md). Diagnosi permessi GitHub in attesa di autenticazione utente.
 
 ## Regole del registro
 

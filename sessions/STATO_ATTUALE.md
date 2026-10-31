@@ -95,3 +95,14 @@ Ogni pubblicazione nel DB dovrà attivare una nuova build/deployment: l’HTML s
 Il codice ha ancora il vincolo localhost sull’URL Supabase: hosting non ancora configurato o verificato. Nessun deployment richiesto/eseguito qui.
 Resta prioritaria la prova Task ChatGPT → strumento di scrittura, senza API OpenAI e senza Codex quotidiano.
 Registro: [2026-10-31_19-59-23_vercel-supabase-hosting-previsto.md](2026-10-31_19-59-23_vercel-supabase-hosting-previsto.md).
+
+## Prova ChatGPT online — 2026-10-31T20:09:12+01:00
+
+Registro: [2026-10-31_20-01-00_test-automazione-chatgpt.md](2026-10-31_20-01-00_test-automazione-chatgpt.md).
+
+- Task singolo Briefly.tcs — scheduler probe creato e risultato automatico osservato nel pannello Programmate. Lettura README remoto corrispondente a verifica indipendente; nessun Codex scheduler o API OpenAI.
+- Scrittura isolata su branch di test FALLITA: 403 Resource not accessible by integration, riprodotto direttamente col connettore GitHub. Nessun branch/file remoto creato.
+- Il task singolo non è più nell'elenco Attiva; briefing quotidiano originale invariato. Non dare per provata la puntualità dell'orario dichiarato.
+- Permessi installazione GitHub non ancora ispezionabili: Configure richiede autenticazione utente. Scheda lasciata aperta, chiesta autenticazione senza modificare permessi.
+- Pubblicazione DB/build/Vercel e scrittura unattended non verificate; publisher non implementato. Nessun cambiamento applicativo o deployment in questa prova.
+- Prossimo passo: sbloccare autenticazione, leggere permessi e diagnosticare 403 prima di riprovare scrittura singola e programmata. Evidenza: ../docs/testing/chatgpt-scheduler-probe-20261031.jpg.
