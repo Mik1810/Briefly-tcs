@@ -143,3 +143,10 @@ Non sono decisioni dell'utente; restano modificabili.
 - Ancora non realizzati: flusso editoriale di scrittura nel database, RSS, approfondimenti come tipo separato,
   hosting. La verifica visiva in browser resta alla QA di Codex.
 - Dettagli: docs/coordination/REPORT_02_CLAUDE.md.
+
+## Decisioni dell’utente registrate il 2026-10-31T18:56:48+01:00
+
+- Il sito deve essere in inglese: interfaccia, testi editoriali visibili e contenuti dimostrativi. Questo supera la precedente proposta di blog in italiano.
+- Non mostrare il periodo coperto nei blog post. I campi interni possono restare per acquisizione e deduplicazione.
+- Stile A e architettura invariati; nessuna richiesta di rinominare gli URL esistenti.
+- Tutto il lavoro va registrato in sessions con data e ora Europe/Rome.
