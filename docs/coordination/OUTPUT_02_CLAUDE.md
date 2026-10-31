@@ -7,7 +7,7 @@ L'integrazione con Supabase locale funziona ed è verificata: `npm run build` le
 - **Schema relazionale** in una migrazione:
   - sei tabelle piccole, con vincoli (una data per briefing, argomenti dal vocabolario, ogni correzione legata a un risultato dello stesso briefing);
   - RLS attiva su tutte; il ruolo anonimo ha solo permesso di lettura e nessuna policy di scrittura.
-  
+
   Il seed contiene i tre demo e la bozza, generati dalle fixture.
 - **Lettura in build**: `fetch` verso l'API REST con la chiave publishable, che vale come ruolo anonimo. Nessun SDK Supabase e nessuna chiave nel browser. Lo script che scrive `.env` salva solo URL e chiave publishable e non stampa le chiavi.
 - **Sorgente sempre esplicita**: `npm run build` legge da Supabase, `npm run build:fixture` dalle fixture. Senza indicazione la build si ferma, e non c'è mai un ripiego automatico sulle fixture.

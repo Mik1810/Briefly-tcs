@@ -87,7 +87,7 @@ Stack `tcs-quotidiano`, runtime `native`, branch `main`. Stato e dati in `~/.sup
   2. `astro build --outDir dist-staging`;
   3. `check-dist` su `dist-staging`;
   4. sostituzione di `dist/`.
-  
+
   Risultato: 12 pagine, 3 briefing, check-dist senza problemi.
 - **Database fermo** (`npm run db:stop`, poi `npm run build`): uscita 1 con "Database Supabase locale non raggiungibile su http://127.0.0.1:55321 (connect ECONNREFUSED …). … La build si interrompe senza usare le fixture." Hash SHA-256 di `dist/` invariato, nessun `dist-staging/` residuo.
 - **Errore dopo la generazione**: con un UPDATE privilegiato ho inserito il marcatore delle bozze nel titolo di un risultato pubblicato. Astro genera, check-dist segnala 3 problemi, uscita 1, `dist/` invariato, staging rimosso. Database ripristinato con `npm run db:reset`.
@@ -124,7 +124,7 @@ Stack `tcs-quotidiano`, runtime `native`, branch `main`. Stato e dati in `~/.sup
   - documentazione Supabase (pagine `.md`);
   - sorgente della CLI su GitHub (API tree e raw) per verificare il binding delle porte;
   - download degli archivi `slim-services` da parte della CLI al primo avvio, con checksum verificati dalla CLI.
-  
+
   Il changelog non l'ho riletto, perché il manager l'aveva già consultato.
 
 ## Correzione dopo la verifica indipendente di Codex
