@@ -12,7 +12,7 @@ interface Props {
 
 const { title, description, current, currentIsPage = true } = Astro.props;
 const site = await getSite();
-const fullTitle = title === 'TCS Daily' ? title : `${title} · TCS Daily`;
+const fullTitle = title === 'Briefly.tcs' ? title : `${title} · Briefly.tcs`;
 ---
 
 <!doctype html>
@@ -35,7 +35,7 @@ const fullTitle = title === 'TCS Daily' ? title : `${title} · TCS Daily`;
       </main>
       <footer class="site-footer">
         <p>
-          TCS Daily — local prototype. Data: {site.sourceDescription}. Content marked as demo is not research
+          Briefly.tcs — local prototype. Data: {site.sourceDescription}. Content marked as demo is not research
           news. <a href="/metodo/">How we work</a>.
         </p>
       </footer>

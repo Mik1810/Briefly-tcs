@@ -158,3 +158,29 @@ Non sono decisioni dell'utente; restano modificabili.
 - Sottotitolo proposto, non ancora esplicitamente approvato: Research updates in theoretical computer science.
 - L’istruzione «registralo» conferma la scelta del nome nel progetto; non autorizza acquisto di domini o creazione del repository remoto.
 - Applicazione della testata da coordinare con la traduzione inglese attualmente affidata a Claude, senza interventi concorrenti sul codice.
+
+## Stato reale dopo l'incarico 04 (Claude) — 2026-10-31T19:14:38+01:00
+
+- Sito pubblico in inglese, verificato sull'HTML generato da Supabase:
+  - interfaccia, Metodo, 404, etichette di accessibilità, metadati, etichette di stato, fonti e correzioni, demo;
+  - `lang="en"` e date come "October 31, 2026".
+- Nel codice il nome è ancora **TCS Daily**, come da incarico. **Briefly.tcs**, approvato alle 19:04:52, non è stato applicato in attesa di coordinamento con Codex.
+- Il periodo coperto è tolto dai metadati visibili dell'articolo. I campi `coverage` e la loro validazione restano in modello, schema e dati.
+- Invariati: URL, ID e ancore (`/archivio/`, `/argomenti/`, `/metodo/`, `#risultato-<id>`, `#correzioni`), date, stati, relazioni, schema e RLS.
+- Demo nel database locale tradotti senza reset con `scripts/translate-demo-db.ts --apply`:
+  - prima, tutte le righe coincidevano con la baseline italiana: nessuna modifica dell'utente e nessun dato estraneo;
+  - 30 righe aggiornate in un'unica istruzione;
+  - il seed inglese è rigenerato per le nuove istanze.
+- Esiti: `npm run check`, `npm run db:verify` e `npm run build` da Supabase superati. `check-dist` verifica anche l'inglese e l'assenza del periodo coperto.
+- Dettagli: docs/coordination/REPORT_04_CLAUDE.md e sessions/2026-10-31_18-57-46_claude-sito-in-inglese.md.
+
+## Stato reale dopo l'incarico 05 (Claude) — 2026-10-31T19:19:25+01:00
+
+- Nome **Briefly.tcs** applicato al sito:
+  - testata con "Briefly" nel colore del testo e ".tcs" nell'accento bordeaux;
+  - titoli `… · Briefly.tcs`, titolo della home e footer.
+
+  Questo supera la voce dell'incarico 04 secondo cui il nome nel codice era ancora TCS Daily.
+- Sottotitolo invariato: "Theoretical computer science briefings for graduate students and researchers." Il sottotitolo solo proposto non è stato applicato.
+- Invariati: CSS, URL, schema, dati, pacchetto npm e stack Supabase interni (`tcs-quotidiano`), inglese e assenza del periodo coperto.
+- Verificati: `npm run check` e `npm run build` da Supabase. Dettagli in docs/coordination/REPORT_05_CLAUDE.md.

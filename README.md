@@ -1,6 +1,9 @@
-# TCS quotidiano
+# Briefly.tcs
 
-Blog italiano di informatica teorica per studenti magistrali e ricercatori. Nome provvisorio.
+Blog di informatica teorica per studenti magistrali e ricercatori. Nome del sito: **Briefly.tcs**, approvato dall'utente (docs/DECISIONI.md) e applicato con l'incarico 05. I nomi precedenti erano «TCS quotidiano» e «TCS Daily».
+Nomi interni invariati: pacchetto npm `tcs-quotidiano`, stack Supabase `tcs-quotidiano`.
+**Lingua pubblica: inglese** (interfaccia, Metodo, 404, etichette di accessibilità, metadati, demo; `lang="en"`, date come "October 31, 2026").
+Commenti tecnici, documentazione interna e registri restano in italiano. URL e ID non sono cambiati (es. `/archivio/`, `/metodo/`, `#risultato-<id>`).
 Stato: **prototipo locale navigabile** con database Supabase locale e contenuti dimostrativi. Nessun deployment, nessun remote Git.
 
 ## Database: Supabase locale
@@ -17,6 +20,21 @@ pubblica le porte su tutte le interfacce. I dettagli sono in docs/coordination/R
 Dati e cache dello stack stanno in `~/.supabase/` (fuori dal repository).
 
 Porte locali: API/REST 55321, Postgres 55322, Studio 55323 (tutte su 127.0.0.1).
+
+## Aggiornare i demo di un database esistente (senza reset)
+
+`npm run db:reset` cancella i dati: non usarlo per aggiornare i demo. Per portare i demo italiani di un database
+già avviato alla versione inglese si usa `scripts/translate-demo-db.ts`:
+
+```sh
+node scripts/translate-demo-db.ts           # confronto a vuoto: nessuna scrittura
+node scripts/translate-demo-db.ts --apply   # aggiorna solo le righe identiche alla baseline italiana
+```
+
+Lo script confronta ogni riga con la baseline italiana conservata in `.local/it-baseline/`, ignorata da Git.
+Aggiorna solo le righe che coincidono in tutte le colonne, con un'unica istruzione SQL atomica.
+Le righe modificate, estranee o mancanti vengono preservate e segnalate.
+Il seed (`supabase/seed.sql`) è già in inglese: serve per le istanze nuove.
 
 ## Comandi
 

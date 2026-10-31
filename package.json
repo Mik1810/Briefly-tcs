@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Prototipo locale del blog TCS quotidiano: Astro statico con componenti React renderizzati in build.",
+  "description": "Prototipo locale del blog Briefly.tcs (sito pubblico in inglese): Astro statico con componenti React renderizzati in build.",
   "engines": {
     "node": ">=24.18.0"
   },

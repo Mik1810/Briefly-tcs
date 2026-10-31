@@ -15,7 +15,7 @@ const NAV_ITEMS: { key: Section; href: string; label: string }[] = [
 
 const MASTHEAD_NAME = (
   <>
-    <span className="masthead-accent">TCS</span> Daily
+    Briefly<span className="masthead-accent">.tcs</span>
   </>
 );
 

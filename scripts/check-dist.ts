@@ -125,7 +125,7 @@ for (const briefing of published) {
   } else {
     if (COVERAGE_LABEL.test(meta)) fail(`briefing ${briefing.date}: i metadati mostrano un’etichetta di periodo coperto`);
     const shown = new Set([briefing.date, briefing.updatedOn]);
-    for (const date of [briefing.coverage.from, briefing.coverage.to]) {
+    for (const date of new Set([briefing.coverage.from, briefing.coverage.to])) {
       if (!shown.has(date) && new RegExp(`<time datetime="${date}"`, 'i').test(meta)) {
         fail(`briefing ${briefing.date}: i metadati mostrano la data del periodo coperto ${date}`);
       }
