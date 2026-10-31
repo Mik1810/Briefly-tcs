@@ -1,6 +1,6 @@
 # Stato attuale e ripresa
 
-Aggiornato: 2026-10-31T19:54:42+01:00 — Europe/Rome.
+Aggiornato: 2026-10-31T19:59:23+01:00 — Europe/Rome.
 
 ## Punto da cui ripartire
 
@@ -87,3 +87,11 @@ Non attivare la proposta di automazione Codex. L’utente vuole il task ChatGPT 
 Da verificare un collegamento di pubblicazione tramite strumento/plugin: accesso nell’account, compatibilità col task e conferme sulle scritture. Nessuna prova unattended ancora eseguita.
 Il task usa comunque ChatGPT e i relativi limiti: non confondere l’esclusione di Codex con consumo nullo dell’abbonamento.
 Ultimo registro: [2026-10-31_19-54-42_solo-chatgpt-senza-codex.md](2026-10-31_19-54-42_solo-chatgpt-senza-codex.md).
+
+## Hosting previsto — 2026-10-31T19:59:23+01:00
+
+L’utente intende usare Vercel per il sito e Supabase hosted per il DB. Progettare il publisher per queste piattaforme, mantenendo Astro statico.
+Ogni pubblicazione nel DB dovrà attivare una nuova build/deployment: l’HTML statico non si aggiorna con la sola scrittura nel DB.
+Il codice ha ancora il vincolo localhost sull’URL Supabase: hosting non ancora configurato o verificato. Nessun deployment richiesto/eseguito qui.
+Resta prioritaria la prova Task ChatGPT → strumento di scrittura, senza API OpenAI e senza Codex quotidiano.
+Registro: [2026-10-31_19-59-23_vercel-supabase-hosting-previsto.md](2026-10-31_19-59-23_vercel-supabase-hosting-previsto.md).

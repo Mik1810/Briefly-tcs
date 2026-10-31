@@ -206,3 +206,11 @@ Non sono decisioni dell'utente; restano modificabili.
 - Le API OpenAI restano escluse. Un task ChatGPT resta soggetto all’uso/limiti del prodotto ChatGPT; non si promette consumo zero di ogni quota.
 - Percorso da provare: task ChatGPT online con strumento di pubblicazione dedicato. Compatibilità dell’account e scrittura senza conferme ripetute non ancora verificate.
 - Il publisher non richiede un modello AI: può scrivere DB e avviare build. Collegamento al progetto locale da progettare, senza esporre servizi in questa fase.
+
+## Piattaforme previste per la produzione — 2026-10-31T19:59:23+01:00
+
+- L’utente intende scegliere **Vercel** per il sito e **Supabase hosted** per il database. Sono le destinazioni previste dell'architettura.
+- Conservare Astro statico + React e stile A. Pubblicazione dati → rigenerazione automatica tramite deploy hook o meccanismo equivalente verificato.
+- Il flusso futuro dovrà funzionare senza il PC locale; serve uno strumento di pubblicazione hosted e protetto collegabile a ChatGPT.
+- Compatibilità Task ChatGPT con scrittura unattended ancora da verificare. Nessuna API OpenAI o automazione Codex quotidiana prevista.
+- Questa scelta di piattaforme non è un deployment: sviluppo ancora locale, nessun progetto cloud o risorsa creata in questa sessione.

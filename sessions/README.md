@@ -22,8 +22,9 @@ Tutte le attività del progetto vengono registrate qui in Markdown, con data e o
 | [2026-10-31_19-48-47_pubblicazione-automatica-fattibilita.md](2026-10-31_19-48-47_pubblicazione-automatica-fattibilita.md) | Sessione: fattibilità della pubblicazione automatica |
 | [2026-10-31_19-51-20_solo-abbonamento-senza-api-openai.md](2026-10-31_19-51-20_solo-abbonamento-senza-api-openai.md) | Solo abbonamento ChatGPT, API OpenAI escluse |
 | [2026-10-31_19-54-42_solo-chatgpt-senza-codex.md](2026-10-31_19-54-42_solo-chatgpt-senza-codex.md) | Solo ChatGPT: pubblicazione tramite strumento collegato da verificare |
+| [2026-10-31_19-59-23_vercel-supabase-hosting-previsto.md](2026-10-31_19-59-23_vercel-supabase-hosting-previsto.md) | Hosting previsto: Vercel e Supabase |
 
-Ultima sessione principale conclusa: [2026-10-31_19-54-42_solo-chatgpt-senza-codex.md](2026-10-31_19-54-42_solo-chatgpt-senza-codex.md).
+Ultima sessione principale conclusa: [2026-10-31_19-59-23_vercel-supabase-hosting-previsto.md](2026-10-31_19-59-23_vercel-supabase-hosting-previsto.md).
 
 ## Regole del registro
 
