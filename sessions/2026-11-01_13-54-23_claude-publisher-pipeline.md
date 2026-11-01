@@ -424,4 +424,23 @@ Eseguito:
 
 Verificato: check 0 errori/avvisi, 47/47 test; build locale e cloud con check-dist pulito; nella pagina del 1/11
 due righe "AI use", nessuna sezione riassuntiva, un solo script, nessun "risultato-", titolo della fonte con KaTeX.
+Online (b808804, 16:33:20): 6 id result-, 0 "risultato-", 2 "AI use"; /archive/ e /method/ 200; /archivio/ e
+/metodo/ 308 verso i nuovi URL; /argomenti/ 404 (la regola :path* non copre la sola barra): aggiunta regola
+esplicita in vercel.json.
+
+## Issue su GitHub, fonti dei laboratori AI, branch — 16:33 → 16:36:07+01:00
+
+Richieste dell'utente: mettere le issue su GitHub; controllare un possibile branch rimasto da un lavoro di
+ChatGPT; spiegare se la branch posts sarà sempre "avanti" rispetto a main; il vecchio briefing controllava anche
+le novità di OpenAI, Anthropic, Erdős Problems e altri siti.
+- GitHub: create le issue #1-#10 dai file docs/issues (stessi numeri), #3 chiusa subito come risolta. Indice
+  aggiornato con il rimando.
+- Branch: origin/automation-probe/chatgpt-20261031-2001 contiene solo 2 commit non in main (045297e, 235bdea), i
+  file .automation-probes/*.json delle prove di scrittura del 31 ottobre, partiti da 5804afa. Prova completata,
+  non un lavoro interrotto. Non eliminato: in attesa del consenso dell'utente (issue 010). Branch locale `posts`
+  presente solo nel clone di lavoro.
+- Fonti: il prompt aveva già Erdős Problems e OpenAI math su GitHub; aggiunte le pagine di ricerca e news di
+  OpenAI, Anthropic e Google DeepMind, con l'avvertenza di trattarne gli annunci come claim non verificati.
+  docs/CHATGPT_TASK_ISTRUZIONI.md aggiornato; prompt del task ChatGPT salvato e verificato dopo ricaricamento
+  (4818 caratteri, contiene "Anthropic, Google DeepMind" e la regola sul titolo).
 

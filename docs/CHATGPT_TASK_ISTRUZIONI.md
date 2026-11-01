@@ -25,7 +25,9 @@ obtained with AI.
 
 Check at least: the latest announcement blocks of arXiv cs.DS, cs.CC, cs.DM and math.CO
 (https://arxiv.org/list/<category>/recent), the ECCC report index (https://eccc.weizmann.ac.il/reports/),
-Erdős Problems, OpenAI math on GitHub, TheoretiCS, Theory of Computing and other TCS journals. Use the arXiv
+Erdős Problems, OpenAI math on GitHub, TheoretiCS, Theory of Computing and other TCS journals. Also check the
+research and news pages of AI labs that announce mathematical or TCS results (OpenAI, Anthropic, Google
+DeepMind), and treat their announcements as unverified claims unless a paper or formal proof is available. Use the arXiv
 announcement date, not the submission date, to decide what is new. Skip anything already covered in previous
 files in `posts/`.
 

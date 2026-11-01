@@ -1,8 +1,9 @@
 # Open issues
 
-Project issues kept as Markdown files in the repository (not on GitHub). One issue per file,
+Project issues kept as Markdown files in the repository and mirrored on GitHub with the same numbers
+(`001` is [#1](https://github.com/Mik1810/Briefly-tcs/issues/1), and so on). One issue per file,
 `NNN-short-title.md`, with status, priority, context, proposal and closing criteria.
-When an issue is closed: update its status, add the date and commit, and update this table.
+When an issue is closed: update its status, add the date and commit, update this table and close it on GitHub.
 
 | # | Title | Priority | Status |
 | --- | --- | --- | --- |
