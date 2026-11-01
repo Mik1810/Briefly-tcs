@@ -224,3 +224,89 @@ nel footer, titoli sezioni attesi; build fixture: avviso demo presente; dist rip
 Pubblicato: commit b2f1974 su main; alle 14:58:21+01:00 il sito pubblico mostra il nuovo footer e la sezione
 "What is not checked" in /metodo/ (verificato con curl). Passo residuo principale: corsa singola del task ChatGPT.
 
+## Corsa singola del task ChatGPT — avvio dopo 14:58 (in corso)
+
+- L'utente ha approvato la corsa singola. Pannello browser: ChatGPT non autenticato (la chat tecnica risulta
+  "Not Found" da anonimo). Cookie non essenziali rifiutati da Claude. In attesa dell'accesso dell'utente.
+- L'utente chiede di usare Chrome. Claude in Chrome non connesso (due tentativi): estensione non raggiungibile.
+  Nessuna azione in ChatGPT eseguita.
+- L'utente accede a ChatGPT nel pannello. 15:05:14+01:00: Claude apre la chat tecnica
+  (6ae63b52-0d38-83eb-983b-eba766226f6a) e invia la richiesta di attività programmata SINGOLA alle 15:12 con il
+  testo di docs/CHATGPT_TASK_ISTRUZIONI.md (testo verificato per intero prima dell'invio), più la richiesta di
+  rileggere il file e riportare percorso e commit.
+- Risposta di ChatGPT (riferita, non verificata): attività "Briefly.tcs: single post run" creata, 1/11/2026
+  15:12 Europe/Rome, una sola esecuzione, stato Attiva, file previsto posts/2026-11-01.json. Task originale TCS
+  non toccato.
+- Esito (riferito da ChatGPT nella chat, letto da Claude alle 15:09): "esecuzione singola completata senza
+  pubblicazione"; branch posts verificato e file assente; nessun risultato del 31 ottobre giudicato abbastanza
+  significativo e documentato (i candidati trovati erano di date precedenti). Nessun file creato.
+- Verificato da Claude alle 15:09:43+01:00: branch posts invariata (ultimo commit 16d6f7f), cartella posts solo
+  README.md, nessun nuovo run del workflow. L'esecuzione risulta avvenuta prima dell'orario dichiarato 15:12:
+  puntualità non affidabile. Controllo in background interrotto.
+- Osservazione: il 31/10/2026 è sabato; arXiv non annuncia nel fine settimana, quindi la finestra "giorno
+  precedente" produrrà spesso giorni vuoti (domenica, lunedì). Il comportamento "nessun file se non c'è nulla" ha
+  funzionato come previsto. Proposta all'utente: allargare la finestra (es. dall'ultimo post, max 3 giorni).
+- Decisione dell'utente: "ultimi 3 giorni solo per questa volta". Il testo del task quotidiano in docs resta
+  "giorno precedente". 15:11:17+01:00: inviata a ChatGPT la richiesta di una seconda attività singola
+  "Briefly.tcs: single post run (3 days)" alle 15:16, stesse istruzioni ma finestra 29-31 ottobre 2026.
+  ChatGPT conferma la creazione (riferito). Controllo in background riavviato.
+- Verificato alle 15:18:19 e poco dopo: branch posts invariata; pagina ChatGPT "Programmate" mostra la nuova
+  attività ancora "Programmata" (non eseguita) dopo l'orario previsto; "Briefing quotidiano ricerca TCS" attivo,
+  prossima esecuzione tra 18 ore, non modificato.
+- 15:20:27+01:00 (verificato): ancora nessun file né run; dettaglio attività "1 nov · Programmata, Nessun
+  aggiornamento disponibile". Ritardo dello scheduler ChatGPT di oltre 4 minuti.
+- 15:21:27+01:00, dopo notifica ricevuta dall'utente: seconda attività "Completata". Esito riferito da ChatGPT:
+  nessun file; nessun risultato del 29-31 ottobre con data confermata, novità significativa e fonte primaria
+  verificabile; candidati esaminati (arXiv 9 ottobre, agosto 2026) fuori finestra. Verificato da Claude: branch
+  posts invariata (16d6f7f), nessun run. Controllo in background interrotto.
+- Valutazione di Claude: due giorni feriali (29-30 ottobre) senza alcun risultato indicano che la ricerca web di
+  ChatGPT non trova gli elenchi arXiv/ECCC per data, e che il criterio "most significant" è molto restrittivo.
+  Proposta: indicare nel testo le pagine da consultare (elenchi arXiv cs.CC/cs.DS/cs.LO/cs.DM, ECCC) e scegliere
+  i risultati più interessanti tra quelli apparsi, invece di richiedere risultati "significativi"; ispezionare
+  prima il prompt del task TCS originale, che già produce briefing, per riusarne il metodo di ricerca.
+
+## Task originale letto e nuova versione del testo — 15:2x → 15:29:04+01:00
+
+- Chat del task originale (6ac94ce8...): ultimo briefing del 1/11 consulta indice ECCC, elenchi arXiv cs.DS,
+  cs.CC, math.CO, Erdős Problems, OpenAI Math, TheoretiCS, Theory of Computing; esito zero novità il 1/11, ma
+  cita risultati del 30/10 (Maximum Cardinality Matching in n^{2+o(1)} Time su arXiv, ECCC TR26-288) che le due
+  corse singole di prova non avevano trovato.
+- Prompt del task letto dalla finestra "Modifica attività" (ogni giorno alle 9:00), chiusa con Escape senza
+  salvare; verificato che il task resta attivo e invariato. Prompt in italiano: ultime 24 ore o dall'ultimo
+  briefing; temi graph algorithms/combinatoria, approssimazione, complessità, parametrizzata, randomizzati,
+  problemi aperti, risultati AI; soglia "breakthrough, non pubblicazioni ordinarie"; enunciato, novità, tecnica,
+  autori, data, link, stato della verifica; niente ripetizioni.
+- Decisioni dell'utente: sostituire il task originale con quello del blog; preferisce "quasi un post al giorno".
+- docs/CHATGPT_TASK_ISTRUZIONI.md riscritto (seconda versione): finestra dall'ultimo post (o 3 giorni), temi e
+  fonti del task originale con URL arXiv/ECCC, data di annuncio arXiv, 1-3 risultati con preferenza ai
+  breakthrough ma pubblicazione anche nei giorni tranquilli, nessuna ripetizione, formato JSON invariato.
+- 15:29: inviata a ChatGPT (chat tecnica) la richiesta di attività singola "Briefly.tcs: single post run v2" alle
+  15:34 con il testo integrale (verificato prima dell'invio). Il task originale sarà sostituito solo dopo esito.
+- ChatGPT conferma la creazione (riferito). Dopo la segnalazione dell'utente ("vedo kanji giapponesi"): la corsa
+  v2 è partita ed è ferma su una richiesta "Allow ChatGPT to use GitHub?" (Consenti sempre / Rifiuta / Consenti
+  una volta). La descrizione automatica dell'azione è in giapponese (errore di lingua dell'interfaccia; significa
+  creare un file nel repository pubblico con un bollettino di preprint su algoritmi su grafi).
+- Dettagli letti da Claude (senza approvare): create_file su Mik1810/Briefly-tcs, branch posts,
+  posts/2026-11-01.json, JSON briefly-post/1 con soli campi previsti e 3 risultati preprint del blocco arXiv
+  del 30 ottobre (planar four-coloring lineare, matching n^{2+o(1)}, greedy online Steiner forest), fonti arXiv
+  https. A differenza della prova del 31 ottobre, questa scrittura chiede conferma: senza "Consenti sempre" il
+  task quotidiano non può pubblicare da solo. Decisione lasciata all'utente.
+
+## Primo post reale e sostituzione del task — 15:35:19 → 15:42:57+01:00 (verificato salvo dove indicato)
+
+- L'utente riferisce di aver cliccato sulla richiesta GitHub (quale opzione non è stato indicato a Claude).
+- Commit 874cea0 su posts (autore GitHub "Michael Piccirilli", 14:35:28Z): posts/2026-11-01.json. Contenuto
+  DIVERSO dalla richiesta letta prima: 2 risultati (four-coloring planare lineare; matching n^{2+o(1)}), senza
+  Steiner forest, titolo "Linear-Time Four-Coloring and Near-Quadratic General Matching". Probabile rigenerazione
+  del contenuto da parte di ChatGPT dopo l'approvazione (non verificato).
+- Run 41316956199: "pubblicati: 2026-11-01", Publish success, deploy hook success.
+- Sito: /briefing/2026-11-01/ HTTP 200 alle 15:36:13, 0 script, 0 Topics, 0 chiavi, 11 elementi math,
+  dichiarazione AI e "automated check only" presenti; verifica a vista nel pannello corretta.
+- Task originale "Briefing quotidiano ricerca TCS" (ogni giorno alle 9:00): prompt sostituito da Claude con il
+  testo integrale di docs/CHATGPT_TASK_ISTRUZIONI.md (3293 caratteri) e salvato; dopo ricaricamento della pagina il
+  prompt salvato coincide (inizio e fine verificati), frequenza "Ogni giorno alle 9:00", titolo invariato.
+  Il vecchio prompt italiano è conservato in questo registro (sezione "Task originale letto").
+- Limiti: puntualità dello scheduler non affidabile (anticipi e ritardi osservati); la richiesta di conferma
+  GitHub può ripresentarsi se non è stato scelto "Consenti sempre"; la qualità scientifica dei post non è
+  verificata (solo controlli strutturali).
+

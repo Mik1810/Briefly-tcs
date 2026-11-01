@@ -193,3 +193,16 @@ Ultimo registro: [2026-11-01_13-00-27_ripresa-supabase-sicurezza.md](2026-11-01_
   online in meno di un minuto, idempotente; poi rimosso da DB e branch.
 - Da fare: provare con una corsa singola il testo di docs/CHATGPT_TASK_ISTRUZIONI.md in ChatGPT, poi aggiornare
   il task originale; aggiornare testo Method/footer ("local prototype", "published only after review").
+  (Superato sotto.)
+
+## Checkpoint prevalente: pubblicazione automatica attiva — 2026-11-01T15:42:57+01:00
+
+- Footer e pagina Method descrivono la pubblicazione automatica senza revisione umana (online).
+- Il publisher controlla anche il rendering delle formule prima di scrivere sul DB. 45 test.
+- Primo post reale online: https://briefly-tcs.vercel.app/briefing/2026-11-01/ (scritto da un task ChatGPT
+  singolo, pubblicato dal workflow, 2 preprint arXiv del 30 ottobre).
+- Task ChatGPT "Briefing quotidiano ricerca TCS" (ogni giorno alle 9:00) ora usa il testo inglese di
+  docs/CHATGPT_TASK_ISTRUZIONI.md: scrive posts/YYYY-MM-DD.json sulla branch posts. Il vecchio briefing italiano
+  non viene più prodotto.
+- Da osservare: prima esecuzione quotidiana del 2 novembre (eventuale richiesta di conferma GitHub, orario,
+  qualità). Correzioni dei post ancora manuali.
