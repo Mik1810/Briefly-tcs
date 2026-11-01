@@ -1,0 +1,26 @@
+{
+  "format": "briefly-post/1",
+  "date": "2026-11-01",
+  "title": "TEST: publishing pipeline check (to be removed)",
+  "summary": "Technical test of the automated pipeline from GitHub to the database and the site. Not a research briefing.",
+  "intro": "This entry was written by Claude Code to test the publishing pipeline end to end. It describes a classic textbook result and will be removed after the check.",
+  "results": [
+    {
+      "title": "TEST: Dijkstra's algorithm with Fibonacci heaps",
+      "summary": "Classic bound used as placeholder content for the pipeline test.",
+      "publication": "classic-result",
+      "body": "With Fibonacci heaps, Dijkstra's algorithm computes single-source shortest paths with non-negative weights in $O(m + n \\log n)$ time.",
+      "sources": [
+        {
+          "title": "Fibonacci heaps and their uses in improved network optimization algorithms",
+          "authors": ["Michael L. Fredman", "Robert Endre Tarjan"],
+          "year": 1987,
+          "venue": "Journal of the ACM 34(3)",
+          "url": "https://doi.org/10.1145/28869.28874",
+          "kind": "article",
+          "lang": "en"
+        }
+      ]
+    }
+  ]
+}
