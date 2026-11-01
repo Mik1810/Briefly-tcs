@@ -31,6 +31,10 @@ Tutte le attività del progetto vengono registrate qui in Markdown, con data e o
 
 | [2026-10-31_20-23-56_supabase-invito-account.md](2026-10-31_20-23-56_supabase-invito-account.md) | Invito vecchio account come Developer inviato; accettazione pendente |
 
+| [2026-10-31_20-25-50_supabase-accesso-dopo-invito.md](2026-10-31_20-25-50_supabase-accesso-dopo-invito.md) | Schema cloud installato e permessi verificati; ripresa completata il giorno seguente |
+| [2026-11-01_13-00-27_ripresa-supabase-sicurezza.md](2026-11-01_13-00-27_ripresa-supabase-sicurezza.md) | Ripresa: correzione funzione auto-RLS applicata, test cloud e Security Advisor puliti |
+| [2026-11-01_13-02-03_claude-supabase-rls-auto-enable.md](2026-11-01_13-02-03_claude-supabase-rls-auto-enable.md) | Claude: migrazione stretta permessi auto-RLS e report |
+
 Ultima prova conclusa: [2026-10-31_20-09-58_ripresa-permessi-github.md](2026-10-31_20-09-58_ripresa-permessi-github.md). Scrittura GitHub programmata riuscita; publisher Supabase/Vercel ancora da implementare.
 
 ## Regole del registro
@@ -59,3 +63,5 @@ Ultima attività: [2026-10-31_20-15-21_supabase-cloud.md](2026-10-31_20-15-21_su
 Ultima attività: [2026-10-31_20-21-01_supabase-cambio-account.md](2026-10-31_20-21-01_supabase-cambio-account.md); nuovo account non ancora visibile al connettore Supabase.
 
 Ultima attività: [2026-10-31_20-23-56_supabase-invito-account.md](2026-10-31_20-23-56_supabase-invito-account.md); invito inviato e verificato nella UI, attesa accettazione del destinatario.
+
+Ultima sessione di ripresa: [2026-11-01_13-00-27_ripresa-supabase-sicurezza.md](2026-11-01_13-00-27_ripresa-supabase-sicurezza.md). Sicurezza cloud verificata; prossimo passo collegamento applicativo al DB online.

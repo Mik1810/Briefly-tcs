@@ -1,6 +1,6 @@
 # Stato attuale e ripresa
 
-Aggiornato: 2026-10-31T19:59:23+01:00 — Europe/Rome.
+Aggiornato: 2026-11-01T13:10:31+01:00 — Europe/Rome.
 
 ## Punto da cui ripartire
 
@@ -136,3 +136,16 @@ L'utente riferisce nuovo account e organizzazione appena creata. Il connettore c
 
 Registro: [2026-10-31_20-23-56_supabase-invito-account.md](2026-10-31_20-23-56_supabase-invito-account.md). Verificato via browser: nuova organizzazione wiuuqjjwctaxgfubwshx (Free), progetto briefly.tcs dvjrhqkqyfkxaejwydog in eu-west-3 già creato dall'utente, schema public senza tabelle.
 Dopo email e conferma esplicita dell'utente, inviato invito al vecchio account come Developer. Team mostra Invited / Developer. Serve accettazione nell'account destinatario prima di controllare connettore. Nessuna modifica schema/dati o progetto creato da Codex. Evidenza privata in .local, esclusa da Git.
+
+## Checkpoint prevalente: Supabase cloud e sicurezza — 2026-11-01T13:10:31+01:00
+
+Ultimo registro: [2026-11-01_13-00-27_ripresa-supabase-sicurezza.md](2026-11-01_13-00-27_ripresa-supabase-sicurezza.md); registro Claude [2026-11-01_13-02-03_claude-supabase-rls-auto-enable.md](2026-11-01_13-02-03_claude-supabase-rls-auto-enable.md). Report Codex [VERIFICA_06_SUPABASE_CLOUD.md](../docs/coordination/VERIFICA_06_SUPABASE_CLOUD.md).
+
+- Nuova organizzazione wiuuqjjwctaxgfubwshx (Free), progetto briefly.tcs dvjrhqkqyfkxaejwydog, Paris eu-west-3. Nuovo account Owner; vecchio account invitato e accettato Developer.
+- Sei tabelle editoriali installate il 31 ottobre tramite SQL Editor, tutte vuote, RLS e grants verificati. Nessun seed demo online.
+- Funzione preesistente public.rls_auto_enable() corretta con migrazione Claude 20261101120237: revocato EXECUTE a PUBLIC/anon/authenticated, corpo/owner/SECURITY DEFINER/ensure_rls invariati e verificati. Auto-RLS provato con CREATE TABLE/assert/ROLLBACK, nessun residuo. Security Advisor 0 errori/0 avvisi/0 suggerimenti.
+- Connettore Supabase ancora limitato alla vecchia organizzazione: per questa attività usata dashboard Chrome autenticata, preferenza utente. Nessun nuovo scope/ruolo/credenziale.
+- Anteprima statica http://localhost:4321/ riavviata da dist precedente via Python su loopback, sessione exec 11672. /metodo/ verificato HTTP 200. Stato DB locale non verificato/ripristinato in questa ripresa.
+- Migrazioni cloud applicate manualmente: tabella storia migrazioni assente alla verifica. NON eseguire db push senza allineare prima baseline e fix già applicati.
+- Il sito usa ancora URL locale e rifiuta host cloud: prossimo lavoro, codice a Claude CLI WSL, integrare configurazione cloud conservando locale e gestire sito senza contenuti online. Vercel e publisher ancora da fare, nessun deployment/push/costo attivato.
+- Registri e migrazione versionati in commit locale alla chiusura; usare git log/status per SHA/allineamento.
