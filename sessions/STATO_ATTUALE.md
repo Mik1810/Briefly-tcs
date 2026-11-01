@@ -206,3 +206,6 @@ Ultimo registro: [2026-11-01_13-00-27_ripresa-supabase-sicurezza.md](2026-11-01_
   non viene più prodotto.
 - Da osservare: prima esecuzione quotidiana del 2 novembre (eventuale richiesta di conferma GitHub, orario,
   qualità). Correzioni dei post ancora manuali.
+- Aggiornamento 16:14: task v3 (paper completi, campo aiUse degli autori, titolo senza nome del sito); post del
+  1/11 rigenerato. Punti aperti tracciati in [docs/issues/](../docs/issues/README.md). Pull request disattivate
+  nel repository GitHub.

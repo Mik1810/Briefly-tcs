@@ -373,4 +373,17 @@ Decisione dell'utente: "Sì, toglilo".
 - Post del 1/11: titolo aggiornato prima nel DB (update limitato a data, demo=false e titolo esatto → 1 riga), poi
   nel file della branch posts (476ed3d, solo il titolo). Run 41319533355: "Già presenti e identici: 1".
 - La build del sito con il nuovo titolo parte dal push di main di questo registro.
+- Verificato alle 16:07:58: titolo online "Linear-Time Four-Coloring and Near-Quadratic General Matching" (e8340c4).
+
+## Issue in Markdown e pull request disattivate — 16:1x → 16:14:14+01:00
+
+Richiesta dell'utente: creare issue in Markdown per i punti aperti (il piano successivo e le relative issue
+verranno decisi dopo) e disattivare le PR.
+- Creati `docs/issues/README.md` (indice) e dieci issue 001-010: prima esecuzione quotidiana, monitoraggio dei
+  fallimenti, titoli delle fonti con LaTeX grezzo (nuovo difetto osservato nel post del 1/11), flusso di
+  correzione, storico migrazioni cloud, privilegi di service_role, Security Advisor, periodo coperto interno,
+  argomenti accantonati, pulizia.
+- GitHub: `gh api -X PATCH repos/Mik1810/Briefly-tcs -F has_pull_requests=false`; rilettura: has_pull_requests
+  false (nessuna PR esistente). Issue GitHub, wiki e progetti invariati. Il task ChatGPT scrive con commit diretti
+  sulla branch posts e non usa PR.
 
