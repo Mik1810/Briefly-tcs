@@ -1,7 +1,7 @@
 {
   "format": "briefly-post/2",
   "date": "2026-11-01",
-  "title": "Briefly.tcs: Linear-Time Four-Coloring and Near-Quadratic General Matching",
+  "title": "Linear-Time Four-Coloring and Near-Quadratic General Matching",
   "summary": "Two new graph-algorithm preprints report linear-time planar four-coloring on the word RAM and a randomized near-quadratic algorithm for general maximum matching. Their full texts also document distinct forms of AI assistance.",
   "intro": "Selected from the 30 October 2026 arXiv announcement. Both articles were read in full in their arXiv HTML version 1; they are preprints, and this briefing does not certify their proofs.",
   "results": [
