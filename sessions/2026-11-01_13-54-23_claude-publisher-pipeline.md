@@ -84,8 +84,35 @@ Riferite in chat dall'utente:
 
 ## Applicazione delle decisioni — tra 14:10:10 e 14:13:42+01:00 (eseguito)
 
-- post.ts: 	opics non più ammesso nel post (risultati con topics vuoti); coverage facoltativo, predefinito
-  dal giorno precedente alla data del post. Formato resta riefly-post/1.
+- post.ts: `topics` non più ammesso nel post (risultati con topics vuoti); `coverage` facoltativo, predefinito
+  dal giorno precedente alla data del post. Formato resta `briefly-post/1`.
 - validate.ts: gli argomenti diventano facoltativi (se presenti devono restare nel vocabolario).
 - publisher.ts: rimosso il blocco su vocabolario vuoto; nel cloud la tabella topics può restare vuota.
-- UI: ArticleMeta, ResultSection, BriefingRow, BriefingLead mostrano argomenti solo se presenti; voce 
+- UI: ArticleMeta, ResultSection, BriefingRow, BriefingLead mostrano argomenti solo se presenti; voce "Topics"
+  tolta dal menu (pagine /argomenti/ conservate per i permalink, non collegate). metodo.astro: tolta la frase
+  sugli argomenti. Nessun altro cambiamento grafico.
+- tests/publisher.test.ts aggiornato (periodo predefinito, topics rifiutato, URL non https, vocabolario vuoto).
+
+## Verifiche — 14:13:42+01:00 (verificato)
+
+- `npm run check`: 0 errori/avvisi, 44/44 test.
+- Publisher locale con post senza argomenti né periodo: dry-run, pubblicazione, rerun idempotente, RPC anon 401;
+  DB: coverage 2026-11-01/2026-11-01 per il post del 2026-11-02, result_topics vuoto.
+- Build locale: pagina del post senza "Topics", menu senza link /argomenti/, home senza trattino orfano;
+  demo locali con argomenti ancora mostrati (3 occorrenze). check-dist pulito.
+- Pulizia: riga di prova cancellata dal DB locale; `npm run build:cloud` → 0 briefing, dist ripristinata.
+- Commit locale 2fc183a (main avanti di 2 rispetto a origin). Nessun push.
+
+## Errori e correzioni (seconda parte)
+
+- L'aggiunta di questa sezione via heredoc da PowerShell ha corrotto backtick e virgolette ed è finita così nel
+  commit 2fc183a; testo troncato e riscritto con l'editor nel commit successivo.
+
+## Osservazioni aperte (non modificate)
+
+- La pagina Method dice ancora "local prototype", "published only after review" e "not yet a working procedure";
+  il footer dice "local prototype". Contraddicono la pubblicazione automatica: da aggiornare prima del primo post
+  reale, previa conferma dell'utente sul testo.
+- La riga "Campi del post: in attesa" nei limiti sopra è superata dalle decisioni registrate qui.
+- Servizi lasciati attivi: stack Supabase locale (API 55321, DB 55322).
+
