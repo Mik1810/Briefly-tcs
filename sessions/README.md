@@ -38,6 +38,8 @@ Tutte le attività del progetto vengono registrate qui in Markdown, con data e o
 | [2026-11-01_13-12-53_collegamento-supabase-cloud.md](2026-11-01_13-12-53_collegamento-supabase-cloud.md) | Collegamento sito a Supabase cloud verificato; modulo Vercel pronto, consenso push/deploy pendente |
 | [2026-11-01_13-13-42_claude-supabase-cloud-target.md](2026-11-01_13-13-42_claude-supabase-cloud-target.md) | Claude: target cloud, isolamento env, test e runtime Node24 |
 
+| [2026-11-01_13-38-25_primo-deploy-handoff-claude.md](2026-11-01_13-38-25_primo-deploy-handoff-claude.md) | Push e primo deploy Vercel READY; handoff completo a Claude |
+
 Ultima prova conclusa: [2026-10-31_20-09-58_ripresa-permessi-github.md](2026-10-31_20-09-58_ripresa-permessi-github.md). Scrittura GitHub programmata riuscita; publisher Supabase/Vercel ancora da implementare.
 
 ## Regole del registro
@@ -70,3 +72,5 @@ Ultima attività: [2026-10-31_20-23-56_supabase-invito-account.md](2026-10-31_20
 Ultima sessione di ripresa: [2026-11-01_13-00-27_ripresa-supabase-sicurezza.md](2026-11-01_13-00-27_ripresa-supabase-sicurezza.md). Sicurezza cloud verificata; prossimo passo collegamento applicativo al DB online.
 
 Ultima sessione: [2026-11-01_13-12-53_collegamento-supabase-cloud.md](2026-11-01_13-12-53_collegamento-supabase-cloud.md). Build cloud reale riuscita; Vercel pronto per consenso finale a push e Deploy.
+
+Ultima sessione: [2026-11-01_13-38-25_primo-deploy-handoff-claude.md](2026-11-01_13-38-25_primo-deploy-handoff-claude.md). Sito https://briefly-tcs.vercel.app online; passaggio completo [HANDOFF_CLAUDE.md](../docs/HANDOFF_CLAUDE.md).

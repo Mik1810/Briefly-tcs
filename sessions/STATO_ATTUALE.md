@@ -1,6 +1,6 @@
 # Stato attuale e ripresa
 
-Aggiornato: 2026-11-01T13:36:51+01:00 — Europe/Rome.
+Aggiornato: 2026-11-01T13:46:14+01:00 — Europe/Rome.
 
 ## Punto da cui ripartire
 
@@ -160,3 +160,13 @@ Ultimo registro: [2026-11-01_13-00-27_ripresa-supabase-sicurezza.md](2026-11-01_
 - Vercel team mik1810s-projects Hobby. Connettore creazione403; Chrome funziona, modulo Import pronto per repo Mik1810/Briefly-tcs main, nome briefly-tcs, Astro, npm ci, npm run build:cloud, dist. Tre env Production/Preview compilate mascherate. Nessun progetto creato e Deploy non premuto. Screenshot .local/vercel-import-prepared-20261101.jpg.
 - Prima di deploy serve push main: Git fetch mostra nessun commit remoto nuovo, solo commit locali in avanti. Nessun force/push eseguito; richiesto consenso esplicito a push e Deploy per AGENTS.
 - Storia migrazioni cloud manuale resta da allineare prima di db push; nessuna migrazione o dato scritto in questa sessione. Publisher e automazione editoriale ancora non implementati.
+
+## Checkpoint prevalente: produzione online e passaggio a Claude — 2026-11-01T13:46:14+01:00
+
+- Documento da usare per continuare: [HANDOFF_CLAUDE.md](../docs/HANDOFF_CLAUDE.md). Ultimo registro [2026-11-01_13-38-25_primo-deploy-handoff-claude.md](2026-11-01_13-38-25_primo-deploy-handoff-claude.md).
+- Push main autorizzato ed eseguito: codice4818aa8 presente suGitHub, primo Deploy Vercel eseguito dopo autenticazione utente.
+- Produzione READY: https://briefly-tcs.vercel.app; deployment dpl_8rgy2fiPQ5Gc3W7x4rpCxPkyoJ9B, commit4818aa88e63d74a34e9b735652453e920db192af, build24s. TeamHobby mik1810s-projects, progetto briefly-tcs.
+- Verifiche online quattro pagine HTTP200/inglese/hosted/noJS/nochiave/nodemopost; DB ancora vuoto, home No published briefings. Nessun articolo reale o automazione nuova attivati.
+- Form import ora e un progetto reale; connettore Vercel continua403su letturadeploy, dashboardChromeautenticatafunziona. Tre warning npmcache-dir non bloccanti; npm audit0vulnerabilita.
+- Handoff e registri versionati/pushati separatamente dal codice app. Nuovi pushmain ora possono ridistribuire automaticamente. Verificare ultimo deploymentprima dinuove modifiche.
+- Restano:publisher deterministico GitHub→Supabase→build e collegamento taskChatGPToriginale senzaAPIOpenAI/Codexquotidiano/revisioneumana. Non rifare infrastruttura, non importare demo, nondbpush prima di allineare storia migrazioni manuali. Dettagli nelhandoff.
