@@ -25,15 +25,27 @@ export interface PublisherConfig {
 
 type Env = Record<string, string | undefined>;
 
+/** Tipo riconosciuto di un valore sbagliato, senza riportarne alcun carattere. */
+function describeKey(value: string): string {
+  if (value.startsWith('sb_publishable_')) return 'una chiave publishable';
+  if (/^https?:\/\//.test(value)) return 'un URL';
+  if (/^["'].*["']$/.test(value)) return 'un valore tra virgolette';
+  if (/^eyJ[\w-]*\.[\w-]+\.[\w-]+$/.test(value)) return 'un JWT legacy (anon o service_role): usare una chiave sb_secret_';
+  return `un valore di formato non riconosciuto (${value.length} caratteri)`;
+}
+
 export function readPublisherConfig(env: Env = process.env): PublisherConfig {
   const target: SupabaseTarget = env.TCS_SUPABASE_TARGET === 'local' ? 'local' : 'cloud';
-  const url = env.TCS_SUPABASE_URL;
-  const secretKey = env.TCS_SUPABASE_SECRET_KEY;
+  // Spazi e a capo ai bordi arrivano facilmente incollando i secret nel terminale o nella pagina GitHub.
+  const url = env.TCS_SUPABASE_URL?.trim();
+  const secretKey = env.TCS_SUPABASE_SECRET_KEY?.trim();
   if (!url || !secretKey) {
     throw new Error('Configurazione publisher mancante: servono TCS_SUPABASE_URL e TCS_SUPABASE_SECRET_KEY.');
   }
   if (!secretKey.startsWith('sb_secret_')) {
-    throw new Error('TCS_SUPABASE_SECRET_KEY deve essere una chiave secret Supabase (sb_secret_…).');
+    throw new Error(
+      `TCS_SUPABASE_SECRET_KEY deve essere una chiave secret Supabase (sb_secret_…); ricevuto ${describeKey(secretKey)}.`,
+    );
   }
   return { target, url: validateUrl(target, url), secretKey };
 }

@@ -147,4 +147,14 @@ test('il publisher accetta solo una chiave secret e un URL cloud valido', () => 
     /supabase\.co/,
   );
   assert.equal(readPublisherConfig({ TCS_SUPABASE_URL: url, TCS_SUPABASE_SECRET_KEY: 'sb_secret_x' }).url, url);
+  // Spazi incollati per errore ai bordi sono tollerati; i valori sbagliati sono descritti senza mostrarli.
+  assert.equal(readPublisherConfig({ TCS_SUPABASE_URL: ` ${url}\n`, TCS_SUPABASE_SECRET_KEY: ' sb_secret_x\n' }).secretKey, 'sb_secret_x');
+  assert.throws(
+    () => readPublisherConfig({ TCS_SUPABASE_URL: url, TCS_SUPABASE_SECRET_KEY: 'eyJhbGc.eyJyb2xl.c2lnbmF0dXJl' }),
+    (error: unknown) => error instanceof Error && /JWT legacy/.test(error.message) && !error.message.includes('eyJ'),
+  );
+  assert.throws(
+    () => readPublisherConfig({ TCS_SUPABASE_URL: url, TCS_SUPABASE_SECRET_KEY: 'segreto-sconosciuto' }),
+    (error: unknown) => error instanceof Error && /19 caratteri/.test(error.message) && !error.message.includes('segreto'),
+  );
 });

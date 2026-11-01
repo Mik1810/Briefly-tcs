@@ -116,3 +116,46 @@ Riferite in chat dall'utente:
 - La riga "Campi del post: in attesa" nei limiti sopra è superata dalle decisioni registrate qui.
 - Servizi lasciati attivi: stack Supabase locale (API 55321, DB 55322).
 
+## Collegamento cloud — avvio 2026-11-01 (dopo 14:13:42), blocchi alle 14:18:47 e 14:19:11+01:00
+
+L'utente ha risposto "Sì, procedi" alla domanda sul collegamento cloud, che elencava push di main, branch posts,
+migrazione SQL, deploy hook e secret: consenso registrato per questi passi.
+
+- `git push origin main` RIFIUTATO (eseguito, verificato): "refusing to allow an OAuth App to create or update
+  workflow ... without `workflow` scope". gh in WSL, account Mik1810, scope: admin:public_key, gist, read:org, repo.
+  Nessun ref remoto aggiornato; branch posts non creata (script interrotto prima). Serve
+  `gh auth refresh -h github.com -s workflow` eseguito dall'utente (autorizzazione nel browser, non da Claude).
+- Browser integrato dell'app: dashboard Supabase non autenticata (pagina di accesso). Nessun accesso tentato
+  da Claude. Serve accesso dell'utente nel pannello oppure uso di Chrome autenticato su sua indicazione.
+
+### Ripresa — 14:21:18 / 14:21:35+01:00
+
+- L'utente sceglie di accedere a Supabase nel pannello browser integrato.
+- Verificato: scope gh ora include `workflow` (rinnovo eseguito dall'utente).
+- Eseguito e verificato con `git ls-remote`: main remoto = 0663771 (push a3b843c..0663771); branch orfana
+  `posts` = 8ebf098 con solo .github/workflows/publish-posts.yml, vercel.json, posts/README.md. Worktree
+  temporaneo /tmp/briefly-posts-wt rimosso. Il push di main avvia un deploy Vercel di produzione (esito da controllare).
+- 14:21: dashboard Supabase nel pannello ancora sulla pagina di accesso; in attesa dell'utente.
+
+### Migrazione cloud publish_briefing — completata entro 14:25:52+01:00
+
+- Banner cookie Supabase: scelto "Opt out" da Claude. Accesso eseguito dall'utente nel pannello
+  (account proprietario, org "michael.piccirilli.it@gmail.com's Org", progetto briefly.tcs).
+- Query di sola lettura prima (verificato): publish_briefing assente, briefings 0, topics 0. Differenza dal
+  locale: nel cloud service_role ha già tutti i privilegi sulle sei tabelle (grant predefiniti Supabase), quindi
+  il `grant select` della migrazione non cambia nulla lì; la chiave secret resta comunque solo nei secret GitHub.
+- Eseguito nell'SQL Editor il contenuto di supabase/migrations/20261101140000_publish_briefing.sql (commit
+  0663771) tramite l'editor della pagina: "Success. No rows returned".
+- Verificato: publish_briefing SECURITY DEFINER, owner postgres, search_path="", EXECUTE anon=false,
+  authenticated=false, service_role=true. RPC via REST con chiave publishable: HTTP 401 42501 permission denied.
+- Storia migrazioni cloud ancora assente: anche questa migrazione è applicata a mano (niente db push).
+
+### Secret e deploy hook — 14:26 circa (in attesa dell'utente)
+
+- Pannello: GitHub non autenticato (settings → 404), Vercel su pagina di login. Nessun accesso tentato da Claude.
+- `gh secret set TCS_SUPABASE_URL` (valore non segreto) negato dal classificatore dei permessi di Claude Code
+  (scritture in archivi di secret). Non aggirato: i tre secret vanno impostati dall'utente con `gh secret set`
+  (inserimento nascosto) o dalla pagina GitHub.
+- Istruzioni date all'utente: chiave secret Supabase dedicata `github-publisher`; deploy hook Vercel su main;
+  secret TCS_SUPABASE_URL, TCS_SUPABASE_SECRET_KEY, VERCEL_DEPLOY_HOOK_URL.
+
