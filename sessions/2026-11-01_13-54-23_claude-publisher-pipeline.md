@@ -310,3 +310,34 @@ Pubblicato: commit b2f1974 su main; alle 14:58:21+01:00 il sito pubblico mostra 
   GitHub può ripresentarsi se non è stato scelto "Consenti sempre"; la qualità scientifica dei post non è
   verificata (solo controlli strutturali).
 
+## Feedback sul primo post e versione 3 — 15:4x → 15:53:41+01:00
+
+Riferito dall'utente: il sommario mostra "n^{2+o(1)}" grezzo; il post non spiega l'algoritmo del matching ed è
+"raffazzonato" rispetto al briefing quotidiano; la sezione "Role of AI and review" deve parlare dell'uso dell'AI
+da parte degli autori (dichiarazioni nei paper), non del sito, già descritto nel footer. Domanda sul consumo:
+risposta data in chat (lettura dei PDF consuma limiti del piano ChatGPT e tempo, non denaro; il task è uno solo).
+L'utente chiede perché rifiutare il LaTeX nei campi di testo: proposta ritirata, resta solo l'istruzione nel task.
+Domanda "aiUse obbligatorio o facoltativo" senza risposta: adottato obbligatorio per i post nuovi (raccomandazione).
+
+Eseguito:
+- Formato `briefly-post/2`: `aiUse` obbligatorio per risultato; `/1` ancora accettato senza aiUse (il file del
+  1/11 resta valido a ogni riesecuzione del workflow). types.ts `aiUse?`, validate.ts testo semplice se presente.
+- Migrazione 20261101160000_results_ai_use.sql: colonna results.ai_use (facoltativa, senza $) e publish_briefing
+  con ai_use (firma e grant invariati). source.ts legge ai_use.
+- Pagina articolo: sezione "Role of AI in this research" con l'aiUse di ogni risultato, nascosta se nessun
+  risultato lo ha; i demo mostrano ancora la loro dichiarazione. La dichiarazione del sito non è più ripetuta nel
+  post (footer e Method).
+- docs/CHATGPT_TASK_ISTRUZIONI.md versione 3: paper completo (HTML/PDF arXiv), 300-600 parole per risultato con
+  enunciato, stato dell'arte, idea dell'algoritmo/dimostrazione, rilevanza e limiti, verifica; dichiarazione AI
+  degli autori; notazione Unicode nei campi di testo semplice.
+
+Verificato:
+- check 0 errori/avvisi, 46/46 test; locale: migrazione applicata, post /2 pubblicato e idempotente, sezione
+  visibile con il testo aiUse, demo invariati; riga di prova cancellata.
+- Cloud (SQL Editor, "Success"): colonna ai_use presente, funzione aggiornata, anon_exec false, service_exec true;
+  RPC anon via REST 401. Build cloud locale: 1 briefing, check-dist pulito, nessuna sezione AI nel post del 1/11.
+- Push main 0dd30bf (build Vercel avviata dal push; esito non controllato nella dashboard).
+- Task ChatGPT quotidiano: prompt v3 salvato (4502 caratteri, contiene briefly-post/2 e la lettura del paper
+  completo), riletto dopo ricaricamento; ogni giorno alle 9:00.
+- Il post del 1/11 resta quello del formato /1 (2 risultati, senza aiUse): non riscritto.
+
