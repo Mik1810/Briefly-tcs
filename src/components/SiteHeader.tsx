@@ -8,9 +8,9 @@ interface Props {
 
 const NAV_ITEMS: { key: Section; href: string; label: string }[] = [
   { key: 'articoli', href: '/', label: 'Articles' },
-  { key: 'archivio', href: '/archivio/', label: 'Archive' },
-  // Topics fuori dal menu dal 2026-11-01 (argomenti accantonati); le pagine /argomenti/ restano per i permalink.
-  { key: 'metodo', href: '/metodo/', label: 'Method' },
+  { key: 'archivio', href: '/archive/', label: 'Archive' },
+  // Topics fuori dal menu dal 2026-11-01 (argomenti accantonati); le pagine /topics/ restano, non collegate.
+  { key: 'metodo', href: '/method/', label: 'Method' },
 ];
 
 const MASTHEAD_NAME = (

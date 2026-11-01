@@ -29,17 +29,17 @@ const hasDemo = site.briefings.some((briefing) => briefing.demo);
     <link rel="icon" href="data:," />
   </head>
   <body>
-    <a class="skip-link" href="#contenuto">Skip to content</a>
+    <a class="skip-link" href="#content">Skip to content</a>
     <div class="page">
       <SiteHeader current={current} currentIsPage={currentIsPage} />
-      <main id="contenuto" tabindex="-1">
+      <main id="content" tabindex="-1">
         <slot />
       </main>
       <footer class="site-footer">
         <p>
           Briefly.tcs: daily briefings drafted by an AI model from primary sources and published automatically,
           without human review. Always check the cited sources.{hasDemo ? ' Content marked as demo is not research news.' : ''}{' '}
-          <a href="/metodo/">How we work</a>.
+          <a href="/method/">How we work</a>.
         </p>
       </footer>
     </div>

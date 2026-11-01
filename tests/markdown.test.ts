@@ -1,7 +1,16 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 
-import { renderMarkdown } from '../src/lib/markdown.ts';
+import { renderInlineMath, renderMarkdown } from '../src/lib/markdown.ts';
+
+test('titoli delle fonti: formule $…$ con KaTeX, testo solo escapato, $ spaiato lasciato com’è', () => {
+  const html = renderInlineMath('Maximum Cardinality Matching in $n^{2+o(1)}$ Time', 'fonte');
+  assert.match(html, /^Maximum Cardinality Matching in <span class="katex">/);
+  assert.match(html, /<math/);
+  assert.doesNotMatch(html, /\$/);
+  assert.equal(renderInlineMath('A <b>bold</b> & costs $5', 'fonte'), 'A &lt;b&gt;bold&lt;/b&gt; &amp; costs $5');
+  assert.throws(() => renderInlineMath('Bad $\\frac{1}{$ title', 'fonte X'), /fonte X/);
+});
 
 test('una formula non valida interrompe la build indicando dove', () => {
   assert.throws(() => renderMarkdown('$$\n\\frac{1}{\n$$', 'briefing X › risultato y'), /briefing X › risultato y/);
@@ -22,12 +31,12 @@ test('l’HTML grezzo nel Markdown non arriva alla pagina', () => {
 
 test('i link con protocolli pericolosi perdono l’href; quelli sicuri restano', () => {
   const html = renderMarkdown(
-    '[a](javascript:alert%281%29) [b](JaVaScRiPt:alert(1)) [c](data:text/html,x) [d](/metodo/) [e](#risultato-x) [f](https://example.org)',
+    '[a](javascript:alert%281%29) [b](JaVaScRiPt:alert(1)) [c](data:text/html,x) [d](/method/) [e](#result-x) [f](https://example.org)',
     'qui',
   );
   assert.doesNotMatch(html, /javascript:|data:/i);
-  assert.match(html, /href="\/metodo\/"/);
-  assert.match(html, /href="#risultato-x"/);
+  assert.match(html, /href="\/method\/"/);
+  assert.match(html, /href="#result-x"/);
   assert.match(html, /href="https:\/\/example\.org"/);
 });
 

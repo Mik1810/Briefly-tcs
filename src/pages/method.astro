@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { FORMALIZATION_LABELS, PUBLICATION_LABELS, VERIFICATION_LABELS } from '../lib/content/labels.ts';
 
-// URL /metodo/ invariato per conservare i permalink; contenuto pubblico in inglese.
+// URL inglese /method/ dal 2026-11-01; /metodo/ reindirizza qui (vercel.json).
 const statusGroups = [
   { name: 'Publication', labels: Object.values(PUBLICATION_LABELS) },
   { name: 'Formalization', labels: Object.values(FORMALIZATION_LABELS) },

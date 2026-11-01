@@ -51,7 +51,7 @@ export interface ScientificStatus {
 }
 
 export interface Result {
-  /** Slug stabile e unico in tutto il sito; diventa l'ancora `#risultato-<id>`. */
+  /** Slug stabile e unico in tutto il sito; diventa l'ancora `#result-<id>`. */
   id: string;
   title: string;
   /** Testo semplice: compare in liste e metadati, dove le formule non sono renderizzate. */

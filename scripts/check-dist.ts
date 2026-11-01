@@ -1,6 +1,7 @@
 // Controlli sull'output generato in dist/, eseguiti da `npm run build` dopo astro build.
 // Verifica ciò che il lettore riceverebbe: bozze assenti, metadati presenti, link interni validi,
-// nessuna risorsa remota né JavaScript nelle pagine. Stampa anche le misure delle risorse.
+// nessuna risorsa remota né JavaScript nelle pagine, a parte lo script facoltativo di copia del link negli
+// articoli. Stampa anche le misure delle risorse.
 // Uscita con codice 1 al primo insieme di errori. Con Supabase le bozze non arrivano alla build (RLS):
 // restano il controllo del marcatore e quello sugli argomenti senza risultati pubblicati.
 
@@ -9,7 +10,8 @@ import { join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { gzipSync } from 'node:zlib';
 
-import { loadValidatedContent } from '../src/lib/content/repository.ts';
+import { loadValidatedContent, resultAnchor } from '../src/lib/content/repository.ts';
+import { COPY_LINK_SCRIPT } from '../src/lib/copy-link.ts';
 import { formatDate } from '../src/lib/dates.ts';
 
 // Cartella da controllare: argomento facoltativo (scripts/build.ts passa dist-staging), altrimenti dist/.
@@ -60,7 +62,7 @@ const textFiles = new Map(
 );
 const htmlFiles = [...textFiles.keys()].filter((f) => f.endsWith('.html'));
 
-/** URL pubblico ("/archivio/") → file in dist. */
+/** URL pubblico ("/archive/") → file in dist. */
 function fileForPath(pathname: string): string | undefined {
   const candidates = pathname.endsWith('/')
     ? [join(DIST, pathname, 'index.html')]
@@ -86,7 +88,7 @@ for (const draft of drafts) {
     if (text.includes(`/briefing/${draft.date}/`)) fail(`${rel(file)}: collega la bozza ${draft.date}`);
     if (text.includes(draft.title)) fail(`${rel(file)}: contiene il titolo della bozza ${draft.date}`);
     for (const result of draft.results) {
-      if (text.includes(`risultato-${result.id}`)) fail(`${rel(file)}: contiene il risultato in bozza ${result.id}`);
+      if (text.includes(resultAnchor(result))) fail(`${rel(file)}: contiene il risultato in bozza ${result.id}`);
     }
   }
 }
@@ -94,14 +96,14 @@ for (const draft of drafts) {
 // 2. Argomenti: pagina solo se c'è almeno un risultato pubblicato.
 const publishedTopics = new Set(published.flatMap((b) => b.results.flatMap((r) => r.topics)));
 for (const topic of raw.topics) {
-  const exists = existsSync(join(DIST, 'argomenti', topic.slug, 'index.html'));
+  const exists = existsSync(join(DIST, 'topics', topic.slug, 'index.html'));
   if (exists !== publishedTopics.has(topic.slug)) {
     fail(`argomento ${topic.slug}: pagina ${exists ? 'presente senza risultati pubblicati' : 'mancante'}`);
   }
 }
 
 // 3. Briefing pubblicati: pagina, date, ancore dei risultati, etichetta dimostrativa, presenza in archivio.
-const archive = readFileSync(join(DIST, 'archivio', 'index.html'), 'utf8');
+const archive = readFileSync(join(DIST, 'archive', 'index.html'), 'utf8');
 for (const briefing of published) {
   const file = fileForPath(`/briefing/${briefing.date}/`);
   if (!file) {
@@ -133,9 +135,9 @@ for (const briefing of published) {
   }
   const ids = idsOf(html);
   for (const result of briefing.results) {
-    if (!ids.has(`risultato-${result.id}`)) fail(`briefing ${briefing.date}: manca l’ancora del risultato ${result.id}`);
+    if (!ids.has(resultAnchor(result))) fail(`briefing ${briefing.date}: manca l’ancora del risultato ${result.id}`);
   }
-  if (!ids.has('correzioni')) fail(`briefing ${briefing.date}: manca la sezione correzioni`);
+  if (!ids.has('corrections')) fail(`briefing ${briefing.date}: manca la sezione correzioni`);
   if (!archive.includes(`href="/briefing/${briefing.date}/"`)) fail(`briefing ${briefing.date}: assente dall’archivio`);
 }
 const generatedBriefings = existsSync(join(DIST, 'briefing')) ? readdirSync(join(DIST, 'briefing')) : [];
@@ -155,7 +157,11 @@ for (const file of htmlFiles) {
   if (!/<title>[^<]+<\/title>/.test(html)) fail(`${name}: manca <title>`);
   const h1 = html.match(/<h1[\s>]/g)?.length ?? 0;
   if (h1 !== 1) fail(`${name}: ${h1} elementi h1 invece di 1`);
-  if (/<script[\s>]/i.test(html)) fail(`${name}: contiene <script>`);
+  // Unico script ammesso: la copia del link nelle pagine articolo (src/lib/copy-link.ts), inline e identico.
+  for (const script of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)) {
+    const allowed = name.startsWith('briefing/') && script[1]!.trim() === '' && script[2] === COPY_LINK_SCRIPT;
+    if (!allowed) fail(`${name}: contiene uno <script> non ammesso`);
+  }
   if (/<(link|script|img|iframe|source)\b[^>]*\s(href|src)="(https?:)?\/\//i.test(html)) {
     fail(`${name}: carica una risorsa remota`);
   }
@@ -205,7 +211,7 @@ const js = files.filter((f) => f.endsWith('.js'));
 
 console.log(`\ncheck-dist — sorgente dei contenuti: ${source.logLabel} (${source.description})`);
 console.log(`  ${htmlFiles.length} pagine HTML, ${published.length} briefing pubblicati, ${drafts.length} bozze escluse`);
-for (const pathname of ['/', '/archivio/', ...published.map((b) => `/briefing/${b.date}/`)]) {
+for (const pathname of ['/', '/archive/', ...published.map((b) => `/briefing/${b.date}/`)]) {
   console.log(`  ${pageWeight(pathname)}`);
 }
 console.log(`  Font KaTeX: ${woff2.length} woff2 per ${kb(sizeOf(woff2))}; totale con woff/ttf di ripiego ${kb(sizeOf(fonts))}`);

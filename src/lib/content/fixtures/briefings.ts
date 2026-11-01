@@ -47,7 +47,7 @@ export const briefings: Briefing[] = [
       'merge sort, and the quadratic worst case of insertion sort.',
     coverage: { from: '2026-10-28', to: '2026-10-28' },
     updatedOn: '2026-10-30',
-    intro: md`This briefing shows what a long issue looks like, with inline and display formulas, sources for every result, and a correction. The three results are textbook theorems, chosen because they are easy to check; the [Method page](/metodo/) describes how real news will be handled.`,
+    intro: md`This briefing shows what a long issue looks like, with inline and display formulas, sources for every result, and a correction. The three results are textbook theorems, chosen because they are easy to check; the [Method page](/method/) describes how real news will be handled.`,
     results: [
       {
         id: 'limite-inferiore-ordinamento-confronti',
@@ -97,7 +97,7 @@ $$
 
 which by the master theorem (case $a = b = 2$, $f(n) = \Theta(n)$) gives $T(n) = \Theta(n \log n)$.
 
-For $n$ a power of two, the worst-case number of comparisons is exactly $n \log_2 n - n + 1$. Comparing it with the [lower bound of the previous result](#risultato-limite-inferiore-ordinamento-confronti) gives asymptotic optimality: no comparison sort does better by more than a constant factor.`,
+For $n$ a power of two, the worst-case number of comparisons is exactly $n \log_2 n - n + 1$. Comparing it with the [lower bound of the previous result](#result-limite-inferiore-ordinamento-confronti) gives asymptotic optimality: no comparison sort does better by more than a constant factor.`,
         sources: [
           CLRS,
           {

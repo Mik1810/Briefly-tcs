@@ -10,6 +10,7 @@
 //    con le frecce quando sono più larghe dello schermo.
 
 import type { Element, Root, RootContent } from 'hast';
+import katex from 'katex';
 import rehypeKatex from 'rehype-katex';
 import rehypeSanitize, { defaultSchema, type Options as SanitizeSchema } from 'rehype-sanitize';
 import rehypeStringify from 'rehype-stringify';
@@ -75,4 +76,25 @@ export function renderMarkdown(source: string, where: string): string {
     throw new Error(`Formula o Markdown non validi in ${where}:\n${details.join('\n')}`);
   }
   return String(file);
+}
+
+const escapeHtml = (text: string) =>
+  text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+/**
+ * Testo di una riga (per esempio il titolo di una fonte, copiato da arXiv) con eventuali formule `$…$`:
+ * il testo è solo escapato, nessun Markdown; le formule passano da KaTeX come nel corpo. Un `$` spaiato resta testo.
+ */
+export function renderInlineMath(text: string, where: string): string {
+  return text
+    .split(/(\$[^$\n]+\$)/)
+    .map((part) => {
+      if (!/^\$[^$\n]+\$$/.test(part)) return escapeHtml(part);
+      try {
+        return katex.renderToString(part.slice(1, -1), { strict: 'error', output: 'htmlAndMathml' });
+      } catch (error) {
+        throw new Error(`Formula non valida in ${where}: ${error instanceof Error ? error.message : String(error)}`);
+      }
+    })
+    .join('');
 }

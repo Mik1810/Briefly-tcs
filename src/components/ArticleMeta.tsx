@@ -20,7 +20,7 @@ export default function ArticleMeta({ briefing, topics }: Props) {
         <div>
           <dt>Updated</dt>
           <dd>
-            <DateText date={briefing.updatedOn} /> · <a href="#correzioni">see corrections</a>
+            <DateText date={briefing.updatedOn} /> · <a href="#corrections">see corrections</a>
           </dd>
         </div>
       ) : null}

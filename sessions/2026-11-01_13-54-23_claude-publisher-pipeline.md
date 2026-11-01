@@ -402,3 +402,26 @@ file), con screenshot e, in grande, "YES, IT'S VIBECODED" seguito da qualcosa ti
 - Su richiesta dell'utente (preferisce orizzontale) screenshot rifatto a 1440x900, verificato a vista (testata,
   titolo, sommario, metadati, indice e introduzione; le formule cominciano più in basso e non compaiono).
 
+## URL inglesi, AI use per risultato, copia link, formule nelle fonti — 16:2x → 16:32:12+01:00
+
+Richieste dell'utente: ritagliare lo spazio laterale dello screenshot; (1) link con riferimenti italiani;
+(2) "Role of AI in this research" deve stare in ogni risultato e parlare solo di quello, non come riassunto
+comune; (3) sostituire "Link to this result" con un'icona che copia negli appunti il link da condividere.
+Lo screenshot dell'utente mostrava anche il titolo della fonte con `$n^{2+o(1)}$` grezzo (issue 003).
+
+Eseguito:
+- URL e ancore in inglese: pagine /archive/, /method/, /topics/ (git mv), ancore #result-<id>, #content,
+  #corrections, id *-heading e *-sources; link interni, fixture, seed.sql, check-dist e test aggiornati. Redirect
+  permanenti in vercel.json da /archivio, /metodo, /argomenti(/...). Chiavi interne delle sezioni invariate.
+  Demo del DB locale aggiornati con replace (1 risultato, 1 intro), senza reset.
+- "AI use" come riga dei metadati di ogni risultato; sezione riassuntiva rimossa (resta solo per i demo).
+- Icona link (SVG) con stato "Link copied": src/lib/copy-link.ts, unico script del sito, inline solo negli
+  articoli e facoltativo (senza JavaScript l'icona è un link all'ancora). check-dist accetta solo quello script,
+  identico carattere per carattere. Il sito non è più "zero script", ma la lettura non richiede JavaScript.
+- Issue 003 chiusa: renderInlineMath (KaTeX su $…$, resto escapato) nei titoli delle fonti; il publisher la
+  controlla prima di scrivere.
+- Screenshot ritagliato a 1048x780 con System.Drawing.
+
+Verificato: check 0 errori/avvisi, 47/47 test; build locale e cloud con check-dist pulito; nella pagina del 1/11
+due righe "AI use", nessuna sezione riassuntiva, un solo script, nessun "risultato-", titolo della fonte con KaTeX.
+

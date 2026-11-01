@@ -17,9 +17,9 @@ export default function ResultSection({ result, topics, bodyHtml, position }: Pr
   const anchor = resultAnchor(result);
   const { status } = result;
   return (
-    <section className="result" id={anchor} aria-labelledby={`${anchor}-titolo`}>
+    <section className="result" id={anchor} aria-labelledby={`${anchor}-heading`}>
       <p className="result-number">Result {position}</p>
-      <h2 id={`${anchor}-titolo`} className="result-title">
+      <h2 id={`${anchor}-heading`} className="result-title">
         {result.title}
       </h2>
       <dl className="result-meta">
@@ -30,6 +30,12 @@ export default function ResultSection({ result, topics, bodyHtml, position }: Pr
             {VERIFICATION_LABELS[status.verification]}
           </dd>
         </div>
+        {result.aiUse ? (
+          <div>
+            <dt>AI use</dt>
+            <dd>{result.aiUse}</dd>
+          </div>
+        ) : null}
         {topics.length > 0 ? (
           <div>
             <dt>Topics</dt>
@@ -40,9 +46,16 @@ export default function ResultSection({ result, topics, bodyHtml, position }: Pr
         ) : null}
       </dl>
       <HtmlBody html={bodyHtml} />
-      <SourceList sources={result.sources} headingId={`${anchor}-fonti`} />
+      <SourceList sources={result.sources} headingId={`${anchor}-sources`} />
       <p className="permalink">
-        <a href={`#${anchor}`}>Link to this result</a>
+        {/* Senza JavaScript è un link all'ancora; con JavaScript copia l'indirizzo (src/lib/copy-link.ts). */}
+        <a href={`#${anchor}`} className="copy-link" data-copy-link="" aria-label="Copy link to this result" title="Copy link to this result">
+          <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M10 13a5 5 0 0 0 7.07 0l3-3a5 5 0 0 0-7.07-7.07l-1.5 1.5" />
+            <path d="M14 11a5 5 0 0 0-7.07 0l-3 3a5 5 0 0 0 7.07 7.07l1.5-1.5" />
+          </svg>
+        </a>
+        <span className="copy-status" role="status"></span>
       </p>
     </section>
   );

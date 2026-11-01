@@ -71,7 +71,7 @@ export function getSite(): Promise<SiteContent> {
 }
 
 export function resultAnchor(result: Pick<Result, 'id'>): string {
-  return `risultato-${result.id}`;
+  return `result-${result.id}`;
 }
 
 export function briefingPath(briefing: Pick<Briefing, 'date'>): string {
@@ -83,7 +83,7 @@ export function resultPath(briefing: Pick<Briefing, 'date'>, result: Pick<Result
 }
 
 export function topicPath(topic: Pick<Topic, 'slug'>): string {
-  return `/argomenti/${topic.slug}/`;
+  return `/topics/${topic.slug}/`;
 }
 
 /** Argomenti dei risultati di un briefing, senza ripetizioni, nell'ordine in cui compaiono. */

@@ -18,7 +18,7 @@ export default function CorrectionList({ corrections, results, variant }: Props)
       <aside className="correction-notice" aria-label="Correction notice">
         <p>
           <strong>This briefing has been substantively corrected</strong> since publication.{' '}
-          <a href="#correzioni">Read the corrections</a>.
+          <a href="#corrections">Read the corrections</a>.
         </p>
       </aside>
     );
@@ -26,8 +26,8 @@ export default function CorrectionList({ corrections, results, variant }: Props)
 
   const titles = new Map(results.map((result) => [result.id, result.title]));
   return (
-    <section className="corrections" id="correzioni" aria-labelledby="correzioni-titolo">
-      <h2 id="correzioni-titolo" className="section-heading">
+    <section className="corrections" id="corrections" aria-labelledby="corrections-heading">
+      <h2 id="corrections-heading" className="section-heading">
         Corrections and updates
       </h2>
       {corrections.length === 0 ? (

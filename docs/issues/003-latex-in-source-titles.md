@@ -1,6 +1,7 @@
 # 003: Source titles containing LaTeX are shown raw
 
-- Status: open
+- Status: closed on 2026-11-01 (option 1: `renderInlineMath` in `src/lib/markdown.ts`, used by `SourceList`
+  and checked by the publisher before writing; test in `tests/markdown.test.ts`)
 - Priority: medium
 - Opened: 2026-11-01
 

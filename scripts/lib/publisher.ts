@@ -12,7 +12,7 @@ import {
 } from '../../src/lib/content/supabase/source.ts';
 import type { Briefing, Topic } from '../../src/lib/content/types.ts';
 import { collectContentProblems } from '../../src/lib/content/validate.ts';
-import { renderMarkdown } from '../../src/lib/markdown.ts';
+import { renderInlineMath, renderMarkdown } from '../../src/lib/markdown.ts';
 
 const TIMEOUT_MS = 15_000;
 // Un post con data futura oltre domani (UTC) è quasi certamente un errore di data del generatore.
@@ -193,6 +193,15 @@ export async function publishPosts(
           renderMarkdown(source, where);
         } catch (error) {
           problems.push(error instanceof Error ? error.message : String(error));
+        }
+      }
+      for (const result of briefing.results) {
+        for (const source of result.sources) {
+          try {
+            renderInlineMath(source.title, `risultato ${result.id} › fonte "${source.title}"`);
+          } catch (error) {
+            problems.push(error instanceof Error ? error.message : String(error));
+          }
         }
       }
       if (problems.length > 0) {

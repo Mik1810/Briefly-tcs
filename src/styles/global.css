@@ -486,7 +486,25 @@ main {
   font-size: 0.85rem;
 }
 
+.permalink {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .permalink a {
+  display: inline-flex;
+  padding: 0.3rem;
+  border-radius: 4px;
+  color: var(--muted);
+}
+
+.permalink a:hover,
+.permalink a[data-state='copied'] {
+  color: var(--accent);
+}
+
+.copy-status {
   color: var(--muted);
 }
 

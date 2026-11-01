@@ -8,8 +8,8 @@ interface Props {
 /** Indice del briefing: un collegamento alla sezione di ciascun risultato. */
 export default function ResultIndex({ results }: Props) {
   return (
-    <nav className="result-index" aria-labelledby="indice-titolo">
-      <h2 id="indice-titolo" className="small-heading">
+    <nav className="result-index" aria-labelledby="index-heading">
+      <h2 id="index-heading" className="small-heading">
         In this briefing
       </h2>
       <ol>
