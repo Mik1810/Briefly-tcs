@@ -9,7 +9,13 @@ import DemoLabel from '../../components/DemoLabel.tsx';
 import HtmlBody from '../../components/HtmlBody.tsx';
 import ResultIndex from '../../components/ResultIndex.tsx';
 import ResultSection from '../../components/ResultSection.tsx';
-import { adjacentBriefings, briefingTopics, getSite, resultTopics } from '../../lib/content/repository.ts';
+import {
+  adjacentBriefings,
+  briefingTopics,
+  getSite,
+  resultAnchor,
+  resultTopics,
+} from '../../lib/content/repository.ts';
 import type { Briefing } from '../../lib/content/types.ts';
 import { renderMarkdown } from '../../lib/markdown.ts';
 
@@ -31,6 +37,7 @@ const results = briefing.results.map((result) => ({
   topics: resultTopics(site, result),
   bodyHtml: renderMarkdown(result.body, `briefing ${briefing.date} › risultato ${result.id}`),
 }));
+const aiUses = briefing.results.filter((result) => result.aiUse);
 ---
 
 <BaseLayout title={briefing.title} description={briefing.summary} current="articoli" currentIsPage={false}>
@@ -63,10 +70,27 @@ const results = briefing.results.map((result) => ({
 
     <CorrectionList corrections={briefing.corrections} results={briefing.results} variant="full" />
 
-    <section class="disclosure" aria-labelledby="ai-titolo">
-      <h2 id="ai-titolo" class="section-heading">Role of AI and review</h2>
-      <p>{briefing.aiDisclosure}</p>
-    </section>
+    {
+      /* Uso dell'AI dichiarato dagli autori dei lavori; quello del sito è nel footer e nella pagina Method.
+         I demo, senza aiUse, mostrano ancora la propria dichiarazione. */
+      aiUses.length > 0 ? (
+        <section class="disclosure" aria-labelledby="ai-titolo">
+          <h2 id="ai-titolo" class="section-heading">Role of AI in this research</h2>
+          <ul>
+            {aiUses.map((result) => (
+              <li>
+                <a href={`#${resultAnchor(result)}`}>{result.title}</a>: {result.aiUse}
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : briefing.demo ? (
+        <section class="disclosure" aria-labelledby="ai-titolo">
+          <h2 id="ai-titolo" class="section-heading">Role of AI and review</h2>
+          <p>{briefing.aiDisclosure}</p>
+        </section>
+      ) : null
+    }
   </article>
   <BriefingNav newer={newer} older={older} />
 </BaseLayout>

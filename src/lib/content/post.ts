@@ -17,7 +17,9 @@ import type {
   SourceKind,
 } from './types.ts';
 
-export const POST_FORMAT = 'briefly-post/1';
+// /2 aggiunge aiUse (obbligatorio) a ogni risultato; /1 resta accettato per i post già pubblicati.
+export const POST_FORMAT = 'briefly-post/2';
+const LEGACY_FORMAT = 'briefly-post/1';
 
 export const AUTOMATED_DISCLOSURE =
   'Written by an AI model (ChatGPT) from the cited sources and published automatically after structural checks. ' +
@@ -43,7 +45,7 @@ const SOURCE_KIND: Record<string, SourceKind> = {
 };
 
 const POST_KEYS = ['format', 'date', 'title', 'summary', 'intro', 'coverage', 'results'];
-const RESULT_KEYS = ['id', 'title', 'summary', 'publication', 'formalization', 'body', 'sources'];
+const RESULT_KEYS = ['id', 'title', 'summary', 'publication', 'formalization', 'body', 'sources', 'aiUse'];
 const SOURCE_KEYS = ['title', 'authors', 'year', 'venue', 'url', 'kind', 'lang'];
 
 export class PostFormatError extends Error {
@@ -95,7 +97,8 @@ export function postToBriefing(file: string, raw: unknown, takenIds: ReadonlySet
 
   if (!isRecord(raw)) throw new PostFormatError(file, ['il file deve contenere un oggetto JSON']);
   unknownKeys('post', raw, POST_KEYS);
-  if (raw.format !== POST_FORMAT) problems.push(`post.format: atteso "${POST_FORMAT}"`);
+  const legacy = raw.format === LEGACY_FORMAT;
+  if (raw.format !== POST_FORMAT && !legacy) problems.push(`post.format: atteso "${POST_FORMAT}"`);
   if (!isIsoDate(raw.date)) problems.push('post.date: atteso YYYY-MM-DD esistente');
   const expectedName = `${String(raw.date)}.json`;
   if (!file.endsWith(`/${expectedName}`) && file !== expectedName) {
@@ -113,7 +116,10 @@ export function postToBriefing(file: string, raw: unknown, takenIds: ReadonlySet
       problems.push(`${path}: risultato non valido`);
       return undefined as unknown as Result;
     }
-    unknownKeys(path, result, RESULT_KEYS);
+    unknownKeys(path, result, legacy ? RESULT_KEYS.filter((key) => key !== 'aiUse') : RESULT_KEYS);
+    if (!legacy && !(typeof result.aiUse === 'string' && result.aiUse.trim() !== '')) {
+      problems.push(`${path}.aiUse: obbligatorio (dichiarazione degli autori sull'uso dell'AI, o la sua assenza)`);
+    }
     let id = typeof result.id === 'string' ? result.id : slugify(String(result.title ?? ''));
     if (result.id === undefined && takenIds.has(id)) id = `${id}-${date}`;
     if (ids.has(id)) problems.push(`${path}.id: id "${id}" ripetuto nel post`);
@@ -150,6 +156,7 @@ export function postToBriefing(file: string, raw: unknown, takenIds: ReadonlySet
       },
       body: result.body as string,
       sources,
+      aiUse: legacy ? undefined : (result.aiUse as string),
     };
   });
 

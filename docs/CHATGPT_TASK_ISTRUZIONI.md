@@ -33,9 +33,23 @@ Select the 1 to 3 most important new results: prefer breakthroughs and significa
 routine papers, but publish the best available results even on quiet days. Create no file only if the sources
 show nothing new at all since the last post.
 
-For each result give, in the body: the precise statement, what is new relative to the state of the art, the
-proof technique if available, and the verification status. Distinguish unverified claims, preprints, formally
-verified results and peer-reviewed work, without confusing them.
+Read each selected paper in full (the arXiv HTML version at https://arxiv.org/html/<id> or the PDF), not only
+the abstract. If the full text is not accessible, say so explicitly in the body and limit the account to what
+you could read.
+
+Write each result with the depth of a briefing for specialists, about 300 to 600 words in the body:
+- the precise statement, with the model and the parameters;
+- the previous state of the art, with the best earlier bounds and who obtained them;
+- how the algorithm or the proof works: the key ideas and the main steps, in two to four paragraphs, not a
+  paraphrase of the abstract;
+- why it matters and what remains open or is limited;
+- the verification status. Distinguish unverified claims, preprints, formally verified results and
+  peer-reviewed work, without confusing them.
+
+For each result also report how the authors used AI in the work: look for an AI-use or LLM statement,
+declarations, acknowledgments and author notes. Report what they state, quoting briefly when useful (for example
+that the proof was found or checked with a named model, or that no AI tools were used). If the paper says nothing
+about AI, write "The paper contains no statement on AI use." Never infer or guess AI use.
 
 Publish it by creating ONE new file in the GitHub repository Mik1810/Briefly-tcs, branch `posts`
 (never `main`), at `posts/YYYY-MM-DD.json`, where YYYY-MM-DD is today's date in Europe/Rome.
@@ -44,17 +58,18 @@ Never modify or delete existing files. If the file for today already exists, do 
 The file must be valid JSON with exactly these fields (no others):
 
 {
-  "format": "briefly-post/1",
+  "format": "briefly-post/2",
   "date": "YYYY-MM-DD",
-  "title": "plain text, no $ and no Markdown",
-  "summary": "one or two plain-text sentences, no $",
+  "title": "plain text",
+  "summary": "one or two plain-text sentences",
   "intro": "optional Markdown paragraph; omit the field if not needed",
   "results": [
     {
-      "title": "plain text, no $",
-      "summary": "one plain-text sentence, no $",
+      "title": "plain text",
+      "summary": "one plain-text sentence",
       "publication": "preprint" | "accepted" | "published" | "classic-result",
       "formalization": "not-stated" | "formalized",
+      "aiUse": "plain text: what the authors state about AI use, or that the paper contains no such statement",
       "body": "Markdown; math as $...$ inline and $$...$$ display (LaTeX, escape backslashes in JSON)",
       "sources": [
         {
@@ -77,11 +92,19 @@ Rules:
 - Only state what the sources support. Say clearly whether a result is a preprint, accepted or published.
   Do not claim that a proof has been checked: the site labels every post "automated check only".
 - `formalization` is "formalized" only if the source says the proof is formalized in a proof assistant.
+- Plain-text fields (title, summary, aiUse) are shown without math rendering: never use LaTeX, $, backslashes or
+  ^{...} there. Write notation in Unicode (n²⁺ᵒ⁽¹⁾, O(m√n), log² k) or in words.
 - `year`, `venue`, `lang` and `intro` are optional; omit them rather than guessing.
 - Do not include topics, dates of coverage, review status or any other field.
 ```
 
 ## Note operative
+
+- Terza versione (2026-11-01, dopo il primo post reale giudicato troppo sommario dall'utente): lettura del paper
+  completo, 300-600 parole per risultato con stato dell'arte e idea dell'algoritmo o della dimostrazione,
+  notazione Unicode nei campi di testo semplice (nessun rifiuto automatico: solo istruzione), campo obbligatorio
+  `aiUse` (formato `briefly-post/2`) mostrato nella sezione "Role of AI in this research". L'uso dell'AI da parte
+  del sito è descritto nel footer e nella pagina Method.
 
 - Prova completa riuscita il 2026-11-01 con un post di test (poi rimosso): vedi
   `sessions/2026-11-01_13-54-23_claude-publisher-pipeline.md`.

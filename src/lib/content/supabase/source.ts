@@ -34,6 +34,7 @@ interface ResultRow {
   publication: Result['status']['publication'];
   formalization: Result['status']['formalization'];
   verification: Result['status']['verification'];
+  ai_use: string | null;
   result_topics: { topic_slug: string }[];
   sources: SourceRow[];
 }
@@ -55,7 +56,7 @@ export interface BriefingRow {
 
 export const BRIEFING_SELECT = [
   'date,status,demo,title,summary,coverage_from,coverage_to,updated_on,intro,ai_disclosure',
-  'results(id,title,summary,body,publication,formalization,verification,' +
+  'results(id,title,summary,body,publication,formalization,verification,ai_use,' +
     'result_topics(topic_slug),sources(title,authors,year,venue,url,kind,lang))',
   'corrections(date,kind,text,result_id)',
 ].join(',');
@@ -102,6 +103,7 @@ export function mapBriefingRow(row: BriefingRow): Briefing {
         kind: source.kind,
         lang: optional(source.lang),
       })),
+      aiUse: optional(result.ai_use ?? null),
     })),
     corrections: (row.corrections ?? []).map((correction) => ({
       date: correction.date,

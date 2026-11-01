@@ -178,6 +178,7 @@ export function collectContentProblems(content: RawContent): string[] {
       requirePlainText(report, `${rPath}.title`, result.title);
       requirePlainText(report, `${rPath}.summary`, result.summary);
       requireText(report, `${rPath}.body`, result.body);
+      if (result.aiUse !== undefined) requirePlainText(report, `${rPath}.aiUse`, result.aiUse);
 
       // Argomenti facoltativi (accantonati dal 2026-11-01): se presenti devono restare nel vocabolario.
       if (!Array.isArray(result.topics)) {

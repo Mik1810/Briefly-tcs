@@ -61,6 +61,8 @@ export interface Result {
   /** Markdown con formule `$…$` e `$$…$$`, renderizzato in build. */
   body: string;
   sources: Source[];
+  /** Uso dell'AI dichiarato dagli autori del lavoro (non dal sito); assente nei contenuti precedenti. */
+  aiUse?: string;
 }
 
 export interface Correction {

@@ -10,7 +10,7 @@ import { publishPosts, readPublisherConfig, type PublisherDb } from '../scripts/
 
 function post(date = '2026-11-02', overrides: Record<string, unknown> = {}) {
   return {
-    format: 'briefly-post/1',
+    format: 'briefly-post/2',
     date,
     title: 'A test briefing',
     summary: 'One result, used to test the publisher.',
@@ -19,6 +19,7 @@ function post(date = '2026-11-02', overrides: Record<string, unknown> = {}) {
         title: 'Faster matrix multiplication bound',
         summary: 'A new upper bound on omega.',
         publication: 'preprint',
+        aiUse: 'The paper contains no AI-use statement.',
         body: 'We show $\\omega < 2.37$.',
         sources: [{ title: 'A paper', authors: ['A. Author'], year: 2026, url: 'https://arxiv.org/abs/2611.00001', kind: 'preprint' }],
       },
@@ -75,6 +76,17 @@ test('campi sconosciuti, valori fuori vocabolario e nome file errato sono rifiut
         error.problems.some((problem) => problem.includes(part)),
       ),
   );
+});
+
+test('aiUse: obbligatorio nel formato /2, assente e rifiutato nel formato /1 dei post già pubblicati', () => {
+  assert.equal(postToBriefing('posts/2026-11-02.json', post()).results[0]?.aiUse, 'The paper contains no AI-use statement.');
+  const missing = post();
+  delete (missing.results[0] as Record<string, unknown>).aiUse;
+  assert.throws(() => postToBriefing('posts/2026-11-02.json', missing), /aiUse: obbligatorio/);
+  const legacy = { ...post(), format: 'briefly-post/1' };
+  assert.throws(() => postToBriefing('posts/2026-11-02.json', legacy), /aiUse: campo non previsto/);
+  delete (legacy.results[0] as Record<string, unknown>).aiUse;
+  assert.equal(postToBriefing('posts/2026-11-02.json', legacy).results[0]?.aiUse, undefined);
 });
 
 test('slugify produce slug ASCII brevi', () => {
