@@ -8,7 +8,8 @@
 
 - The local native Supabase stack is still running (API 55321, DB 55322): stop it with `npm run db:stop` when not
   needed.
-- Remote branch `automation-probe/chatgpt-20261031-2001` with the 31 October test files: can be deleted.
+- ~~Remote branch `automation-probe/chatgpt-20261031-2001` with the 31 October test files~~: deleted on
+  2026-11-01 with the owner's consent.
 - Local branch `posts` created in the working clone during the session: not needed.
 - Completed ChatGPT test tasks ("scheduler probe", "unattended write probe", "single post run",
   "single post run (3 days)", "v2", "v3"): can be archived from the Scheduled page.

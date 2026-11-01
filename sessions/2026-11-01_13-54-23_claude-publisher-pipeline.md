@@ -443,4 +443,8 @@ le novità di OpenAI, Anthropic, Erdős Problems e altri siti.
   OpenAI, Anthropic e Google DeepMind, con l'avvertenza di trattarne gli annunci come claim non verificati.
   docs/CHATGPT_TASK_ISTRUZIONI.md aggiornato; prompt del task ChatGPT salvato e verificato dopo ricaricamento
   (4818 caratteri, contiene "Anthropic, Google DeepMind" e la regola sul titolo).
+- Push 678140e; alle 16:37:03 /argomenti/ e /argomenti → 308 verso /topics/ (verificato).
+- 16:38:54: su consenso esplicito dell'utente ("Sì, eliminalo") eliminato il branch remoto
+  automation-probe/chatgpt-20261031-2001 (`git push origin --delete`); ls-remote mostra solo main e posts.
+  Issue 010 aggiornata (file e commento su GitHub #10).
 
