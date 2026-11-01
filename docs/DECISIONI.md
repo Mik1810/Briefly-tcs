@@ -214,3 +214,11 @@ Non sono decisioni dell'utente; restano modificabili.
 - Il flusso futuro dovrà funzionare senza il PC locale; serve uno strumento di pubblicazione hosted e protetto collegabile a ChatGPT.
 - Compatibilità Task ChatGPT con scrittura unattended ancora da verificare. Nessuna API OpenAI o automazione Codex quotidiana prevista.
 - Questa scelta di piattaforme non è un deployment: sviluppo ancora locale, nessun progetto cloud o risorsa creata in questa sessione.
+
+## Collegamento applicativo Supabase hosted — 2026-11-01T13:35:29+01:00
+
+- Sito statico conserva Astro + React senza nuove dipendenze, inglese e design A.
+- Target espliciti local/cloud, .env locale separata da .env.cloud privata; quest'ultima mai versionata. Cloud HTTPS solo host progetto Supabase e chiave publishable/legacy anon, nessuna secret/service_role ammessa.
+- Cloud env caricata prima di Astro, esclusi file .env locali in cloud; env esterne Vercel prioritarie. Node24 pin per allineamento al runtime testato.
+- Database online vuoto valido: nessuna migrazione dei demo locali e nessun contenuto inventato. Build reale cloud e pagine vuote verificate.
+- Primo deployment Vercel preparato (modulo import, Hobby) ma non avviato; push e Deploy richiedono consenso esplicito come da AGENTS. Nessuna nuova risorsa a pagamento.

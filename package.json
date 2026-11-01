@@ -5,13 +5,15 @@
   "type": "module",
   "description": "Prototipo locale del blog Briefly.tcs (sito pubblico in inglese): Astro statico con componenti React renderizzati in build.",
   "engines": {
-    "node": ">=24.18.0"
+    "node": ">=24.18.0 <25"
   },
   "scripts": {
-    "dev": "TCS_CONTENT_SOURCE=supabase ASTRO_TELEMETRY_DISABLED=1 astro dev",
+    "dev": "TCS_CONTENT_SOURCE=supabase TCS_SUPABASE_TARGET=local ASTRO_TELEMETRY_DISABLED=1 astro dev",
+    "dev:cloud": "TCS_CONTENT_SOURCE=supabase TCS_SUPABASE_TARGET=cloud ASTRO_TELEMETRY_DISABLED=1 node --env-file-if-exists=.env.cloud node_modules/astro/bin/astro.mjs dev",
     "dev:fixture": "TCS_CONTENT_SOURCE=fixture ASTRO_TELEMETRY_DISABLED=1 astro dev",
     "check": "ASTRO_TELEMETRY_DISABLED=1 astro check && TCS_CONTENT_SOURCE=fixture node --test \"tests/*.test.ts\"",
-    "build": "TCS_CONTENT_SOURCE=supabase node scripts/build.ts",
+    "build": "TCS_CONTENT_SOURCE=supabase TCS_SUPABASE_TARGET=local node scripts/build.ts",
+    "build:cloud": "TCS_CONTENT_SOURCE=supabase TCS_SUPABASE_TARGET=cloud node --env-file-if-exists=.env.cloud scripts/build.ts",
     "build:fixture": "TCS_CONTENT_SOURCE=fixture node scripts/build.ts",
     "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview",
     "supabase": "SUPABASE_TELEMETRY_DISABLED=1 DO_NOT_TRACK=1 supabase",

@@ -10,9 +10,11 @@ import { spawnSync } from 'node:child_process';
 
 import { briefings as fixtureBriefings } from '../src/lib/content/fixtures/briefings.ts';
 import { topics as fixtureTopics } from '../src/lib/content/fixtures/topics.ts';
-import { createSupabaseSource, readSupabaseConfig } from '../src/lib/content/supabase/source.ts';
+import { readSupabaseConfig } from '../src/lib/content/supabase/config.ts';
+import { createSupabaseSource } from '../src/lib/content/supabase/source.ts';
 
-const config = readSupabaseConfig();
+// Sempre lo stack locale: i controlli privilegiati usano `supabase db query --local`.
+const config = readSupabaseConfig({ target: 'local' });
 const outcomes: string[] = [];
 const ok = (message: string) => outcomes.push(`ok   ${message}`);
 

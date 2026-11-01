@@ -5,7 +5,8 @@ import { yearOf } from '../dates.ts';
 import { contentSourceKind } from './config.ts';
 import { fixtureSource } from './fixtures/source.ts';
 import type { ContentSource, ContentSourceKind } from './source.ts';
-import { createSupabaseSource, readSupabaseConfig } from './supabase/source.ts';
+import { readSupabaseConfig } from './supabase/config.ts';
+import { createSupabaseSource } from './supabase/source.ts';
 import type { Briefing, RawContent, Result, Topic } from './types.ts';
 import { assertValidContent } from './validate.ts';
 

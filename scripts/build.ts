@@ -1,6 +1,6 @@
 // Build con sostituzione finale di dist/. Una build fallita non tocca l'ultima build valida.
 //
-// 1. Carica e valida i contenuti dalla sorgente scelta (TCS_CONTENT_SOURCE): errore leggibile e uscita
+// 1. Carica e valida i contenuti dalla sorgente scelta (TCS_CONTENT_SOURCE, TCS_SUPABASE_TARGET): errore leggibile e uscita
 //    immediata se il database non risponde, prima di generare qualunque file.
 // 2. astro build in dist-staging/, poi scripts/check-dist.ts su dist-staging/.
 // 3. Solo se tutto è riuscito: dist/ → dist-previous/, dist-staging/ → dist/, poi rimozione di dist-previous/.
@@ -37,7 +37,7 @@ function run(command: string, args: string[]): boolean {
 
 try {
   const { source, raw } = await loadValidatedContent();
-  console.log(`Contenuti: ${source.description}; ${raw.briefings.length} briefing ricevuti e validati.`);
+  console.log(`Contenuti: ${source.logLabel}; ${raw.briefings.length} briefing ricevuti e validati.`);
 } catch (error) {
   abort(error instanceof Error ? error.message : String(error));
 }

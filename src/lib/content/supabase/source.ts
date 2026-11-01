@@ -1,12 +1,12 @@
-// Sorgente Supabase: legge i contenuti dall'API REST (PostgREST) dello stack locale durante la build.
+// Sorgente Supabase: legge i contenuti dall'API REST (PostgREST) durante la build, dallo stack locale
+// o dal progetto cloud secondo la configurazione (config.ts).
 // Nessun SDK e nessuna chiave privilegiata: la chiave publishable agisce come ruolo anon, quindi le
 // policy RLS restituiscono solo i briefing pubblicati e ciò che ne dipende. Le bozze non lasciano il database.
 // Qualunque errore interrompe la build: non esiste alcun ripiego sulle fixture.
 
-import { existsSync } from 'node:fs';
-
 import type { ContentSource } from '../source.ts';
 import type { Briefing, Correction, RawContent, Result, Source, Topic } from '../types.ts';
+import type { SupabaseConfig } from './config.ts';
 
 const TIMEOUT_MS = 10_000;
 
@@ -112,31 +112,6 @@ export function mapBriefingRow(row: BriefingRow): Briefing {
   };
 }
 
-interface SupabaseConfig {
-  url: string;
-  publishableKey: string;
-}
-
-/** Legge URL e chiave da process.env, caricando .env se presente. Errore esplicito se mancano. */
-export function readSupabaseConfig(): SupabaseConfig {
-  if ((!process.env.TCS_SUPABASE_URL || !process.env.TCS_SUPABASE_PUBLISHABLE_KEY) && existsSync('.env')) {
-    process.loadEnvFile('.env');
-  }
-  const url = process.env.TCS_SUPABASE_URL;
-  const publishableKey = process.env.TCS_SUPABASE_PUBLISHABLE_KEY;
-  if (!url || !publishableKey) {
-    throw new Error(
-      'Configurazione Supabase mancante: servono TCS_SUPABASE_URL e TCS_SUPABASE_PUBLISHABLE_KEY ' +
-        '(generare .env con `npm run db:env` a stack avviato).',
-    );
-  }
-  const { hostname } = new URL(url);
-  if (hostname !== '127.0.0.1' && hostname !== 'localhost') {
-    throw new Error(`TCS_SUPABASE_URL deve puntare allo stack locale, non a ${hostname}.`);
-  }
-  return { url: url.replace(/\/+$/, ''), publishableKey };
-}
-
 async function getRows<T>(config: SupabaseConfig, table: string, params: Record<string, string>): Promise<T[]> {
   const url = `${config.url}/rest/v1/${table}?${new URLSearchParams(params)}`;
   let response: Response;
@@ -147,9 +122,11 @@ async function getRows<T>(config: SupabaseConfig, table: string, params: Record<
     });
   } catch (error) {
     const reason = error instanceof Error ? (error.cause instanceof Error ? error.cause.message : error.message) : String(error);
+    const hint =
+      config.target === 'local' ? 'Avviare lo stack con `npm run db:start`.' : 'Verificare la rete e TCS_SUPABASE_URL.';
     throw new Error(
-      `Database Supabase locale non raggiungibile su ${config.url} (${reason}). ` +
-        'Avviare lo stack con `npm run db:start`. La build si interrompe senza usare le fixture.',
+      `Database Supabase ${config.target === 'local' ? 'locale' : 'cloud'} non raggiungibile su ${config.url} (${reason}). ` +
+        `${hint} La build si interrompe senza usare le fixture.`,
     );
   }
   if (!response.ok) {
@@ -164,7 +141,8 @@ async function getRows<T>(config: SupabaseConfig, table: string, params: Record<
 export function createSupabaseSource(config: SupabaseConfig): ContentSource {
   return {
     kind: 'supabase',
-    description: 'local Supabase database (anonymous read, published content only)',
+    description: `${config.target === 'local' ? 'local' : 'hosted'} Supabase database (anonymous read, published content only)`,
+    logLabel: `Supabase ${config.target} (${new URL(config.url).host})`,
     load: async (): Promise<RawContent> => {
       const [topicRows, briefingRows] = await Promise.all([
         getRows<TopicRow>(config, 'topics', { select: 'slug,name,description', order: 'position' }),

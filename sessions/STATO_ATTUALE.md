@@ -1,6 +1,6 @@
 # Stato attuale e ripresa
 
-Aggiornato: 2026-11-01T13:10:31+01:00 — Europe/Rome.
+Aggiornato: 2026-11-01T13:36:51+01:00 — Europe/Rome.
 
 ## Punto da cui ripartire
 
@@ -149,3 +149,14 @@ Ultimo registro: [2026-11-01_13-00-27_ripresa-supabase-sicurezza.md](2026-11-01_
 - Migrazioni cloud applicate manualmente: tabella storia migrazioni assente alla verifica. NON eseguire db push senza allineare prima baseline e fix già applicati.
 - Il sito usa ancora URL locale e rifiuta host cloud: prossimo lavoro, codice a Claude CLI WSL, integrare configurazione cloud conservando locale e gestire sito senza contenuti online. Vercel e publisher ancora da fare, nessun deployment/push/costo attivato.
 - Registri e migrazione versionati in commit locale alla chiusura; usare git log/status per SHA/allineamento.
+
+## Checkpoint prevalente: sito collegato al cloud, Vercel pronto — 2026-11-01T13:36:51+01:00
+
+- Registro: [2026-11-01_13-12-53_collegamento-supabase-cloud.md](2026-11-01_13-12-53_collegamento-supabase-cloud.md); Claude [2026-11-01_13-13-42_claude-supabase-cloud-target.md](2026-11-01_13-13-42_claude-supabase-cloud-target.md); report [VERIFICA_07_SUPABASE_CLOUD.md](../docs/coordination/VERIFICA_07_SUPABASE_CLOUD.md) e [REPORT_07_CLAUDE.md](../docs/coordination/REPORT_07_CLAUDE.md).
+- Codice supporta target espliciti locale/cloud. npm run build/dev restano locali; build:cloud/dev:cloud usano .env.cloud privata o env esterne. File .env locale preservato, nessuna dipendenza nuova. Node>=24.18.0<25.
+- Corretto conflitto Astro con .env: cloud env caricata prima del processo, vite.envDir=false sucloud; niente ripiego locale o fixture.
+- Verificato:35 test; buildcloud reale riuscita da progetto dvjrhqkqyfkxaejwydog,0briefing/5pagine, check-dist pulito. Claude astrocheck finale0errori/avvisi. Nessuna chiave nell'output, nessuno script HTML.
+- dist/ e http://localhost:4321/ ora mostrano la build da cloud vuoto. Demo locali non importati, vecchia anteprima in .local/preview-before-cloud. Screenshot home .local/cloud-home-20261101.jpg. DB locale non avviato qui.
+- Vercel team mik1810s-projects Hobby. Connettore creazione403; Chrome funziona, modulo Import pronto per repo Mik1810/Briefly-tcs main, nome briefly-tcs, Astro, npm ci, npm run build:cloud, dist. Tre env Production/Preview compilate mascherate. Nessun progetto creato e Deploy non premuto. Screenshot .local/vercel-import-prepared-20261101.jpg.
+- Prima di deploy serve push main: Git fetch mostra nessun commit remoto nuovo, solo commit locali in avanti. Nessun force/push eseguito; richiesto consenso esplicito a push e Deploy per AGENTS.
+- Storia migrazioni cloud manuale resta da allineare prima di db push; nessuna migrazione o dato scritto in questa sessione. Publisher e automazione editoriale ancora non implementati.

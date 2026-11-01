@@ -203,7 +203,7 @@ const fonts = files.filter((f) => /\.(woff2?|ttf)$/.test(f));
 const woff2 = fonts.filter((f) => f.endsWith('.woff2'));
 const js = files.filter((f) => f.endsWith('.js'));
 
-console.log(`\ncheck-dist — sorgente dei contenuti: ${source.kind} (${source.description})`);
+console.log(`\ncheck-dist — sorgente dei contenuti: ${source.logLabel} (${source.description})`);
 console.log(`  ${htmlFiles.length} pagine HTML, ${published.length} briefing pubblicati, ${drafts.length} bozze escluse`);
 for (const pathname of ['/', '/archivio/', ...published.map((b) => `/briefing/${b.date}/`)]) {
   console.log(`  ${pageWeight(pathname)}`);

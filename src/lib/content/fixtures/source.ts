@@ -6,5 +6,6 @@ import { topics } from './topics.ts';
 export const fixtureSource: ContentSource = {
   kind: 'fixture',
   description: 'local demo fixtures (explicit offline mode, no database)',
+  logLabel: 'fixture',
   load: async () => ({ topics, briefings }),
 };

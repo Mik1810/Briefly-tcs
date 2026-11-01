@@ -39,6 +39,8 @@ Il seed (`supabase/seed.sql`) è già in inglese: serve per le istanze nuove.
 ## Comandi
 
 Richiede Node v24.18.0, già presente in WSL tramite nvm (`.nvmrc`). Eseguire da WSL nella cartella del progetto.
+`engines.node` è `>=24.18.0 <25`: si resta sul major 24 testato (un intervallo aperto come `>=24` può far scegliere
+a Vercel un major più recente).
 
 ```sh
 npm ci                  # dipendenze esatte del lockfile, CLI Supabase 2.122.0 compresa
@@ -55,7 +57,33 @@ npm run preview         # serve dist/ in locale
 
 npm run build:fixture   # build dimostrativa offline dalle fixture, solo se richiesta esplicitamente
 npm run dev:fixture
+
+npm run build:cloud     # come build, ma legge il progetto Supabase cloud (.env.cloud o variabili d'ambiente)
+npm run dev:cloud
 ```
+
+### Target Supabase: locale o cloud
+
+`TCS_SUPABASE_TARGET` (impostata dagli script) sceglie il database: `local` (predefinito) o `cloud`.
+
+| Target | URL ammesso | File letto per i valori mancanti |
+| --- | --- | --- |
+| `local` | `http(s)://127.0.0.1`, `localhost` o `[::1]`, porta qualsiasi | `.env` (da `npm run db:env`) |
+| `cloud` | solo `https://<ref>.supabase.co`, senza porta, percorso, query, frammento o credenziali | `.env.cloud` |
+
+- Precedenza, variabile per variabile: **variabili d'ambiente già impostate** (per esempio su Vercel) > file del target.
+  Il target cloud non legge mai `.env` e non ripiega sulle fixture: se mancano valori la build si ferma.
+- `.env.cloud` è privato e ignorato da Git (formato in `.env.example`); va creato a mano con URL e chiave publishable.
+- Chiave: solo publishable (`sb_publishable_…`) o JWT legacy con ruolo `anon`. Chiavi `sb_secret_…`, JWT `service_role`
+  o formati sconosciuti vengono rifiutati senza riportarne il contenuto nell'errore.
+- Log di build e check-dist indicano il target e l'host (`Supabase cloud (<ref>.supabase.co)`), mai la chiave.
+- Un database vuoto è valido: home, archivio e argomenti mostrano gli stati vuoti, Metodo resta disponibile.
+- `npm run db:verify` usa sempre lo stack locale.
+- Come arrivano i valori cloud ad Astro: `build:cloud` e `dev:cloud` avviano Node con `--env-file-if-exists=.env.cloud`,
+  che carica il file in `process.env` prima di Astro senza sovrascrivere variabili già impostate; i processi figli
+  e i worker le ereditano. Se il file manca (es. Vercel con sole variabili esterne) non è un errore.
+- In modalità cloud `astro.config.mjs` imposta `vite.envDir: false`: Astro non carica `.env`. Senza questo, durante
+  `astro build` Astro copiava i valori di `.env` locale nel `process.env` dei worker, che ricevevano l'URL 127.0.0.1.
 
 La sorgente si sceglie con `TCS_CONTENT_SOURCE`, impostata esplicitamente da ogni script (`supabase` o `fixture`).
 Senza questa variabile la build si ferma. Con un database non raggiungibile la build fallisce con un messaggio chiaro:
@@ -65,7 +93,8 @@ Senza questa variabile la build si ferma. Con un database non raggiungibile la b
 Una build fallita (database fermo, dati non validi, controlli non superati) lascia intatta l'ultima `dist/` valida.
 
 Gli script disattivano la telemetria di Astro (`ASTRO_TELEMETRY_DISABLED=1`) e della CLI Supabase
-(`SUPABASE_TELEMETRY_DISABLED=1`, `DO_NOT_TRACK=1`). La build non usa modelli AI né servizi remoti.
+(`SUPABASE_TELEMETRY_DISABLED=1`, `DO_NOT_TRACK=1`). La build non usa modelli AI; l'unico servizio remoto
+possibile è il progetto Supabase cloud, solo con `build:cloud`/`dev:cloud`.
 Il progetto sta su `/mnt/c`: installazione e build sono più lente che nella home Linux, e il watch di `npm run dev`
 potrebbe non accorgersi di file salvati da editor Windows. In quel caso riavviare il server.
 

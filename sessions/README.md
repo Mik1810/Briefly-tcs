@@ -35,6 +35,9 @@ Tutte le attività del progetto vengono registrate qui in Markdown, con data e o
 | [2026-11-01_13-00-27_ripresa-supabase-sicurezza.md](2026-11-01_13-00-27_ripresa-supabase-sicurezza.md) | Ripresa: correzione funzione auto-RLS applicata, test cloud e Security Advisor puliti |
 | [2026-11-01_13-02-03_claude-supabase-rls-auto-enable.md](2026-11-01_13-02-03_claude-supabase-rls-auto-enable.md) | Claude: migrazione stretta permessi auto-RLS e report |
 
+| [2026-11-01_13-12-53_collegamento-supabase-cloud.md](2026-11-01_13-12-53_collegamento-supabase-cloud.md) | Collegamento sito a Supabase cloud verificato; modulo Vercel pronto, consenso push/deploy pendente |
+| [2026-11-01_13-13-42_claude-supabase-cloud-target.md](2026-11-01_13-13-42_claude-supabase-cloud-target.md) | Claude: target cloud, isolamento env, test e runtime Node24 |
+
 Ultima prova conclusa: [2026-10-31_20-09-58_ripresa-permessi-github.md](2026-10-31_20-09-58_ripresa-permessi-github.md). Scrittura GitHub programmata riuscita; publisher Supabase/Vercel ancora da implementare.
 
 ## Regole del registro
@@ -65,3 +68,5 @@ Ultima attività: [2026-10-31_20-21-01_supabase-cambio-account.md](2026-10-31_20
 Ultima attività: [2026-10-31_20-23-56_supabase-invito-account.md](2026-10-31_20-23-56_supabase-invito-account.md); invito inviato e verificato nella UI, attesa accettazione del destinatario.
 
 Ultima sessione di ripresa: [2026-11-01_13-00-27_ripresa-supabase-sicurezza.md](2026-11-01_13-00-27_ripresa-supabase-sicurezza.md). Sicurezza cloud verificata; prossimo passo collegamento applicativo al DB online.
+
+Ultima sessione: [2026-11-01_13-12-53_collegamento-supabase-cloud.md](2026-11-01_13-12-53_collegamento-supabase-cloud.md). Build cloud reale riuscita; Vercel pronto per consenso finale a push e Deploy.
