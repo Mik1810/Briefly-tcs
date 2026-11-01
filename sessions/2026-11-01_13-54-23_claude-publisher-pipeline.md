@@ -341,3 +341,25 @@ Verificato:
   completo), riletto dopo ricaricamento; ogni giorno alle 9:00.
 - Il post del 1/11 resta quello del formato /1 (2 risultati, senza aiUse): non riscritto.
 
+## Rigenerazione del post del 1/11 con il task v3 — dalle 15:57:27+01:00
+
+Decisione dell'utente: "Sì, rigeneralo".
+- 15:57: file posts/2026-11-01.json rimosso dalla branch posts (7613cf4); copia nello scratchpad di Claude
+  (2026-11-01.v1-backup.json, non versionata). Run 41318746926: 0 post, nessuna pubblicazione.
+- Cancellazione nel cloud (SQL Editor, avviso distruttivo confermato da Claude): delete limitato a data
+  2026-11-01, demo=false e titolo esatto → 1 riga. Il sito pubblico mostra il vecchio post fino alla build successiva.
+- 15:58:33: richiesta a ChatGPT (chat tecnica) di attività singola "Briefly.tcs: single post run v3" alle 16:03 con
+  il testo v3 integrale. Sforzo di ragionamento della chat trovato su "Immediato" e riportato da Claude su "Alto"
+  prima dell'invio (impostazione dell'interfaccia della chat; effetto sull'esecuzione programmata non verificato).
+- ChatGPT conferma la creazione (riferito). Commit f6d04e8 su posts alle 15:01:30Z (16:01:30 Roma, prima delle
+  16:03 annunciate): formato briefly-post/2, 2 risultati (four-coloring planare lineare su word RAM; matching
+  n²⁺ᵒ⁽¹⁾ randomizzato), paper letti in HTML v1 secondo il testo, corpo strutturato in sezioni (enunciato,
+  stato dell'arte, tecnica, significato e limiti), sommario in Unicode, aiUse con le dichiarazioni degli autori
+  (ChatGPT Pro e Gemini Deep Think solo per revisione del testo; discussioni con GPT 5.5/5.6/6). Nessuna nuova
+  richiesta di conferma GitHub osservata da Claude.
+- Run 41319084930: pubblicato 2026-11-01, deploy hook success. 16:02:48: pagina pubblica con la nuova versione
+  (sezione "Role of AI in this research" presente, 29 elementi math, 0 script). Contenuti scientifici non
+  verificati da Claude.
+- Osservazione: il titolo comincia con "Briefly.tcs:" (ridondante con il nome del sito); possibile ritocco del
+  prompt, non eseguito.
+
