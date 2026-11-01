@@ -1,0 +1,58 @@
+{
+  "format": "briefly-post/2",
+  "date": "2026-11-01",
+  "title": "Briefly.tcs: Linear-Time Four-Coloring and Near-Quadratic General Matching",
+  "summary": "Two new graph-algorithm preprints report linear-time planar four-coloring on the word RAM and a randomized near-quadratic algorithm for general maximum matching. Their full texts also document distinct forms of AI assistance.",
+  "intro": "Selected from the 30 October 2026 arXiv announcement. Both articles were read in full in their arXiv HTML version 1; they are preprints, and this briefing does not certify their proofs.",
+  "results": [
+    {
+      "title": "Four-Coloring Planar Graphs in Linear Time",
+      "summary": "A deterministic word-RAM algorithm produces a proper planar four-coloring in optimal linear time.",
+      "publication": "preprint",
+      "formalization": "not-stated",
+      "aiUse": "The authors state that ChatGPT Pro and Gemini Deep Think were used only for proofreading and comments on exposition.",
+      "body": "### The theorem and its computational model\n\nFor every planar graph $G$ on $n$ vertices, Inoue, Kawarabayashi, Miyashita, Mohar, Thomassen, and Thorup give a deterministic algorithm that outputs a proper four-coloring in $O(n)$ time (Theorem 1). The bound is stated in the **word-RAM** model with $\\Theta(\\log n)$-bit words and constant-time addressing, addition, bitwise operations, and shifts. It is therefore important not to silently transfer the bound to a pointer-machine or pure comparison model. The running time is optimal for an explicit coloring output.\n\n### Earlier results and the graph-theoretic reduction\n\nThe constructive proof by Robertson, Sanders, Seymour, and Thomas yielded a quadratic-time algorithm. The same six authors' earlier work, presented at FOCS 2026, improved this to $O(n\\log n)$ by proving a much stronger supply of local reductions: a planar triangulation has linearly many pairwise non-touching **D-reducible configurations** or suitable short obstructing cycles. Recursively removing a constant fraction of the configurations reduces the graph size geometrically. The difficulty is extending a four-coloring of the reduced graph across the removed configurations. Their extension procedure needs $O(\\log n)$ global Kempe changes; scanning the whole graph for each change incurred the extra logarithm.\n\n### How the new algorithm works\n\nA Kempe change exchanges two colors along selected connected components of the subgraph induced by those colors. A configuration's ring is a constant-size interface to the rest of the graph; D-reducibility guarantees that a bounded sequence of appropriately chosen changes can make its ring coloring extendible. The earlier conditional-expectation argument chooses color pairings and component swaps so that a constant fraction of the still-uncolored configurations progress. Repeating this process produces the requisite $O(\\log n)$ changes.\n\nThe new contribution is a data-structural acceleration of **color extension**, not a new proof of the Four Color Theorem. The authors select configurations strictly inside leaf regions of a recursive planar division, use compact codes for small regions, and precompute tabulation answers. They compress the effect of a Kempe component inside a region to its connectivity on the region boundary. These boundary summaries can be combined bottom-up and propagated top-down, avoiding repeated global traversals.\n\nThe critical accounting target is $O(n/\\log n)$ amortized work per change. Leaf regions are handled by constant-time table lookups, while larger regions are processed proportionally to boundary size. A further obstacle arises when intermediate boundaries have too much counter information to fit a single table index; the paper resolves this by encoding the planar structure separately and transferring segmented counter arrays through small lookups. The resulting linear-time extension step satisfies the recurrence $T(n)\\leq T(n/2)+O(n)$.\n\n### Significance, limits, and verification\n\nThe result closes the asymptotic running-time gap for constructive planar four-coloring **in the stated word-RAM model**. It relies on the earlier substantial structural theorem and sophisticated compact representation; it does not claim the same bound under every computational model. The authors explicitly say that ChatGPT Pro and Gemini Deep Think were used only for proofreading and comments on exposition, not to discover or verify the proof. This account is based on the full HTML text of arXiv v1, announced 30 October 2026. It remains a preprint; the proof was not independently checked for this briefing and no proof-assistant formalization is claimed.",
+      "sources": [
+        {
+          "title": "Four-Coloring Planar Graphs in Linear Time",
+          "authors": [
+            "Yuta Inoue",
+            "Ken-ichi Kawarabayashi",
+            "Atsuyuki Miyashita",
+            "Bojan Mohar",
+            "Carsten Thomassen",
+            "Mikkel Thorup"
+          ],
+          "year": 2026,
+          "venue": "arXiv:2610.39753v1 [cs.DS]",
+          "url": "https://arxiv.org/abs/2610.39753v1",
+          "kind": "preprint",
+          "lang": "en"
+        }
+      ]
+    },
+    {
+      "title": "Maximum Cardinality Matching in Near-Quadratic Time",
+      "summary": "A randomized combinatorial algorithm finds a maximum matching in general graphs in n²⁺ᵒ⁽¹⁾ time with high probability.",
+      "publication": "preprint",
+      "formalization": "not-stated",
+      "aiUse": "The authors acknowledge discussing the approach with GPT 5.5, GPT 5.6, and GPT 6, alongside human researchers; they do not claim AI proof verification.",
+      "body": "### The theorem and its context\n\nLi, Li, and Zhang present a randomized algorithm which, **with high probability**, computes a maximum-cardinality matching in any unweighted undirected graph on $n$ vertices in $n^{2+o(1)}$ time (Theorem 1). Their stronger intermediate theorem concerns maximum **integral symmetric flow** in simple skew-symmetric directed graphs, also in $n^{2+o(1)}$ time with high probability. The success probability and the restriction to simple graphs in the flow formulation are material parts of the statements.\n\nThe classical combinatorial general-matching algorithm has running time $O(m\\sqrt n)$, while algebraic algorithms based on matrix multiplication can be faster on dense graphs. The new bound is near-quadratic and particularly attractive as a combinatorial route for dense instances. It is **not** the best currently announced asymptotic bound for every density: the authors explicitly acknowledge a concurrent OpenAI result released on 6 October 2026 with $m^{1+o(1)}$ time, which can be stronger on sparse graphs. They report that they obtained their result before that announcement and regard the approaches as orthogonal.\n\n### Reduction to symmetric flow\n\nThe matching-to-flow reduction makes two copies $v,v'$ of each original vertex and adds symmetric arcs $(u,v')$ and $(v,u')$ for every original edge $\\{u,v\\}$. A source $s$ connects to each $v$, with a symmetric arc from $v'$ to the paired sink $s'$. Capacities are one. Each matching edge corresponds to a pair of symmetric source-to-sink paths, and the resulting integral symmetric flow has value **twice** the matching cardinality. Thus, an efficient symmetric-flow algorithm gives a matching algorithm.\n\nThe key residual-graph primitive is a **regular path**, one that never uses both an edge and its symmetric mate. Standard augmenting-path searches are too expensive if they repeatedly scan all $m$ residual edges. The authors instead maintain a small sampled subgraph $H$ and run a resumable regular-reachability procedure on it. This procedure either finds a regular augmenting path or returns a **barrier**, the skew-symmetric analogue of a cut certificate obstructing such a path in $H$.\n\n### Stochastic barrier toggling\n\nWhen the search returns a barrier, the algorithm samples an edge using dynamically maintained weights and a signed charge determined by the barrier. Sampling a negatively charged edge can expose a new regular-reachability connection: that edge and its symmetric mate are inserted into $H$. A positively charged sample changes its sampling weight, encouraging future useful samples. In the paper's implementation, each symmetric edge pair has a variable $x_e$ with sampling weight $1/x_e$; barrier toggles multiply selected variables by constants, with clipping and a polynomial upper threshold.\n\nThis is a stochastic analogue of cut toggling in recent maximum-flow work, adapted to barriers rather than ordinary cuts. An energy/potential argument bounds the total number of barrier operations by near-quadratic complexity; an additional analysis shows that the procedure finds a substantial fraction of the remaining integral symmetric flow with high probability. Repeating the half-progress primitive for logarithmically many rounds yields an exact maximum flow, and hence an exact maximum matching. The paper also explains how to sample charged edges without explicitly scanning each barrier boundary.\n\n### Significance, limits, AI use, and verification\n\nThe paper provides a comparatively direct combinatorial path to near-quadratic general matching, but does not supersede the cited October near-linear-in-$m$ announcement in all regimes. Its correctness and runtime are probabilistic, not deterministic. In its acknowledgments, the authors say they discussed their approach with researchers and with GPT 5.5, GPT 5.6, and GPT 6; they do **not** say those models proved or formally checked the result. This account uses the full HTML text of arXiv v1, announced 30 October 2026. It is a preprint, not an independently verified proof or a proof-assistant formalization.",
+      "sources": [
+        {
+          "title": "Maximum Cardinality Matching in $n^{2+o(1)}$ Time",
+          "authors": [
+            "George Z. Li",
+            "Jason Li",
+            "Junkai Zhang"
+          ],
+          "year": 2026,
+          "venue": "arXiv:2610.40591v1 [cs.DS]",
+          "url": "https://arxiv.org/abs/2610.40591v1",
+          "kind": "preprint",
+          "lang": "en"
+        }
+      ]
+    }
+  ]
+}
