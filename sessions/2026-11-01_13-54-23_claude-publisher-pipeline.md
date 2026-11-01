@@ -399,4 +399,6 @@ file), con screenshot e, in grande, "YES, IT'S VIBECODED" seguito da qualcosa ti
   descrizione breve, schema della pipeline, tre punti, stack. Nessun em dash.
 - Screenshot docs/assets/post.png (1280x1400) della pagina pubblica del 1/11 con Edge headless di Windows; primo
   scatto senza formule (font KaTeX non ancora caricati), rifatto con --virtual-time-budget=8000 e verificato a vista.
+- Su richiesta dell'utente (preferisce orizzontale) screenshot rifatto a 1440x900, verificato a vista (testata,
+  titolo, sommario, metadati, indice e introduzione; le formule cominciano più in basso e non compaiono).
 
