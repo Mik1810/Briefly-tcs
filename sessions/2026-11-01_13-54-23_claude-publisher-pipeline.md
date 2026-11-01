@@ -159,3 +159,35 @@ migrazione SQL, deploy hook e secret: consenso registrato per questi passi.
 - Istruzioni date all'utente: chiave secret Supabase dedicata `github-publisher`; deploy hook Vercel su main;
   secret TCS_SUPABASE_URL, TCS_SUPABASE_SECRET_KEY, VERCEL_DEPLOY_HOOK_URL.
 
+### Prove del workflow in dry run — 14:32:30 → 14:36:46+01:00
+
+- `gh secret list` (solo nomi, verificato): i tre secret presenti, impostati dall'utente alle 13:28–13:32 UTC.
+- Run 41311766035 (workflow_dispatch, ref posts, dry_run): FALLITO, "TCS_SUPABASE_SECRET_KEY deve essere una
+  chiave secret Supabase". Il workflow e i checkout funzionano; il valore del secret non inizia con sb_secret_.
+- Correzione 4042aa2 (push main): trim degli spazi ai bordi e descrizione del tipo di valore errato senza
+  riportarne caratteri. Run 41311934862: "formato non riconosciuto (60 caratteri)".
+- Correzione 1b95d9f (push main): segnala anche caratteri di controllo e posizione di "sb_secret_".
+  Run 41312063673: 60 caratteri, nessun carattere di controllo, "sb_secret_" assente. Il secret contiene quindi
+  un altro valore (non publishable, non URL, non JWT). Chiesto all'utente di reimpostarlo copiando la chiave dal
+  pulsante di copia nella riga "Secret keys". 44/44 test a ogni commit. Ogni push di main avvia una build Vercel.
+
+### Prova end-to-end nel cloud — 14:41:20 → 14:46:12+01:00 (verificato)
+
+- L'utente ha reimpostato TCS_SUPABASE_SECRET_KEY (chiave dedicata `github_publisher` visibile in API Keys).
+- Run 41312465213 (dry run): ok, "Post letti: 0", connessione e chiave valide.
+- Post di test riconoscibile "TEST: publishing pipeline check (to be removed)" caricato su posts (6291bdb).
+  Run 41312556066 (push): pubblicato 2026-11-01, step deploy hook success.
+- Sito pubblico già alle 14:43:20: /briefing/2026-11-01/ HTTP 200, presente in home, 0 script, 0 "Topics",
+  0 "sb_secret", formula MathML, fonte e dichiarazione AI presenti. Verifica a vista nel pannello: design invariato,
+  menu Articles/Archive/Method.
+- Run 41312652066 (workflow_dispatch reale): "Già presenti e identici: 1", deploy hook skipped (idempotenza).
+- Pulizia: nell'SQL Editor, dopo l'avviso "Potential issue detected" confermato da Claude, `delete` limitato a
+  data 2026-11-01, demo=false e titolo TEST → 1 riga; conteggi successivi briefings/results/sources/result_topics
+  = 0/0/0/0. File rimosso da posts (16d6f7f); run 41312793050: 0 post, deploy hook skipped.
+- Il sito torna vuoto solo con la prossima build: avviata dal push di main di chiusura (da verificare sotto).
+
+### Documento per il task ChatGPT (eseguito)
+
+- `docs/CHATGPT_TASK_ISTRUZIONI.md`: testo inglese del task, formato JSON e regole. Il task ChatGPT originale NON
+  è stato modificato; da provare prima con una corsa singola.
+

@@ -179,4 +179,17 @@ Ultimo registro: [2026-11-01_13-00-27_ripresa-supabase-sicurezza.md](2026-11-01_
 - Verificato in locale: 44 test, pubblicazione, idempotenza, RPC negata ad anon, rollback su errore, pagina generata.
 - Da fare: concordare con l'utente i campi del post (formato briefly-post/1 è bozza); applicare migrazione e
   vocabolario topics nel cloud via SQL Editor; creare branch posts, secret GitHub e deploy hook; prova end-to-end
-  con post di test; poi collegare il task ChatGPT originale. Nessun push eseguito.
+  con post di test; poi collegare il task ChatGPT originale. Nessun push eseguito. (Superato sotto.)
+
+## Checkpoint prevalente: pipeline cloud provata end-to-end — 2026-11-01T14:46:12+01:00
+
+- Registro: [2026-11-01_13-54-23_claude-publisher-pipeline.md](2026-11-01_13-54-23_claude-publisher-pipeline.md).
+- Campi decisi con l'utente: un briefing al giorno, stati scientifici mantenuti, niente argomenti (nascosti al
+  lettore, menu senza Topics), periodo coperto non scritto né mostrato (predefinito ieri).
+- Cloud: migrazione publish_briefing applicata a mano e verificata (solo service_role; anon 401). Storia
+  migrazioni ancora assente: niente db push. Secret GitHub impostati dall'utente; chiave Supabase dedicata
+  github_publisher; deploy hook Vercel su main.
+- Branch orfana `posts` su GitHub (workflow + vercel.json + README). Prova con post di test: pubblicato,
+  online in meno di un minuto, idempotente; poi rimosso da DB e branch.
+- Da fare: provare con una corsa singola il testo di docs/CHATGPT_TASK_ISTRUZIONI.md in ChatGPT, poi aggiornare
+  il task originale; aggiornare testo Method/footer ("local prototype", "published only after review").
