@@ -221,3 +221,6 @@ Eseguito:
 Verificato: check 0 errori/avvisi, 45/45 test; build cloud: footer nuovo, 0 frasi vecchie in /metodo/, 0 em dash
 nel footer, titoli sezioni attesi; build fixture: avviso demo presente; dist ripristinata con build cloud.
 
+Pubblicato: commit b2f1974 su main; alle 14:58:21+01:00 il sito pubblico mostra il nuovo footer e la sezione
+"What is not checked" in /metodo/ (verificato con curl). Passo residuo principale: corsa singola del task ChatGPT.
+
