@@ -13,6 +13,8 @@ interface Props {
 const { title, description, current, currentIsPage = true } = Astro.props;
 const site = await getSite();
 const fullTitle = title === 'Briefly.tcs' ? title : `${title} · Briefly.tcs`;
+// Avviso sui demo solo nelle build che ne contengono (fixture, stack locale); la produzione non ne ha.
+const hasDemo = site.briefings.some((briefing) => briefing.demo);
 ---
 
 <!doctype html>
@@ -35,8 +37,9 @@ const fullTitle = title === 'Briefly.tcs' ? title : `${title} · Briefly.tcs`;
       </main>
       <footer class="site-footer">
         <p>
-          Briefly.tcs — local prototype. Data: {site.sourceDescription}. Content marked as demo is not research
-          news. <a href="/metodo/">How we work</a>.
+          Briefly.tcs: daily briefings drafted by an AI model from primary sources and published automatically,
+          without human review. Always check the cited sources.{hasDemo ? ' Content marked as demo is not research news.' : ''}{' '}
+          <a href="/metodo/">How we work</a>.
         </p>
       </footer>
     </div>

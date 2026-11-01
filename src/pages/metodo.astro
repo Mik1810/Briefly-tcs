@@ -1,10 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { FORMALIZATION_LABELS, PUBLICATION_LABELS, VERIFICATION_LABELS } from '../lib/content/labels.ts';
-import { getSite } from '../lib/content/repository.ts';
 
 // URL /metodo/ invariato per conservare i permalink; contenuto pubblico in inglese.
-const site = await getSite();
 const statusGroups = [
   { name: 'Publication', labels: Object.values(PUBLICATION_LABELS) },
   { name: 'Formalization', labels: Object.values(FORMALIZATION_LABELS) },
@@ -20,23 +18,17 @@ const statusGroups = [
   <article class="article">
     <header class="article-header">
       <h1 class="article-title">Method</h1>
-      <p class="article-summary">How sources will be chosen, what role AI will play, and how review and corrections work.</p>
+      <p class="article-summary">
+        Briefly.tcs publishes one briefing a day on new results in theoretical computer science. Briefings are drafted
+        by an AI model and published automatically.
+      </p>
     </header>
 
     <div class="prose">
       <h2>Current status</h2>
       <p>
-        This site is a local prototype. Every article currently on it is <strong>demo content</strong>: it describes
-        classic textbook results to test layout, formulas, and corrections. None of it is research news.
-      </p>
-      <p>
-        Data for this build: {site.sourceDescription}.{' '}
-        {
-          site.sourceKind === 'supabase'
-            ? 'The pages are generated at build time by reading the Supabase database.'
-            : 'This is an offline demo build: the reference database is a local Supabase instance.'
-        }{' '}
-        The editorial process described below is a project commitment, not yet a working procedure.
+        Briefings are drafted by an AI model (ChatGPT) from the sources they cite and published automatically: no
+        human editor and no independent expert checks them before they appear.
       </p>
 
       <h2>One briefing a day</h2>
@@ -71,18 +63,24 @@ const statusGroups = [
 
       <h2>Role of AI</h2>
       <p>
-        AI may help with gathering and drafting, never while the site is being read: pages are generated in advance and
-        served as static HTML. Every article states the actual role of AI and the level of review carried out. An
-        automated check is presented as such, without calling it a mathematical review.
+        Each briefing is written by an AI model from the sources it cites. Before publication, software checks only the
+        structure: required fields, https source links, well-formed formulas, one briefing per day. These checks do
+        not verify the mathematics. Every result is therefore labelled “automated check only”, and the primary sources
+        remain the authority.
       </p>
 
-      <h2>Review and drafts</h2>
-      <p>Texts start as drafts and are published only after review. Drafts do not appear on any page of the site.</p>
+      <h2>What is not checked</h2>
+      <p>
+        No one reads a briefing before it is published, and an AI model can misstate a result or its status. If a claim
+        matters to your work, read the cited paper. Pages are generated in advance and served as static HTML; no AI runs
+        while you read the site.
+      </p>
 
       <h2>Corrections</h2>
       <p>
         Every correction records its date and a description, and updates the article’s date. Substantive corrections are
-        also flagged at the top of the article; minor ones appear only in the final list.
+        also flagged at the top of the article; minor ones appear only in the final list. Corrections are currently
+        made by hand when an error is reported.
       </p>
     </div>
   </article>

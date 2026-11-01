@@ -202,3 +202,22 @@ migrazione SQL, deploy hook e secret: consenso registrato per questi passi.
 - Passi residui: corsa singola del task ChatGPT con docs/CHATGPT_TASK_ISTRUZIONI.md e poi aggiornamento del task
   originale; testo Method/footer; eventuale controllo esito build nel workflow (richiederebbe token Vercel).
 
+## Testi footer e Method — 14:54:46 → 14:57:27+01:00
+
+Decisioni riferite in chat dall'utente sulla proposta di Claude: footer approvato ma senza em dash (usare i due
+punti); sottotitolo di Method sostituito con il suo testo ("Briefly.tcs publishes one briefing a day ... published
+automatically."); resto approvato. Domande su nome ChatGPT e contatto per errori non risposte: ChatGPT resta
+nominato solo in "Current status" (come già nella dichiarazione AI dei post), nessun contatto aggiunto.
+
+Eseguito:
+- BaseLayout.astro: nuovo footer; avviso demo solo se la build contiene briefing demo; tolta la riga sui dati.
+- metodo.astro: sottotitolo dell'utente; "Current status" riscritto senza ripetere il sottotitolo; "Role of AI"
+  e nuova sezione "What is not checked" al posto di "Review and drafts"; frase sulle correzioni manuali.
+- Correzioni di accuratezza rispetto alla proposta: "working source links" → "https source links" (il validatore
+  controlla il formato, non la raggiungibilità). "well-formed formulas" era falso per il publisher: aggiunto in
+  scripts/lib/publisher.ts il rendering KaTeX di intro e corpi prima della pubblicazione (una formula non valida
+  nel DB avrebbe bloccato ogni build successiva). Nuovo test.
+
+Verificato: check 0 errori/avvisi, 45/45 test; build cloud: footer nuovo, 0 frasi vecchie in /metodo/, 0 em dash
+nel footer, titoli sezioni attesi; build fixture: avviso demo presente; dist ripristinata con build cloud.
+

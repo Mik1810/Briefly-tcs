@@ -115,6 +115,16 @@ test('id derivato già usato in un altro giorno riceve la data; un post invalido
   assert.equal(db.rows.has('2026-11-01'), false);
 });
 
+test('una formula non valida blocca il post prima del database', async () => {
+  const db = memoryDb();
+  const bad = post();
+  bad.results[0]!.body = 'Broken $\\frac{1}{$ formula.';
+  const report = await publishPosts([file(bad)], db, { today: TODAY });
+  assert.deepEqual(report.published, []);
+  assert.match(report.problems.join('\n'), /risultato faster-matrix-multiplication-bound/);
+  assert.equal(db.rows.size, 0);
+});
+
 test('date troppo future, JSON illeggibile e dry run', async () => {
   const db = memoryDb();
   const report = await publishPosts(

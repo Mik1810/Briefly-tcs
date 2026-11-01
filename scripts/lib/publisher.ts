@@ -12,6 +12,7 @@ import {
 } from '../../src/lib/content/supabase/source.ts';
 import type { Briefing, Topic } from '../../src/lib/content/types.ts';
 import { collectContentProblems } from '../../src/lib/content/validate.ts';
+import { renderMarkdown } from '../../src/lib/markdown.ts';
 
 const TIMEOUT_MS = 15_000;
 // Un post con data futura oltre domani (UTC) è quasi certamente un errore di data del generatore.
@@ -182,6 +183,18 @@ export async function publishPosts(
         continue;
       }
       const problems = collectContentProblems({ topics, briefings: [briefing] });
+      // Stesso rendering della build: una formula non valida pubblicata bloccherebbe ogni build successiva.
+      const markdown = [
+        ...(briefing.intro ? [{ source: briefing.intro, where: 'intro' }] : []),
+        ...briefing.results.map((result) => ({ source: result.body, where: `risultato ${result.id}` })),
+      ];
+      for (const { source, where } of markdown) {
+        try {
+          renderMarkdown(source, where);
+        } catch (error) {
+          problems.push(error instanceof Error ? error.message : String(error));
+        }
+      }
       if (problems.length > 0) {
         for (const problem of problems) fail(path, problem);
         continue;
