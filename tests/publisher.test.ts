@@ -157,4 +157,8 @@ test('il publisher accetta solo una chiave secret e un URL cloud valido', () => 
     () => readPublisherConfig({ TCS_SUPABASE_URL: url, TCS_SUPABASE_SECRET_KEY: 'segreto-sconosciuto' }),
     (error: unknown) => error instanceof Error && /19 caratteri/.test(error.message) && !error.message.includes('segreto'),
   );
+  assert.throws(
+    () => readPublisherConfig({ TCS_SUPABASE_URL: url, TCS_SUPABASE_SECRET_KEY: '\u001b[200~sb_secret_abc\u001b[201~' }),
+    /caratteri di controllo, "sb_secret_" compare in posizione 6/,
+  );
 });

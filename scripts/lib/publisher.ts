@@ -31,7 +31,12 @@ function describeKey(value: string): string {
   if (/^https?:\/\//.test(value)) return 'un URL';
   if (/^["'].*["']$/.test(value)) return 'un valore tra virgolette';
   if (/^eyJ[\w-]*\.[\w-]+\.[\w-]+$/.test(value)) return 'un JWT legacy (anon o service_role): usare una chiave sb_secret_';
-  return `un valore di formato non riconosciuto (${value.length} caratteri)`;
+  const details = [`${value.length} caratteri`];
+  // Incollando nel terminale possono finire nel valore sequenze invisibili (es. ESC[200~ … ESC[201~).
+  if (/[\u0000-\u001f\u007f]/.test(value)) details.push('contiene caratteri di controllo');
+  const at = value.indexOf('sb_secret_');
+  if (at > 0) details.push(`"sb_secret_" compare in posizione ${at}`);
+  return `un valore di formato non riconosciuto (${details.join(', ')})`;
 }
 
 export function readPublisherConfig(env: Env = process.env): PublisherConfig {
