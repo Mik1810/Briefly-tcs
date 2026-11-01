@@ -1,19 +1,19 @@
-# 007: Ricontrollare il Security Advisor dopo le nuove migrazioni
+# 007: Re-run the Supabase Security Advisor after the new migrations
 
-- Stato: aperta
-- Priorità: bassa
-- Creata: 2026-11-01
+- Status: open
+- Priority: low
+- Opened: 2026-11-01
 
-## Contesto
+## Context
 
-Il Security Advisor del progetto cloud era a 0 errori/avvisi il 1° novembre mattina. Dopo sono state aggiunte la
-funzione SECURITY DEFINER `publish_briefing` e la colonna `results.ai_use`.
+The Security Advisor of the hosted project showed 0 errors and 0 warnings on the morning of 1 November. Since
+then the SECURITY DEFINER function `publish_briefing` and the column `results.ai_use` were added.
 
-## Da fare
+## To do
 
-Riaprire Security Advisor e Performance Advisor nella dashboard Supabase e annotare l'esito; correggere eventuali
-avvisi con una migrazione.
+Open the Security Advisor and Performance Advisor in the Supabase dashboard and record the result; fix any
+warnings with a migration.
 
-## Criteri di chiusura
+## Closing criteria
 
-Advisor senza errori, oppure avvisi motivati e registrati.
+No advisor errors, or warnings justified and recorded.

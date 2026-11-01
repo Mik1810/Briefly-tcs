@@ -387,3 +387,16 @@ verranno decisi dopo) e disattivare le PR.
   false (nessuna PR esistente). Issue GitHub, wiki e progetti invariati. Il task ChatGPT scrive con commit diretti
   sulla branch posts e non usa PR.
 
+## Issue in inglese e README vetrina — 16:1x → 16:21:00+01:00
+
+Richiesta dell'utente: issue rigorosamente in inglese; README ripulito come vetrina (niente dettagli né elenco di
+file), con screenshot e, in grande, "YES, IT'S VIBECODED" seguito da qualcosa tipo "IDGAF".
+- docs/issues: indice e dieci issue riscritte in inglese con nomi inglesi (001-first-daily-run ... 010-cleanup);
+  file italiani rimossi con git rm.
+- Vecchio README spostato con git mv in docs/SVILUPPO.md (note di sviluppo in italiano, con premessa sullo stato
+  di allora e link relativi corretti); link in STATO_ATTUALE aggiornato.
+- Nuovo README in inglese: titolo "YES, IT'S VIBECODED.", sottotitolo "And honestly? IDGAF.", link al sito,
+  descrizione breve, schema della pipeline, tre punti, stack. Nessun em dash.
+- Screenshot docs/assets/post.png (1280x1400) della pagina pubblica del 1/11 con Edge headless di Windows; primo
+  scatto senza formule (font KaTeX non ancora caricati), rifatto con --virtual-time-budget=8000 e verificato a vista.
+
