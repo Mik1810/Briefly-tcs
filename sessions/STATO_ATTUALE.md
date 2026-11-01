@@ -169,4 +169,14 @@ Ultimo registro: [2026-11-01_13-00-27_ripresa-supabase-sicurezza.md](2026-11-01_
 - Verifiche online quattro pagine HTTP200/inglese/hosted/noJS/nochiave/nodemopost; DB ancora vuoto, home No published briefings. Nessun articolo reale o automazione nuova attivati.
 - Form import ora e un progetto reale; connettore Vercel continua403su letturadeploy, dashboardChromeautenticatafunziona. Tre warning npmcache-dir non bloccanti; npm audit0vulnerabilita.
 - Handoff e registri versionati/pushati separatamente dal codice app. Nuovi pushmain ora possono ridistribuire automaticamente. Verificare ultimo deploymentprima dinuove modifiche.
-- Restano:publisher deterministico GitHub→Supabase→build e collegamento taskChatGPToriginale senzaAPIOpenAI/Codexquotidiano/revisioneumana. Non rifare infrastruttura, non importare demo, nondbpush prima di allineare storia migrazioni manuali. Dettagli nelhandoff.
+- (Superato dal checkpoint successivo per il publisher.) Restano:publisher deterministico GitHub→Supabase→build e collegamento taskChatGPToriginale senzaAPIOpenAI/Codexquotidiano/revisioneumana. Non rifare infrastruttura, non importare demo, nondbpush prima di allineare storia migrazioni manuali. Dettagli nelhandoff.
+
+## Checkpoint prevalente: publisher implementato e provato in locale — 2026-11-01T14:02:29+01:00
+
+- Registro: [2026-11-01_13-54-23_claude-publisher-pipeline.md](2026-11-01_13-54-23_claude-publisher-pipeline.md).
+- Architettura: task ChatGPT → branch orfana posts (posts/YYYY-MM-DD.json) → GitHub Actions publish-posts.yml →
+  RPC atomica publish_briefing (solo service_role) → deploy hook Vercel di main. vercel.json non costruisce posts.
+- Verificato in locale: 44 test, pubblicazione, idempotenza, RPC negata ad anon, rollback su errore, pagina generata.
+- Da fare: concordare con l'utente i campi del post (formato briefly-post/1 è bozza); applicare migrazione e
+  vocabolario topics nel cloud via SQL Editor; creare branch posts, secret GitHub e deploy hook; prova end-to-end
+  con post di test; poi collegare il task ChatGPT originale. Nessun push eseguito.

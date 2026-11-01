@@ -35,7 +35,7 @@ export function supabaseTarget(env: Env = process.env): SupabaseTarget {
   throw new Error(`TCS_SUPABASE_TARGET deve valere "local" o "cloud" (valore attuale: ${JSON.stringify(value)}).`);
 }
 
-function validateUrl(target: SupabaseTarget, value: string): string {
+export function validateUrl(target: SupabaseTarget, value: string): string {
   let url: URL;
   try {
     url = new URL(value);

@@ -39,6 +39,7 @@ Tutte le attività del progetto vengono registrate qui in Markdown, con data e o
 | [2026-11-01_13-13-42_claude-supabase-cloud-target.md](2026-11-01_13-13-42_claude-supabase-cloud-target.md) | Claude: target cloud, isolamento env, test e runtime Node24 |
 
 | [2026-11-01_13-38-25_primo-deploy-handoff-claude.md](2026-11-01_13-38-25_primo-deploy-handoff-claude.md) | Push e primo deploy Vercel READY; handoff completo a Claude |
+| [2026-11-01_13-54-23_claude-publisher-pipeline.md](2026-11-01_13-54-23_claude-publisher-pipeline.md) | Claude: publisher posts → Supabase → Vercel, provato in locale; campi del post da concordare |
 
 Ultima prova conclusa: [2026-10-31_20-09-58_ripresa-permessi-github.md](2026-10-31_20-09-58_ripresa-permessi-github.md). Scrittura GitHub programmata riuscita; publisher Supabase/Vercel ancora da implementare.
 

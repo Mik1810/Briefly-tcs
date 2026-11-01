@@ -38,7 +38,7 @@ interface ResultRow {
   sources: SourceRow[];
 }
 
-interface BriefingRow {
+export interface BriefingRow {
   date: string;
   status: Briefing['status'];
   demo: boolean;
@@ -53,14 +53,14 @@ interface BriefingRow {
   corrections: { date: string; kind: Correction['kind']; text: string; result_id: string | null }[];
 }
 
-const BRIEFING_SELECT = [
+export const BRIEFING_SELECT = [
   'date,status,demo,title,summary,coverage_from,coverage_to,updated_on,intro,ai_disclosure',
   'results(id,title,summary,body,publication,formalization,verification,' +
     'result_topics(topic_slug),sources(title,authors,year,venue,url,kind,lang))',
   'corrections(date,kind,text,result_id)',
 ].join(',');
 
-const BRIEFING_ORDER = {
+export const BRIEFING_ORDER = {
   order: 'date.desc',
   'results.order': 'position',
   'results.result_topics.order': 'position',
