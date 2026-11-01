@@ -191,3 +191,14 @@ migrazione SQL, deploy hook e secret: consenso registrato per questi passi.
 - `docs/CHATGPT_TASK_ISTRUZIONI.md`: testo inglese del task, formato JSON e regole. Il task ChatGPT originale NON
   è stato modificato; da provare prima con una corsa singola.
 
+## Chiusura — 2026-11-01T14:47:13+01:00
+
+- Push main af6007f; alle 14:47:13 /briefing/2026-11-01/ HTTP 404 e home senza il post di test (verificato).
+- main e posts allineati con origin. Ultimi commit applicativi: 1dfb349, 2fc183a, 4042aa2, 1b95d9f.
+- Test: 44/44, Astro check 0 errori. Prove cloud: dry run, pubblicazione, idempotenza, rimozione.
+- Servizi lasciati attivi: stack Supabase locale (55321/55322). Pannello browser con sessioni Supabase dell'utente.
+- Non verificati: esiti delle singole build Vercel nella dashboard (pannello non autenticato su Vercel; esito
+  dedotto dal sito pubblico). Security Advisor non riaperto dopo la migrazione.
+- Passi residui: corsa singola del task ChatGPT con docs/CHATGPT_TASK_ISTRUZIONI.md e poi aggiornamento del task
+  originale; testo Method/footer; eventuale controllo esito build nel workflow (richiederebbe token Vercel).
+
