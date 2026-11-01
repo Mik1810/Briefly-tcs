@@ -363,3 +363,14 @@ Decisione dell'utente: "Sì, rigeneralo".
 - Osservazione: il titolo comincia con "Briefly.tcs:" (ridondante con il nome del sito); possibile ritocco del
   prompt, non eseguito.
 
+## Titolo senza nome del sito — 16:0x → 16:07:16+01:00
+
+Decisione dell'utente: "Sì, toglilo".
+- docs/CHATGPT_TASK_ISTRUZIONI.md e prompt del task ChatGPT: nuova regola "The title names the results, not the
+  site: never start it with "Briefly.tcs" or a date." Primo salvataggio nel task NON registrato (verificato dopo
+  ricaricamento: 4502 caratteri); secondo tentativo con modifica da tastiera, salvato e verificato (4592 caratteri,
+  regola presente, ogni giorno alle 9:00).
+- Post del 1/11: titolo aggiornato prima nel DB (update limitato a data, demo=false e titolo esatto → 1 riga), poi
+  nel file della branch posts (476ed3d, solo il titolo). Run 41319533355: "Già presenti e identici: 1".
+- La build del sito con il nuovo titolo parte dal push di main di questo registro.
+

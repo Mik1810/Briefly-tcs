@@ -94,6 +94,7 @@ Rules:
 - `formalization` is "formalized" only if the source says the proof is formalized in a proof assistant.
 - Plain-text fields (title, summary, aiUse) are shown without math rendering: never use LaTeX, $, backslashes or
   ^{...} there. Write notation in Unicode (n²⁺ᵒ⁽¹⁾, O(m√n), log² k) or in words.
+- The title names the results, not the site: never start it with "Briefly.tcs" or a date.
 - `year`, `venue`, `lang` and `intro` are optional; omit them rather than guessing.
 - Do not include topics, dates of coverage, review status or any other field.
 ```
