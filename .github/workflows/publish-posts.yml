@@ -1,0 +1,70 @@
+# Publisher dei post: branch `posts` (scritta dal task ChatGPT) → Supabase → build Vercel di main.
+#
+# Questo file vive nella branch `posts` (dove GitHub lo esegue a ogni push) e in main come riferimento.
+# Il codice del publisher è sempre preso da main: la branch posts contiene solo i JSON e questo workflow.
+# Vercel non costruisce la branch posts (vercel.json); la build di produzione parte dal deploy hook
+# solo se almeno un post è stato pubblicato, quindi nessun ciclo commit → build → commit.
+#
+# Secret richiesti nel repository: TCS_SUPABASE_URL, TCS_SUPABASE_SECRET_KEY, VERCEL_DEPLOY_HOOK_URL.
+
+name: Publish posts
+
+on:
+  push:
+    branches: [posts]
+    paths: ['posts/**.json']
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: Validate only, do not write to Supabase
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-posts
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout publisher (main)
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: app
+
+      - name: Checkout posts
+        uses: actions/checkout@v4
+        with:
+          ref: posts
+          path: content
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: app/.nvmrc
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+
+      - name: Install
+        working-directory: app
+        run: npm ci --no-audit --no-fund
+
+      - name: Publish to Supabase
+        id: publish
+        working-directory: app
+        env:
+          TCS_SUPABASE_URL: ${{ secrets.TCS_SUPABASE_URL }}
+          TCS_SUPABASE_SECRET_KEY: ${{ secrets.TCS_SUPABASE_SECRET_KEY }}
+        run: node scripts/publish-posts.ts ${{ inputs.dry_run && '--dry-run' || '' }} ../content/posts
+
+      # Anche se un altro post è fallito, quelli pubblicati devono comparire sul sito.
+      - name: Trigger Vercel production build
+        if: ${{ always() && steps.publish.outputs.published != '' && steps.publish.outputs.published != '0' }}
+        env:
+          VERCEL_DEPLOY_HOOK_URL: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
+        run: curl --fail --silent --show-error --max-time 30 -X POST "$VERCEL_DEPLOY_HOOK_URL" > /dev/null
