@@ -30,12 +30,14 @@ export default function ResultSection({ result, topics, bodyHtml, position }: Pr
             {VERIFICATION_LABELS[status.verification]}
           </dd>
         </div>
-        <div>
-          <dt>Topics</dt>
-          <dd>
-            <TopicLinks topics={topics} />
-          </dd>
-        </div>
+        {topics.length > 0 ? (
+          <div>
+            <dt>Topics</dt>
+            <dd>
+              <TopicLinks topics={topics} />
+            </dd>
+          </div>
+        ) : null}
       </dl>
       <HtmlBody html={bodyHtml} />
       <SourceList sources={result.sources} headingId={`${anchor}-fonti`} />

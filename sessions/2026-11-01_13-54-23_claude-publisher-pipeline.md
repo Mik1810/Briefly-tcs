@@ -72,3 +72,20 @@
 - L'esito della build Vercel dopo il deploy hook non è controllato dal workflow (servirebbe un token Vercel).
 - Campi del post: in attesa della discussione con l'utente.
 - Servizi lasciati attivi: stack Supabase locale (API 55321, DB 55322). Anteprima 4321 non verificata.
+
+## Decisioni dell'utente sui campi del post — risposta ricevuta tra 14:02:29 e 14:10:10+01:00
+
+Riferite in chat dall'utente:
+- Periodo coperto: non serve (il post giornaliero riguarda ieri); può restare in tabella ma non va mostrato.
+- 1. Un briefing al giorno (struttura attuale con uno o più risultati).
+- 2. Etichette di stato scientifico: poco rilevanti, per ora si tengono.
+- 3. Argomenti: il generatore non deve specificarli e il lettore non deve vederli; tema accantonato, forse riaperto.
+- 4. Nessun campo aggiunto o tolto oltre a questo.
+
+## Applicazione delle decisioni — tra 14:10:10 e 14:13:42+01:00 (eseguito)
+
+- post.ts: 	opics non più ammesso nel post (risultati con topics vuoti); coverage facoltativo, predefinito
+  dal giorno precedente alla data del post. Formato resta riefly-post/1.
+- validate.ts: gli argomenti diventano facoltativi (se presenti devono restare nel vocabolario).
+- publisher.ts: rimosso il blocco su vocabolario vuoto; nel cloud la tabella topics può restare vuota.
+- UI: ArticleMeta, ResultSection, BriefingRow, BriefingLead mostrano argomenti solo se presenti; voce 

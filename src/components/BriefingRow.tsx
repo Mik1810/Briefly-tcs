@@ -17,8 +17,12 @@ export default function BriefingRow({ briefing, topics, headingLevel }: Props) {
     <article className="row">
       <p className="meta">
         <DateText date={briefing.date} />
-        <span aria-hidden="true"> — </span>
-        <TopicLinks topics={topics} />
+        {topics.length > 0 ? (
+          <>
+            <span aria-hidden="true"> — </span>
+            <TopicLinks topics={topics} />
+          </>
+        ) : null}
         {briefing.demo ? (
           <>
             <span aria-hidden="true"> — </span>

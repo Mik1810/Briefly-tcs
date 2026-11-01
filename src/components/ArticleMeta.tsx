@@ -24,12 +24,14 @@ export default function ArticleMeta({ briefing, topics }: Props) {
           </dd>
         </div>
       ) : null}
-      <div>
-        <dt>Topics</dt>
-        <dd>
-          <TopicLinks topics={topics} />
-        </dd>
-      </div>
+      {topics.length > 0 ? (
+        <div>
+          <dt>Topics</dt>
+          <dd>
+            <TopicLinks topics={topics} />
+          </dd>
+        </div>
+      ) : null}
       <div>
         <dt>Results</dt>
         <dd>{briefing.results.length}</dd>

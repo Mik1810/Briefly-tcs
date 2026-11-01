@@ -14,12 +14,10 @@ function post(date = '2026-11-02', overrides: Record<string, unknown> = {}) {
     date,
     title: 'A test briefing',
     summary: 'One result, used to test the publisher.',
-    coverage: { from: '2026-11-01', to: '2026-11-01' },
     results: [
       {
         title: 'Faster matrix multiplication bound',
         summary: 'A new upper bound on omega.',
-        topics: ['algoritmi'],
         publication: 'preprint',
         body: 'We show $\\omega < 2.37$.',
         sources: [{ title: 'A paper', authors: ['A. Author'], year: 2026, url: 'https://arxiv.org/abs/2611.00001', kind: 'preprint' }],
@@ -56,7 +54,9 @@ test('un post valido diventa un briefing pubblicato, non demo, con verifica solo
   assert.equal(briefing.demo, false);
   assert.equal(briefing.aiDisclosure, AUTOMATED_DISCLOSURE);
   assert.deepEqual(briefing.corrections, []);
+  assert.deepEqual(briefing.coverage, { from: '2026-11-01', to: '2026-11-01' }, 'periodo coperto predefinito: ieri');
   const [result] = briefing.results;
+  assert.deepEqual(result?.topics, []);
   assert.equal(result?.id, 'faster-matrix-multiplication-bound');
   assert.deepEqual(result?.status, { publication: 'preprint', formalization: 'non-indicata', verification: 'controllo-automatico' });
   assert.equal(result?.sources[0]?.kind, 'preprint');
@@ -65,12 +65,13 @@ test('un post valido diventa un briefing pubblicato, non demo, con verifica solo
 test('campi sconosciuti, valori fuori vocabolario e nome file errato sono rifiutati', () => {
   const bad = post('2026-11-02', { status: 'pubblicato', demo: true });
   (bad.results[0] as Record<string, unknown>).verification = 'revisione-indipendente';
+  (bad.results[0] as Record<string, unknown>).topics = ['algoritmi'];
   (bad.results[0] as Record<string, unknown>).publication = 'peer-reviewed';
   assert.throws(
     () => postToBriefing('posts/2026-11-03.json', bad),
     (error: unknown) =>
       error instanceof PostFormatError &&
-      ['post.status', 'post.demo', 'verification', 'peer-reviewed', '2026-11-02.json'].every((part) =>
+      ['post.status', 'post.demo', 'verification', 'topics', 'peer-reviewed', '2026-11-02.json'].every((part) =>
         error.problems.some((problem) => problem.includes(part)),
       ),
   );
@@ -102,14 +103,14 @@ test('id derivato già usato in un altro giorno riceve la data; un post invalido
   const db = memoryDb();
   await publishPosts([file(post())], db, { today: TODAY });
   const bad = post('2026-11-03');
-  bad.results[0]!.topics = ['quantistica'];
+  bad.results[0]!.sources[0]!.url = 'http://insecure.example';
   const report = await publishPosts(
     [file(post('2026-11-03'), '2026-11-03'), file({ ...bad, date: '2026-11-01' }, '2026-11-01')],
     db,
     { today: '2026-11-03' },
   );
   assert.deepEqual(report.published, ['2026-11-03']);
-  assert.match(report.problems.join('\n'), /quantistica.*fuori vocabolario/);
+  assert.match(report.problems.join('\n'), /url: URL assente o non https/);
   assert.equal(db.rows.get('2026-11-03')?.results[0]?.id, 'faster-matrix-multiplication-bound-2026-11-03');
   assert.equal(db.rows.has('2026-11-01'), false);
 });
@@ -128,9 +129,10 @@ test('date troppo future, JSON illeggibile e dry run', async () => {
   assert.equal(db.rows.size, 0);
 });
 
-test('vocabolario argomenti vuoto: il publisher si ferma', async () => {
+test('vocabolario argomenti vuoto (come nel cloud): il post si pubblica comunque', async () => {
   const db = { ...memoryDb(), topics: async () => [] };
-  await assert.rejects(publishPosts([file(post())], db, { today: TODAY }), /Vocabolario argomenti vuoto/);
+  const report = await publishPosts([file(post())], db, { today: TODAY });
+  assert.deepEqual(report.published, ['2026-11-02']);
 });
 
 test('il publisher accetta solo una chiave secret e un URL cloud valido', () => {

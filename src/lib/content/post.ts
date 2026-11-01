@@ -3,7 +3,9 @@
 // stato pubblicato, nessun demo, verifica "solo controllo automatico", dichiarazione AI fissa, nessuna correzione.
 // Valori pubblici in inglese nel file, convertiti nei valori interni (italiani) dello schema.
 //
-// BOZZA: i campi visibili del post sono ancora da concordare con l'utente (sessione 2026-11-01_13-54-23).
+// Campi concordati con l'utente il 2026-11-01 (sessione 2026-11-01_13-54-23): un briefing al giorno, stati
+// scientifici mantenuti. Il periodo coperto resta nel DB ma non va scritto né mostrato: se assente vale "ieri".
+// Gli argomenti sono accantonati: il post non li contiene e il lettore non li vede.
 
 import { isIsoDate } from '../dates.ts';
 import type {
@@ -41,7 +43,7 @@ const SOURCE_KIND: Record<string, SourceKind> = {
 };
 
 const POST_KEYS = ['format', 'date', 'title', 'summary', 'intro', 'coverage', 'results'];
-const RESULT_KEYS = ['id', 'title', 'summary', 'topics', 'publication', 'formalization', 'body', 'sources'];
+const RESULT_KEYS = ['id', 'title', 'summary', 'publication', 'formalization', 'body', 'sources'];
 const SOURCE_KEYS = ['title', 'authors', 'year', 'venue', 'url', 'kind', 'lang'];
 
 export class PostFormatError extends Error {
@@ -56,6 +58,12 @@ export class PostFormatError extends Error {
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
+}
+
+function previousDay(isoDate: string): string {
+  const day = new Date(`${isoDate}T00:00:00Z`);
+  day.setUTCDate(day.getUTCDate() - 1);
+  return day.toISOString().slice(0, 10);
 }
 
 /** Slug ASCII da un titolo, al massimo 60 caratteri e senza trattini ai bordi. */
@@ -93,10 +101,11 @@ export function postToBriefing(file: string, raw: unknown, takenIds: ReadonlySet
   if (!file.endsWith(`/${expectedName}`) && file !== expectedName) {
     problems.push(`post.date: il file deve chiamarsi ${expectedName}`);
   }
-  const coverage = isRecord(raw.coverage) ? raw.coverage : {};
+  const date = raw.date as string;
+  const yesterday = isIsoDate(date) ? previousDay(date) : undefined;
+  const coverage = isRecord(raw.coverage) ? raw.coverage : { from: yesterday, to: yesterday };
   if (isRecord(raw.coverage)) unknownKeys('post.coverage', raw.coverage, ['from', 'to']);
 
-  const date = raw.date as string;
   const ids = new Set<string>();
   const results: Result[] = (Array.isArray(raw.results) ? raw.results : []).map((result: unknown, i) => {
     const path = `post.results[${i}]`;
@@ -133,7 +142,7 @@ export function postToBriefing(file: string, raw: unknown, takenIds: ReadonlySet
       id,
       title: result.title as string,
       summary: result.summary as string,
-      topics: result.topics as string[],
+      topics: [],
       status: {
         publication: mapped(`${path}.publication`, PUBLICATION, result.publication),
         formalization: mapped(`${path}.formalization`, FORMALIZATION, result.formalization ?? 'not-stated'),

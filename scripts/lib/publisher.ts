@@ -135,7 +135,6 @@ export async function publishPosts(
   const fail = (path: string, message: string) => report.problems.push(`${path}: ${message}`);
 
   const [topics, resultIds] = await Promise.all([db.topics(), db.resultIds()]);
-  if (topics.length === 0) throw new Error('Vocabolario argomenti vuoto nel database: caricarlo prima di pubblicare.');
 
   const parsed: { path: string; raw: unknown; date: string }[] = [];
   for (const file of files) {

@@ -20,8 +20,12 @@ export default function BriefingLead({ briefing, topics }: Props) {
       <p className="lead-summary">{briefing.summary}</p>
       <p className="meta">
         <DateText date={briefing.date} />
-        <span aria-hidden="true"> — </span>
-        <TopicLinks topics={topics} />
+        {topics.length > 0 ? (
+          <>
+            <span aria-hidden="true"> — </span>
+            <TopicLinks topics={topics} />
+          </>
+        ) : null}
       </p>
       <h3 className="lead-results-heading">In this briefing</h3>
       <ol className="lead-results">

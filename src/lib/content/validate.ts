@@ -179,8 +179,9 @@ export function collectContentProblems(content: RawContent): string[] {
       requirePlainText(report, `${rPath}.summary`, result.summary);
       requireText(report, `${rPath}.body`, result.body);
 
-      if (!Array.isArray(result.topics) || result.topics.length === 0) {
-        report(`${rPath}.topics`, 'serve almeno un argomento');
+      // Argomenti facoltativi (accantonati dal 2026-11-01): se presenti devono restare nel vocabolario.
+      if (!Array.isArray(result.topics)) {
+        report(`${rPath}.topics`, 'elenco argomenti mancante');
       } else {
         const seen = new Set<unknown>();
         for (const slug of result.topics) {
