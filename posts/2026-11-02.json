@@ -1,0 +1,76 @@
+{
+  "format": "briefly-post/2",
+  "date": "2026-11-02",
+  "title": "Odd k-SUM Hypotheses Fall, Planar Subcubic Treedepth Is Hard, and Bipartite Choosability Breaks a Conjecture",
+  "summary": "Three preprints announced on 2 November report truly faster algorithms for odd k-SUM and deterministic real 3SUM/APSP, NP-hardness of treedepth on planar subcubic graphs, and counterexamples to the Alon–Krivelevich choosability conjecture. All three explicitly describe AI involvement, but none claims a proof-assistant formalization of its own main theorem.",
+  "intro": "The selection uses the 2 November arXiv announcement blocks, rather than the 30 October submission timestamps. The full HTML of each cited arXiv v1 manuscript was consulted. These are research claims in preprints, not independently certified proofs.",
+  "results": [
+    {
+      "title": "Odd k-SUM hypotheses refuted and real 3SUM/APSP derandomized",
+      "summary": "Selected-entry subset convolution gives a randomized truly faster algorithm for every fixed odd k-SUM on polynomially bounded integers, while new reductions derandomize real 3SUM and APSP.",
+      "publication": "preprint",
+      "formalization": "not-stated",
+      "aiUse": "The authors state that the results were obtained using ChatGPT Sol 6.1; they rewrote the proofs from scratch in a completely human-written manuscript and say they checked correctness and originality themselves. They also mention a separate AI-generated, Lean-verified subset-convolution solution, not a formalization of this paper.",
+      "body": "### Statements and prior bounds\n\nChan, Itakura, Ma, and Yu give a randomized algorithm for integer $k$-SUM, for every fixed odd $k\\geq5$, with running time $O(n^{\\lceil k/2\\rceil-\\varepsilon_k})$ for some constant $\\varepsilon_k>0$, assuming polynomially bounded integer inputs. Thus the conventional odd-$k$ SUM hypothesis at exponent $\\lceil k/2\\rceil$ fails in this randomized integer setting. They also give a different randomized truly subquadratic algorithm for integer 3SUM **without matrix multiplication**. Separately, their deterministic reductions yield a deterministic $O(n^{1.9998})$ algorithm for real 3SUM and a truly subcubic deterministic algorithm for real APSP. These are not claims of strongly subquadratic algorithms in unrestricted bit complexity.\n\nThe recent breakthrough of Alman and Vassilevska Williams, reporting work by Anthropic, had already obtained truly subquadratic 3SUM and truly subcubic APSP using selected-entry rectangular matrix multiplication; for real inputs the associated reductions were randomized. The present paper therefore contributes a simpler route to integer 3SUM, an extension to odd $k$, and **derandomization** for real inputs, rather than claiming the first truly subquadratic 3SUM algorithm.\n\n### Why the convolution method works\n\nFor families of $t$-subsets of $[d]$, define $(f\\star g)(C)=\\sum_{A\\subseteq C}f(A)g(C\\setminus A)$, but ask for the answer only on a selected family of $2t$-subsets $C$. The key observation is that the zeta transform $\\widehat f(X)=\\sum_{S\\subseteq X}f(S)$ and Möbius inversion form a subset-lattice dynamic program. Precomputing its states through level $s$, then resuming only below requested output sets, costs $(N+\\binom d{\\leq s}+|\\mathcal C|\\binom{2t}{\\geq s})d^{O(1)}$. The selected-output trade-off needs neither FFT nor fast matrix multiplication.\n\nTo connect 3SUM to this primitive, the authors hash integers modulo a random prime and then apply correlated affine hashes to the three input sets. Binary representations become subsets. A witness $a+b=c$ is useful when the corresponding hashed bit vectors add without carries, so their supports are disjoint and subset convolution detects it. Random affine shifts make a sufficiently balanced no-carry representation appear with controlled probability; collisions are treated separately, and a sum-of-squared-errors check suppresses false positives. For odd $k$, an unbalanced 3SUM instance is formed by grouping $\\lfloor k/2\\rfloor$ input numbers on each side, and the subset lattice is generalized to base-$r$ vectors.\n\n### Deterministic real reductions and limits\n\nFor real APSP, the authors replace random sampling by a **rank-halving** task: given a candidate intermediate index for each min-plus product entry, find another whose rank among candidate sums is at most half as large. They compute counts and sums of ranks over dyadic intervals, reducing those statistics to selected-entry matrix multiplication; iterating the halving step $O(\\log d)$ times locates minima. A related counting construction handles real 3SUM. The new integer method remains randomized, and the constants in the truly subquadratic/subcubic exponents are small. The authors explicitly credit ChatGPT Sol 6.1 with obtaining results while taking responsibility for the rewritten human proof. **Status:** arXiv v1 preprint, full text read; no formalization of these theorems is asserted and no independent proof check is claimed here.",
+      "sources": [
+        {
+          "title": "3SUM Made Simpler (Without Matrix Multiplication), k-SUM Hypothesis Refuted for Odd k, and Real 3SUM/APSP Derandomized",
+          "authors": [
+            "Timothy M. Chan",
+            "Reina Itakura",
+            "Zhiyuan Ma",
+            "Yuancheng Yu"
+          ],
+          "year": 2026,
+          "venue": "arXiv:2610.42012v1 [cs.DS]",
+          "url": "https://arxiv.org/html/2610.42012v1",
+          "kind": "preprint",
+          "lang": "en"
+        }
+      ]
+    },
+    {
+      "title": "Treedepth is NP-hard even for planar graphs of maximum degree three",
+      "summary": "A polynomial-time Turing reduction establishes NP-hardness of exact treedepth on planar subcubic graphs, settling two longstanding restriction questions.",
+      "publication": "preprint",
+      "formalization": "not-stated",
+      "aiUse": "The author states that Claude Opus 5.5 suggested the reduction idea; the author improved the degree bound from four to three, simplified the lower-bound argument, wrote the text, and used AI only for figures and proofreading.",
+      "body": "### Exact statement and the unresolved boundary\n\nFor a connected graph, treedepth obeys $\\operatorname{td}(G)=1+\\min_{v\\in V(G)}\\operatorname{td}(G-v)$, with the maximum taken across components for disconnected graphs. Equivalently it is the minimum height of an elimination forest whose closure contains $G$. Kühn shows that deciding $\\operatorname{td}(G)\\leq K$ on **planar graphs of maximum degree three** is NP-hard under **polynomial-time Turing reductions**. The qualification matters: the paper does not establish the same statement by a single many-one reduction. The degree bound is sharp because degree-at-most-two graphs are disjoint unions of paths and cycles, for which treedepth is efficiently computable.\n\nGeneral treedepth computation was already NP-hard, including on bipartite, co-bipartite and chordal graphs. But polynomial-time solvability on planar graphs, or even on bounded-degree graphs, remained open; weighted variants were known hard under other restrictions. Treedepth is central to parameterized algorithms because a supplied decomposition of depth $d$ supports dynamic programming for numerous graph problems. The new hardness result concerns **finding the optimum decomposition**, not the fixed-parameter tractability of deciding depth at most $d$.\n\n### Reduction and structural gadgets\n\nThe source problem is **Weighted Tree Search**: an unknown vertex of a weighted tree must be identified by querying edges, each query revealing which component contains the target and incurring its edge weight. The objective is the minimum worst-case cost of a decision tree. The construction represents vertices of this source tree by planar wall-like backbones, with connecting strands encoding weighted edges. Walls have treedepth proportional to their size and are stable under the controlled vertex deletions used in the argument.\n\nAn important gadget is a **double wall**: two copies of a wall connected through a subdividing vertex $r$. If a single wall has treedepth $A$, the double wall has treedepth $A+1$, and deleting $r$ leaves two components of depth $A$. This makes $r$ a provably optimal elimination root, avoiding the difficulty of locating a suitable root in an ordinary wall. Copies of this gadget serve as anchors that force the elimination process to account for the search cost.\n\n### Correctness and the Turing-reduction caveat\n\nThe upper bound translates a low-cost weighted search strategy into an elimination tree of height at most $B=2K+1+A$. For the converse, the paper defines a potential combining the remaining weighted search cost and the heights of wall backbones. After any deletion, minor operations recover a smaller instance whose potential falls by at most one. Since treedepth is minor-monotone, induction forces depth at least $B+1$ for a no-instance.\n\nThe construction needs the exact treedepth $A$ of a polynomial-size wall, which the reduction computes by binary search using $O(\\log(K+c(T)))$ calls to the **target treedepth oracle**; one further call solves the transformed instance. This explains the Turing rather than many-one hardness. The author credits Claude Opus 5.5 with the original reduction idea, but reports personally strengthening it to maximum degree three. **Status:** arXiv v1 preprint, full text read; no formal proof-assistant verification or completed peer review is stated.",
+      "sources": [
+        {
+          "title": "Treedepth is NP-Hard on Planar Graphs of Maximum Degree 3",
+          "authors": [
+            "Kolja Kühn"
+          ],
+          "year": 2026,
+          "venue": "arXiv:2610.42033v1 [cs.DM]",
+          "url": "https://arxiv.org/html/2610.42033v1",
+          "kind": "preprint",
+          "lang": "en"
+        }
+      ]
+    },
+    {
+      "title": "Counterexamples to the Alon–Krivelevich bipartite choosability conjecture",
+      "summary": "Explicit bipartite graphs have list chromatic number asymptotically larger than any constant multiple of log maximum degree.",
+      "publication": "preprint",
+      "formalization": "not-stated",
+      "aiUse": "The authors state that gpt-6-astra through the xean research harness found the counterexample and proof; Claude Opus 5.5 helped rewrite the article. They say they independently checked all mathematical content themselves, not that a proof assistant verified it.",
+      "body": "### The conjecture and the claimed counterexample\n\nThe choice number $\\operatorname{ch}(G)$ is the least $q$ for which every assignment of lists of $q$ colors to vertices admits a proper list coloring. Alon and Krivelevich conjectured a universal bound $\\operatorname{ch}(G)=O(\\log\\Delta)$ for bipartite graphs of maximum degree $\\Delta$. Yu and Yu construct a family of bipartite graphs violating that statement, with\n\n$$\\operatorname{ch}(G)\\geq\\left(\\frac1{32}-o(1)\\right)\\frac{(\\ln\\Delta)^2}{(\\ln\\ln\\Delta)^3}.$$\n\nIn particular $\\operatorname{ch}(G)/\\ln\\Delta\\to\\infty$. This is a **lower-bound counterexample**, not an algorithm for list coloring. Earlier general upper bounds for bipartite graphs were of order $\\Delta/\\log\\Delta$, including a bound below $0.797\\Delta/\\ln\\Delta$ by Bradshaw, Mohar and Stacho; they did not settle the logarithmic conjecture.\n\n### An explicit bipartite set-system construction\n\nFix $k\\geq2$, let $P=[2k-1]$, and place one vertex $a_S$ and one vertex $b_T$ in opposite bipartition classes for every $k$-subset $S,T\\subseteq P$. Connect $a_S$ to $b_T$ precisely when $|S\\cap T|\\leq r$. Give these vertices their own defining sets as color lists: $L(a_S)=S$ and $L(b_T)=T$. The graph is regular, with\n\n$$\\Delta=\\sum_{t=1}^{\\min(r,k)}\\binom kt\\binom{k-1}{t-1}.$$\n\nThe central theorem says these lists are uncolorable whenever $r^2>2(2k-1)\\ln(2k-1)$. Choosing $r$ just above that threshold makes the degree small enough relative to $k$ to obtain the displayed asymptotic separation.\n\n### Why every attempted list coloring fails\n\nAssume a proper coloring exists. On the left it selects a color belonging to each $k$-set; on the right it selects a color belonging to each $k$-set, equivalently a color missing from the complementary $(k-1)$-set. Properness forces the two families assigned the same color to remain far apart in Johnson distance: otherwise the corresponding vertices would be adjacent and monochromatic.\n\nUniformly counting the color classes is insufficient: an adversarial coloring may use a common color on exponentially small fractions of both layers. The authors instead introduce conditional product weights on the layers of the Boolean lattice. They choose the weights *depending on the supposed coloring* through a continuous self-map and Brouwer's fixed-point theorem, equalizing each color's weighted share on the $k$- and $(k-1)$-layers. Pigeonholing then yields a color with share at least $1/(2k-1)$ on both sides.\n\nA nested coupling transports the $(k-1)$-set family to $k$-sets without reducing its weighted mass. A concentration lemma, proved via bounded-difference martingales and exponential moments, forces two such heavy families to contain sets within Johnson distance at most $\\sqrt{2(2k-1)\\ln(2k-1)}$. This contradicts the separation required by proper coloring.\n\n### Scope and verification\n\nThe authors say gpt-6-astra discovered the counterexample and proof and Claude Opus 5.5 helped rewrite the manuscript; they report checking the mathematics themselves. That declaration is not independent external verification. The construction refutes the stated universal logarithmic bound if correct, but does not determine the optimal growth of bipartite choosability in $\\Delta$. **Status:** arXiv v1 preprint, full text read; no Lean formalization or peer review is claimed.",
+      "sources": [
+        {
+          "title": "A Counterexample to the Alon-Krivelevich Conjecture and a New Lower Bound for Choosability of Bipartite Graphs",
+          "authors": [
+            "Junran Yu",
+            "Gexin Yu"
+          ],
+          "year": 2026,
+          "venue": "arXiv:2610.42094v1 [math.CO]",
+          "url": "https://arxiv.org/html/2610.42094v1",
+          "kind": "preprint",
+          "lang": "en"
+        }
+      ]
+    }
+  ]
+}
