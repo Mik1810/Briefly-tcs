@@ -475,3 +475,20 @@ Eseguito:
 - Osservazioni per le issue: #1 due esecuzioni quotidiane consecutive (2 e 3 novembre) hanno scritto il post da
   sole, intorno alle 9:18 e 8:57 Roma; #2 il fallimento del 3/11 è stato notato dall'utente solo a sera.
 
+## Avvisi di fallimento (issue #2) — 18:2x → 18:27:50+01:00
+
+Decisione dell'utente: "Sì, procedi" sull'issue #2.
+- I run del workflow risultano avviati da Mik1810 (actor e triggering actor): GitHub dovrebbe già mandargli
+  le email dei run falliti, ma le impostazioni di notifica non sono leggibili (serve scope notifications).
+- Nuovo `.github/workflows/daily-post-check.yml` su main: cron 11:00 UTC e workflow_dispatch con data; se
+  /briefing/<oggi>/ non risponde 200 apre una issue "Daily post missing: <data>" (o commenta quella aperta) con
+  la causa probabile. Solo GITHUB_TOKEN, permessi contents/actions read, issues write.
+- `publish-posts.yml`: output del publisher salvato con tee; step "Open an issue on failure" (if: failure()) che
+  apre "Publish failed (<data>, run <id>)" con le righe ERRORE e il link al run; permesso issues: write. Copiato
+  anche nella branch posts (0d98437). Main: 45c3566.
+- Verificato: YAML dei due workflow analizzato senza errori; step di failure simulato in locale (con e senza log);
+  publish dry run sul workflow aggiornato ok (3 post identici); daily check 2026-11-03 → HTTP 200, nessuna issue;
+  daily check 2026-10-31 → HTTP 404, aperta issue #11 "Daily post missing: 2026-10-31".
+- Non verificato: esecuzione reale dello step di failure su GitHub; ricezione delle notifiche da parte
+  dell'utente (gli è chiesto di confermare, poi #11 si chiude).
+

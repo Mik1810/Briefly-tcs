@@ -24,6 +24,17 @@ not check the build result.
 3. Optional: a daily workflow that checks after 10:00 that today's page exists and fails otherwise (public HTTP
    only, no credentials).
 
+## Done on 2026-11-03
+
+- `.github/workflows/daily-post-check.yml` (on `main`): every day at 11:00 UTC (12:00 in Rome in winter, 13:00 in
+  summer) it checks `/briefing/<today>/`; if missing it opens an issue "Daily post missing: <date>" with the likely
+  cause (no file on `posts`, or file present but publish/build failed), or comments on the open one.
+- `publish-posts.yml` (on `main` and `posts`): on failure it opens an issue "Publish failed (<date>, run <id>)"
+  with the publisher errors and the run link. Uses only `GITHUB_TOKEN` (`issues: write`).
+- Tested: the check passes for 2026-11-03 and opened #11 for 2026-10-31 (no post). The failure step was simulated
+  locally; it has not run on GitHub yet.
+- Still open: the owner must confirm that GitHub issue notifications arrive (email or app).
+
 ## Closing criteria
 
 A simulated workflow failure and a simulated build failure each produce a notification the owner receives.
