@@ -84,5 +84,7 @@ jobs:
         run: |
           errors=$(grep -E '^ERRORE|^  ' "$RUNNER_TEMP/publish.log" 2>/dev/null | head -40 || true)
           [ -n "$errors" ] || errors='No publisher output: the failure happened before or after the publish step.'
-          body=$(printf 'The publish workflow failed, so new posts may not be online.\n\nRun: %s\n\n```\n%s\n```\n\nOpened automatically by the "Publish posts" workflow.' "$RUN_URL" "$errors")
-          gh issue create -R "${{ github.repository }}" --title "Publish failed ($(TZ=Europe/Rome date +%F), run ${{ github.run_id }})" --body "$body"
+          # Assegnazione e menzione del proprietario: notifiche "participating", anche via email.
+          owner='${{ github.repository_owner }}'
+          body=$(printf '@%s The publish workflow failed, so new posts may not be online.\n\nRun: %s\n\n```\n%s\n```\n\nOpened automatically by the "Publish posts" workflow.' "$owner" "$RUN_URL" "$errors")
+          gh issue create -R "${{ github.repository }}" --title "Publish failed ($(TZ=Europe/Rome date +%F), run ${{ github.run_id }})" --body "$body" --assignee "$owner"
