@@ -1,7 +1,7 @@
 // Controlli sull'output generato in dist/, eseguiti da `npm run build` dopo astro build.
 // Verifica ciò che il lettore riceverebbe: bozze assenti, metadati presenti, link interni validi,
-// nessuna risorsa remota né JavaScript nelle pagine, a parte lo script facoltativo di copia del link negli
-// articoli. Stampa anche le misure delle risorse.
+// nessuna risorsa remota né JavaScript nelle pagine, a parte lo script facoltativo delle azioni dei risultati
+// negli articoli. Stampa anche le misure delle risorse.
 // Uscita con codice 1 al primo insieme di errori. Con Supabase le bozze non arrivano alla build (RLS):
 // resta il controllo del marcatore.
 
@@ -11,7 +11,7 @@ import { fileURLToPath } from 'node:url';
 import { gzipSync } from 'node:zlib';
 
 import { loadValidatedContent, resultAnchor } from '../src/lib/content/repository.ts';
-import { COPY_LINK_SCRIPT } from '../src/lib/copy-link.ts';
+import { RESULT_ACTIONS_SCRIPT } from '../src/lib/result-actions.ts';
 import { formatDate } from '../src/lib/dates.ts';
 
 // Cartella da controllare: argomento facoltativo (scripts/build.ts passa dist-staging), altrimenti dist/.
@@ -150,9 +150,9 @@ for (const file of htmlFiles) {
   if (!/<title>[^<]+<\/title>/.test(html)) fail(`${name}: manca <title>`);
   const h1 = html.match(/<h1[\s>]/g)?.length ?? 0;
   if (h1 !== 1) fail(`${name}: ${h1} elementi h1 invece di 1`);
-  // Unico script ammesso: la copia del link nelle pagine articolo (src/lib/copy-link.ts), inline e identico.
+  // Unico script ammesso: le azioni dei risultati nelle pagine articolo (src/lib/result-actions.ts), inline e identico.
   for (const script of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)) {
-    const allowed = name.startsWith('briefing/') && script[1]!.trim() === '' && script[2] === COPY_LINK_SCRIPT;
+    const allowed = name.startsWith('briefing/') && script[1]!.trim() === '' && script[2] === RESULT_ACTIONS_SCRIPT;
     if (!allowed) fail(`${name}: contiene uno <script> non ammesso`);
   }
   if (/<(link|script|img|iframe|source)\b[^>]*\s(href|src)="(https?:)?\/\//i.test(html)) {

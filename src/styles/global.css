@@ -480,14 +480,23 @@ main {
   font-size: 0.85rem;
 }
 
-.result-actions a {
+.result-actions a,
+.result-actions button {
   display: inline-flex;
   padding: 0.35rem;
+  border: 0;
   border-radius: 4px;
+  background: none;
   color: var(--muted);
+  cursor: pointer;
+}
+
+.result-actions button[hidden] {
+  display: none;
 }
 
 .result-actions a:hover,
+.result-actions button:hover,
 .result-actions a[data-state='copied'] {
   color: var(--accent);
 }

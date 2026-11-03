@@ -621,4 +621,10 @@ categorie; l'utente le ha approvate tutte.
   filetto, icona senza testo (aria-label e title "Copy link to this result").
   Check 0 errori, 48/48 test, check-dist pulito; push 897fd15; 20:40 online, verificato a vista nel pannello
   (icona a destra all'altezza dell'ultima riga delle fonti, nessuna riga). Proposte di altre icone in chat.
+- Decisione dell'utente: sì a "Condividi" e "Apri PDF"; no a citazione BibTeX e condivisione via email.
+  Eseguito: src/lib/pdf.ts (`pdfUrl`, `firstPdfUrl`: arXiv abs/html/pdf → /pdf/<id>, ECCC report → /download/,
+  URL .pdf; altrimenti nessuna icona) con tests/pdf.test.ts; URL reali dei post 1-3/11 controllati (arXiv abs,
+  arXiv html, ECCC /download, quest'ultimo verificato application/pdf). copy-link.ts rinominato
+  result-actions.ts: lo script mostra il pulsante Condividi solo se esiste navigator.share e apre il menu di
+  condivisione con titolo e indirizzo del risultato; check-dist accetta solo questo script.
 

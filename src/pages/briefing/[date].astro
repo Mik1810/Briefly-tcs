@@ -9,7 +9,7 @@ import HtmlBody from '../../components/HtmlBody.tsx';
 import ResultIndex from '../../components/ResultIndex.tsx';
 import ResultSection from '../../components/ResultSection.tsx';
 import { adjacentBriefings, getSite } from '../../lib/content/repository.ts';
-import { COPY_LINK_SCRIPT } from '../../lib/copy-link.ts';
+import { RESULT_ACTIONS_SCRIPT } from '../../lib/result-actions.ts';
 import type { Briefing } from '../../lib/content/types.ts';
 import { renderMarkdown } from '../../lib/markdown.ts';
 
@@ -70,6 +70,6 @@ const results = briefing.results.map((result) => ({
       ) : null
     }
   </article>
-  <script is:inline set:html={COPY_LINK_SCRIPT} />
+  <script is:inline set:html={RESULT_ACTIONS_SCRIPT} />
   <BriefingNav newer={newer} older={older} />
 </BaseLayout>
