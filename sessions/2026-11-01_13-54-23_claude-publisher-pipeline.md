@@ -531,3 +531,12 @@ Decisione dell'utente: non intende correggere i post; la sezione "Corrections an
   riavviato). Push cb30f7e; 19:52:59 pagina del 3/11 senza "Corrections and updates", con "Copy link"; /method/
   con "not corrected afterwards".
 
+## Stack locale e riepilogo — 19:54:07 → 19:54:28+01:00
+
+Richiesta dell'utente: avviare lo stack, poi riepilogo di issue aperte, lavorabili e attività non tracciate.
+- `npm run db:start`: stack pronto, API locale 200, .env riscritto (chiave non mostrata). La CLI segnala la
+  versione 3.0.0 disponibile (installata 2.122.0, non aggiornata).
+- Build locale: 3 briefing demo, 12 pagine, sostituzione di dist riuscita; poi build cloud per riportare dist
+  allo stato abituale.
+- Issue aperte su GitHub: #1, #5, #6, #7, #8, #9, #10. Servizi attivi: stack locale (55321/55322).
+
