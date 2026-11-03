@@ -509,4 +509,7 @@ Richiesta dell'utente: l'icona in fondo al risultato, sotto le fonti, sembra "vu
   dopo il push.
 - Push 68b8bd4; 19:40:11 pagina pubblica con `result-head`; verifica a vista nel pannello: icona a destra sulla
   riga "RESULT 1", sopra il titolo. Server temporaneo 4322 fermato (porta libera).
+- Ripensamento dell'utente: deve stare sotto, perché si condivide dopo aver letto. Riportata in fondo al
+  risultato come riga di chiusura: filetto sottile, allineata a destra, icona + testo "Copy link" (prima era
+  un'icona sola a sinistra, che sembrava vuota). Stato "Link copied" a sinistra del pulsante.
 
