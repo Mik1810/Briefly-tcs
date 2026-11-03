@@ -588,4 +588,8 @@ Decisioni dell'utente (domanda con opzioni): #8 "Calcolarlo dall'ultimo post"; #
   periodo coperto funziona sui post reali). Online alle 20:22: pagine 200 e nessun "Topics", ma /topics/,
   /topics/<slug>/ e /argomenti/ in 404: le regole `:path*` di Vercel non coprono il percorso con barra finale.
   Sostituite con `/(.*)`.
+- Push 3167452; 20:24:28 verificato: /topics, /topics/, /topics/<slug>/, /argomenti, /argomenti/,
+  /argomenti/<slug>/ → 308 verso la home; /archivio/ e /metodo/ → 308 verso /archive/ e /method/.
+  /topics/ ha risposto 404 per circa un minuto dopo il deploy (cache), poi 308.
+- Issue aperte su GitHub: #1 (attesa del post del 4/11) e #10 (pulizia).
 
