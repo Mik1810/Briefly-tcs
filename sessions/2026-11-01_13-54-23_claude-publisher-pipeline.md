@@ -615,4 +615,8 @@ categorie; l'utente le ha approvate tutte.
 - Domanda dell'utente: il vecchio briefing riportava 5-10 risultati al giorno, ora al massimo 3. Spiegato che il
   limite "1 to 3" è nel prompt v2/v3; proposte: 3-8 in dettaglio, misto (2-3 approfonditi + fino a 7 brevi), o
   lasciare. Decisione dell'utente: lasciare 1-3 per il momento. Nessuna modifica.
+- Richiesta dell'utente (screenshot annotato): togliere la riga sopra "Copy link" ("troppe righe") e mettere
+  icone come quella di copia a destra, all'altezza delle fonti; chiede quali altre icone avrebbe senso aggiungere.
+  Eseguito: `.result-foot` flex con fonti a sinistra e `.result-actions` a destra allineate in basso, nessun
+  filetto, icona senza testo (aria-label e title "Copy link to this result").
 

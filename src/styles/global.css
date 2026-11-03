@@ -460,30 +460,35 @@ main {
   margin-top: 1.5rem;
 }
 
-.permalink {
+.result-foot {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.result-foot .sources {
+  flex: 1;
+  min-width: 0;
+}
+
+.result-actions {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  gap: 0.75rem;
-  margin-top: 1.5rem;
-  padding-top: 0.75rem;
-  border-top: 1px solid var(--rule);
+  gap: 0.5rem;
+  flex-shrink: 0;
   font-family: var(--sans);
   font-size: 0.85rem;
 }
 
-.permalink a {
+.result-actions a {
   display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.3rem 0.5rem;
+  padding: 0.35rem;
   border-radius: 4px;
   color: var(--muted);
-  text-decoration: none;
 }
 
-.permalink a:hover,
-.permalink a[data-state='copied'] {
+.result-actions a:hover,
+.result-actions a[data-state='copied'] {
   color: var(--accent);
 }
 
