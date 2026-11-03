@@ -54,7 +54,6 @@ export const briefings: Briefing[] = [
         title: 'Every comparison sort needs Ω(n log n) comparisons in the worst case',
         summary:
           'The decision-tree argument: n! permutations to tell apart force a tree of height at least log₂ n!.',
-        topics: ['complessita', 'algoritmi'],
         status: CLASSIC,
         body: md`An algorithm that accesses the elements only through comparisons $a_i \le a_j$ can be described by a **decision tree**: every internal node is a comparison, every leaf a permutation of the input. To sort every input of $n$ distinct elements correctly, the tree must have at least $n!$ reachable leaves.
 
@@ -87,7 +86,6 @@ The bound holds **only in the comparison model**. Algorithms that read the keys,
         id: 'merge-sort-ottimo',
         title: 'Merge sort uses O(n log n) comparisons and is therefore optimal among comparison sorts',
         summary: 'The recurrence T(n) = 2T(n/2) + Θ(n) gives Θ(n log n), which matches the lower bound.',
-        topics: ['algoritmi'],
         status: CLASSIC,
         body: md`Merge sort splits the input into two halves, sorts them recursively, and merges them in linear time. Its cost satisfies
 
@@ -113,7 +111,6 @@ For $n$ a power of two, the worst-case number of comparisons is exactly $n \log_
         id: 'insertion-sort-quadratico',
         title: 'Insertion sort takes Θ(n²) comparisons in the worst case',
         summary: 'On reverse-sorted input every element moves past all the previous ones: n(n−1)/2 comparisons.',
-        topics: ['algoritmi'],
         status: CLASSIC,
         body: md`Insertion sort inserts the $i$-th element into the already sorted prefix, scanning it from the right. On decreasing input the $i$-th element is compared with all $i - 1$ previous ones, for a total of
 
@@ -155,7 +152,6 @@ More generally the running time is $\Theta(n + I)$, where $I$ is the number of i
         id: 'dijkstra-heap-binario',
         title: 'With a binary heap, Dijkstra computes shortest paths in O((n + m) log n)',
         summary: 'On a graph with non-negative weights, every priority-queue operation costs O(log n).',
-        topics: ['grafi', 'algoritmi'],
         status: CLASSIC,
         body: md`On a directed graph with $n$ vertices, $m$ edges, and non-negative weights, Dijkstra's algorithm extracts each vertex once from the priority queue and performs at most one decrease-key per edge. With a binary heap both operations cost $O(\log n)$, for a total of $O((n + m)\log n)$.
 
@@ -190,7 +186,6 @@ The assumption on the weights is essential: with negative edges, the greedy choi
         id: 'karatsuba',
         title: 'Karatsuba’s algorithm multiplies two n-digit integers with three recursive products instead of four',
         summary: 'Saving one product per level lowers the exponent of the cost from 2 to log₂ 3, about 1.585.',
-        topics: ['algoritmi'],
         status: CLASSIC,
         body: md`The schoolbook method multiplies two $n$-digit integers with $\Theta(n^2)$ elementary operations. Karatsuba writes $x = x_1 B^{m} + x_0$ and $y = y_1 B^{m} + y_0$ and observes that
 
@@ -214,7 +209,6 @@ with $z_2 = x_1 y_1$ and $z_0 = x_0 y_0$. Three recursive multiplications of hal
         id: 'alberi-binari-catalan',
         title: 'Binary trees with n nodes are counted by the n-th Catalan number',
         summary: 'A recurrence on the root leads to the closed form and to 4ⁿ asymptotic growth.',
-        topics: ['combinatoria'],
         status: CLASSIC,
         body: md`Choosing how many nodes lie in the left subtree of the root gives the recurrence $C_0 = 1$, $C_{n+1} = \sum_{i=0}^{n} C_i\, C_{n-i}$, whose solution is
 
@@ -238,8 +232,8 @@ The first values are $1, 1, 2, 5, 14, 42$. The same numbers count many other str
     aiDisclosure: DEMO_DISCLOSURE,
   },
   {
-    // Bozza di controllo: non deve comparire in home, archivio, argomenti né in dist/.
-    // scripts/check-dist.ts cerca il marcatore (invariato, è un dato di controllo), la data, l'id e la pagina dell'argomento.
+    // Bozza di controllo: non deve comparire in home, archivio né in dist/.
+    // scripts/check-dist.ts cerca il marcatore (invariato, è un dato di controllo), la data e l'id.
     date: '2026-11-01',
     status: 'bozza',
     demo: true,
@@ -251,7 +245,6 @@ The first values are $1, 1, 2, 5, 14, 42$. The same numbers count many other str
         id: 'bozza-di-controllo',
         title: 'MARCATORE-BOZZA-NON-PUBBLICARE draft result',
         summary: 'The only result with the Logic topic: its page must not be generated.',
-        topics: ['logica'],
         status: CLASSIC,
         body: md`MARCATORE-BOZZA-NON-PUBBLICARE body of the draft, with a formula $n^2$.`,
         sources: [CLRS],

@@ -8,7 +8,7 @@ import DemoLabel from '../../components/DemoLabel.tsx';
 import HtmlBody from '../../components/HtmlBody.tsx';
 import ResultIndex from '../../components/ResultIndex.tsx';
 import ResultSection from '../../components/ResultSection.tsx';
-import { adjacentBriefings, briefingTopics, getSite, resultTopics } from '../../lib/content/repository.ts';
+import { adjacentBriefings, getSite } from '../../lib/content/repository.ts';
 import { COPY_LINK_SCRIPT } from '../../lib/copy-link.ts';
 import type { Briefing } from '../../lib/content/types.ts';
 import { renderMarkdown } from '../../lib/markdown.ts';
@@ -28,7 +28,6 @@ const { newer, older } = adjacentBriefings(site, briefing.date);
 const introHtml = briefing.intro ? renderMarkdown(briefing.intro, `briefing ${briefing.date} › intro`) : null;
 const results = briefing.results.map((result) => ({
   result,
-  topics: resultTopics(site, result),
   bodyHtml: renderMarkdown(result.body, `briefing ${briefing.date} › risultato ${result.id}`),
 }));
 ---
@@ -39,7 +38,7 @@ const results = briefing.results.map((result) => ({
       <DemoLabel demo={briefing.demo} />
       <h1 class="article-title">{briefing.title}</h1>
       <p class="article-summary">{briefing.summary}</p>
-      <ArticleMeta briefing={briefing} topics={briefingTopics(site, briefing)} />
+      <ArticleMeta briefing={briefing} />
     </header>
 
     {
@@ -55,11 +54,10 @@ const results = briefing.results.map((result) => ({
     {introHtml ? <HtmlBody html={introHtml} className="prose article-intro" /> : null}
 
     {
-      results.map(({ result, topics, bodyHtml }, index) => (
-        <ResultSection result={result} topics={topics} bodyHtml={bodyHtml} position={index + 1} />
+      results.map(({ result, bodyHtml }, index) => (
+        <ResultSection result={result} bodyHtml={bodyHtml} position={index + 1} />
       ))
     }
-
 
     {
       /* L'uso dell'AI dichiarato dagli autori sta in ogni risultato ("AI use"); quello del sito nel footer e in

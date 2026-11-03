@@ -566,3 +566,22 @@ Decisione dell'utente: lavorare su #5, poi "anche 6 e 7 insieme".
 - Security Advisor rilanciato: 0/0/0. Performance Advisor rilanciato: 0/0 e 1 info "Unused Index" su
   public.result_topics (argomenti accantonati). Issue #5, #6, #7 chiuse (file, indice, GitHub).
 
+## Issue #8 e #9 — 2026-11-03, 20:0x → 20:1x
+
+Decisioni dell'utente (domanda con opzioni): #8 "Calcolarlo dall'ultimo post"; #9 "Eliminarli del tutto".
+- #8: `coverageSinceLastPost` nel publisher (dall'ultimo post pubblicato prima della data, altrimenti 3 giorni
+  prima, fino a ieri), applicato solo se il file non ha `coverage`; escluso dal confronto di idempotenza. Nota:
+  in locale le date dei risultati includono la bozza demo del 1/11 (la chiave secret vede anche le bozze); nel
+  cloud non ci sono bozze.
+- #9: rimossi pagine /topics/, TopicLinks, ResultRow, campi `topics` (modello, validazione, post, fixture, seed,
+  sorgente Supabase, publisher), stili, controlli in check-dist (ora verifica che /topics/ non esista), parti di
+  verify-db; eliminato scripts/translate-demo-db.ts (script una tantum già usato). Id italiani residui
+  `precedenti`/`anno-` diventati `previous`/`year-`. Redirect /topics(/...) e /argomenti(/...) verso la home.
+- Migrazione 20261103210000_drop_topics.sql: publish_briefing senza result_topics, drop di result_topics e topics.
+  Locale: applicata, verify-db ok, publisher ok, seed rigenerato senza argomenti.
+- Cloud (SQL Editor, avviso distruttivo confermato da Claude su decisione dell'utente; tabelle vuote): migrazione
+  e riga di storico in una transazione, "Success". Verificato: 0 tabelle argomenti, tabelle public briefings,
+  corrections, results, sources; storico 6 versioni; funzione senza result_topics, SECURITY DEFINER postgres;
+  EXECUTE service_role true, anon false.
+- Check 0 errori, 48/48 test; build locale, fixture e cloud con check-dist pulito; nessun "Topics" nelle pagine.
+

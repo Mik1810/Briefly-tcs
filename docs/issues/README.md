@@ -14,6 +14,6 @@ When an issue is closed: update its status, add the date and commit, update this
 | [005](005-cloud-migration-history.md) | Align the migration history of the hosted Supabase project | medium | closed |
 | [006](006-service-role-privileges.md) | Reduce service_role write privileges in the hosted project | medium | closed |
 | [007](007-security-advisor.md) | Re-run the Supabase Security Advisor after the new migrations | low | closed |
-| [008](008-coverage-period.md) | Internal coverage period does not match the "since the last post" window | low | open |
-| [009](009-topics.md) | Topics are set aside | low | waiting for a decision |
+| [008](008-coverage-period.md) | Internal coverage period does not match the "since the last post" window | low | closed |
+| [009](009-topics.md) | Topics are set aside | low | closed (removed) |
 | [010](010-cleanup.md) | Clean up services, branches and test runs | low | open |

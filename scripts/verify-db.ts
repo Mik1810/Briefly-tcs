@@ -9,7 +9,6 @@ import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
 
 import { briefings as fixtureBriefings } from '../src/lib/content/fixtures/briefings.ts';
-import { topics as fixtureTopics } from '../src/lib/content/fixtures/topics.ts';
 import { readSupabaseConfig } from '../src/lib/content/supabase/config.ts';
 import { createSupabaseSource } from '../src/lib/content/supabase/source.ts';
 
@@ -84,8 +83,7 @@ ok(`lettura anonima di briefings: HTTP 200, solo le date pubblicate (${published
 const content = await createSupabaseSource(config).load();
 const expected = fixtureBriefings.filter((b) => b.status === 'pubblicato').toSorted((a, b) => (a.date < b.date ? 1 : -1));
 assert.deepEqual(plain(content.briefings), plain(expected));
-assert.deepEqual(plain(content.topics), plain(fixtureTopics));
-ok('contenuto letto dalla sorgente Supabase identico alle fixture pubblicate (risultati, fonti, correzioni, argomenti)');
+ok('contenuto letto dalla sorgente Supabase identico alle fixture pubblicate (risultati, fonti, correzioni)');
 
 // 3. Tentativi di lettura della bozza: risposte vuote, non errori, perché RLS filtra le righe.
 for (const date of draftDates) {
@@ -96,13 +94,13 @@ for (const date of draftDates) {
   }
 }
 for (const id of draftResults) {
-  for (const path of [`results?id=eq.${id}`, `sources?result_id=eq.${id}`, `result_topics?result_id=eq.${id}`]) {
+  for (const path of [`results?id=eq.${id}`, `sources?result_id=eq.${id}`]) {
     const response = await anon('GET', `${path}&select=*`);
     assert.equal(response.status, 200);
     assert.deepEqual(response.json, [], `${path} non deve restituire righe`);
   }
 }
-ok(`lettura anonima della bozza (briefing, risultati, fonti, argomenti, correzioni): HTTP 200 con zero righe`);
+ok(`lettura anonima della bozza (briefing, risultati, fonti, correzioni): HTTP 200 con zero righe`);
 
 // 4. Scritture anonime: negate dai privilegi (nessun GRANT) prima ancora delle policy.
 const before = privileged<{ n: number; title: string }>(
@@ -110,7 +108,6 @@ const before = privileged<{ n: number; title: string }>(
           (select title from public.briefings where date = '${publishedDates[0]}') as title`,
 )[0]!;
 const attempts = [
-  ['POST', 'topics', { slug: 'scrittura-anonima', name: 'X', description: 'X', position: 99 }],
   ['POST', 'briefings', { ...{ date: '2026-12-01', status: 'pubblicato', demo: true }, title: 'X', summary: 'X' }],
   ['PATCH', `briefings?date=eq.${publishedDates[0]}`, { title: 'Titolo modificato da anon' }],
   ['PATCH', `briefings?date=eq.${draftDates[0]}`, { status: 'pubblicato' }],
@@ -123,15 +120,13 @@ for (const [method, path, body] of attempts) {
   assert.equal(code, '42501', `${method} ${path}: atteso permission denied (42501), ottenuto ${code}`);
   ok(`${method} ${path.split('?')[0]} anonimo: HTTP ${response.status}, ${code} permission denied`);
 }
-const after = privileged<{ n: number; title: string; topic: number; draft: string }>(
+const after = privileged<{ n: number; title: string; draft: string }>(
   `select (select count(*)::int from public.briefings) as n,
           (select title from public.briefings where date = '${publishedDates[0]}') as title,
-          (select count(*)::int from public.topics where slug = 'scrittura-anonima') as topic,
           (select status from public.briefings where date = '${draftDates[0]}') as draft`,
 )[0]!;
 assert.equal(after.n, before.n);
 assert.equal(after.title, before.title);
-assert.equal(after.topic, 0);
 assert.equal(after.draft, 'bozza');
 ok('dopo i tentativi: righe, titolo e stato della bozza invariati nel database');
 

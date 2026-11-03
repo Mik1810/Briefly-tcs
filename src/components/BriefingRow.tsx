@@ -1,28 +1,20 @@
 import { briefingPath } from '../lib/content/repository.ts';
-import type { Briefing, Topic } from '../lib/content/types.ts';
+import type { Briefing } from '../lib/content/types.ts';
 import DateText from './DateText.tsx';
-import TopicLinks from './TopicLinks.tsx';
 
 interface Props {
   briefing: Briefing;
-  topics: Topic[];
   /** Livello del titolo, per mantenere una gerarchia corretta nelle diverse pagine. */
   headingLevel: 2 | 3;
 }
 
-/** Riga editoriale di home e archivio: data, argomenti, titolo e sommario. */
-export default function BriefingRow({ briefing, topics, headingLevel }: Props) {
+/** Riga editoriale di home e archivio: data, titolo e sommario. */
+export default function BriefingRow({ briefing, headingLevel }: Props) {
   const Heading = headingLevel === 2 ? 'h2' : 'h3';
   return (
     <article className="row">
       <p className="meta">
         <DateText date={briefing.date} />
-        {topics.length > 0 ? (
-          <>
-            <span aria-hidden="true"> — </span>
-            <TopicLinks topics={topics} />
-          </>
-        ) : null}
         {briefing.demo ? (
           <>
             <span aria-hidden="true"> — </span>

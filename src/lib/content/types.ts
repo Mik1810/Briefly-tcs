@@ -27,12 +27,6 @@ export type SourceKind = (typeof SOURCE_KINDS)[number];
 export const CORRECTION_KINDS = ['sostanziale', 'minore'] as const;
 export type CorrectionKind = (typeof CORRECTION_KINDS)[number];
 
-export interface Topic {
-  slug: string;
-  name: string;
-  description: string;
-}
-
 export interface Source {
   title: string;
   authors: string[];
@@ -56,7 +50,6 @@ export interface Result {
   title: string;
   /** Testo semplice: compare in liste e metadati, dove le formule non sono renderizzate. */
   summary: string;
-  topics: string[];
   status: ScientificStatus;
   /** Markdown con formule `$…$` e `$$…$$`, renderizzato in build. */
   body: string;
@@ -92,6 +85,5 @@ export interface Briefing {
 }
 
 export interface RawContent {
-  topics: Topic[];
   briefings: Briefing[];
 }

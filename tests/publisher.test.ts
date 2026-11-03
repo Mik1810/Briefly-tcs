@@ -3,7 +3,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 
-import { topics } from '../src/lib/content/fixtures/topics.ts';
 import {
   AUTOMATED_DISCLOSURE,
   normalizeMathEscapes,
@@ -12,7 +11,12 @@ import {
   slugify,
 } from '../src/lib/content/post.ts';
 import type { Briefing } from '../src/lib/content/types.ts';
-import { publishPosts, readPublisherConfig, type PublisherDb } from '../scripts/lib/publisher.ts';
+import {
+  coverageSinceLastPost,
+  publishPosts,
+  readPublisherConfig,
+  type PublisherDb,
+} from '../scripts/lib/publisher.ts';
 
 function post(date = '2026-11-02', overrides: Record<string, unknown> = {}) {
   return {
@@ -42,7 +46,6 @@ function memoryDb(): PublisherDb & { rows: Map<string, Briefing> } {
   const rows = new Map<string, Briefing>();
   return {
     rows,
-    topics: async () => topics,
     resultIds: async () => new Map([...rows.values()].flatMap((b) => b.results.map((r) => [r.id, b.date] as [string, string]))),
     briefing: async (date) => rows.get(date),
     publish: async (briefing) => {
@@ -63,7 +66,6 @@ test('un post valido diventa un briefing pubblicato, non demo, con verifica solo
   assert.deepEqual(briefing.corrections, []);
   assert.deepEqual(briefing.coverage, { from: '2026-11-01', to: '2026-11-01' }, 'periodo coperto predefinito: ieri');
   const [result] = briefing.results;
-  assert.deepEqual(result?.topics, []);
   assert.equal(result?.id, 'faster-matrix-multiplication-bound');
   assert.deepEqual(result?.status, { publication: 'preprint', formalization: 'non-indicata', verification: 'controllo-automatico' });
   assert.equal(result?.sources[0]?.kind, 'preprint');
@@ -72,7 +74,7 @@ test('un post valido diventa un briefing pubblicato, non demo, con verifica solo
 test('campi sconosciuti, valori fuori vocabolario e nome file errato sono rifiutati', () => {
   const bad = post('2026-11-02', { status: 'pubblicato', demo: true });
   (bad.results[0] as Record<string, unknown>).verification = 'revisione-indipendente';
-  (bad.results[0] as Record<string, unknown>).topics = ['algoritmi'];
+  (bad.results[0] as Record<string, unknown>).topics = ['algorithms'];
   (bad.results[0] as Record<string, unknown>).publication = 'peer-reviewed';
   assert.throws(
     () => postToBriefing('posts/2026-11-03.json', bad),
@@ -166,10 +168,25 @@ test('date troppo future, JSON illeggibile e dry run', async () => {
   assert.equal(db.rows.size, 0);
 });
 
-test('vocabolario argomenti vuoto (come nel cloud): il post si pubblica comunque', async () => {
-  const db = { ...memoryDb(), topics: async () => [] };
-  const report = await publishPosts([file(post())], db, { today: TODAY });
-  assert.deepEqual(report.published, ['2026-11-02']);
+test('periodo coperto: dall’ultimo post pubblicato a ieri; 3 giorni se non ci sono post', () => {
+  assert.deepEqual(coverageSinceLastPost('2026-11-02', []), { from: '2026-10-30', to: '2026-11-01' });
+  assert.deepEqual(coverageSinceLastPost('2026-11-03', ['2026-11-02']), { from: '2026-11-02', to: '2026-11-02' });
+  // Lunedì dopo un venerdì: il task copre venerdì-domenica.
+  assert.deepEqual(coverageSinceLastPost('2026-11-09', ['2026-11-06', '2026-11-03']), { from: '2026-11-06', to: '2026-11-08' });
+  // I post successivi alla data non contano.
+  assert.deepEqual(coverageSinceLastPost('2026-11-03', ['2026-11-04']), { from: '2026-10-31', to: '2026-11-02' });
+});
+
+test('periodo coperto calcolato alla pubblicazione e ignorato nel confronto dei post già pubblicati', async () => {
+  const db = memoryDb();
+  await publishPosts([file(post('2026-11-02'), '2026-11-02')], db, { today: '2026-11-04' });
+  await publishPosts([file(post('2026-11-04'), '2026-11-04')], db, { today: '2026-11-04' });
+  assert.deepEqual(db.rows.get('2026-11-02')?.coverage, { from: '2026-10-30', to: '2026-11-01' });
+  assert.deepEqual(db.rows.get('2026-11-04')?.coverage, { from: '2026-11-02', to: '2026-11-03' });
+  // Riesecuzione: per il 2/11 il calcolo darebbe lo stesso, ma anche un valore storico diverso non è un conflitto.
+  db.rows.get('2026-11-02')!.coverage = { from: '2026-11-01', to: '2026-11-01' };
+  const again = await publishPosts([file(post('2026-11-02'), '2026-11-02')], db, { today: '2026-11-04' });
+  assert.deepEqual(again, { published: [], unchanged: ['2026-11-02'], problems: [] });
 });
 
 test('il publisher accetta solo una chiave secret e un URL cloud valido', () => {

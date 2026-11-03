@@ -1,13 +1,11 @@
-import type { Briefing, Topic } from '../lib/content/types.ts';
+import type { Briefing } from '../lib/content/types.ts';
 import DateText from './DateText.tsx';
-import TopicLinks from './TopicLinks.tsx';
 
 interface Props {
   briefing: Briefing;
-  topics: Topic[];
 }
 
-export default function ArticleMeta({ briefing, topics }: Props) {
+export default function ArticleMeta({ briefing }: Props) {
   return (
     <dl className="article-meta">
       <div>
@@ -21,14 +19,6 @@ export default function ArticleMeta({ briefing, topics }: Props) {
           <dt>Updated</dt>
           <dd>
             <DateText date={briefing.updatedOn} />
-          </dd>
-        </div>
-      ) : null}
-      {topics.length > 0 ? (
-        <div>
-          <dt>Topics</dt>
-          <dd>
-            <TopicLinks topics={topics} />
           </dd>
         </div>
       ) : null}

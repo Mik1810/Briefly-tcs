@@ -1,16 +1,14 @@
 import { briefingPath, resultPath } from '../lib/content/repository.ts';
-import type { Briefing, Topic } from '../lib/content/types.ts';
+import type { Briefing } from '../lib/content/types.ts';
 import DateText from './DateText.tsx';
 import DemoLabel from './DemoLabel.tsx';
-import TopicLinks from './TopicLinks.tsx';
 
 interface Props {
   briefing: Briefing;
-  topics: Topic[];
 }
 
 /** Articolo in evidenza della home: l'ultimo briefing, con l'elenco dei suoi risultati. */
-export default function BriefingLead({ briefing, topics }: Props) {
+export default function BriefingLead({ briefing }: Props) {
   return (
     <article className="lead" aria-labelledby="lead-title">
       <DemoLabel demo={briefing.demo} />
@@ -20,12 +18,6 @@ export default function BriefingLead({ briefing, topics }: Props) {
       <p className="lead-summary">{briefing.summary}</p>
       <p className="meta">
         <DateText date={briefing.date} />
-        {topics.length > 0 ? (
-          <>
-            <span aria-hidden="true"> — </span>
-            <TopicLinks topics={topics} />
-          </>
-        ) : null}
       </p>
       <h3 className="lead-results-heading">In this briefing</h3>
       <ol className="lead-results">

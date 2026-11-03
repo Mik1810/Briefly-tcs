@@ -1,4 +1,4 @@
-export type Section = 'articoli' | 'archivio' | 'argomenti' | 'metodo';
+export type Section = 'articoli' | 'archivio' | 'metodo';
 
 interface Props {
   current: Section | null;
@@ -9,7 +9,6 @@ interface Props {
 const NAV_ITEMS: { key: Section; href: string; label: string }[] = [
   { key: 'articoli', href: '/', label: 'Articles' },
   { key: 'archivio', href: '/archive/', label: 'Archive' },
-  // Topics fuori dal menu dal 2026-11-01 (argomenti accantonati); le pagine /topics/ restano, non collegate.
   { key: 'metodo', href: '/method/', label: 'Method' },
 ];
 

@@ -145,7 +145,7 @@ async function withFetch<T>(fake: typeof fetch, fn: () => Promise<T>): Promise<T
   }
 }
 
-test('cloud vuoto: contenuto valido senza briefing né argomenti; la sorgente è descritta come hosted', async () => {
+test('cloud vuoto: contenuto valido senza briefing; la sorgente è descritta come hosted', async () => {
   const requested: string[] = [];
   const source = createSupabaseSource({ target: 'cloud', url: CLOUD_URL, publishableKey: KEY });
   const content = await withFetch(
@@ -156,7 +156,7 @@ test('cloud vuoto: contenuto valido senza briefing né argomenti; la sorgente è
     },
     () => source.load(),
   );
-  assert.deepEqual(content, { topics: [], briefings: [] });
+  assert.deepEqual(content, { briefings: [] });
   assertValidContent(content);
   assert.ok(requested.every((url) => url.startsWith(`${CLOUD_URL}/rest/v1/`)));
   assert.match(source.description, /^hosted Supabase database/);

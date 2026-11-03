@@ -5,16 +5,10 @@
 // Qualunque errore interrompe la build: non esiste alcun ripiego sulle fixture.
 
 import type { ContentSource } from '../source.ts';
-import type { Briefing, Correction, RawContent, Result, Source, Topic } from '../types.ts';
+import type { Briefing, Correction, RawContent, Result, Source } from '../types.ts';
 import type { SupabaseConfig } from './config.ts';
 
 const TIMEOUT_MS = 10_000;
-
-interface TopicRow {
-  slug: string;
-  name: string;
-  description: string;
-}
 
 interface SourceRow {
   title: string;
@@ -35,7 +29,6 @@ interface ResultRow {
   formalization: Result['status']['formalization'];
   verification: Result['status']['verification'];
   ai_use: string | null;
-  result_topics: { topic_slug: string }[];
   sources: SourceRow[];
 }
 
@@ -57,14 +50,13 @@ export interface BriefingRow {
 export const BRIEFING_SELECT = [
   'date,status,demo,title,summary,coverage_from,coverage_to,updated_on,intro,ai_disclosure',
   'results(id,title,summary,body,publication,formalization,verification,ai_use,' +
-    'result_topics(topic_slug),sources(title,authors,year,venue,url,kind,lang))',
+    'sources(title,authors,year,venue,url,kind,lang))',
   'corrections(date,kind,text,result_id)',
 ].join(',');
 
 export const BRIEFING_ORDER = {
   order: 'date.desc',
   'results.order': 'position',
-  'results.result_topics.order': 'position',
   'results.sources.order': 'position',
   'corrections.order': 'position',
 };
@@ -93,7 +85,6 @@ export function mapBriefingRow(row: BriefingRow): Briefing {
         formalization: result.formalization,
         verification: result.verification,
       },
-      topics: (result.result_topics ?? []).map((topic) => topic.topic_slug),
       sources: (result.sources ?? []).map((source) => ({
         title: source.title,
         authors: source.authors,
@@ -146,12 +137,8 @@ export function createSupabaseSource(config: SupabaseConfig): ContentSource {
     description: `${config.target === 'local' ? 'local' : 'hosted'} Supabase database (anonymous read, published content only)`,
     logLabel: `Supabase ${config.target} (${new URL(config.url).host})`,
     load: async (): Promise<RawContent> => {
-      const [topicRows, briefingRows] = await Promise.all([
-        getRows<TopicRow>(config, 'topics', { select: 'slug,name,description', order: 'position' }),
-        getRows<BriefingRow>(config, 'briefings', { select: BRIEFING_SELECT, ...BRIEFING_ORDER }),
-      ]);
-      const topics: Topic[] = topicRows.map(({ slug, name, description }) => ({ slug, name, description }));
-      return { topics, briefings: briefingRows.map(mapBriefingRow) };
+      const briefingRows = await getRows<BriefingRow>(config, 'briefings', { select: BRIEFING_SELECT, ...BRIEFING_ORDER });
+      return { briefings: briefingRows.map(mapBriefingRow) };
     },
   };
 }

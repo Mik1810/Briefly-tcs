@@ -1,13 +1,6 @@
 -- GENERATO da scripts/generate-seed.ts a partire da src/lib/content/fixtures/. Non modificare a mano.
 -- Solo contenuti dimostrativi: risultati classici da manuale e una bozza di controllo.
 
-insert into public.topics (slug, name, description, position) values
-  ('complessita', 'Computational complexity', 'Lower bounds, complexity classes, and models of computation.', 0),
-  ('algoritmi', 'Algorithms', 'Design and analysis of algorithms and data structures.', 1),
-  ('grafi', 'Graphs', 'Graph algorithms and structural properties of graphs.', 2),
-  ('combinatoria', 'Combinatorics', 'Enumeration, discrete structures, and combinatorial methods.', 3),
-  ('logica', 'Logic', 'Logic in computer science, semantics, and formal verification.', 4);
-
 insert into public.briefings (date, status, demo, title, summary, coverage_from, coverage_to, updated_on, intro, ai_disclosure) values
   ('2026-10-29', 'pubblicato', true, 'Comparison sorting: the lower bound and the algorithms that meet it', 'A long example briefing with classic results: the lower bound for comparison sorting, merge sort, and the quadratic worst case of insertion sort.', '2026-10-28', '2026-10-28', '2026-10-30', 'This briefing shows what a long issue looks like, with inline and display formulas, sources for every result, and a correction. The three results are textbook theorems, chosen because they are easy to check; the [Method page](/method/) describes how real news will be handled.', 'Demo text drafted with the assistance of an AI model (Claude) while developing the prototype. It describes classic textbook results; it has not gone through the planned editorial process and no scientific review has been carried out.'),
   ('2026-10-30', 'pubblicato', true, 'Shortest paths: Dijkstra’s algorithm with a binary heap', 'A short example briefing with a single classic result on shortest paths.', '2026-10-29', '2026-10-29', null, null, 'Demo text drafted with the assistance of an AI model (Claude) while developing the prototype. It describes classic textbook results; it has not gone through the planned editorial process and no scientific review has been carried out.'),
@@ -64,17 +57,6 @@ $$
 
 The first values are $1, 1, 2, 5, 14, 42$. The same numbers count many other structures, for example well-formed parenthesizations.', 'risultato-classico', 'non-indicata', 'non-verificato'),
   ('bozza-di-controllo', '2026-11-01', 0, 'MARCATORE-BOZZA-NON-PUBBLICARE draft result', 'The only result with the Logic topic: its page must not be generated.', 'MARCATORE-BOZZA-NON-PUBBLICARE body of the draft, with a formula $n^2$.', 'risultato-classico', 'non-indicata', 'non-verificato');
-
-insert into public.result_topics (result_id, topic_slug, position) values
-  ('limite-inferiore-ordinamento-confronti', 'complessita', 0),
-  ('limite-inferiore-ordinamento-confronti', 'algoritmi', 1),
-  ('merge-sort-ottimo', 'algoritmi', 0),
-  ('insertion-sort-quadratico', 'algoritmi', 0),
-  ('dijkstra-heap-binario', 'grafi', 0),
-  ('dijkstra-heap-binario', 'algoritmi', 1),
-  ('karatsuba', 'algoritmi', 0),
-  ('alberi-binari-catalan', 'combinatoria', 0),
-  ('bozza-di-controllo', 'logica', 0);
 
 insert into public.sources (result_id, position, title, authors, year, venue, url, kind, lang) values
   ('limite-inferiore-ordinamento-confronti', 0, 'The Art of Computer Programming, Volume 3: Sorting and Searching', array['Donald E. Knuth'], 1998, 'Addison-Wesley, 2nd edition', null, 'libro', 'en'),

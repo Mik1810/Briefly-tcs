@@ -3,7 +3,8 @@
 > Questo era il README del repository fino al 2026-11-01, quando il README è diventato una vetrina in inglese.
 > Alcune frasi descrivono lo stato di allora (prototipo locale); per lo stato attuale vedere
 > `sessions/STATO_ATTUALE.md`. Pipeline di pubblicazione: `docs/CHATGPT_TASK_ISTRUZIONI.md`, punti aperti:
-> `docs/issues/`.
+> `docs/issues/`. Dal 2026-11-03 gli argomenti non esistono più (pagine, tabelle e script
+> `translate-demo-db.ts` rimossi): le parti seguenti che li citano sono storiche.
 
 Blog di informatica teorica per studenti magistrali e ricercatori. Nome del sito: **Briefly.tcs**, approvato dall'utente (docs/DECISIONI.md) e applicato con l'incarico 05. I nomi precedenti erano «TCS quotidiano» e «TCS Daily».
 Nomi interni invariati: pacchetto npm `tcs-quotidiano`, stack Supabase `tcs-quotidiano`.

@@ -7,21 +7,14 @@ import { fixtureSource } from './fixtures/source.ts';
 import type { ContentSource, ContentSourceKind } from './source.ts';
 import { readSupabaseConfig } from './supabase/config.ts';
 import { createSupabaseSource } from './supabase/source.ts';
-import type { Briefing, RawContent, Result, Topic } from './types.ts';
+import type { Briefing, RawContent, Result } from './types.ts';
 import { assertValidContent } from './validate.ts';
 
 export interface SiteContent {
   sourceKind: ContentSourceKind;
   sourceDescription: string;
-  topics: Topic[];
-  topicsBySlug: Map<string, Topic>;
   /** Solo briefing pubblicati, dal più recente. */
   briefings: Briefing[];
-}
-
-export interface TopicEntry {
-  briefing: Briefing;
-  result: Result;
 }
 
 function selectSource(kind: ContentSourceKind): ContentSource {
@@ -56,8 +49,6 @@ async function loadSite(): Promise<SiteContent> {
   return {
     sourceKind: source.kind,
     sourceDescription: source.description,
-    topics: raw.topics,
-    topicsBySlug: new Map(raw.topics.map((topic) => [topic.slug, topic])),
     briefings,
   };
 }
@@ -80,41 +71,6 @@ export function briefingPath(briefing: Pick<Briefing, 'date'>): string {
 
 export function resultPath(briefing: Pick<Briefing, 'date'>, result: Pick<Result, 'id'>): string {
   return `${briefingPath(briefing)}#${resultAnchor(result)}`;
-}
-
-export function topicPath(topic: Pick<Topic, 'slug'>): string {
-  return `/topics/${topic.slug}/`;
-}
-
-/** Argomenti dei risultati di un briefing, senza ripetizioni, nell'ordine in cui compaiono. */
-export function briefingTopics(site: SiteContent, briefing: Briefing): Topic[] {
-  const slugs = new Set(briefing.results.flatMap((result) => result.topics));
-  return [...slugs].flatMap((slug) => {
-    const topic = site.topicsBySlug.get(slug);
-    return topic ? [topic] : [];
-  });
-}
-
-export function resultTopics(site: SiteContent, result: Result): Topic[] {
-  return result.topics.flatMap((slug) => {
-    const topic = site.topicsBySlug.get(slug);
-    return topic ? [topic] : [];
-  });
-}
-
-/** Risultati pubblicati per argomento. Gli argomenti senza risultati pubblicati non compaiono. */
-export function entriesByTopic(site: SiteContent): Map<string, TopicEntry[]> {
-  const map = new Map<string, TopicEntry[]>();
-  for (const briefing of site.briefings) {
-    for (const result of briefing.results) {
-      for (const slug of result.topics) {
-        const list = map.get(slug);
-        if (list) list.push({ briefing, result });
-        else map.set(slug, [{ briefing, result }]);
-      }
-    }
-  }
-  return map;
 }
 
 export function adjacentBriefings(site: SiteContent, date: string): { newer?: Briefing; older?: Briefing } {

@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BriefingRow from '../components/BriefingRow.tsx';
-import { briefingTopics, briefingsByYear, getSite } from '../lib/content/repository.ts';
+import { briefingsByYear, getSite } from '../lib/content/repository.ts';
 
 const site = await getSite();
 const years = briefingsByYear(site);
@@ -17,12 +17,12 @@ const years = briefingsByYear(site);
       <p class="empty">No published briefings.</p>
     ) : (
       years.map(([year, briefings]) => (
-        <section class="list" aria-labelledby={`anno-${year}`}>
-          <h2 id={`anno-${year}`} class="section-heading">
+        <section class="list" aria-labelledby={`year-${year}`}>
+          <h2 id={`year-${year}`} class="section-heading">
             {year}
           </h2>
           {briefings.map((briefing) => (
-            <BriefingRow briefing={briefing} topics={briefingTopics(site, briefing)} headingLevel={3} />
+            <BriefingRow briefing={briefing} headingLevel={3} />
           ))}
         </section>
       ))

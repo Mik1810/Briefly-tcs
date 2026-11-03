@@ -5,9 +5,8 @@ import assert from 'node:assert/strict';
 import { describe, test } from 'node:test';
 
 import { formatDate, isIsoDate } from '../src/lib/dates.ts';
-import { entriesByTopic, getSite } from '../src/lib/content/repository.ts';
+import { getSite } from '../src/lib/content/repository.ts';
 import { briefings as fixtureBriefings } from '../src/lib/content/fixtures/briefings.ts';
-import { topics as fixtureTopics } from '../src/lib/content/fixtures/topics.ts';
 import type { Briefing, RawContent } from '../src/lib/content/types.ts';
 import { collectContentProblems } from '../src/lib/content/validate.ts';
 
@@ -24,7 +23,6 @@ function validBriefing(overrides: Partial<Briefing> = {}): Briefing {
         id: 'risultato-a',
         title: 'Risultato',
         summary: 'Sintesi.',
-        topics: ['algoritmi'],
         status: { publication: 'preprint', formalization: 'non-indicata', verification: 'non-verificato' },
         body: 'Testo con $n^2$.',
         sources: [{ title: 'Fonte', authors: ['A. Autore'], kind: 'preprint', url: 'https://example.org/x' }],
@@ -37,10 +35,7 @@ function validBriefing(overrides: Partial<Briefing> = {}): Briefing {
 }
 
 function content(...briefings: Briefing[]): RawContent {
-  return {
-    topics: [{ slug: 'algoritmi', name: 'Algoritmi', description: 'Descrizione.' }],
-    briefings,
-  };
+  return { briefings };
 }
 
 /** Problemi segnalati per un contenuto: verifica che ce ne sia uno sul campo atteso. */
@@ -75,7 +70,7 @@ describe('validazione dei metadati', () => {
   });
 
   test('le fixture del prototipo sono valide', () => {
-    assert.deepEqual(collectContentProblems({ topics: fixtureTopics, briefings: fixtureBriefings }), []);
+    assert.deepEqual(collectContentProblems({ briefings: fixtureBriefings }), []);
   });
 
   test('data inesistente o malformata', () => {
@@ -134,17 +129,10 @@ describe('validazione dei metadati', () => {
     assert.deepEqual(collectContentProblems(content(validBriefing({ corrections: [sameDay], updatedOn: '2026-03-10' }))), []);
   });
 
-  test('vocabolari chiusi per argomenti e stati', () => {
+  test('vocabolari chiusi per gli stati', () => {
     const bad = validBriefing();
     const base = bad.results[0]!;
-    bad.results = [
-      {
-        ...base,
-        topics: ['quantistica'],
-        status: { ...base.status, publication: 'quasi-pubblicato' as never },
-      },
-    ];
-    expectProblem(content(bad), /topics: argomento "quantistica" fuori vocabolario/);
+    bad.results = [{ ...base, status: { ...base.status, publication: 'quasi-pubblicato' as never } }];
     expectProblem(content(bad), /status\.publication: valore "quasi-pubblicato" non ammesso/);
   });
 
@@ -165,7 +153,7 @@ describe('validazione dei metadati', () => {
   });
 
   test('i dati arrivati senza tipi vengono controllati a runtime', () => {
-    const raw = { topics: [], briefings: [{ date: '2026-03-10' }] } as unknown as RawContent;
+    const raw = { briefings: [{ date: '2026-03-10' }] } as unknown as RawContent;
     expectProblem(raw, /\.status: valore undefined non ammesso/);
     expectProblem(raw, /\.results: serve almeno un risultato/);
   });
@@ -182,17 +170,5 @@ describe('esclusione delle bozze', () => {
     assert.ok(site.briefings.every((briefing) => briefing.status === 'pubblicato'));
     const dates = site.briefings.map((briefing) => briefing.date);
     assert.deepEqual(dates, dates.toSorted().toReversed());
-  });
-
-  test('un argomento usato solo da bozze non ha voci', async () => {
-    const draftOnlyTopics = new Set(
-      fixtureBriefings.filter((b) => b.status === 'bozza').flatMap((b) => b.results.flatMap((r) => r.topics)),
-    );
-    for (const b of fixtureBriefings.filter((b) => b.status === 'pubblicato')) {
-      for (const r of b.results) for (const t of r.topics) draftOnlyTopics.delete(t);
-    }
-    assert.ok(draftOnlyTopics.size > 0, 'la bozza di controllo dovrebbe usare un argomento esclusivo');
-    const entries = entriesByTopic(await getSite());
-    for (const slug of draftOnlyTopics) assert.equal(entries.has(slug), false);
   });
 });

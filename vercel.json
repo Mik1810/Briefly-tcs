@@ -10,8 +10,9 @@
     { "source": "/archivio/", "destination": "/archive/", "permanent": true },
     { "source": "/metodo", "destination": "/method/", "permanent": true },
     { "source": "/metodo/", "destination": "/method/", "permanent": true },
-    { "source": "/argomenti", "destination": "/topics/", "permanent": true },
-    { "source": "/argomenti/", "destination": "/topics/", "permanent": true },
-    { "source": "/argomenti/:path*", "destination": "/topics/:path*", "permanent": true }
+    { "source": "/argomenti", "destination": "/", "permanent": true },
+    { "source": "/argomenti/:path*", "destination": "/", "permanent": true },
+    { "source": "/topics", "destination": "/", "permanent": true },
+    { "source": "/topics/:path*", "destination": "/", "permanent": true }
   ]
 }

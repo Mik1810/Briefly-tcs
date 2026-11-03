@@ -1,24 +1,20 @@
-// Righe del database per tabella, derivate da topics e briefing del dominio.
-// Usato da generate-seed.ts (seed per nuovi avvii) e da translate-demo-db.ts (confronto e aggiornamento mirato).
+// Righe del database per tabella, derivate dai briefing del dominio. Usato da generate-seed.ts.
 
-import type { Briefing, Topic } from '../../src/lib/content/types.ts';
+import type { Briefing } from '../../src/lib/content/types.ts';
 
 export type Value = string | number | boolean | null | undefined | string[];
 export type Row = Record<string, Value>;
 
 export interface SeedRows {
-  topics: Row[];
   briefings: Row[];
   results: Row[];
-  result_topics: Row[];
   sources: Row[];
   corrections: Row[];
 }
 
-export function seedRows(topics: Topic[], briefings: Briefing[]): SeedRows {
+export function seedRows(briefings: Briefing[]): SeedRows {
   const results = briefings.flatMap((b) => b.results.map((r, position) => ({ b, r, position })));
   return {
-    topics: topics.map((t, position) => ({ slug: t.slug, name: t.name, description: t.description, position })),
     briefings: briefings.map((b) => ({
       date: b.date,
       status: b.status,
@@ -42,9 +38,6 @@ export function seedRows(topics: Topic[], briefings: Briefing[]): SeedRows {
       formalization: r.status.formalization,
       verification: r.status.verification,
     })),
-    result_topics: results.flatMap(({ r }) =>
-      r.topics.map((slug, position) => ({ result_id: r.id, topic_slug: slug, position })),
-    ),
     sources: results.flatMap(({ r }) =>
       r.sources.map((s, position) => ({
         result_id: r.id,

@@ -314,17 +314,6 @@ main {
   white-space: nowrap;
 }
 
-.topic-list {
-  margin-top: 1.5rem;
-  padding: 0;
-  list-style: none;
-}
-
-.topic-list li {
-  padding: 1.25rem 0;
-  border-bottom: 1px solid var(--rule);
-}
-
 /* ---------- Pagine semplici ---------- */
 
 .page-header {

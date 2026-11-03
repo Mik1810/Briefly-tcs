@@ -1,6 +1,9 @@
 # 008: Internal coverage period does not match the "since the last post" window
 
-- Status: open
+- Status: closed on 2026-11-03 with option 2: when the post has no `coverage`, the publisher stores it from the
+  date of the last post published before it (3 days back if there is none) to the previous day
+  (`coverageSinceLastPost` in `scripts/lib/publisher.ts`). The value is excluded from the comparison of
+  already-published posts, so older rows with the previous rule do not cause conflicts. Tests added.
 - Priority: low
 - Opened: 2026-11-01
 

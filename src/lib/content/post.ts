@@ -4,8 +4,8 @@
 // Valori pubblici in inglese nel file, convertiti nei valori interni (italiani) dello schema.
 //
 // Campi concordati con l'utente il 2026-11-01 (sessione 2026-11-01_13-54-23): un briefing al giorno, stati
-// scientifici mantenuti. Il periodo coperto resta nel DB ma non va scritto né mostrato: se assente vale "ieri".
-// Gli argomenti sono accantonati: il post non li contiene e il lettore non li vede.
+// scientifici mantenuti. Il periodo coperto resta nel DB ma non va scritto né mostrato: se assente vale "ieri",
+// e il publisher lo ricalcola dall'ultimo post pubblicato. Gli argomenti sono stati eliminati il 2026-11-03.
 
 import { isIsoDate } from '../dates.ts';
 import type {
@@ -157,7 +157,6 @@ export function postToBriefing(file: string, raw: unknown, takenIds: ReadonlySet
       id,
       title: result.title as string,
       summary: result.summary as string,
-      topics: [],
       status: {
         publication: mapped(`${path}.publication`, PUBLICATION, result.publication),
         formalization: mapped(`${path}.formalization`, FORMALIZATION, result.formalization ?? 'not-stated'),

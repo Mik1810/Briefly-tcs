@@ -1,19 +1,17 @@
 import { FORMALIZATION_LABELS, PUBLICATION_LABELS, VERIFICATION_LABELS } from '../lib/content/labels.ts';
 import { resultAnchor } from '../lib/content/repository.ts';
-import type { Result, Topic } from '../lib/content/types.ts';
+import type { Result } from '../lib/content/types.ts';
 import HtmlBody from './HtmlBody.tsx';
 import SourceList from './SourceList.tsx';
-import TopicLinks from './TopicLinks.tsx';
 
 interface Props {
   result: Result;
-  topics: Topic[];
   /** Corpo già renderizzato in build. */
   bodyHtml: string;
   position: number;
 }
 
-export default function ResultSection({ result, topics, bodyHtml, position }: Props) {
+export default function ResultSection({ result, bodyHtml, position }: Props) {
   const anchor = resultAnchor(result);
   const { status } = result;
   return (
@@ -34,14 +32,6 @@ export default function ResultSection({ result, topics, bodyHtml, position }: Pr
           <div>
             <dt>AI use</dt>
             <dd>{result.aiUse}</dd>
-          </div>
-        ) : null}
-        {topics.length > 0 ? (
-          <div>
-            <dt>Topics</dt>
-            <dd>
-              <TopicLinks topics={topics} />
-            </dd>
           </div>
         ) : null}
       </dl>

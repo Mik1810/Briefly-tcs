@@ -10,7 +10,7 @@ import {
   mapBriefingRow,
   type BriefingRow,
 } from '../../src/lib/content/supabase/source.ts';
-import type { Briefing, Topic } from '../../src/lib/content/types.ts';
+import type { Briefing } from '../../src/lib/content/types.ts';
 import { collectContentProblems } from '../../src/lib/content/validate.ts';
 import { renderInlineMath, renderMarkdown } from '../../src/lib/markdown.ts';
 
@@ -58,7 +58,7 @@ export function readPublisherConfig(env: Env = process.env): PublisherConfig {
 
 /** Accesso al database necessario al publisher; sostituibile nei test. */
 export interface PublisherDb {
-  topics(): Promise<Topic[]>;
+  /** Id dei risultati pubblicati → data del loro briefing (anche per sapere quali giorni hanno un post). */
   resultIds(): Promise<Map<string, string>>;
   briefing(date: string): Promise<Briefing | undefined>;
   publish(briefing: Briefing): Promise<'published' | 'exists'>;
@@ -86,8 +86,6 @@ export function createRestDb(config: PublisherConfig): PublisherDb {
   };
 
   return {
-    topics: async () =>
-      (await request('GET', 'topics?select=slug,name,description&order=position')) as Topic[],
     resultIds: async () => {
       const rows = (await request('GET', 'results?select=id,briefing_date')) as { id: string; briefing_date: string }[];
       return new Map(rows.map((row) => [row.id, row.briefing_date]));
@@ -122,6 +120,21 @@ function addDays(isoDate: string, days: number): string {
   return date.toISOString().slice(0, 10);
 }
 
+/** Senza periodo coperto nel file, il dato non è scritto dall'autore: escluso dal confronto con il DB. */
+function comparable(briefing: Briefing, authoredCoverage: boolean): Briefing {
+  return authoredCoverage ? briefing : { ...briefing, coverage: { from: '', to: '' } };
+}
+
+/**
+ * Periodo coperto (dato interno, mai mostrato) coerente con la finestra del task "dall'ultimo post":
+ * dal giorno dell'ultimo post pubblicato prima di `date` (al massimo 3 giorni prima se non ce ne sono) a ieri.
+ */
+export function coverageSinceLastPost(date: string, publishedDates: Iterable<string>): { from: string; to: string } {
+  const to = addDays(date, -1);
+  const last = [...publishedDates].filter((day) => day < date).sort().at(-1);
+  return { from: last && last <= to ? last : addDays(date, -3), to };
+}
+
 export interface PostFile {
   path: string;
   text: string;
@@ -152,7 +165,7 @@ export async function publishPosts(
   const report: PublishReport = { published: [], unchanged: [], problems: [] };
   const fail = (path: string, message: string) => report.problems.push(`${path}: ${message}`);
 
-  const [topics, resultIds] = await Promise.all([db.topics(), db.resultIds()]);
+  const resultIds = await db.resultIds();
 
   const parsed: { path: string; raw: unknown; date: string }[] = [];
   for (const file of files) {
@@ -172,9 +185,13 @@ export async function publishPosts(
       // Id già usati da altri giorni: quelli del briefing stesso non contano per il confronto.
       const taken = new Set([...resultIds].filter(([, day]) => day !== date).map(([id]) => id));
       const briefing = postToBriefing(path, raw, taken);
+      const authoredCoverage = typeof raw === 'object' && raw !== null && 'coverage' in raw;
+      if (!authoredCoverage) briefing.coverage = coverageSinceLastPost(date, resultIds.values());
 
       if (existing) {
-        if (canonical(existing) === canonical(briefing)) report.unchanged.push(date);
+        if (canonical(comparable(existing, authoredCoverage)) === canonical(comparable(briefing, authoredCoverage))) {
+          report.unchanged.push(date);
+        }
         else fail(path, `il ${date} è già pubblicato con contenuto diverso; modifiche e correzioni non sono automatiche`);
         continue;
       }
@@ -182,7 +199,7 @@ export async function publishPosts(
         fail(path, `data ${date} troppo nel futuro rispetto a oggi (${today} UTC)`);
         continue;
       }
-      const problems = collectContentProblems({ topics, briefings: [briefing] });
+      const problems = collectContentProblems({ briefings: [briefing] });
       // Stesso rendering della build: una formula non valida pubblicata bloccherebbe ogni build successiva.
       const markdown = [
         ...(briefing.intro ? [{ source: briefing.intro, where: 'intro' }] : []),

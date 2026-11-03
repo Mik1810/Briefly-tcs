@@ -97,25 +97,6 @@ export function collectContentProblems(content: RawContent): string[] {
   const problems: string[] = [];
   const report: Report = (path, message) => problems.push(`${path}: ${message}`);
 
-  const topicSlugs = new Set<string>();
-  if (!Array.isArray(content.topics)) report('topics', 'elenco argomenti mancante');
-  for (const [i, topic] of (content.topics ?? []).entries()) {
-    const path = `argomento[${i}]`;
-    if (!isRecord(topic)) {
-      report(path, 'argomento non valido');
-      continue;
-    }
-    if (typeof topic.slug !== 'string' || !SLUG.test(topic.slug)) {
-      report(`${path}.slug`, `slug non valido ${JSON.stringify(topic.slug)}`);
-    } else if (topicSlugs.has(topic.slug)) {
-      report(`${path}.slug`, `slug duplicato "${topic.slug}"`);
-    } else {
-      topicSlugs.add(topic.slug);
-    }
-    requirePlainText(report, `${path}.name`, topic.name);
-    requirePlainText(report, `${path}.description`, topic.description);
-  }
-
   const dates = new Set<string>();
   const resultIds = new Set<string>();
   if (!Array.isArray(content.briefings)) report('briefings', 'elenco briefing mancante');
@@ -179,20 +160,6 @@ export function collectContentProblems(content: RawContent): string[] {
       requirePlainText(report, `${rPath}.summary`, result.summary);
       requireText(report, `${rPath}.body`, result.body);
       if (result.aiUse !== undefined) requirePlainText(report, `${rPath}.aiUse`, result.aiUse);
-
-      // Argomenti facoltativi (accantonati dal 2026-11-01): se presenti devono restare nel vocabolario.
-      if (!Array.isArray(result.topics)) {
-        report(`${rPath}.topics`, 'elenco argomenti mancante');
-      } else {
-        const seen = new Set<unknown>();
-        for (const slug of result.topics) {
-          if (seen.has(slug)) report(`${rPath}.topics`, `argomento ripetuto ${JSON.stringify(slug)}`);
-          seen.add(slug);
-          if (typeof slug !== 'string' || !topicSlugs.has(slug)) {
-            report(`${rPath}.topics`, `argomento ${JSON.stringify(slug)} fuori vocabolario`);
-          }
-        }
-      }
 
       const status: Record<string, unknown> = isRecord(result.status) ? result.status : {};
       requireOneOf(report, `${rPath}.status.publication`, PUBLICATION_STATUSES, status.publication);

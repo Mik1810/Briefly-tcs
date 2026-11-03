@@ -1,6 +1,10 @@
 # 009: Topics are set aside
 
-- Status: waiting for the owner's decision
+- Status: closed on 2026-11-03. The owner chose to remove topics entirely: `/topics/` pages, topic components,
+  model fields, validation, fixtures, seed and checks were removed; migration `20261103210000_drop_topics.sql`
+  updates `publish_briefing` and drops `topics` and `result_topics` (applied locally and in the hosted project,
+  recorded in the migration history). `/topics/` and `/argomenti/` redirect to the home page. The obsolete
+  one-off script `scripts/translate-demo-db.ts` was deleted with them.
 - Priority: low
 - Opened: 2026-11-01
 

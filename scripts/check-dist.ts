@@ -3,7 +3,7 @@
 // nessuna risorsa remota né JavaScript nelle pagine, a parte lo script facoltativo di copia del link negli
 // articoli. Stampa anche le misure delle risorse.
 // Uscita con codice 1 al primo insieme di errori. Con Supabase le bozze non arrivano alla build (RLS):
-// restano il controllo del marcatore e quello sugli argomenti senza risultati pubblicati.
+// resta il controllo del marcatore.
 
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { join, relative, resolve, sep } from 'node:path';
@@ -93,14 +93,8 @@ for (const draft of drafts) {
   }
 }
 
-// 2. Argomenti: pagina solo se c'è almeno un risultato pubblicato.
-const publishedTopics = new Set(published.flatMap((b) => b.results.flatMap((r) => r.topics)));
-for (const topic of raw.topics) {
-  const exists = existsSync(join(DIST, 'topics', topic.slug, 'index.html'));
-  if (exists !== publishedTopics.has(topic.slug)) {
-    fail(`argomento ${topic.slug}: pagina ${exists ? 'presente senza risultati pubblicati' : 'mancante'}`);
-  }
-}
+// 2. Argomenti eliminati il 2026-11-03: nessuna pagina /topics/ deve essere generata.
+if (existsSync(join(DIST, 'topics'))) fail('topics/: pagine degli argomenti generate nonostante la rimozione');
 
 // 3. Briefing pubblicati: pagina, date, ancore dei risultati, etichetta dimostrativa, presenza in archivio.
 const archive = readFileSync(join(DIST, 'archive', 'index.html'), 'utf8');

@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BriefingLead from '../components/BriefingLead.tsx';
 import BriefingRow from '../components/BriefingRow.tsx';
-import { briefingTopics, getSite } from '../lib/content/repository.ts';
+import { getSite } from '../lib/content/repository.ts';
 
 // La home mostra l'ultimo briefing in evidenza e un numero limitato di precedenti; il resto è in archivio.
 const HOME_LIMIT = 10;
@@ -19,19 +19,19 @@ const recent = others.slice(0, HOME_LIMIT - 1);
 >
   {
     lead ? (
-      <BriefingLead briefing={lead} topics={briefingTopics(site, lead)} />
+      <BriefingLead briefing={lead} />
     ) : (
       <p class="empty">No published briefings.</p>
     )
   }
   {
     recent.length > 0 ? (
-      <section class="list" aria-labelledby="precedenti">
-        <h2 id="precedenti" class="section-heading">
+      <section class="list" aria-labelledby="previous">
+        <h2 id="previous" class="section-heading">
           Previous briefings
         </h2>
         {recent.map((briefing) => (
-          <BriefingRow briefing={briefing} topics={briefingTopics(site, briefing)} headingLevel={3} />
+          <BriefingRow briefing={briefing} headingLevel={3} />
         ))}
       </section>
     ) : null
