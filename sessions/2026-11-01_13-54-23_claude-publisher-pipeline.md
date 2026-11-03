@@ -491,4 +491,10 @@ Decisione dell'utente: "Sì, procedi" sull'issue #2.
   daily check 2026-10-31 → HTTP 404, aperta issue #11 "Daily post missing: 2026-10-31".
 - Non verificato: esecuzione reale dello step di failure su GitHub; ricezione delle notifiche da parte
   dell'utente (gli è chiesto di confermare, poi #11 si chiude).
+- Riferito dall'utente: la notifica della #11 NON è arrivata. Ipotesi (non verificabile senza scope
+  notifications): le issue nuove notificano solo chi "segue" il repository con certe impostazioni; assegnazione e
+  menzione generano notifiche "participating", inviate anche per email con le impostazioni predefinite.
+- Eseguito: entrambe le issue automatiche ora menzionano @<owner> e sono assegnate al proprietario. Main 10eb14a,
+  posts 6aa6d5b. #11 chiusa come prova. Nuova prova (run 41686985407, data 2026-10-30): aperta #12
+  "Daily post missing: 2026-10-30", assegnata a Mik1810 (verificato via API). Ricezione da confermare.
 
