@@ -6,6 +6,8 @@
 # solo se almeno un post è stato pubblicato, quindi nessun ciclo commit → build → commit.
 #
 # Secret richiesti nel repository: TCS_SUPABASE_URL, TCS_SUPABASE_SECRET_KEY, VERCEL_DEPLOY_HOOK_URL.
+# In caso di errore apre una issue con GITHUB_TOKEN (issues: write); vedi anche daily-post-check.yml.
+# Ogni modifica di questo file va copiata anche nella branch posts, da cui GitHub lo esegue.
 
 name: Publish posts
 
@@ -22,6 +24,7 @@ on:
 
 permissions:
   contents: read
+  issues: write
 
 concurrency:
   group: publish-posts
@@ -60,7 +63,9 @@ jobs:
         env:
           TCS_SUPABASE_URL: ${{ secrets.TCS_SUPABASE_URL }}
           TCS_SUPABASE_SECRET_KEY: ${{ secrets.TCS_SUPABASE_SECRET_KEY }}
-        run: node scripts/publish-posts.ts ${{ inputs.dry_run && '--dry-run' || '' }} ../content/posts
+        run: |
+          set -o pipefail
+          node scripts/publish-posts.ts ${{ inputs.dry_run && '--dry-run' || '' }} ../content/posts 2>&1 | tee "$RUNNER_TEMP/publish.log"
 
       # Anche se un altro post è fallito, quelli pubblicati devono comparire sul sito.
       - name: Trigger Vercel production build
@@ -68,3 +73,16 @@ jobs:
         env:
           VERCEL_DEPLOY_HOOK_URL: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
         run: curl --fail --silent --show-error --max-time 30 -X POST "$VERCEL_DEPLOY_HOOK_URL" > /dev/null
+
+      # Avviso: una issue per ogni run fallito (notifica email/app al proprietario), con gli errori del publisher.
+      # Il publisher non stampa mai chiavi; il log contiene solo percorsi, date ed errori di validazione.
+      - name: Open an issue on failure
+        if: ${{ failure() }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          errors=$(grep -E '^ERRORE|^  ' "$RUNNER_TEMP/publish.log" 2>/dev/null | head -40 || true)
+          [ -n "$errors" ] || errors='No publisher output: the failure happened before or after the publish step.'
+          body=$(printf 'The publish workflow failed, so new posts may not be online.\n\nRun: %s\n\n```\n%s\n```\n\nOpened automatically by the "Publish posts" workflow.' "$RUN_URL" "$errors")
+          gh issue create -R "${{ github.repository }}" --title "Publish failed ($(TZ=Europe/Rome date +%F), run ${{ github.run_id }})" --body "$body"
