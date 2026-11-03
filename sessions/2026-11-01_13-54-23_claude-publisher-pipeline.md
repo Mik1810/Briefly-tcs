@@ -526,4 +526,8 @@ Decisione dell'utente: non intende correggere i post; la sezione "Corrections an
   (aggiunta la frase "Published briefings are not corrected afterwards.", descrizione aggiornata).
 - Invariati: modello dati, validazione e tabella `corrections` nel DB (vuota nel cloud).
 - Issue 004 chiusa come "not planned" (file, indice e GitHub).
+- Verificato: check 0 errori, 48/48 test; build fixture (demo con correzioni) e build cloud completate con dist
+  sostituita; build locale non eseguibile perché lo stack Supabase locale è spento dopo il riavvio (non
+  riavviato). Push cb30f7e; 19:52:59 pagina del 3/11 senza "Corrections and updates", con "Copy link"; /method/
+  con "not corrected afterwards".
 
