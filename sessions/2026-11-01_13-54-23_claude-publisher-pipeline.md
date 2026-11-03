@@ -606,4 +606,7 @@ categorie; l'utente le ha approvate tutte.
   Non modificati: CLAUDE.md (istruzioni dell'utente, cita ancora docs/coordination come regola), migrazione
   20261101120237 già applicata (commento con rimando storico), registri storici delle sessioni.
 - Issue 010 aggiornata: restano da archiviare le attività di prova in ChatGPT e da decidere sulla chat tecnica.
+- Decisione dell'utente: la chat tecnica di ChatGPT resta. Pagina "Programmate": le 6 attività di prova sono nel
+  filtro "Completata"; il menu "Altre azioni" offre solo "Elimina" (nessuna archiviazione). Menu chiuso senza
+  azioni: l'eliminazione definitiva di dati nell'account ChatGPT spetta all'utente. Push b322090 per la pulizia.
 

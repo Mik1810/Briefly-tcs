@@ -14,8 +14,9 @@
   `docs/HANDOFF_CLAUDE.md`, `docs/design/`, `docs/testing/`)~~: deleted on 2026-11-03 with the owner's consent;
   tracked ones remain in Git history up to 5ee701b. `docs/SVILUPPO.md` rewritten as current development notes.
 - Completed ChatGPT test tasks ("scheduler probe", "unattended write probe", "single post run",
-  "single post run (3 days)", "v2", "v3"): can be archived from the Scheduled page.
-- The ChatGPT chat used for the tests: keep or archive at the owner's choice.
+  "single post run (3 days)", "v2", "v3"): visible under the "Completata" filter of the Scheduled page. The only
+  action offered is "Elimina" (permanent deletion, no archive): to be done by the owner, not by Claude.
+- ~~The ChatGPT chat used for the tests~~: kept by the owner's choice (2026-11-03).
 
 ## Closing criteria
 
