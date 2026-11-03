@@ -480,16 +480,19 @@ main {
   margin-top: 1.5rem;
 }
 
-.permalink {
-  margin-top: 1rem;
-  font-family: var(--sans);
-  font-size: 0.85rem;
+.result-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
 .permalink {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  font-family: var(--sans);
+  font-size: 0.85rem;
 }
 
 .permalink a {

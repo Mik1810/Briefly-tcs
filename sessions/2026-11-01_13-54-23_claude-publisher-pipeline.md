@@ -500,3 +500,11 @@ Decisione dell'utente: "Sì, procedi" sull'issue #2.
 - Riferito dall'utente: la notifica della #12 è arrivata. Chiuse #12 (prova) e #2 (risolta); file 002 e indice
   aggiornati. Lo step "Publish failed" non è ancora stato eseguito su GitHub.
 
+## Posizione dell'icona di copia — 2026-11-03 sera
+
+Richiesta dell'utente: l'icona in fondo al risultato, sotto le fonti, sembra "vuota" lì.
+- ResultSection: icona e stato "Link copied" spostati nella riga di "RESULT N", allineati a destra
+  (`.result-head` flex). Check 0 errori, 48/48 test; build cloud con 3 briefing e check-dist pulito.
+- Server statico temporaneo su 127.0.0.1:4322 non raggiungibile da Windows: fermato; verifica a vista sul sito
+  dopo il push.
+
