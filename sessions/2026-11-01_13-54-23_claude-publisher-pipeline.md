@@ -612,4 +612,7 @@ categorie; l'utente le ha approvate tutte.
 - Riferito dall'utente: attività di prova eliminate. Verificato da Claude: filtro "Completata" e "In pausa" vuoti,
   "Attiva" contiene solo "Briefing quotidiano ricerca TCS". Issue #10 chiusa (file, indice, GitHub).
   Issue ancora aperta: #1 (verifica della pubblicazione automatica del 4 novembre).
+- Domanda dell'utente: il vecchio briefing riportava 5-10 risultati al giorno, ora al massimo 3. Spiegato che il
+  limite "1 to 3" è nel prompt v2/v3; proposte: 3-8 in dettaglio, misto (2-3 approfonditi + fino a 7 brevi), o
+  lasciare. Decisione dell'utente: lasciare 1-3 per il momento. Nessuna modifica.
 
