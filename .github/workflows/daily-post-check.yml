@@ -1,0 +1,54 @@
+# Controllo giornaliero: alle 12:00 (Europe/Rome, ora solare) verifica che la pagina del giorno sia online.
+# Se manca apre una issue (notifica email/app al proprietario) con la causa più probabile: nessun file su `posts`,
+# pubblicazione fallita o build Vercel non aggiornata. Solo HTTP pubblico e GITHUB_TOKEN: nessun nuovo secret.
+# Gira da main (i workflow programmati usano sempre la branch predefinita).
+
+name: Daily post check
+
+on:
+  schedule:
+    - cron: '0 11 * * *'
+  workflow_dispatch:
+    inputs:
+      date:
+        description: Date to check (YYYY-MM-DD), default today in Europe/Rome
+        required: false
+
+permissions:
+  contents: read
+  actions: read
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+      SITE: https://briefly-tcs.vercel.app
+    steps:
+      - name: Check today's page
+        run: |
+          set -euo pipefail
+          day="${{ inputs.date }}"
+          [ -n "$day" ] || day=$(TZ=Europe/Rome date +%F)
+          code=$(curl -s -o /dev/null -w '%{http_code}' "$SITE/briefing/$day/?check=$(date +%s)")
+          echo "Page /briefing/$day/: HTTP $code"
+          [ "$code" = 200 ] && exit 0
+
+          if gh api "repos/$REPO/contents/posts/$day.json?ref=posts" --silent 2>/dev/null; then
+            last=$(gh run list -R "$REPO" --workflow publish-posts.yml --limit 1 --json conclusion,url -q '.[0] | "\(.conclusion) \(.url)"')
+            reason="posts/$day.json exists on the posts branch, but the page is not online. Latest publish run: $last. Either the publisher rejected the post or the Vercel build did not complete."
+          else
+            reason="No posts/$day.json on the posts branch: the ChatGPT task did not write a post (no news found, the run did not start, or it stopped waiting for a confirmation)."
+          fi
+
+          title="Daily post missing: $day"
+          existing=$(gh issue list -R "$REPO" --state open --search "\"$title\" in:title" --json number -q '.[0].number')
+          body=$(printf '%s\n\nChecked %s/briefing/%s/ at %s UTC: HTTP %s.\n\nOpened automatically by the "Daily post check" workflow.' "$reason" "$SITE" "$day" "$(date -u +%H:%M)" "$code")
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" -R "$REPO" --body "$body"
+          else
+            gh issue create -R "$REPO" --title "$title" --body "$body"
+          fi
