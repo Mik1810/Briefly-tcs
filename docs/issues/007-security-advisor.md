@@ -1,6 +1,8 @@
 # 007: Re-run the Supabase Security Advisor after the new migrations
 
-- Status: open
+- Status: closed on 2026-11-03. After rerunning the linter: Security Advisor 0 errors, 0 warnings, 0 suggestions;
+  Performance Advisor 0 errors, 0 warnings, 1 info ("Unused Index" on `public.result_topics`, expected while
+  topics are set aside, see 009).
 - Priority: low
 - Opened: 2026-11-01
 

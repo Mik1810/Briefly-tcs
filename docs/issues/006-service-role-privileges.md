@@ -1,6 +1,10 @@
 # 006: Reduce service_role write privileges in the hosted project
 
-- Status: open
+- Status: closed on 2026-11-03 with migration `20261103200000_service_role_read_only.sql` (revokes INSERT,
+  UPDATE, DELETE, TRUNCATE on the six tables). Hosted project now matches the local stack: service_role has
+  REFERENCES, SELECT, TRIGGER and EXECUTE on `publish_briefing`. Locally, direct insert/delete with the secret key
+  return 403 and publishing through the RPC still works; on GitHub the publisher dry run succeeds. Supabase's
+  default privileges for future tables in `public` were not changed.
 - Priority: medium
 - Opened: 2026-11-01
 

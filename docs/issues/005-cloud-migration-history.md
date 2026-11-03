@@ -1,6 +1,12 @@
 # 005: Align the migration history of the hosted Supabase project
 
-- Status: open
+- Status: closed on 2026-11-03. Schema fingerprints (columns, constraints, indexes, policies, functions, EXECUTE,
+  anon/authenticated grants, RLS) were identical locally and in the hosted project, apart from the pre-existing
+  `rls_auto_enable` function. In the SQL Editor, `supabase_migrations.schema_migrations` was created (same columns
+  as the CLI's: version, statements, name; RLS enabled) and the five versions up to `20261103200000` were recorded
+  as applied without being run again (`statements` left NULL). For new migrations: run the file in the SQL Editor
+  and insert its version and name into that table, or link the CLI (`supabase login`, `supabase link`) and use
+  `supabase db push`, which needs the database password.
 - Priority: medium
 - Opened: 2026-11-01
 

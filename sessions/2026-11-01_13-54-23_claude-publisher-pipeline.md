@@ -540,3 +540,29 @@ Richiesta dell'utente: avviare lo stack, poi riepilogo di issue aperte, lavorabi
   allo stato abituale.
 - Issue aperte su GitHub: #1, #5, #6, #7, #8, #9, #10. Servizi attivi: stack locale (55321/55322).
 
+## Issue #5, #6, #7 insieme — dalle 19:5x del 2026-11-03
+
+Decisione dell'utente: lavorare su #5, poi "anche 6 e 7 insieme".
+- Locale: supabase_migrations.schema_migrations (version text PK, statements text[], name text) contiene le 4
+  migrazioni; service_role locale ha solo REFERENCES, SELECT, TRIGGER, TRUNCATE sulle tabelle.
+- Impronta dello schema public (colonne, vincoli, indici, policy, funzioni, EXECUTE, grant anon/authenticated,
+  RLS, grant service_role) preparata in una query di sola lettura; calcolata in locale. `supabase db query` legge
+  un `--` iniziale come opzione: usato `-f`. La CLI offre `db query --linked` via Management API (solo login).
+- Migrazione #6 `20261103200000_service_role_read_only.sql`: revoca INSERT/UPDATE/DELETE/TRUNCATE di
+  service_role sulle sei tabelle. Locale: applicata; insert/delete diretti con chiave secret → 403 permission
+  denied; publisher via RPC ancora ok (post di prova pubblicato e cancellato).
+- Cloud: sessione Supabase del pannello scaduta (pagina di accesso); in attesa dell'accesso dell'utente.
+- L'utente rientra in Supabase nel pannello (accesso via GitHub, eseguito da lui).
+- Impronta cloud (SQL Editor, sola lettura): colonne 44, vincoli 45, indici 14, policy 6, funzioni 1 (escluse
+  rls_auto_enable), EXECUTE 3, grant anon/authenticated 6, RLS 6, tutte con md5 identici al locale.
+  rls_auto_enable presente solo nel cloud; tabella storico assente.
+- Transazione nel cloud: revoca della #6 + creazione supabase_migrations.schema_migrations (version text PK,
+  statements text[], name text) + 5 righe (20261031122537 … 20261103200000, statements NULL). Avviso Supabase
+  "tabella senza RLS": scelto da Claude "Run and enable RLS". "Success".
+- Verificato nel cloud: storico con 5 versioni, RLS attiva sulla tabella; service_role REFERENCES,SELECT,TRIGGER
+  su tutte le tabelle; insert/delete false, select true, EXECUTE publish_briefing true; anon EXECUTE false.
+- GitHub: publish dry run 41699596956 ok ("Già presenti e identici: 3"), quindi lettura con la chiave secret ok.
+  La scrittura via RPC nel cloud sarà esercitata dal prossimo post (provata in locale).
+- Security Advisor rilanciato: 0/0/0. Performance Advisor rilanciato: 0/0 e 1 info "Unused Index" su
+  public.result_topics (argomenti accantonati). Issue #5, #6, #7 chiuse (file, indice, GitHub).
+
