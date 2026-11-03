@@ -512,4 +512,6 @@ Richiesta dell'utente: l'icona in fondo al risultato, sotto le fonti, sembra "vu
 - Ripensamento dell'utente: deve stare sotto, perché si condivide dopo aver letto. Riportata in fondo al
   risultato come riga di chiusura: filetto sottile, allineata a destra, icona + testo "Copy link" (prima era
   un'icona sola a sinistra, che sembrava vuota). Stato "Link copied" a sinistra del pulsante.
+  Check 0 errori, 48/48 test, check-dist pulito; push c61ac1e; 19:43 online, verificato a vista nel pannello
+  (riga sotto le fonti, a destra, "Copy link" con icona).
 
