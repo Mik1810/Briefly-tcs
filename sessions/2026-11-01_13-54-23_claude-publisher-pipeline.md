@@ -467,4 +467,11 @@ Eseguito:
 - Verifica offline del file reale con publishPosts (DB simulato, dry run): pubblicabile, 0 problemi. Check 0
   errori, 48/48 test.
 - docs/CHATGPT_TASK_ISTRUZIONI.md: regola esplicita sull'escape dei backslash nel JSON.
+- Push fa21ba5; run manuale 41683127897 (workflow_dispatch, reale): "pubblicati: 2026-11-03", deploy hook
+  success. 18:20:32: /briefing/2026-11-03/ HTTP 200, titolo "Reed–Muller codes attain the optimal length for binary
+  linear three-query local correction", 14 elementi math, 0 katex-error, riga "AI use" presente.
+- Prompt del task ChatGPT NON aggiornato con la regola sull'escape: il pannello browser chiede di nuovo l'accesso a
+  ChatGPT (Google). Non urgente: la normalizzazione nel publisher copre il caso.
+- Osservazioni per le issue: #1 due esecuzioni quotidiane consecutive (2 e 3 novembre) hanno scritto il post da
+  sole, intorno alle 9:18 e 8:57 Roma; #2 il fallimento del 3/11 è stato notato dall'utente solo a sera.
 
