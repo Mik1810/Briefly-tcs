@@ -1,6 +1,7 @@
 # 002: Notice failures of the publish workflow and of the Vercel build
 
-- Status: open
+- Status: closed on 2026-11-03 (alert issues are assigned to and mention the owner; the owner confirmed that the
+  notification of test issue #12 arrived)
 - Priority: high
 - Opened: 2026-11-01
 
@@ -33,7 +34,9 @@ not check the build result.
   with the publisher errors and the run link. Uses only `GITHUB_TOKEN` (`issues: write`).
 - Tested: the check passes for 2026-11-03 and opened #11 for 2026-10-31 (no post). The failure step was simulated
   locally; it has not run on GitHub yet.
-- Still open: the owner must confirm that GitHub issue notifications arrive (email or app).
+- The first test (#11) did not notify the owner. Alert issues now assign and @mention the owner; the second test
+  (#12) reached the owner.
+- Not exercised on GitHub yet: the "Publish failed" step (it will run on the first real failure).
 
 ## Closing criteria
 

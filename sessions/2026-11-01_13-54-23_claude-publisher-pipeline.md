@@ -497,4 +497,6 @@ Decisione dell'utente: "Sì, procedi" sull'issue #2.
 - Eseguito: entrambe le issue automatiche ora menzionano @<owner> e sono assegnate al proprietario. Main 10eb14a,
   posts 6aa6d5b. #11 chiusa come prova. Nuova prova (run 41686985407, data 2026-10-30): aperta #12
   "Daily post missing: 2026-10-30", assegnata a Mik1810 (verificato via API). Ricezione da confermare.
+- Riferito dall'utente: la notifica della #12 è arrivata. Chiuse #12 (prova) e #2 (risolta); file 002 e indice
+  aggiornati. Lo step "Publish failed" non è ancora stato eseguito su GitHub.
 
