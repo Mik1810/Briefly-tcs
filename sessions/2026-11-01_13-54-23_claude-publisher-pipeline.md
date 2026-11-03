@@ -627,4 +627,9 @@ categorie; l'utente le ha approvate tutte.
   arXiv html, ECCC /download, quest'ultimo verificato application/pdf). copy-link.ts rinominato
   result-actions.ts: lo script mostra il pulsante Condividi solo se esiste navigator.share e apre il menu di
   condivisione con titolo e indirizzo del risultato; check-dist accetta solo questo script.
+  Verificato: check 0 errori, 50/50 test; build cloud pulita; link PDF generati per tutti i 6 risultati reali
+  (arXiv /pdf/… e ECCC /download/); un PDF arXiv e quello ECCC rispondono 200 application/pdf. Push 49926ab, online
+  alle 20:45. Nel pannello (senza navigator.share) Condividi resta nascosto come previsto; icone PDF e copia
+  visibili a destra delle fonti. Clic su Condividi provato simulando navigator.share nella pagina: titolo e URL del
+  risultato corretti. Menu di condivisione reale su telefono non verificato.
 
