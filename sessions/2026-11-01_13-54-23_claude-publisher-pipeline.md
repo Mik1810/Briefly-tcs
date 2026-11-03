@@ -619,4 +619,6 @@ categorie; l'utente le ha approvate tutte.
   icone come quella di copia a destra, all'altezza delle fonti; chiede quali altre icone avrebbe senso aggiungere.
   Eseguito: `.result-foot` flex con fonti a sinistra e `.result-actions` a destra allineate in basso, nessun
   filetto, icona senza testo (aria-label e title "Copy link to this result").
+  Check 0 errori, 48/48 test, check-dist pulito; push 897fd15; 20:40 online, verificato a vista nel pannello
+  (icona a destra all'altezza dell'ultima riga delle fonti, nessuna riga). Proposte di altre icone in chat.
 
