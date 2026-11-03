@@ -507,4 +507,6 @@ Richiesta dell'utente: l'icona in fondo al risultato, sotto le fonti, sembra "vu
   (`.result-head` flex). Check 0 errori, 48/48 test; build cloud con 3 briefing e check-dist pulito.
 - Server statico temporaneo su 127.0.0.1:4322 non raggiungibile da Windows: fermato; verifica a vista sul sito
   dopo il push.
+- Push 68b8bd4; 19:40:11 pagina pubblica con `result-head`; verifica a vista nel pannello: icona a destra sulla
+  riga "RESULT 1", sopra il titolo. Server temporaneo 4322 fermato (porta libera).
 
