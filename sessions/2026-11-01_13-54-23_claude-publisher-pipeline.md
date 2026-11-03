@@ -584,4 +584,8 @@ Decisioni dell'utente (domanda con opzioni): #8 "Calcolarlo dall'ultimo post"; #
   corrections, results, sources; storico 6 versioni; funzione senza result_topics, SECURITY DEFINER postgres;
   EXECUTE service_role true, anon false.
 - Check 0 errori, 48/48 test; build locale, fixture e cloud con check-dist pulito; nessun "Topics" nelle pagine.
+- Push f0b3458: issue #8 e #9 chiuse; publish dry run 41702520368 ok (3 post identici, quindi il confronto senza
+  periodo coperto funziona sui post reali). Online alle 20:22: pagine 200 e nessun "Topics", ma /topics/,
+  /topics/<slug>/ e /argomenti/ in 404: le regole `:path*` di Vercel non coprono il percorso con barra finale.
+  Sostituite con `/(.*)`.
 
