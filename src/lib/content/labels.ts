@@ -1,10 +1,4 @@
-import type {
-  CorrectionKind,
-  FormalizationStatus,
-  PublicationStatus,
-  SourceKind,
-  VerificationStatus,
-} from './types.ts';
+import type { FormalizationStatus, PublicationStatus, SourceKind, VerificationStatus } from './types.ts';
 
 // Etichette pubbliche (inglese) dei valori del vocabolario. I valori interni restano invariati.
 // Testo sobrio, senza colori per categoria.
@@ -33,9 +27,4 @@ export const SOURCE_KIND_LABELS: Record<SourceKind, string> = {
   articolo: 'Article',
   preprint: 'Preprint',
   'pagina-web': 'Web page',
-};
-
-export const CORRECTION_KIND_LABELS: Record<CorrectionKind, string> = {
-  sostanziale: 'Substantive correction',
-  minore: 'Minor correction',
 };

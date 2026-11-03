@@ -4,7 +4,6 @@ import 'katex/dist/katex.min.css';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArticleMeta from '../../components/ArticleMeta.tsx';
 import BriefingNav from '../../components/BriefingNav.tsx';
-import CorrectionList from '../../components/CorrectionList.tsx';
 import DemoLabel from '../../components/DemoLabel.tsx';
 import HtmlBody from '../../components/HtmlBody.tsx';
 import ResultIndex from '../../components/ResultIndex.tsx';
@@ -52,7 +51,6 @@ const results = briefing.results.map((result) => ({
       ) : null
     }
 
-    <CorrectionList corrections={briefing.corrections} results={briefing.results} variant="notice" />
     <ResultIndex results={briefing.results} />
     {introHtml ? <HtmlBody html={introHtml} className="prose article-intro" /> : null}
 
@@ -62,7 +60,6 @@ const results = briefing.results.map((result) => ({
       ))
     }
 
-    <CorrectionList corrections={briefing.corrections} results={briefing.results} variant="full" />
 
     {
       /* L'uso dell'AI dichiarato dagli autori sta in ogni risultato ("AI use"); quello del sito nel footer e in

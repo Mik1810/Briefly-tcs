@@ -514,4 +514,16 @@ Richiesta dell'utente: l'icona in fondo al risultato, sotto le fonti, sembra "vu
   un'icona sola a sinistra, che sembrava vuota). Stato "Link copied" a sinistra del pulsante.
   Check 0 errori, 48/48 test, check-dist pulito; push c61ac1e; 19:43 online, verificato a vista nel pannello
   (riga sotto le fonti, a destra, "Copy link" con icona).
+- L'utente non è ancora convinto della posizione ma chiede di lasciarla così per ora; chiede l'elenco delle
+  issue aperte (fornito in chat: #1, #4-#10).
+
+## Niente correzioni (issue #4) — 2026-11-03 sera
+
+Decisione dell'utente: non intende correggere i post; la sezione "Corrections and updates" si può togliere.
+- Rimossi: CorrectionList.tsx (sezione e avviso), uso nella pagina articolo, link "see corrections" nei
+  metadati (resta la data "Updated" se presente), CORRECTION_KIND_LABELS, stili .corrections e
+  .correction-notice, controllo dell'id "corrections" in check-dist, paragrafo "Corrections" in Method
+  (aggiunta la frase "Published briefings are not corrected afterwards.", descrizione aggiornata).
+- Invariati: modello dati, validazione e tabella `corrections` nel DB (vuota nel cloud).
+- Issue 004 chiusa come "not planned" (file, indice e GitHub).
 

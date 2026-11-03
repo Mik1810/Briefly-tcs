@@ -1,6 +1,8 @@
 # 004: A workflow for correcting published posts
 
-- Status: open
+- Status: closed as not planned on 2026-11-03. The owner does not intend to correct published posts: the
+  "Corrections and updates" section, the correction notice and the Method paragraph were removed; Method now says
+  that published briefings are not corrected afterwards. The `corrections` table stays in the database, unused.
 - Priority: medium
 - Opened: 2026-11-01
 

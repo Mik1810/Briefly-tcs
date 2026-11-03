@@ -137,7 +137,6 @@ for (const briefing of published) {
   for (const result of briefing.results) {
     if (!ids.has(resultAnchor(result))) fail(`briefing ${briefing.date}: manca l’ancora del risultato ${result.id}`);
   }
-  if (!ids.has('corrections')) fail(`briefing ${briefing.date}: manca la sezione correzioni`);
   if (!archive.includes(`href="/briefing/${briefing.date}/"`)) fail(`briefing ${briefing.date}: assente dall’archivio`);
 }
 const generatedBriefings = existsSync(join(DIST, 'briefing')) ? readdirSync(join(DIST, 'briefing')) : [];
