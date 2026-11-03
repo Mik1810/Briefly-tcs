@@ -1,6 +1,6 @@
 # Decisioni aggiornate — 31 ottobre 2026
 
-Questo documento prevale sulle proposte iniziali in PIANO.md e sulla prima revisione di Claude.
+Questo documento prevale sulle proposte iniziali (PIANO.md, rimosso il 2026-11-03) e sulla prima revisione di Claude.
 Le sezioni seguenti conservano la storia delle decisioni. Per lo stato corrente e il punto di ripresa leggere sessions/STATO_ATTUALE.md e le ultime voci di questo documento.
 
 ## Confermato dall'utente
@@ -108,7 +108,7 @@ Non sono decisioni dell'utente; restano modificabili.
 - La revisione visiva in browser (360/768/1440 px, zoom, tastiera) non è stata svolta da Claude: è affidata alla QA di Codex.
 - Non realizzati: Supabase, RSS, approfondimenti autonomi come tipo di contenuto separato,
   sostituzione atomica di dist/ in caso di build fallita, processo editoriale e qualunque integrazione AI.
-- Dettagli, misure e limiti: docs/coordination/REPORT_01_CLAUDE.md.
+- Dettagli, misure e limiti: REPORT_01_CLAUDE.md (rimosso il 2026-11-03, nella storia Git).
 
 ## Scelte tecniche dell'incarico 02 (proposte di Claude, da revisionare da Codex)
 
@@ -142,7 +142,7 @@ Non sono decisioni dell'utente; restano modificabili.
   - correzione nello stesso giorno della pubblicazione ammessa (già dall'incarico 01).
 - Ancora non realizzati: flusso editoriale di scrittura nel database, RSS, approfondimenti come tipo separato,
   hosting. La verifica visiva in browser resta alla QA di Codex.
-- Dettagli: docs/coordination/REPORT_02_CLAUDE.md.
+- Dettagli: REPORT_02_CLAUDE.md (rimosso il 2026-11-03, nella storia Git).
 
 ## Decisioni dell’utente registrate il 2026-10-31T18:56:48+01:00
 
@@ -172,7 +172,7 @@ Non sono decisioni dell'utente; restano modificabili.
   - 30 righe aggiornate in un'unica istruzione;
   - il seed inglese è rigenerato per le nuove istanze.
 - Esiti: `npm run check`, `npm run db:verify` e `npm run build` da Supabase superati. `check-dist` verifica anche l'inglese e l'assenza del periodo coperto.
-- Dettagli: docs/coordination/REPORT_04_CLAUDE.md e sessions/2026-10-31_18-57-46_claude-sito-in-inglese.md.
+- Dettagli: REPORT_04_CLAUDE.md (rimosso il 2026-11-03, nella storia Git) e sessions/2026-10-31_18-57-46_claude-sito-in-inglese.md.
 
 ## Stato reale dopo l'incarico 05 (Claude) — 2026-10-31T19:19:25+01:00
 
@@ -183,7 +183,7 @@ Non sono decisioni dell'utente; restano modificabili.
   Questo supera la voce dell'incarico 04 secondo cui il nome nel codice era ancora TCS Daily.
 - Sottotitolo invariato: "Theoretical computer science briefings for graduate students and researchers." Il sottotitolo solo proposto non è stato applicato.
 - Invariati: CSS, URL, schema, dati, pacchetto npm e stack Supabase interni (`tcs-quotidiano`), inglese e assenza del periodo coperto.
-- Verificati: `npm run check` e `npm run build` da Supabase. Dettagli in docs/coordination/REPORT_05_CLAUDE.md.
+- Verificati: `npm run check` e `npm run build` da Supabase. Dettagli in REPORT_05_CLAUDE.md (rimosso il 2026-11-03, nella storia Git).
 
 ## Pubblicazione automatica — decisione dell’utente del 2026-10-31T19:48:47+01:00
 
@@ -222,3 +222,26 @@ Non sono decisioni dell'utente; restano modificabili.
 - Cloud env caricata prima di Astro, esclusi file .env locali in cloud; env esterne Vercel prioritarie. Node24 pin per allineamento al runtime testato.
 - Database online vuoto valido: nessuna migrazione dei demo locali e nessun contenuto inventato. Build reale cloud e pagine vuote verificate.
 - Primo deployment Vercel preparato (modulo import, Hobby) ma non avviato; push e Deploy richiedono consenso esplicito come da AGENTS. Nessuna nuova risorsa a pagamento.
+
+## Pubblicazione automatica in produzione — decisioni dell'utente dal 2026-11-01 al 2026-11-03
+
+Registro di dettaglio: sessions/2026-11-01_13-54-23_claude-publisher-pipeline.md. Questa sezione prevale sulle precedenti.
+
+- Pipeline attiva: task ChatGPT "Briefing quotidiano ricerca TCS" (ogni giorno alle 9:00, testo in
+  docs/CHATGPT_TASK_ISTRUZIONI.md) → `posts/YYYY-MM-DD.json` sulla branch orfana `posts` → GitHub Actions
+  `publish-posts.yml` → RPC `publish_briefing` su Supabase → deploy hook Vercel. Il task originale in italiano è
+  stato sostituito da quello del blog. Avvisi: issue GitHub assegnate al proprietario se la pubblicazione fallisce
+  o se alle 12:00 il post del giorno non è online.
+- Contenuto del post: un briefing al giorno con 1-3 risultati (quasi un post al giorno), letti dal paper completo,
+  300-600 parole ciascuno; stati scientifici mantenuti; campo "AI use" per risultato con quanto dichiarano gli
+  autori. Periodo coperto non scritto né mostrato (calcolato dall'ultimo post). Fonti: arXiv, ECCC, Erdős
+  Problems, OpenAI math, laboratori AI (OpenAI, Anthropic, Google DeepMind), riviste TCS.
+- Argomenti (topics) eliminati da sito, codice e database. Correzioni dei post non previste: sezione rimossa,
+  Method dice che i post non vengono corretti.
+- Sito: URL e ancore in inglese (/archive/, /method/, #result-…) con redirect dai vecchi; footer e Method
+  descrivono la pubblicazione automatica senza revisione umana; unico JavaScript: copia del link di un risultato.
+- Sicurezza: la chiave del publisher (service_role) è in sola lettura sulle tabelle e scrive solo tramite
+  `publish_briefing`; storico delle migrazioni registrato anche nel cloud; Security Advisor senza avvisi.
+- Repository: README vetrina in inglese; pull request disattivate; issue in docs/issues/ e su GitHub con gli
+  stessi numeri. Documenti di coordinamento, piano iniziale, handoff, design e prove della fase prototipo rimossi
+  il 2026-11-03 (recuperabili dalla storia Git fino al commit 5ee701b).

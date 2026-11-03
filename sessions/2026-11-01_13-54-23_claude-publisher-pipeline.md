@@ -593,3 +593,17 @@ Decisioni dell'utente (domanda con opzioni): #8 "Calcolarlo dall'ultimo post"; #
   /topics/ ha risposto 404 per circa un minuto dopo il deploy (cache), poi 308.
 - Issue aperte su GitHub: #1 (attesa del post del 4/11) e #10 (pulizia).
 
+## Pulizia di file datati e di lavoro — 20:27:56+01:00 e seguenti
+
+Richiesta dell'utente: ripulire anche file non più utili, datati o di lavoro. Inventario presentato con quattro
+categorie; l'utente le ha approvate tutte.
+- Eliminati: `.local/` (105 file non tracciati: output e puntatori delle sessioni Codex/Claude, copie di
+  changelog e documentazione Supabase, screenshot delle configurazioni, baseline italiana, vecchia anteprima);
+  branch locale `posts`; tracciati `docs/coordination/` (24), `docs/PIANO.md`, `docs/HANDOFF_CLAUDE.md`,
+  `docs/design/` (7, compresa CONFRONTO.png da 1,5 MB), `docs/testing/` (3). Storia Git fino a 5ee701b.
+- Riferimenti: DECISIONI.md (rimandi ai report marcati come rimossi; nuova sezione con le decisioni dal 1 al 3
+  novembre), SVILUPPO.md riscritto come note di sviluppo attuali, note in STATO_ATTUALE.md e sessions/README.md.
+  Non modificati: CLAUDE.md (istruzioni dell'utente, cita ancora docs/coordination come regola), migrazione
+  20261101120237 già applicata (commento con rimando storico), registri storici delle sessioni.
+- Issue 010 aggiornata: restano da archiviare le attività di prova in ChatGPT e da decidere sulla chat tecnica.
+

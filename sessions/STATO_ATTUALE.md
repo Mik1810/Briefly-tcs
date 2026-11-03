@@ -6,7 +6,9 @@ Aggiornato: 2026-11-01T13:46:14+01:00 — Europe/Rome.
 
 - Sessione principale: [2026-10-31_18-56-48_sito-in-inglese.md](2026-10-31_18-56-48_sito-in-inglese.md).
 - [Indice completo](README.md), inclusi i registri di Claude e le lavorazioni parallele per nome/GitHub.
-- [Decisioni](../docs/DECISIONI.md), [comandi di avvio](../docs/SVILUPPO.md), [report inglese](../docs/coordination/REPORT_04_CLAUDE.md), [report nome](../docs/coordination/REPORT_05_CLAUDE.md).
+- [Decisioni](../docs/DECISIONI.md), [note di sviluppo](../docs/SVILUPPO.md), [issue](../docs/issues/README.md).
+  I report in docs/coordination, il piano, l'handoff e le immagini di design e prova citati più sotto sono stati
+  rimossi il 2026-11-03 (storia Git fino a 5ee701b); restano citati come storia.
 
 ## Stato effettivo
 

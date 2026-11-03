@@ -62,7 +62,8 @@ Ultima prova conclusa: [2026-10-31_20-09-58_ripresa-permessi-github.md](2026-10-
 
 Codex mantiene riepilogo e checkpoint. Claude, per ogni nuovo incarico, scrive il proprio registro datato in questa cartella e lo comunica a Codex.
 Codex collega il registro e gli esiti della revisione nella sessione principale.
-I report preesistenti in `docs/coordination/` restano conservati e sono richiamati dal primo riepilogo.
+I report preesistenti in `docs/coordination/` erano richiamati dal primo riepilogo; sono stati rimossi il
+2026-11-03 su richiesta dell'utente insieme a piano, handoff, design e prove (storia Git fino a 5ee701b).
 
 Ultima attività: [2026-10-31_20-15-21_supabase-cloud.md](2026-10-31_20-15-21_supabase-cloud.md), in attesa della scelta organizzazione Supabase.
 
