@@ -27,6 +27,8 @@ jobs:
       GH_TOKEN: ${{ github.token }}
       REPO: ${{ github.repository }}
       SITE: https://briefly-tcs.vercel.app
+      # Assegnazione e menzione: notifiche "participating", inviate anche via email con le impostazioni predefinite.
+      OWNER: ${{ github.repository_owner }}
     steps:
       - name: Check today's page
         run: |
@@ -46,9 +48,9 @@ jobs:
 
           title="Daily post missing: $day"
           existing=$(gh issue list -R "$REPO" --state open --search "\"$title\" in:title" --json number -q '.[0].number')
-          body=$(printf '%s\n\nChecked %s/briefing/%s/ at %s UTC: HTTP %s.\n\nOpened automatically by the "Daily post check" workflow.' "$reason" "$SITE" "$day" "$(date -u +%H:%M)" "$code")
+          body=$(printf '@%s %s\n\nChecked %s/briefing/%s/ at %s UTC: HTTP %s.\n\nOpened automatically by the "Daily post check" workflow.' "$OWNER" "$reason" "$SITE" "$day" "$(date -u +%H:%M)" "$code")
           if [ -n "$existing" ]; then
             gh issue comment "$existing" -R "$REPO" --body "$body"
           else
-            gh issue create -R "$REPO" --title "$title" --body "$body"
+            gh issue create -R "$REPO" --title "$title" --body "$body" --assignee "$OWNER"
           fi
