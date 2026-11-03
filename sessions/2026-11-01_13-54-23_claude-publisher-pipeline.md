@@ -609,4 +609,7 @@ categorie; l'utente le ha approvate tutte.
 - Decisione dell'utente: la chat tecnica di ChatGPT resta. Pagina "Programmate": le 6 attività di prova sono nel
   filtro "Completata"; il menu "Altre azioni" offre solo "Elimina" (nessuna archiviazione). Menu chiuso senza
   azioni: l'eliminazione definitiva di dati nell'account ChatGPT spetta all'utente. Push b322090 per la pulizia.
+- Riferito dall'utente: attività di prova eliminate. Verificato da Claude: filtro "Completata" e "In pausa" vuoti,
+  "Attiva" contiene solo "Briefing quotidiano ricerca TCS". Issue #10 chiusa (file, indice, GitHub).
+  Issue ancora aperta: #1 (verifica della pubblicazione automatica del 4 novembre).
 
