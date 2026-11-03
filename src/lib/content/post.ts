@@ -68,6 +68,15 @@ function previousDay(isoDate: string): string {
   return day.toISOString().slice(0, 10);
 }
 
+/**
+ * Il generatore a volte raddoppia l'escape nel JSON e il testo letto contiene `\\delta` invece di `\delta`
+ * (post del 2026-11-03). Dentro le formule `\\` seguito da una lettera non è mai voluto (sarebbe un a capo
+ * attaccato a una lettera), quindi diventa `\`. Fuori dalle formule il testo resta intatto.
+ */
+export function normalizeMathEscapes(text: string): string {
+  return text.replace(/\$\$[\s\S]+?\$\$|\$[^$\n]+\$/g, (math) => math.replace(/\\\\(?=[A-Za-z])/g, '\\'));
+}
+
 /** Slug ASCII da un titolo, al massimo 60 caratteri e senza trattini ai bordi. */
 export function slugify(text: string): string {
   return text
@@ -134,7 +143,7 @@ export function postToBriefing(file: string, raw: unknown, takenIds: ReadonlySet
       }
       unknownKeys(sPath, source, SOURCE_KEYS);
       return {
-        title: source.title as string,
+        title: typeof source.title === 'string' ? normalizeMathEscapes(source.title) : (source.title as string),
         authors: source.authors as string[],
         year: source.year as number | undefined,
         venue: source.venue as string | undefined,
@@ -154,7 +163,7 @@ export function postToBriefing(file: string, raw: unknown, takenIds: ReadonlySet
         formalization: mapped(`${path}.formalization`, FORMALIZATION, result.formalization ?? 'not-stated'),
         verification: 'controllo-automatico',
       },
-      body: result.body as string,
+      body: typeof result.body === 'string' ? normalizeMathEscapes(result.body) : (result.body as string),
       sources,
       aiUse: legacy ? undefined : (result.aiUse as string),
     };
@@ -168,7 +177,7 @@ export function postToBriefing(file: string, raw: unknown, takenIds: ReadonlySet
     title: raw.title as string,
     summary: raw.summary as string,
     coverage: { from: coverage.from as string, to: coverage.to as string },
-    intro: raw.intro as string | undefined,
+    intro: typeof raw.intro === 'string' ? normalizeMathEscapes(raw.intro) : (raw.intro as string | undefined),
     results,
     corrections: [],
     aiDisclosure: AUTOMATED_DISCLOSURE,

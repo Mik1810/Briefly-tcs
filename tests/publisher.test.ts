@@ -4,7 +4,13 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 
 import { topics } from '../src/lib/content/fixtures/topics.ts';
-import { AUTOMATED_DISCLOSURE, PostFormatError, postToBriefing, slugify } from '../src/lib/content/post.ts';
+import {
+  AUTOMATED_DISCLOSURE,
+  normalizeMathEscapes,
+  PostFormatError,
+  postToBriefing,
+  slugify,
+} from '../src/lib/content/post.ts';
 import type { Briefing } from '../src/lib/content/types.ts';
 import { publishPosts, readPublisherConfig, type PublisherDb } from '../scripts/lib/publisher.ts';
 
@@ -87,6 +93,15 @@ test('aiUse: obbligatorio nel formato /2, assente e rifiutato nel formato /1 dei
   assert.throws(() => postToBriefing('posts/2026-11-02.json', legacy), /aiUse: campo non previsto/);
   delete (legacy.results[0] as Record<string, unknown>).aiUse;
   assert.equal(postToBriefing('posts/2026-11-02.json', legacy).results[0]?.aiUse, undefined);
+});
+
+test('backslash raddoppiati nelle formule (post del 2026-11-03) normalizzati; il testo fuori formula no', () => {
+  assert.equal(normalizeMathEscapes('Map $C:\\\\mathbb{F}_2^k$ and $(3,\\\\delta)$.'), 'Map $C:\\mathbb{F}_2^k$ and $(3,\\delta)$.');
+  assert.equal(normalizeMathEscapes('$$a \\\\ b$$ keeps the line break; C:\\\\path stays'), '$$a \\\\ b$$ keeps the line break; C:\\\\path stays');
+  const doubled = post();
+  doubled.results[0]!.body = 'We show $\\\\omega < 2.37$ and $k=O_\\\\delta(\\\\log n)$.';
+  const briefing = postToBriefing('posts/2026-11-02.json', doubled);
+  assert.equal(briefing.results[0]?.body, 'We show $\\omega < 2.37$ and $k=O_\\delta(\\log n)$.');
 });
 
 test('slugify produce slug ASCII brevi', () => {

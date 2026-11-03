@@ -448,3 +448,23 @@ le novità di OpenAI, Anthropic, Erdős Problems e altri siti.
   automation-probe/chatgpt-20261031-2001 (`git push origin --delete`); ls-remote mostra solo main e posts.
   Issue 010 aggiornata (file e commento su GitHub #10).
 
+## Ripresa 2026-11-03 — post del giorno non pubblicato (18:16:21+01:00)
+
+Segnalazione dell'utente: "mi sa che oggi non è stato fatto un post".
+Verificato:
+- Branch posts: 91c995f (2026-11-02 08:18Z) e d216479 (2026-11-03 07:57Z), entrambi scritti dal task ChatGPT
+  quotidiano senza interventi (nessuna richiesta di conferma GitHub). /briefing/2026-11-02/ online (200).
+- Run 41599785699 (3/11) FALLITO nello step Publish: "Formula o Markdown non validi in risultato
+  optimal-lower-bound-for-binary-linear-3-query-locally-correc ... Got function '\\' with no arguments as
+  subscript ... O_\\delta". /briefing/2026-11-03/ 404. Nessun dato scritto (comportamento previsto).
+- `gh run view --log` restituiva vuoto; log letto via API dei job.
+- Analisi del file: 14 formule, 11 con backslash raddoppiati (`\\mathbb`, `\\delta`, ...) e nessuna con backslash
+  singolo: doppio escape sistematico di ChatGPT nel JSON. Il post del 2/11 era corretto.
+
+Eseguito:
+- src/lib/content/post.ts: `normalizeMathEscapes` (dentro $…$ e $$…$$, `\\` seguito da lettera → `\`), applicata a
+  corpo, intro e titoli delle fonti. Test aggiunto. Il file di ChatGPT non viene modificato.
+- Verifica offline del file reale con publishPosts (DB simulato, dry run): pubblicabile, 0 problemi. Check 0
+  errori, 48/48 test.
+- docs/CHATGPT_TASK_ISTRUZIONI.md: regola esplicita sull'escape dei backslash nel JSON.
+
