@@ -1,0 +1,54 @@
+{
+  "format": "briefly-post/2",
+  "date": "2026-11-04",
+  "title": "Hyperclique Hardness Falls; Gaussian Sweeps Improve Sparse-Graph Pathwidth",
+  "summary": "A uniform algebraic circuit beats brute-force hyperclique counting for every fixed uniformity, overturning several fine-grained hypotheses. Correlated Gaussian sweeps also improve longstanding pathwidth bounds and exact exponential algorithms.",
+  "results": [
+    {
+      "title": "Hypercliques can be counted faster than brute force for every fixed dimension",
+      "summary": "Uniform arithmetic circuits of size O(nᵏ⁻ε) refute the hyperclique hypothesis and accelerate dense Max-kSAT and arithmetic-progression detection.",
+      "publication": "preprint",
+      "formalization": "not-stated",
+      "aiUse": "The authors state that ChatGPT 6 Pro obtained the main result following their October 12 prompt. ChatGPT and Claude helped explain ideas, compare prior work, proofread and draw figures; they state that none of the manuscript text was AI-generated.",
+      "body": "**Statement and model.** For every fixed integer $k\\ge 3$, Alman, Li, Pant, Pratt and Williams construct a uniform arithmetic circuit for the $k$-hyperclique polynomial\n$$\\Delta_n^{(k)}=\\sum_{\\alpha\\in[n]^k}\\prod_{j=1}^k x^{(j)}_{\\alpha_{-j}}$$\nof size $O(n^{k-\\varepsilon_k})$, where $\\varepsilon_k=2^{-\\Theta(2^k)}>0$. Evaluating the circuit on a $(k-1)$-uniform hypergraph counts its $k$-vertex hypercliques in $n^{k-\\varepsilon_k+o(1)}$ time. Their applications include $2^{(1-\\delta_k)n}\\operatorname{poly}(n,m)$ algorithms for Max-Degree-$k$CSP (hence Max-$k$SAT), and $O(n^{2-2\\varepsilon_k/k})$ detection of nontrivial $k$-term arithmetic progressions in subsets of $\\{0,\\ldots,n\\}$ for fixed $k\\ge4$.\n\n**Previous frontier.** Lincoln, Vassilevska Williams and Williams (SODA 2018) conjectured that detecting a $k$-hyperclique requires $n^{k-o(1)}$ time for $k\\ge4$. They proved that the natural hyperclique tensor has tensor rank $\\Theta(n^k)$, apparently blocking a Strassen-style rank decomposition. The Max-$k$SAT and $k$-arithmetic-progression conjectures likewise ruled out the improvements obtained here. Crucially, the recent claimed subexponential algorithms for 3-SAT do not directly imply these dense Max-$k$SAT improvements: standard reductions can introduce a number of variables proportional to the potentially $\\Theta(n^k)$ clauses.\n\n**Proof mechanism.** The authors distinguish tensor rank from unrestricted arithmetic-circuit complexity. Rank decompositions force a single layer of products of linear forms; deeper set-multilinear circuits can exploit factorizations across different partitions of the $k$ modes. A product of two inner products already illustrates the separation: it has a small circuit but quadratically large tensor rank. The paper first constructs restricted partition-rank identities, using an identity-matrix decomposition that is also related to techniques in the recent OpenAI ETH manuscript.\n\nThe construction then recursively separates high-degree and low-degree contributions to a hyperclique polynomial. Carefully chosen partial transposes and a partitioning lemma control the combinatorial indices; the high-degree part is reduced using rectangular matrix multiplication. For the low-degree part, the Baur–Strassen automatic-differentiation theorem computes all required partial derivatives of a smaller hyperclique circuit at constant-factor overhead. Balancing the degree threshold makes both branches beat the naive exponent, giving a uniform circuit with rational dyadic constants. Standard reductions then transfer the speedup to counting, CSP optimization and progression detection.\n\n**Significance and limits.** This overturns a prominent fine-grained hardness hypothesis with an unconditional algebraic algorithm and illustrates why full tensor-rank lower bounds do not establish arithmetic-circuit lower bounds. The exponent saving is positive but doubly exponentially small as a function of fixed $k$; no practical speedup is implied for moderate inputs. The result is a publicly available arXiv v1 preprint, not a peer-reviewed or proof-assistant-formalized theorem. The authors say the main result came from ChatGPT 6 Pro after their October 12 prompt; ChatGPT and Claude helped with exposition and checking, while the manuscript text was written by the authors.",
+      "sources": [
+        {
+          "title": "Finding Hypercliques Faster Than Brute Force",
+          "authors": [
+            "Josh Alman",
+            "Baitian Li",
+            "Neha Pant",
+            "Kevin Pratt",
+            "Ryan Williams"
+          ],
+          "year": 2026,
+          "venue": "arXiv:2611.05082v1 [cs.DS]",
+          "url": "https://arxiv.org/html/2611.05082v1",
+          "kind": "preprint",
+          "lang": "en"
+        }
+      ]
+    },
+    {
+      "title": "Gaussian sweeps lower the pathwidth of every subcubic graph",
+      "summary": "A correlated-Gaussian construction improves the subcubic pathwidth coefficient from 1/6 to about 0.13982 and yields faster exact graph algorithms.",
+      "publication": "preprint",
+      "formalization": "formalized",
+      "aiUse": "The author reports using OpenAI Codex, ChatGPT 6 Astra, Sol 5.6, Claude Opus 5.5, Sonnet 5.5, Haiku 5.5, Fable 5.1 and GitHub Copilot for research ideas, derivations, proofs, code, certificates, Lean formalization and editing. He states that he directed the work and checked its correctness.",
+      "body": "**Statement and parameters.** For every $n$-vertex graph $G$ of maximum degree three, Gaspers proves\n$$\\operatorname{pw}(G)\\le c_3n+o(n),\\qquad c_3=\\frac{3}{4\\pi}\\arccos\\frac56\\approx0.13982.$$\nThe same leading constant bounds cutwidth and bisection width. For maximum degree four, the paper establishes pathwidth at most $0.2458n+o(n)$ and cutwidth at most $n/3+o(n)$. For arbitrary graphs with $m$ edges, it proves $\\operatorname{pw}(G)\\le 7m/48+o(n)$. The decompositions are algorithmically constructible, and their smaller bags improve exponential-time dynamic programming for several graph problems.\n\n**Previous frontier.** Fomin and Høie (2006), building on the bisection theorem of Monien and Preis, showed that subcubic graphs have pathwidth at most $n/6+o(n)$. For maximum degree four, the earlier general bound was $n/3+o(n)$ (Fomin, Gaspers, Saurabh and Stepanov, 2009); the per-edge bound $13m/75$ came from Scott and Sorkin (2007). The new cubic coefficient had previously appeared only as an upper bound on bisection width of *random* cubic graphs (Lichev and Mitsche, 2023), not every subcubic graph.\n\n**Proof mechanism.** Rather than recursively splitting the graph with balanced edge cuts, the author assigns each vertex a correlated Gaussian label. Each label is a weighted sum of independent standard Gaussians from a ball around that vertex, with weights chosen to correlate adjacent labels strongly. Sweeping a threshold across these labels yields a linear ordering and a path decomposition: its active bag is a frontier of vertices on one side that have a neighbor on the other. The expected frontier size can be bounded locally using only the joint Gaussian distribution of a vertex and its neighbors.\n\nA comparison principle reduces these local distributions to an explicit ideal Gaussian star. Its orthant probabilities give quantitative frontier bounds; the elementary plain sweep already beats $n/6$ for cubic graphs. A refined *median-switched sweep* uses the inner frontier below the median and the outer frontier above it. This removes the last slack and yields the exact displayed $c_3$. A separate bootstrap from degree-specific inequalities produces the per-edge bound. The paper describes discretization of the Gaussian choices and conditional expectations to construct the layouts algorithmically.\n\n**Consequences, evidence and limitations.** Improved pathwidth directly reduces the exponent of table-based dynamic programs; examples include new bounds for Max 2-CSP, dominating set, Hamiltonicity and feedback vertex set. The 191-page preprint provides source code, numerical certificates and Lean 4 proofs. Importantly, the author states that the cubic pathwidth theorem has an unconditional Lean proof, while several other formally stated bounds depend on external computational or analytic certificates; they should not all be described as unconditionally formalized. The coefficient is not proved optimal, and the paper proposes a smaller cubic constant as a conjecture. The AI methodology statement explicitly credits OpenAI Codex and several ChatGPT and Claude models with mathematical ideas, derivations, code, certificates, Lean development and drafting; the author reports checking the results. This is an arXiv preprint, not a peer-reviewed publication.",
+      "sources": [
+        {
+          "title": "Path Decompositions of Sparse Graphs via Gaussian Sweeps and Faster Exponential Algorithms",
+          "authors": [
+            "Serge Gaspers"
+          ],
+          "year": 2026,
+          "venue": "arXiv:2611.05146v1 [cs.DS]",
+          "url": "https://arxiv.org/pdf/2611.05146",
+          "kind": "preprint",
+          "lang": "en"
+        }
+      ]
+    }
+  ]
+}
