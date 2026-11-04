@@ -78,3 +78,5 @@ Ultima sessione: [2026-11-01_13-12-53_collegamento-supabase-cloud.md](2026-11-01
 Ultima sessione: [2026-11-01_13-38-25_primo-deploy-handoff-claude.md](2026-11-01_13-38-25_primo-deploy-handoff-claude.md). Sito https://briefly-tcs.vercel.app online; passaggio completo [HANDOFF_CLAUDE.md](../docs/HANDOFF_CLAUDE.md).
 
 Ultima sessione: [2026-11-04_13-05-03_bozzetti-icona.md](2026-11-04_13-05-03_bozzetti-icona.md) — quattro bozzetti per l’icona, scelta aperta.
+
+Ultima sessione: [2026-11-04_13-06-32_griglia-icone.md](2026-11-04_13-06-32_griglia-icone.md) — 16 bozzetti in griglia 4×4.

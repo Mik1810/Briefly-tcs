@@ -215,3 +215,7 @@ Ultimo registro: [2026-11-01_13-00-27_ripresa-supabase-sicurezza.md](2026-11-01_
 ## Bozzetti icona — 2026-11-04T13:05:29+01:00
 
 Quattro concept visivi proposti all’utente, scelta aperta; nessuna modifica al sito. Registro: [2026-11-04_13-05-03_bozzetti-icona.md](2026-11-04_13-05-03_bozzetti-icona.md).
+
+## Griglia icone — 2026-11-04T13:07:36+01:00
+
+Presentati 16 ulteriori concept in griglia; scelta aperta. Registro: [2026-11-04_13-06-32_griglia-icone.md](2026-11-04_13-06-32_griglia-icone.md).
