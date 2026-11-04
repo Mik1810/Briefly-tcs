@@ -76,3 +76,5 @@ Ultima sessione di ripresa: [2026-11-01_13-00-27_ripresa-supabase-sicurezza.md](
 Ultima sessione: [2026-11-01_13-12-53_collegamento-supabase-cloud.md](2026-11-01_13-12-53_collegamento-supabase-cloud.md). Build cloud reale riuscita; Vercel pronto per consenso finale a push e Deploy.
 
 Ultima sessione: [2026-11-01_13-38-25_primo-deploy-handoff-claude.md](2026-11-01_13-38-25_primo-deploy-handoff-claude.md). Sito https://briefly-tcs.vercel.app online; passaggio completo [HANDOFF_CLAUDE.md](../docs/HANDOFF_CLAUDE.md).
+
+Ultima sessione: [2026-11-04_13-05-03_bozzetti-icona.md](2026-11-04_13-05-03_bozzetti-icona.md) — quattro bozzetti per l’icona, scelta aperta.

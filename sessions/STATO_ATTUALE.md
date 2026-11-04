@@ -211,3 +211,7 @@ Ultimo registro: [2026-11-01_13-00-27_ripresa-supabase-sicurezza.md](2026-11-01_
 - Aggiornamento 16:14: task v3 (paper completi, campo aiUse degli autori, titolo senza nome del sito); post del
   1/11 rigenerato. Punti aperti tracciati in [docs/issues/](../docs/issues/README.md). Pull request disattivate
   nel repository GitHub.
+
+## Bozzetti icona — 2026-11-04T13:05:29+01:00
+
+Quattro concept visivi proposti all’utente, scelta aperta; nessuna modifica al sito. Registro: [2026-11-04_13-05-03_bozzetti-icona.md](2026-11-04_13-05-03_bozzetti-icona.md).
