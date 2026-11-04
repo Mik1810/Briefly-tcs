@@ -633,3 +633,16 @@ categorie; l'utente le ha approvate tutte.
   visibili a destra delle fonti. Clic su Condividi provato simulando navigator.share nella pagina: titolo e URL del
   risultato corretti. Menu di condivisione reale su telefono non verificato.
 
+## Icona del sito — 2026-11-04
+
+Richiesta dell'utente: un'icona significativa per il sito, con bozzetti. Mostrati in chat sei bozzetti (B con
+punto, B in negativo, B con ∎, solo ∎, grafo, ".tcs") e poi quattro varianti di ".tcs". Scelta dell'utente: F2
+(".tcs" corsivo grassetto avorio su fondo inchiostro #20201e, punto #c4566e).
+- Script PowerShell nello scratchpad (System.Drawing): "tcs" in Georgia Bold Italic convertito in tracciati
+  (nessuna dipendenza dai font del visitatore), composizione nella griglia 64x64.
+- Creati public/favicon.svg (3,3 kB), public/favicon-32.png, public/apple-touch-icon.png (180x180, senza
+  angoli arrotondati: li applica il telefono). Anteprima 256 px spostata nello scratchpad.
+- BaseLayout: rimosso il segnaposto `data:` e aggiunti i link a SVG, PNG 32 e apple-touch-icon.
+- Nota: i tracciati derivano dal font Georgia di Windows; da riconsiderare se servisse un'icona con licenza
+  tipografica diversa.
+
