@@ -219,3 +219,7 @@ Quattro concept visivi proposti all’utente, scelta aperta; nessuna modifica al
 ## Griglia icone — 2026-11-04T13:07:36+01:00
 
 Presentati 16 ulteriori concept in griglia; scelta aperta. Registro: [2026-11-04_13-06-32_griglia-icone.md](2026-11-04_13-06-32_griglia-icone.md).
+
+## Bozzetti con .tcs — 2026-11-04T13:09:55+01:00
+
+Presentata griglia 4×4 con .tcs; scelta aperta. Registro: [2026-11-04_13-08-47_icone-tcs.md](2026-11-04_13-08-47_icone-tcs.md).

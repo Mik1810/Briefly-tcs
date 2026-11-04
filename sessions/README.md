@@ -80,3 +80,5 @@ Ultima sessione: [2026-11-01_13-38-25_primo-deploy-handoff-claude.md](2026-11-01
 Ultima sessione: [2026-11-04_13-05-03_bozzetti-icona.md](2026-11-04_13-05-03_bozzetti-icona.md) — quattro bozzetti per l’icona, scelta aperta.
 
 Ultima sessione: [2026-11-04_13-06-32_griglia-icone.md](2026-11-04_13-06-32_griglia-icone.md) — 16 bozzetti in griglia 4×4.
+
+Ultima sessione: [2026-11-04_13-08-47_icone-tcs.md](2026-11-04_13-08-47_icone-tcs.md) — 16 concept con .tcs.
