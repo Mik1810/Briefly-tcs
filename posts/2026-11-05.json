@@ -1,0 +1,56 @@
+{
+  "format": "briefly-post/2",
+  "date": "2026-11-05",
+  "title": "3-Uniform Hyperclique Falls Below Quartic Time; 2×2 Integer Matrix Mortality Is Undecidable",
+  "summary": "Two major preprints overturn longstanding complexity expectations: a deterministic subquartic algorithm for 3-uniform four-hypercliques and an undecidability proof for mortality of 2×2 integer matrices.",
+  "results": [
+    {
+      "title": "The 3-Uniform Hyperclique Hypothesis is False",
+      "summary": "A deterministic O(n³·⁹⁵⁷) algorithm for four-hypercliques refutes the 3-uniform hypothesis and yields faster Max-3-SAT.",
+      "publication": "preprint",
+      "formalization": "not-stated",
+      "aiUse": "The authors state that both proofs were obtained using ChatGPT Sol 6.1, prompted by different suggestions; they rewrote the proofs and report checking their correctness and originality.",
+      "body": "**Statement and context.** For a 3-uniform hypergraph on $n$ vertices, a 4-hyperclique is a four-vertex set whose four triples are all hyperedges. Chan, Itakura, Ma and Yu give a deterministic $O(n^{3.957})$ algorithm for detecting and counting these configurations. By grouping vertices, they obtain truly sub-$n^k$ algorithms for every fixed $k\\ge 4$ in 3-uniform hypergraphs. This refutes the 3-uniform Hyperclique Hypothesis of Lincoln, Vassilevska Williams and Williams. Through an established reduction, the result also yields deterministic Max-3-SAT in $O(2^{0.99n})$ time. These are claims proved in a new arXiv preprint, not a peer-reviewed or formally certified theorem.\n\n**Previous frontier.** Unlike ordinary graph clique, where matrix multiplication yields truly sub-brute-force algorithms, hyperclique with uniformity at least three had resisted constant savings in the exponent: known improvements were only polylogarithmic. The hypothesis had consequently become a standard assumption for conditional lower bounds in geometry, databases, graph patterns and fine-grained complexity. The new paper is distinct from the broader hyperclique announcement covered previously: it targets the especially consequential *3-uniform* case and supplies an explicit exponent for four vertices.\n\n**First proof route.** The authors express the count as the four-array contraction\n$$\\sum_{a,b,c,d}P[a,b,c]Q[a,b,d]R[a,c,d]S[b,c,d].$$\nA reduction using Behrend sets without three-term arithmetic progressions turns this into counting alternating four-cycles in a colored multigraph, with opposite edges required to share colors. Ordinary matrix multiplication would also count cycles with mismatched opposite colors. The key algebraic lemma constructs signed coefficients from families of anticommuting matrices: unwanted terms cancel, while matching-color terms survive. This makes the desired contraction reducible to rectangular matrix multiplication. Optimizing the block sizes and using recent rectangular-multiplication bounds gives the $3.957$ exponent.\n\n**Second proof route and limits.** An independent, shorter argument embeds indices in a Boolean cube and introduces a univariate polynomial whose value at one is the hyperclique count. Fourier inversion via Walsh–Hadamard transforms provides a second expression for its coefficients. Low-degree and high-degree coefficients are computed from different expressions, each by rectangular matrix multiplication; the resulting exponent is $3.998$. Both approaches depend on strong recent rectangular-multiplication bounds. The paper does not establish a similarly explicit result for every uniformity $h>3$, and practical constants are not evaluated.\n\n**AI and verification.** The authors explicitly disclose that both proofs were obtained using ChatGPT Sol 6.1 from different prompts. They say they rewrote the arguments, checked correctness and originality, and wrote the manuscript themselves. This is arXiv v1, announced November 5; no proof-assistant formalization or completed peer review is stated.",
+      "sources": [
+        {
+          "title": "The 3-Uniform Hyperclique Hypothesis is False",
+          "authors": [
+            "Timothy M. Chan",
+            "Reina Itakura",
+            "Zhiyuan Ma",
+            "Yuancheng Yu"
+          ],
+          "year": 2026,
+          "venue": "arXiv:2611.06813v1 [cs.DS]",
+          "url": "https://arxiv.org/html/2611.06813v1",
+          "kind": "preprint",
+          "lang": "en"
+        }
+      ]
+    },
+    {
+      "title": "Mortality Is Undecidable for 2×2 Integer Matrices",
+      "summary": "An explicit family of 5,799 integer 2×2 matrices has undecidable mortality even when all but one matrix are fixed.",
+      "publication": "preprint",
+      "formalization": "formalized",
+      "aiUse": "The authors report using OpenAI Codex and Claude Code for mathematical research, proof development, manuscript preparation and Lean 4 formalization. They also used GPT-5.6-Sol in an earlier investigation that produced partial results.",
+      "body": "**Statement.** Matrix mortality asks whether the zero matrix belongs to the semigroup generated by a given finite collection of integer matrices. Quartz, Shevchenko, De Sterck and Liu prove undecidability already for $2\\times2$ integer matrices. More strongly, there is a *fixed* set $\\mathcal G$ of 5,798 nonsingular integer matrices, each of determinant $\\pm p$ for one fixed prime $p$, and a fixed rational image line $L$, such that deciding mortality of $\\mathcal G\\cup\\{R\\}$ is undecidable when only the nonzero rank-one matrix $R$ varies and $\\operatorname{im}R=L$. Thus the construction uses exactly 5,799 matrices. The companion Lean 4 development is reported to formalize the complete reduction.\n\n**Earlier knowledge.** Mortality was decidable in dimension one and undecidable in dimensions at least three, while the two-dimensional integer case had remained open. Important decidable subclasses include pairs of rational matrices and integer families whose determinants lie in $\\{0,1,-1\\}$. The result closes the dimension gap, but does not determine the minimum number of generators needed for undecidability.\n\n**Machine encoding.** The reduction begins with the halting problem for a fixed universal two-counter machine. The two counters are encoded by the exponents of 2 and 3 in a single positive integer. Increments, conditional decrements and zero tests become arithmetic updates and divisibility tests. A cleanup phase makes every halting run reach the same configuration; reversing the transition graph then gives a fixed source configuration and an input-dependent target. This reversal is essential because the image line of the eventual rank-one matrix must remain fixed.\n\n**Projective simulation.** A rational line in $\\mathbb Q^2$ is represented by one rational coordinate, and nonsingular $2\\times2$ matrices act through fractional-linear transformations. The authors encode program states and counter values in these coordinates and implement arithmetic instructions using a fixed family of matrices. The central soundness obstacle is unrestricted multiplication order: a product could otherwise simulate illegal instruction sequences. Carefully designed residue checks ensure that any incorrect state, digit, scan length or guessed arithmetic operation introduces a prime-denominator defect that subsequent matrices cannot erase. Consequently, reachability between correctly encoded configurations coincides with a genuine computation.\n\n**From reachability to zero.** Given a fixed source line $s$ and target line $t$, take a rank-one matrix $R=u\\lambda$ with image $s$ and kernel $t$. Then $RWR=0$ exactly when a nonsingular word $W$ maps $s$ to $t$; conversely any zero product yields such a word. This converts undecidable projective reachability into mortality while varying only the kernel of $R$. The authors give an explicit generator count and discuss restrictions their construction does not settle.\n\n**AI and verification.** Appendix I states that OpenAI Codex and Claude Code assisted research, proof development, writing and Lean 4 formalization; an earlier GPT-5.6-Sol investigation yielded partial results, while the authors selected the final architecture. Appendix G reports a Lean development with no project-specific unproved axioms or sorry placeholders. That is a reported formalization, not independent validation by this briefing. The paper is arXiv v1, not peer-reviewed.",
+      "sources": [
+        {
+          "title": "Mortality Is Undecidable for 2×2 Integer Matrices",
+          "authors": [
+            "Thanin Quartz",
+            "Ivan O. Shevchenko",
+            "Hans De Sterck",
+            "Jun Liu"
+          ],
+          "year": 2026,
+          "venue": "arXiv:2611.06562v1 [cs.CC]",
+          "url": "https://arxiv.org/html/2611.06562v1",
+          "kind": "preprint",
+          "lang": "en"
+        }
+      ]
+    }
+  ]
+}
