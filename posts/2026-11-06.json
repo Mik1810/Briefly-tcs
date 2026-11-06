@@ -1,0 +1,53 @@
+{
+  "format": "briefly-post/2",
+  "date": "2026-11-06",
+  "title": "Almost-Linear Canonical Cut Hierarchies and Polylogarithmic-Entropy Quadratic Extractors",
+  "summary": "A randomized almost-linear-time algorithm constructs the entire canonical cut hierarchy of an undirected graph. A new explicit quadratic-source extractor breaks the sumset barrier and works at polylogarithmic min-entropy.",
+  "results": [
+    {
+      "title": "Canonical Cut Hierarchy in Almost-Linear Time via Reduction to Max-Flow",
+      "summary": "An AI-assisted randomized max-flow reduction computes the full canonical cut hierarchy in almost-linear time for polynomially bounded capacities.",
+      "publication": "preprint",
+      "formalization": "not-stated",
+      "aiUse": "The authors say they asked an unnamed AI system to adapt directed-min-cut ideas to graph strength and then to the canonical cut hierarchy; they verified the details and used AI to help write the manuscript.",
+      "body": "**Statement and model.** Let $G=(V,E,c)$ be an undirected graph with $n$ vertices, $m$ edges and positive integer capacities bounded by a polynomial in $m+n$. For a partition $\\Pi$ into at least two parts, its Tutte–Nash-Williams ratio is $c(\\delta(\\Pi))/(|\\Pi|-1)$; the minimum $\\beta(G)$ is the graph's strength. Recursively splitting every induced subgraph by its unique *finest* minimizing partition defines the canonical cut hierarchy, a rooted tree with at most $2n-1$ nodes. Chandrasekaran and Sagar give a **randomized $(m+n)^{1+o(1)}$-time algorithm** constructing this entire hierarchy with high probability. The algorithm uses a polylogarithmic number of max-flow computations on networks of almost-linear size. The hierarchy yields exact strength, partition connectivity $\\lfloor\\beta(G)\\rfloor$, arboricity and fractional arboricity, integral and fractional spanning-tree packing numbers, and implicit representations of the principal partition sequence and maximum fractional tree packing.\n\n**Earlier bounds.** Cen, Fleischmann, Li, Li and Panigrahi computed the canonical hierarchy in $nm^{1+o(1)}$ time under polynomially bounded capacities. Classical algorithms for strength and the principal partition sequence used many parametric max-flow calls; Narayanan's approach used $O(n^2)$ flows. Chekuri and Quanrud obtained near-linear-time *approximate* fractional tree packing, not exact strength. A very recent directed-min-cut result had already implied almost-linear-time arboricity, but not the full canonical hierarchy.\n\n**Core reduction.** The authors solve the Lagrangian partition problem $\\min_\\Pi\\{c(\\delta(\\Pi))-\\lambda(|\\Pi|-1)\\}$. For a tentative spanning tree $T$, they build a directed flow network with one source unit per nonroot vertex, one unit of sink capacity per tree edge, and a shared capacity arc for each original graph edge. A flow route chooses an incident graph edge and a tree edge on its unique $T$-path. Heavy-light/path decomposition compresses the potentially quadratic path-incidence relation to $O(m\\log^2 n+n)$ arcs. If $T$ crosses an optimal partition in exactly $|\\Pi|-1$ tree edges, a minimum cut in this network recovers an optimum partition: its flow shortfall equals the maximum partition deficit.\n\n**Finding the tree and the hierarchy.** Starting with any tree, the algorithm rounds an augmented fractional flow, selects a multiset of edges, decomposes its union with $T$ into two spanning trees, and samples one. Relative to a fixed unknown optimal partition, the expected *excess* number of crossing tree edges halves. After $O(\\log(n/\\eta))$ iterations, integrality makes the tree respecting with probability at least $1-\\eta$. Finally, divide-and-conquer over the Lagrangian parameter uses nested optimal partitions: recurse on contracted parts below a breakpoint and induced subgraphs above it. At each recursion depth the total edge volume remains $O(m)$.\n\n**Scope and verification.** The almost-linear bound depends on polynomially bounded integer capacities and fast integral max-flow; it is randomized, not a strongly polynomial deterministic algorithm. The paper is an arXiv v1 preprint, without a claimed proof-assistant formalization or completed peer review. Its AI disclosure says the authors asked an unnamed AI system to adapt recent directed-min-cut ideas to strength and then to the hierarchy; they checked the details and used AI for manuscript writing.",
+      "sources": [
+        {
+          "title": "Canonical Cut Hierarchy in Almost-Linear Time via Reduction to Max-Flow",
+          "authors": [
+            "Karthekeyan Chandrasekaran",
+            "Harshul Sagar"
+          ],
+          "year": 2026,
+          "venue": "arXiv:2611.08466v1 [cs.DS]",
+          "url": "https://arxiv.org/html/2611.08466v1",
+          "kind": "preprint",
+          "lang": "en"
+        }
+      ]
+    },
+    {
+      "title": "Quadratic Extractors",
+      "summary": "An explicit deterministic extractor handles quadratic and 2-local sources with only polylogarithmic min-entropy, overcoming a known sumset-extraction barrier.",
+      "publication": "preprint",
+      "formalization": "not-stated",
+      "aiUse": "The authors credit ChatGPT Astra with providing an explicit rank-combiner construction after they defined the object; they state that humans did everything else, including writing those sections.",
+      "body": "**Statement and model.** A quadratic source on $n$ bits is $X=P(U_s)$, where $U_s$ is uniform on $\\mathbb F_2^s$ and each output coordinate of $P$ is a polynomial of degree at most two. A deterministic extractor $\\mathrm{Ext}:\\{0,1\\}^n\\to\\{0,1\\}^m$ must make $\\mathrm{Ext}(X)$ statistically close to uniform for *every* source in the class with sufficient min-entropy $H_\\infty(X)$. Chandrasekaran, Goodman and Zuckerman construct an explicit extractor for **$k=\\log^{C}n$** min-entropy (for a universal constant $C$), outputting $m=k^{\\Omega(1)}$ bits with error $n^{-\\Omega(1)}$. The same guarantee holds for 2-local sources, where each output bit depends on at most two hidden uniform bits. Their further reduction gives explicit extraction from constant-depth $\\mathrm{AC}^0$-samplable sources for $k\\ge n^{1/3+\\alpha}$, for every fixed $\\alpha>0$.\n\n**Previous frontier.** The best earlier explicit quadratic-source extractors required entropy close to $n-\\sqrt{\\log n}$; even for 2-local sources the threshold was roughly $\\sqrt n$. Existing approaches reduced structured sources to affine or sumset sources and invoked powerful affine/sumset extractors. This cannot cross the desired threshold in general: quadratic and even 2-local maps can sample Sidon sets with maximal additive doubling, which defeat black-box reductions to sumset extraction. The new construction therefore changes the underlying strategy rather than merely optimizing a known extractor.\n\n**Structural and analytic steps.** The proof first develops a win–win decomposition for quadratic maps. Conditioning on selected quadratic forms and examining discrete derivatives separates cases with substantial derivative entropy from those with exploitable algebraic structure. Cauchy–Schwarz converts correlations involving quadratic phases into expressions governed by linear derivatives, while a structure theorem controls the remaining low-rank behavior. Instead of demanding a large affine subset of the source support, the construction uses these local linear consequences to identify seeds and coordinates on which extraction can succeed.\n\n**Correlation breaking and rank combining.** The low-entropy regime builds on a challenge-response/correlation-breaking framework and strong linear seeded extractors. A new *rank combiner* assembles candidate linear maps so that sufficient rank survives across the structured alternatives arising in the proof. The authors develop its construction over larger finite fields and then reduce field size. Combining quadratic conditioning, correlation breaking and the rank combiner yields the final explicit seedless extractor; the 2-local consequence is immediate, while a separate reduction handles $\\mathrm{AC}^0$ sources.\n\n**Importance and verification.** This is the first explicit construction beyond the sumset-extractor barrier for these sources, with applications to unconditional pseudorandomness from weak structured randomness. It does not extract from arbitrary min-entropy sources, which is impossible without additional assumptions, and its output and error remain polynomially related to $k$ and $n$. This is an arXiv v1 preprint (also ECCC TR26-303), not a peer-reviewed or formally verified theorem. The authors explicitly credit **ChatGPT Astra** with supplying an explicit rank-combiner construction after they defined that object; they state that the human authors performed all other work, including writing the relevant sections.",
+      "sources": [
+        {
+          "title": "Quadratic Extractors",
+          "authors": [
+            "Gautam Chandrasekaran",
+            "Jesse Goodman",
+            "David Zuckerman"
+          ],
+          "year": 2026,
+          "venue": "arXiv:2611.07266v1 [cs.CC]; ECCC TR26-303",
+          "url": "https://arxiv.org/html/2611.07266v1",
+          "kind": "preprint",
+          "lang": "en"
+        }
+      ]
+    }
+  ]
+}
