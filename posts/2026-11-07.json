@@ -1,0 +1,58 @@
+{
+  "format": "briefly-post/2",
+  "date": "2026-11-07",
+  "title": "Whitebox PIT Suffices for Constant-Depth Factorization; Sigmoid Networks Exhibit New Circuit Bounds",
+  "summary": "A new reduction makes deterministic factorization of constant-depth arithmetic circuits possible from whitebox PIT. Separate results establish nearly tight parity wire bounds and strong explicit lower bounds for robust sigmoid networks.",
+  "results": [
+    {
+      "title": "Deterministic Factorization of Constant-Depth Circuits from Whitebox PIT",
+      "summary": "Deterministic polynomial-time factorization of constant-depth arithmetic circuits reduces to either whitebox or blackbox polynomial identity testing.",
+      "publication": "preprint",
+      "formalization": "not-stated",
+      "aiUse": "The authors state that ChatGPT Astra discovered the proof of Theorem 1.2, the base-field kernel-basis algorithm. They attribute the remaining technical ideas and manuscript writing to the human authors.",
+      "body": "**Statement and model.** Let $f\\in\\mathbb Q[X_1,\\ldots,X_n]$ be represented by an arithmetic circuit of constant depth, size $s$, and degree $d$. Bhattacharjee, Kumar, Rai, Ramanathan, Saptharishi, and Saraf give a deterministic polynomial-time *oracle reduction* from computing the complete irreducible factorization of $f$ to polynomial identity testing (PIT) for constant-depth circuits. The PIT oracle may be **whitebox**, inspecting the circuit, or blackbox. The algorithm outputs constant-depth circuits for all irreducible factors and their multiplicities, with polynomial overhead in the input size and degree. This is not an unconditional polynomial-time factoring algorithm: its complexity includes calls to the stipulated deterministic PIT oracle.\n\n**Previous work.** Kaltofen established randomized polynomial-time factorization and circuit-size closure under factors for general arithmetic circuits. Kopparty, Saraf, and Shpilka established an equivalence between PIT derandomization and factorization in general circuit models. For restricted constant-depth circuits, previous deterministic subexponential-time factorization algorithms and later structural closure theorems provided a reduction relying specifically on **blackbox** PIT and its hitting sets. Such a hitting set preserves nonzeroness for many relevant polynomials simultaneously; a whitebox PIT decision procedure does not immediately provide that guarantee. The present work removes this asymmetry.\n\n**Proof architecture.** First, preprocessing makes the input monic and square-free in a distinguished variable $Y$, and chooses a suitable shift; resultants, discriminants, and a decision-to-search reduction for PIT make these steps deterministic. Introducing a formal variable $T$ and replacing $X_i$ by $TX_i$ yields a polynomial whose roots in $Y$ can be lifted to truncated formal power series. Previous constant-depth closure results ensure that these truncated roots have efficiently constructible small constant-depth circuits.\n\nThe remaining difficulty is **root recombination**: identifying which lifted roots belong to the same irreducible factor without enumerating exponentially many subsets. The authors use logarithmic derivatives and degree constraints on symmetric power sums to build a homogeneous linear system. Its solutions encode valid groups of roots. Crucially, the indicator vectors of the irreducible factors form the unique reduced-row-echelon basis of a kernel over the *base field*, rather than over the rational-function field. An auxiliary deterministic algorithm computes this base-field kernel for matrices with polynomial entries represented by constant-depth circuits using PIT calls; row reduction then recovers the factors. This also gives a modular reduction for linear independence testing of structured polynomials.\n\n**Scope and verification.** The main theorem works over the rationals, with extensions discussed under additional assumptions for suitable finite fields. No faster whitebox PIT algorithm is currently supplied; the advance is the strength of the reduction and its consequences for future PIT derandomization. This is ECCC TR26-310, a public technical report, not a peer-reviewed or proof-assistant-verified result.",
+      "sources": [
+        {
+          "title": "Deterministic factorization of constant depth circuits from whitebox PIT",
+          "authors": [
+            "Somnath Bhattacharjee",
+            "Mrinal Kumar",
+            "Shanthanu S. Rai",
+            "Varun Ramanathan",
+            "Ramprasad Saptharishi",
+            "Shubhangi Saraf"
+          ],
+          "year": 2026,
+          "venue": "ECCC TR26-310",
+          "url": "https://eccc.weizmann.ac.il/report/2026/310/download",
+          "kind": "preprint",
+          "lang": "en"
+        }
+      ]
+    },
+    {
+      "title": "New Gate, Weight and Wire Complexity Bounds for Sigmoid Neural Networks",
+      "summary": "Robust sigmoid circuits compute every symmetric Boolean function with linear wires at depth three, yet explicit functions require nearly n¹·⁵ gates at the same depth.",
+      "publication": "preprint",
+      "formalization": "not-stated",
+      "aiUse": "The paper contains no statement on AI use.",
+      "body": "**Statement and model.** Li, Reichman, Williams, and Wu study feedforward circuits with logistic sigmoid activation $\\sigma(z)=1/(1+e^{-z})$ on Boolean inputs. A circuit computes a Boolean function with *noticeable separation* when its real output distinguishes the two classes by an inverse-polynomial margin. Their robust model additionally restricts weights and biases to polynomial magnitude. They establish three striking bounds: every symmetric Boolean function has a depth-three robust sigmoid circuit with $O(n)$ wires; parity needs $\\Omega(n^2/\\log^2 n)$ wires at depth two, matching an $O(n^2)$ upper bound up to logarithms; and an explicit polynomial-time computable Boolean function requires $\\Omega(n^{3/2}/(\\log n)^{O(1)})$ gates and $\\Omega(n^{5/2}/(\\log n)^{O(1)})$ wires at depth three. The exact choice of separation and weight regime is essential to each claim.\n\n**Prior landscape.** For Boolean-output threshold circuits, classical work established superlinear wire lower bounds for parity even at constant depth. Kane and Williams (STOC 2016) proved the corresponding near-$n^{3/2}$ gate and near-$n^{5/2}$ wire lower bounds for depth-three threshold circuits, but these did not automatically extend to smooth sigmoid gates. For unrestricted-weight sigmoid circuits, earlier explicit size lower bounds were substantially weaker, including Koiran's $\\Omega(n^{1/4})$ bound. The new paper demonstrates that real-valued intermediate activations change wire complexity fundamentally: linear-wire depth-three sigmoid circuits coexist with superlinear threshold-circuit wire lower bounds.\n\n**Proof ideas.** The linear-wire upper bound for symmetric functions exploits real-valued intermediate encodings of Hamming weight and a subsequent sigmoid-based decoding stage. This uses the fact that intermediate sigmoid outputs need not be Boolean, allowing information to travel through a sparse architecture that threshold circuits cannot emulate wire-for-wire. The depth-two parity lower bound analyzes how many distinct input coordinates can influence the output through a restricted number of weighted connections, yielding the near-quadratic barrier.\n\nFor lower bounds against robust depth-three networks, the authors rebuild the Kane–Williams random-restriction approach. A threshold gate often simplifies to a constant after restriction, whereas a sigmoid gate generally retains a nonconstant continuous response. Their replacement restriction lemma combines analytic approximations, including Taylor expansions, with bounds on the residual gate behavior. They also derive average-sensitivity estimates: a depth-$d$ robust sigmoid circuit with $s$ gates has sensitivity at most $O(s^{1-1/d}n^{1-1/(2d)+o(1)})$. This supplies average-case correlation bounds against parity.\n\n**Limitations and status.** The authors separately analyze unrestricted weights, proving a depth-two weight-compression theorem and additional separations, but the robust lower bounds must not be extrapolated to arbitrary weights or vanishing margins. The paper is a 64-page ECCC technical report (TR26-311), not a peer-reviewed article or formally verified proof.",
+      "sources": [
+        {
+          "title": "New Gate, Weight and Wire Complexity Bounds for Sigmoid Neural Networks",
+          "authors": [
+            "Jiatu Li",
+            "Daniel Reichman",
+            "Ryan Williams",
+            "Tony Wu"
+          ],
+          "year": 2026,
+          "venue": "ECCC TR26-311",
+          "url": "https://eccc.weizmann.ac.il/report/2026/311/download",
+          "kind": "preprint",
+          "lang": "en"
+        }
+      ]
+    }
+  ]
+}
