@@ -1,0 +1,51 @@
+{
+  "format": "briefly-post/2",
+  "date": "2026-11-09",
+  "title": "The k-Clique Hypothesis Falls and the Aaronson–Ambainis Conjecture Is Proved",
+  "summary": "A uniform improvement over matrix-multiplication-based clique counting refutes a central fine-grained hypothesis. A Lean-formalized influence bound resolves the Aaronson–Ambainis conjecture and limits average-case quantum query advantages.",
+  "results": [
+    {
+      "title": "The k-Clique hypothesis fails independently of the matrix-multiplication exponent",
+      "summary": "A uniform exponent saving for counting large fixed cliques refutes the k-Clique Hypothesis even if the matrix-multiplication exponent equals two.",
+      "publication": "preprint",
+      "formalization": "not-stated",
+      "aiUse": "The authors report extensive use of OpenAI ChatGPT-6. They credit the model with an initial improved 5-clique approach and with the core algebraic decomposition, distilled through iterative exchanges from ideas in OpenAI's ETH manuscript; they attribute the overarching counting algorithm and its extension to all sufficiently large k mainly to themselves.",
+      "body": "### Statement and context\n\nVirginia Vassilevska Williams and Or Zamir prove that there are absolute constants $K_0$ and $\\delta>0$, independent of the matrix-multiplication exponent $\\omega\\ge 2$, such that for every fixed $k\\ge K_0$ the number of $k$-cliques in an $n$-vertex graph can be computed in time $O(n^{(\\omega-\\delta)k/3})$. The bound is an asymptotic fixed-pattern statement: the paper does not give optimized numerical values for $K_0$ or $\\delta$. Its stronger algebraic ingredient computes weighted copies of **any** nine-vertex pattern over a characteristic-zero field in $n^{3\\omega-\\varepsilon+o(1)}$ arithmetic operations for an absolute $\\varepsilon>0$.\n\nThe classical Nešetril–Poljak reduction groups the vertices of a $k$-clique into triples and detects a triangle in a graph of size $n^{k/3}$. Matrix multiplication then gives $n^{\\omega k/3+o(1)}$ for $k$ divisible by three. The fine-grained $k$-Clique Hypothesis asserted essentially that this exponent could not be improved. An improvement tied merely to the **currently known upper bound** on $\\omega$ would not settle that hypothesis: the new saving is uniform even if $\\omega=2$.\n\n### How the proof works\n\nFirst encode the weighted sum for a nine-vertex pattern $H$ as $\\operatorname{tr}(M_{12}M_{23}M_{31})$, where each matrix has order $n^3$ and indexes assignments to a triple of pattern vertices. The key maneuver concerns a *wedge*, two edges sharing an endpoint. The two matrices that contain its endpoint assignments can be connected by an identity operator. Replacing that identity by a suitable partial swap identifies previously distinct assignments, *folding* the wedge into an instance on a pattern with fewer edges.\n\nA rank-or-swap decomposition expresses the identity on pairs of assignments as\n$$I=R+\\sum_{j=1}^{M}c_jS_j,$$\nwhere $M\\le n^\\eta$, $\\operatorname{rank}(R)\\le n^{2-\\gamma}$ for positive constants $\\eta,\\gamma$, and the $S_j$ are partial swaps. The authors construct it via elementary polynomial interpolation and a tensor-product eigenbasis; binomial concentration bounds the residual rank. Partial-swap terms reduce to sparser patterns, allowing induction on the number of edges.\n\nReducing only one matrix dimension would save an exponent proportional to $\\omega-2$, which vanishes at $\\omega=2$. Instead, the algorithm applies the decomposition to **two vertex-disjoint wedges**, shrinking two dimensions simultaneously and obtaining a saving proportional to $\\omega-1$. Patterns without two disjoint wedges admit a direct $O(n^5)$ evaluation. The nine-vertex result is then lifted to all sufficiently large fixed $k$ by grouping vertices.\n\n### Significance and status\n\nThe method also improves the generic exact running time for Max-2-CSP and related counting tasks from $2^{\\omega n/3+o(n)}$ to $2^{(\\omega/3-c)n+o(n)}$ for an absolute $c>0$. Optimizing the savings and determining whether linear dependence on $k$ in the exponent is necessary remain open. This is an **arXiv v1 preprint**, announced November 9, 2026; no completed peer review or proof-assistant formalization is claimed. The authors describe the algebraic decomposition as largely AI-derived, while the algorithmic framework is primarily their own.",
+      "sources": [
+        {
+          "title": "The k-Clique hypothesis is dead, for good",
+          "authors": [
+            "Virginia Vassilevska Williams",
+            "Or Zamir"
+          ],
+          "year": 2026,
+          "venue": "arXiv:2611.09764v1 [cs.DS]",
+          "url": "https://arxiv.org/html/2611.09764v1",
+          "kind": "preprint",
+          "lang": "en"
+        }
+      ]
+    },
+    {
+      "title": "A formally verified proof of the Aaronson–Ambainis conjecture",
+      "summary": "A degree-six polynomial lower bound on variable influence resolves the Aaronson–Ambainis conjecture and yields an average-case classical simulation of quantum query algorithms.",
+      "publication": "preprint",
+      "formalization": "formalized",
+      "aiUse": "The author states that AI models produced the mathematical statements and that instances of a non-public Anthropic model, orchestrated in a research harness built by David Turturean at Physical Superintelligence, developed and tested the proof. An Anthropic model also drafted an initial manuscript; the author reviewed and edited it. The paper reports a Lean kernel-checked formalization of the main theorem and corollary.",
+      "body": "### Statement and prior bounds\n\nDavid Turturean proves the Aaronson–Ambainis conjecture for bounded real functions on the discrete cube. Let $f:\\{-1,1\\}^n\\to[-1,1]$ have Fourier degree at most $d\\ge1$, and write $x^j$ for $x$ with bit $j$ flipped. With\n$$\\operatorname{Inf}_j(f)=\\mathbb E_x\\left[\\left(\\frac{f(x)-f(x^j)}2\\right)^2\\right],$$\nthe paper establishes\n$$\\max_j\\operatorname{Inf}_j(f)\\ge\\frac{\\sqrt{15}}{500\\pi^4}\\frac{\\operatorname{Var}(f)^{5/2}}{d^6}.$$\nThis proves that a bounded, nonconstant low-degree polynomial has a coordinate of influence polynomially large in its variance and inverse degree. Previously, general lower bounds were exponential rather than polynomial in the degree; polynomial bounds were known only for restricted classes. An earlier announced approach had been withdrawn.\n\n### Proof architecture\n\nThe first step is combinatorial. For a Boolean level-set indicator on the cube, the proof constructs a bijection compatible with prescribed *wings* (subcubes on which the function stays one). A determinant of an agreement matrix controls the number of coordinates left unchanged by this bijection. This produces an inequality for opposite-valued **antipodal pairs** and fractional certificates, expressed as nonnegative coordinate weights that cover every set of bit flips changing the function value.\n\nEvery pair of opposite-valued inputs becomes an antipodal pair in a unique subcube. Summing the antipodal inequalities over subcubes yields an **all-pairs inequality**. Weighted Cauchy–Schwarz arguments turn this into a bound on coordinate boundary sizes. This replaces a conjectured geometric inequality used in an earlier approach by Lovett and Zhang; the paper explains why that earlier auxiliary conjecture fails for a tribes-type example.\n\nFor a bounded real polynomial of degree $d$, the multilinear extension stays bounded on $[-1,1]^n$. Markov's derivative inequality, Chebyshev polynomial composition and linear-programming duality then supply, at each input, a fractional-certificate row of total cost at most $\\pi^2d^2$. Applying the all-pairs inequality to **every threshold level** of the real function and integrating across levels produces a lower bound on the mean absolute increment in some coordinate. A final averaging and moment argument converts that increment into squared influence, using a total local increment bound of order $d^2$, and yields the stated $d^{-6}$ estimate.\n\n### Consequences, limitations and verification\n\nThe acceptance probability of a $T$-query quantum algorithm is a bounded polynomial of degree at most $2T$. The influence theorem therefore gives a deterministic classical algorithm that approximates that probability within $\\varepsilon$ on a $1-\\delta$ fraction of uniformly distributed inputs using at most $(4T)^8\\varepsilon^{-14}\\delta^{-8}$ queries. This concerns **average-case approximation without an input promise**, not efficient classical simulation on every input. Improving the variance and degree exponents remains of interest.\n\nThe manuscript is an **arXiv v1 preprint announced November 9, 2026**, not a peer-reviewed publication. Crucially, the author explicitly reports that the main theorem and corollary were **formalized in Lean and checked by its kernel**, with a public companion repository. This is a reported proof-assistant verification, distinct from independent mathematical peer review.",
+      "sources": [
+        {
+          "title": "A proof of the Aaronson-Ambainis conjecture",
+          "authors": [
+            "David Turturean"
+          ],
+          "year": 2026,
+          "venue": "arXiv:2611.09773v1 [cs.CC]",
+          "url": "https://arxiv.org/html/2611.09773v1",
+          "kind": "preprint",
+          "lang": "en"
+        }
+      ]
+    }
+  ]
+}
