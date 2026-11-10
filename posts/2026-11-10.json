@@ -1,0 +1,32 @@
+{
+  "format": "briefly-post/2",
+  "date": "2026-11-10",
+  "title": "Planar Induced-Minor Coloring Conjectures Refuted",
+  "summary": "New hardness constructions show that excluding a fixed planar induced minor does not make 3-Coloring tractable, completing a refutation of proposed algorithmic conjectures. A separator theorem also shows why constantly dominated separators do not suffice for independent-set tractability.",
+  "results": [
+    {
+      "title": "Planar induced-minor exclusions do not guarantee efficient coloring",
+      "summary": "NP-hardness of 3-Coloring on explicit planar-induced-minor-free classes completes the failure of a proposed tractability boundary.",
+      "publication": "preprint",
+      "formalization": "not-stated",
+      "aiUse": "The authors state that GPT-6-Astra developed the proofs in Sections 3 and 5. They report that GPT-6.1-Sol wrote proofs in Sections 3 and 4 from author drafts, subsequently verified and polished by the authors; GPT-6-Astra wrote Section 5 proofs with author simplification and verification. They used Claude Opus 5.5 to polish the introduction.",
+      "body": "### Statement and previous landscape\n\nFor a fixed graph $H$, an $H$-induced-minor-free graph contains no model of $H$ obtained by vertex deletions and edge contractions, without edge deletions. Dallard, Milanič and Štorgel, and independently Gartland and Lokshtanov, conjectured that excluding any fixed *planar* induced minor makes Maximum Weight Independent Set and List 3-Coloring polynomial-time solvable. Bonnet and Chang recently disproved the independent-set part: Maximum Independent Set (MIS) is NP-hard even when the $5\\\\times5$ grid is excluded as an induced minor. Czyżewska, Masařík, Pilipczuk and Rzążewski now disprove the coloring part as well and identify considerably smaller planar obstructions. Their reductions are polynomial, so quasipolynomial-time tractability is also excluded unless $\\\\mathrm{NP}\\\\subseteq\\\\mathrm{QP}$.\n\n### How the hardness proofs work\n\nThe starting objects are Bonnet–Chang *loom grids*, whose cells are arranged in rows and columns with side-dependent adjacencies. An analysis of possible connected branch sets shows that their induced minors cannot realize certain configurations of mutually anticomplete branching subgraphs. Consequently the host graphs exclude four explicit planar trees on only 16 vertices (each with four branching vertices), as well as a once-subdivided $K_4$. The authors introduce a second family, *triangle-free loom grids*, which supplies a distinct obstruction rather than merely repeating the original construction.\n\nFor MIS, a reduction from Max-Cut uses two rows for each input edge and two guard rows. A selected guard vertex fixes one of two sides in each variable column, encoding a cut. The remaining rows contribute a baseline plus one exactly when the corresponding edge crosses the cut. For an input graph $F$ with $n$ vertices and $m$ edges, the constructed graphs $G_B,G_T$ satisfy the exact identity\n$$\n\\\\alpha(G_B)=\\\\alpha(G_T)=n+2m(n-1)+\\\\operatorname{maxcut}(F).\n$$\nThis establishes hardness in both loom-grid families.\n\nThe coloring reduction instead encodes a 3-SAT instance. Rows represent clauses; columns encode Boolean variables; state vertices propagate colors 1 and 2, while chosen cell-side vertices use color 3. A change in the state-color sequence is possible only at a cell corresponding to a satisfied literal. Thus a proper 3-coloring exists precisely when every clause can select a true literal. This completes the refutation of the original algorithmic conjecture, including its List 3-Coloring formulation.\n\n### Structural separation and limitations\n\nThe paper also proves a positive separator theorem: for explicit trees $H_{h,t}$, every graph excluding $H_{h,t}$ as an induced minor admits a balanced separator dominated by at most $h(9t+8)$ vertices. In particular, some classes have constantly dominated balanced separators while MIS remains NP-hard. Hence the proposed separator condition alone cannot explain algorithmic tractability. The general Gartland–Lokshtanov structural conjecture remains open, as do complexity classifications for trees with two or three branching vertices.\n\n**Verification:** This is arXiv v1, a preprint rather than peer-reviewed work; no proof-assistant formalization is claimed. The authors say they checked and polished AI-produced proofs, which is not independent formal verification.",
+      "sources": [
+        {
+          "title": "What remains of the planar induced minor conjectures?",
+          "authors": [
+            "Jadwiga Czyżewska",
+            "Tomáš Masařík",
+            "Marcin Pilipczuk",
+            "Paweł Rzążewski"
+          ],
+          "year": 2026,
+          "venue": "arXiv:2611.09627v1 [cs.DM]",
+          "url": "https://arxiv.org/html/2611.09627v1",
+          "kind": "preprint",
+          "lang": "en"
+        }
+      ]
+    }
+  ]
+}
