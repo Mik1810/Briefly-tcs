@@ -1,0 +1,29 @@
+{
+  "format": "briefly-post/2",
+  "date": "2026-11-11",
+  "title": "Directed singular-value sparsifiers with nearly optimal support",
+  "summary": "Emile Anand reduces the support of strong singular-value sparsifiers for unweighted directed graphs to O(n log n/ε²) arcs and gives a randomized nearly-linear-time construction in the real-arithmetic model.",
+  "results": [
+    {
+      "title": "Directed singular-value sparsifiers with O(n log n/ε²) arcs",
+      "summary": "Strong directed singular-value approximation now needs only O(n log n/ε²) reweighted original arcs while preserving every in-degree and out-degree exactly.",
+      "publication": "preprint",
+      "formalization": "not-stated",
+      "aiUse": "The author reports exploring an expander-based approach with GPT-6 Astra; Claude Opus 5.5 subsequently helped flesh out the writing of the lemmas and proofs.",
+      "body": "**Theorem and model.** Let $A\\in\\{0,1\\}^{n\\times n}$ be the adjacency matrix of an unweighted directed graph, with $m$ arcs, and let $0<\\varepsilon<1$. Write $D_L=\\operatorname{diag}(A\\mathbf1)$, $D_R=\\operatorname{diag}(A^\\top\\mathbf1)$ and $P=D_L^{-1/2}AD_R^{-1/2}$ after removing zero-degree coordinates. Anand constructs a nonnegative reweighting $\\widetilde A$, supported only on original arcs, with exactly the same row and column sums and at most $O(n\\log(2n)/\\varepsilon^2)$ nonzeros. Its normalized matrix $\\widetilde P$ obeys the *strong singular-value* condition\n\n$$|x^\\top(\\widetilde P-P)y|\\le\\varepsilon\\sqrt{\\|x\\|_2^2-\\|P^\\top x\\|_2^2}\\sqrt{\\|y\\|_2^2-\\|Py\\|_2^2}$$\n\nfor all $x,y$, including directions in which the defect vanishes. A randomized algorithm achieves this with probability at least $1-\\eta$ in $\\widetilde O(m+n)$ **real-arithmetic** operations, where the suppressed factors depend polynomially on $\\log n$, $\\log(1/\\varepsilon)$ and $\\log(1/\\eta)$. Rational output weights have polynomial bit length. For positive weighted inputs with maximum-to-minimum weight ratio $U$, an existential bound adds $O(n\\log(2U))$ arcs.\n\n**Previous bounds.** Strong SV approximation, introduced by Ahmadinejad, Peebles, Pyne, Sidford and Vadhan, is stronger than ordinary directed cut approximation: it controls bilinear errors relative to the left and right Schur-complement defects and behaves well under products of transition operators. Lau, Wang and Zhou previously established an $O(n\\log^5 n/\\varepsilon^2)$-arc bound. Anand removes four logarithmic factors and gives a nearly-linear randomized construction, whereas their algorithm was deterministic. The familiar undirected benchmark of Batson, Spielman and Srivastava is $O(n/\\varepsilon^2)$ edges; Anand also proves an $\\Omega(\\min\\{n^2,n/\\varepsilon^2\\})$ directed lower bound, leaving only one logarithm in support size.\n\n**Proof mechanism.** The directed matrix is lifted to a weighted bipartite graph, allowing effective-resistance decompositions to control the left and right defect metrics. The central projected-variance lemma analyzes perturbations after enforcing *both* degree constraints: each resistance piece contributes its own Schur-complement defect, without paying again for vertices shared by different pieces. This produces matrix-discrepancy estimates suitable for a partial coloring that drives a constant fraction of arc weights toward zero while preserving the margins.\n\nThe construction proceeds through repeated sparsification phases. In relatively sparse phases it uses constrained spectral projection; in dense phases, expander pruning produces cores with controlled covariance. Gaussian matrix bounds and a rotation argument show that projecting a Gaussian vector onto the degree-constrained cube yields low spectral discrepancy. Sparse Jacobi iterations implement the projection to sufficient precision. Cycle rounding then deletes arcs while preserving every in-degree and out-degree exactly. A stability lemma composes the phasewise errors despite changes in the defect metrics, and grid rounding bounds the bit length of the final weights.\n\n**Significance and limits.** The result improves sparse representations of directed random walks, directed cuts and associated linear-algebraic primitives. Removing the remaining $\\log n$ factor, obtaining an equally efficient weighted construction, derandomizing, and proving a word-RAM running time remain open. In particular, the stated nearly-linear complexity must **not** be interpreted as a bit-complexity guarantee.\n\n**AI use and verification.** The paper's AI disclosure says the author explored an expander-based approach with GPT-6 Astra and that Claude Opus 5.5 helped develop the written lemmas and proofs. This is an arXiv v1 preprint, announced November 11, 2026; no proof-assistant formalization or completed peer review is stated. The account is based on the complete arXiv HTML manuscript, not merely its abstract.",
+      "sources": [
+        {
+          "title": "Directed Singular-Value Sparsifiers with $O(n \\log n/\\varepsilon^2)$ Arcs",
+          "authors": [
+            "Emile Anand"
+          ],
+          "year": 2026,
+          "venue": "arXiv:2611.14342v1 [cs.DS]",
+          "url": "https://arxiv.org/html/2611.14342v1",
+          "kind": "preprint",
+          "lang": "en"
+        }
+      ]
+    }
+  ]
+}
