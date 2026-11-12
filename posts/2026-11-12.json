@@ -1,0 +1,34 @@
+{
+  "format": "briefly-post/2",
+  "date": "2026-11-12",
+  "title": "Sparse Induced-Universal Graphs for Every Proper Minor-Closed Class",
+  "summary": "A new full-version construction achieves induced-universal graphs with n¹⁺ᵒ⁽¹⁾ vertices and edges for every fixed proper minor-closed graph class, unifying optimal adjacency labeling and sparse universality.",
+  "results": [
+    {
+      "title": "You Can Have It All: Small Sparse Induced-Universal Graphs for Minor-Closed Classes",
+      "summary": "Every proper minor-closed graph class has induced-universal hosts with n¹⁺ᵒ⁽¹⁾ vertices and edges, obtained through orientable mixed adjacency-labeling schemes.",
+      "publication": "preprint",
+      "formalization": "not-stated",
+      "aiUse": "The paper contains no statement on AI use.",
+      "body": "**Theorem and scope.** Fix any proper minor-closed class $\\\\mathcal G$ of finite simple graphs, such as the planar graphs or the graphs excluding a fixed minor. For every positive integer $n$, Dujmović, Gavoille, Joret, Micek, Morin, and Wood construct an $n$-induced-universal graph $U_n$ with both $|V(U_n)|=n^{1+o(1)}$ and $|E(U_n)|=n^{1+o(1)}$: every $n$-vertex member of $\\\\mathcal G$ occurs as an *induced* subgraph. Equivalently, their construction supplies adjacency labels of length $(1+o(1))\\\\log_2 n$ bits, with an explicit $O((\\\\log n)^{3/4})$ additive term and a polynomial-time labeling algorithm for each fixed class. The induced requirement is important: unlike ordinary subgraph universality, the host must reproduce both edges and nonedges on the chosen vertices.\n\n**Earlier bounds and the new ingredient.** For planar graphs, Dujmović and collaborators obtained near-linear induced-universal hosts (JACM 2021), and Esperet, Joret, and Morin obtained hosts simultaneously sparse in vertices and edges (JLMS 2023). For general fixed-minor-free classes, combining the bounded-treewidth labeling theorem of Gavoille and Labourel with the two-bounded-treewidth decomposition of DeVos and collaborators gave labels of $(2+o(1))\\\\log n$ bits and hosts with $n^{2+o(1)}$ vertices. Babai and collaborators had obtained $O(n^{3/2})$-size subgraph-universal constructions, but without induced universality. The authors emphasize that an earlier conference version of their own work already established the optimal leading constant for adjacency labels and near-linear *vertex* universality. The genuinely additional result of this full version is simultaneous near-linear **edge sparsity** for every proper minor-closed class.\n\n**Proof architecture.** The starting point is the graph-minor product structure theorem: a graph in a fixed proper minor-closed class admits a tree decomposition whose torsos belong to a class modeled by a bounded-treewidth graph strongly multiplied by a path, plus a bounded number of apex vertices. The authors build a weighted *mixed labeling scheme* for these product-structured pieces. Besides vertex labels and an adjacency tester, it carries clique labels and local identifiers, so information can be passed across the small clique adhesions of a tree decomposition. A separate extension lemma handles the bounded apex vertices.\n\n**Gluing and sparsity.** The technical gluing lemma reorganizes the decomposition into small clusters of bags with comparable descendant weights, separated by only $O(\\\\log_b n)$ exceptional transitions on each root-to-leaf path. Shannon-style prefix codes allocate short identifiers in proportion to subtree weights; local clique identifiers let a vertex recover precisely which ancestral piece can contain a neighbor. Crucially, the new mixed scheme is *orientable*: the universal graph implicit in its labels admits an orientation with subpolynomial maximum outdegree. When the schemes are glued, the authors track both adjacency correctness and this outdegree bound, so a host with $n^{1+o(1)}$ vertices has only $n^{1+o(1)}$ edges. The appendix develops the needed product-class scheme and improves the fixed-treewidth sparse host bound to $n(\\\\log n)^{O(k)}$ vertices and edges, from an earlier $n(\\\\log n)^{O(k^2)}$ dependence.\n\n**Significance and verification.** The result unifies optimal-leading-term adjacency labeling with sparse induced universality throughout the graph-minor hierarchy. Its asymptotics hide constants depending on the excluded-minor class; the paper does not claim a uniformly practical host construction for arbitrary inputs or a linear-size bound. This account is based on the full arXiv HTML v1, including the proof and appendix. The manuscript is a preprint/full version of earlier conference work; its new sparsity theorem should not be confused with the previously published labeling theorem. No proof-assistant formalization is stated. The paper contains no statement on AI use.",
+      "sources": [
+        {
+          "title": "You Can Have It All: Small Sparse Induced-Universal Graphs for Minor-Closed Classes",
+          "authors": [
+            "Vida Dujmović",
+            "Cyril Gavoille",
+            "Gwenaël Joret",
+            "Piotr Micek",
+            "Pat Morin",
+            "David R. Wood"
+          ],
+          "year": 2026,
+          "venue": "arXiv:2611.14194v1 [math.CO]",
+          "url": "https://arxiv.org/html/2611.14194v1",
+          "kind": "preprint",
+          "lang": "en"
+        }
+      ]
+    }
+  ]
+}
