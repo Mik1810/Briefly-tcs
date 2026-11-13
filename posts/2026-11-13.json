@@ -1,0 +1,32 @@
+{
+  "format": "briefly-post/2",
+  "date": "2026-11-13",
+  "title": "Near-Exact Length Slack for Planar Directed Steiner Tree and Steiner Forest",
+  "summary": "New LP-competitive planar network-design algorithms achieve polylogarithmic cost approximations with 1+ε path-length slack for directed Steiner tree and undirected Steiner forest. A complementary hardness result separates planar instances from general graphs.",
+  "results": [
+    {
+      "title": "A Little Length Slack Goes a Long Way in Planar Length-Constrained Network Design",
+      "summary": "Planar length-constrained directed Steiner tree and undirected Steiner forest admit LP-competitive polylogarithmic approximations with arbitrarily small multiplicative length slack.",
+      "publication": "preprint",
+      "formalization": "not-stated",
+      "aiUse": "The authors state that they first found weaker LP-competitive algorithms without AI assistance, then GPT-6 Astra improved the directed Steiner tree approximation to O(log² k/ε), supplied flow preprocessing and threshold arguments for Steiner forest, and suggested a median trick for length slack. The authors simplified and wrote the proofs, used the model for proofreading and figures, and state that they verified the results themselves.",
+      "body": "Consider a planar graph with nonnegative integral edge costs $c$ and lengths $\\ell$, a length budget $h$, and $k$ connectivity demands. A bicriteria $(\\alpha,\\beta)$ approximation purchases a subgraph costing at most $\\alpha$ times the optimum under the original budget $h$, while permitting demand paths of length at most $\\beta h$. Hershkowitz, Huang, Jain, and Korimilli obtain polynomial-time, LP-competitive $O(\\log^2 k/\\varepsilon)$ approximation for length-constrained **directed Steiner tree** (LC-DST) with slack $1+\\varepsilon$, and LP-competitive $O(\\log^5 k/\\varepsilon^2)$ approximation for undirected **Steiner forest** (LC-SF), again with slack $1+\\varepsilon$. Their reduction also yields an $O(\\log^6 k/\\varepsilon)$ approximation for directed Steiner forest (LC-DSF) with slack $6+\\varepsilon$. Running times are polynomial in $n$ and $1/\\varepsilon$ for $0<\\varepsilon<1$. The LP-competitive guarantee compares cost to a fractional relaxation, not merely the integral optimum.\n\nPreviously, Chekuri and Jain (APPROX/RANDOM 2026) obtained an LP-competitive $O(\\log^2 k)$ approximation for planar LC-DST but with $O(\\log k)$ length slack; their planar directed-forest approximation had $O(\\log^6 k)$ cost factor and $O(\\log k)$ slack without LP competitiveness. Hershkowitz and Huang had achieved $1+\\varepsilon$ slack for the undirected single-root Steiner-tree problem, with LP-competitive cost $O(\\log^3 k/\\varepsilon)$. Thus the new directed and multicommodity guarantees remove a logarithmic multiplicative violation of the length budget, rather than merely improving constants.\n\nFor LC-DST, the algorithm recursively constructs a hierarchy of planar shortest-path separators under a mixture metric combining edge cost and length. Traditional separator recursion incurs additional length at each of $O(\\log k)$ levels. Earlier shortcut schemes subdivided separators into predetermined pieces, but directed paths cannot necessarily travel backward from a shortcut's entry point. Instead, the algorithm scans each directed separator and greedily buys a candidate shortcut from the parent separator precisely when its mixture-metric route improves on continuation from the preceding shortcut. The purchases themselves induce variable-length, directionally reachable pieces. A two-way charging argument bounds shortcut cost by the cumulative reduction in solution-path length, and bounds extra path length by the fractional cost of canonical root-to-terminal paths. Appropriate mixture coefficients keep the latter excess below $\\varepsilon h$.\n\nFor LC-SF, the authors adapt junction-tree decomposition to fractional rather than integral solutions. They bucket LP flow paths, intersect them with short separator chunks, and create rooted candidate subgraphs using the single-root algorithm. Dummy terminal edges encode the two portions of a pair's length allowance, selected through a flow-weighted median. Enumerating geometric flow thresholds prevents the cost of spreading a pair's fractional flow across many chunks from being paid repeatedly. A weighted averaging argument guarantees a low-density candidate, and greedy coverage of the remaining pairs supplies the logarithmic set-cover factor. The directed-forest guarantee follows through an earlier reduction.\n\nThe paper also gives a contrasting hardness boundary: assuming $\\mathsf{NP}\\not\\subseteq\\mathsf{BPTIME}(2^{\\mathrm{polylog}(n)})$, general-graph LC-SF has no polynomial-time $2^{\\log^{1-\\delta}k}$ approximation with slack below $3$, for fixed $\\delta>0$; the corresponding LC-DSF hardness applies for any fixed positive slack. This emphasizes the role of planarity. The results remain bicriteria, and the directed multicommodity slack is $6+\\varepsilon$, not $1+\\varepsilon$. This is arXiv v1, a preprint without a reported proof-assistant formalization or completed peer review; the authors say they checked the arguments, which is not independent verification.",
+      "sources": [
+        {
+          "title": "A Little Length Slack Goes a Long Way in Planar Length-Constrained Network Design",
+          "authors": [
+            "D Ellis Hershkowitz",
+            "Richard Z Huang",
+            "Rhea Jain",
+            "Manas Korimilli"
+          ],
+          "year": 2026,
+          "venue": "arXiv:2611.17201v1 [cs.DS]",
+          "url": "https://arxiv.org/html/2611.17201v1",
+          "kind": "preprint",
+          "lang": "en"
+        }
+      ]
+    }
+  ]
+}
