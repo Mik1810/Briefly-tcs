@@ -1,0 +1,32 @@
+{
+  "format": "briefly-post/2",
+  "date": "2026-11-14",
+  "title": "The Submodular Secretary Problem: Tight Monotone Bounds and a Nonmonotone Separation",
+  "summary": "A new preprint determines the optimal asymptotic competitive ratio of 1 − 1/e for monotone submodular secretary selection without shortlists. For nonmonotone objectives it beats 1/e and proves an upper bound strictly below 1/2.",
+  "results": [
+    {
+      "title": "Tight 1 − 1/e for Monotone Submodular Secretary and Strict Bounds for General Objectives",
+      "summary": "Linear-query online selection attains the optimal monotone asymptotic ratio, while new algorithms and lower bounds separate the nonmonotone ratio from both 1/e and 1/2.",
+      "publication": "preprint",
+      "formalization": "formalized",
+      "aiUse": "The authors state that the results were developed with substantial assistance from GPT-6 Astra, Claude Opus 5.5 and Claude Fable 5.2, that Claude assisted with manuscript drafting, and that GPT-6 Astra wrote a Lean 4 formalization of every result; some finite certificates use native_decide.",
+      "body": "In the cardinality-constrained submodular secretary problem, $n$ elements arrive in a uniformly random order. An online algorithm knows $n$ and a budget $k$, may query a nonnegative submodular value oracle only on already arrived elements, and must accept or reject each arrival irrevocably while selecting at most $k$ elements. Performance is $\\\\mathbb{E}[f(A)]/\\\\mathrm{OPT}$, where $\\\\mathrm{OPT}=\\\\max_{|S|\\\\le k}f(S)$. Abdi, Banihashem, Hajiaghayi and Mittal determine the optimal asymptotic competitive ratio for monotone objectives: it is exactly $1-1/e$ as $k\\\\to\\\\infty$, even against computationally unbounded algorithms. The worst-case ratio across all budgets is exactly $1/e$, attained at $k=1$. Their randomized algorithm makes at most $4n+1$ value queries and achieves $1-1/e-O(\\\\log(k+1)/\\\\sqrt{k})$ for monotone objectives, and $1/e-O(\\\\log^2(k+1)/k)$ for arbitrary nonnegative submodular objectives. For the latter, a separate polynomial-query algorithm reaches $1/e+3.5\\\\cdot10^{-6}$ for sufficiently large $k$, while an information-theoretic construction rules out ratios above $0.497053$.\n\nPreviously, Kesselheim and Tönnis (2017) obtained $1/e-o(1)$ for monotone objectives only with exponentially many queries, and $0.275-o(1)$ with polynomially many; a $1-1/e-\\\\varepsilon$ guarantee by Agrawal, Shadravan and Stein (2019) permitted a shortlist and deferred selection, which is not the irrevocable-decision model. For nonmonotone objectives, Fujii (2019) achieved approximately $0.107$. The new result therefore settles the monotone asymptotic question without a shortlist and substantially improves the general case.\n\nThe central algorithm, AttenuatedPricing, maintains a dynamic marginal-value threshold, increasing with the number of acceptances and decreasing with time. A potential-function accounting identity makes revenue from accepted elements pay for the threshold penalty in a differential inequality for expected objective value. A deletion coupling compares the actual execution to one in which a particular optimal element is removed and subsequently inserted at a random arrival time. This resolves the dependence between an element's marginal contribution and the online state it might otherwise have influenced. Price resets handle unexpectedly large singleton values without requiring prior knowledge of $\\\\mathrm{OPT}$.\n\nFor nonmonotone objectives, the authors introduce *eligibility attenuation*: an eligible arriving element is accepted with probability $e^{-\\\\tau}$, where $\\\\tau$ is the measure of earlier times at which that element would have passed the price test. Conditioned on the execution without the element, its probability of prior selection is exactly $1-e^{-\\\\tau}$. This simultaneously controls the damage from nonmonotonicity and preserves the gain comparison, producing the $1/e$ differential-equation benchmark. Historical eligibility is sampled through Poisson processes to obtain linear oracle complexity. To exceed $1/e$, the analysis mixes a two-comparator pricing strategy with a pruned greedy strategy; their guarantees complement one another depending on the value of disjoint near-optimal sets.\n\nThe matching monotone upper bound uses random sparse coverage groups: an offline solution can assemble complete groups, whereas an online selection is unlikely to encounter compatible future elements. For general objectives, indistinguishable paired elements and layered matroid gadgets establish the strict upper bound below $1/2$. The exact optimal ratio for general nonmonotone objectives remains open, between $1/e+3.5\\\\cdot10^{-6}$ and $0.497053$ in the large-budget regime. This is an arXiv v1 preprint, not a peer-reviewed publication. The authors report a Lean 4 formalization of every result, written by GPT-6 Astra; some finite certificates use `native_decide`, which trusts Lean's compiler. That is a reported formalization, not an independent audit of the artifact.",
+      "sources": [
+        {
+          "title": "The Submodular Secretary Problem: Tight 1-1/e for Monotone Objectives, and Strictly Between 1/e and 1/2 in General",
+          "authors": [
+            "Hamed Abdi",
+            "Kiarash Banihashem",
+            "MohammadTaghi Hajiaghayi",
+            "Danny Mittal"
+          ],
+          "year": 2026,
+          "venue": "arXiv:2611.17292v1 [cs.DS]",
+          "url": "https://arxiv.org/html/2611.17292v1",
+          "kind": "preprint",
+          "lang": "en"
+        }
+      ]
+    }
+  ]
+}
