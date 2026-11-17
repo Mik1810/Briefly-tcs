@@ -1,0 +1,33 @@
+{
+  "format": "briefly-post/2",
+  "date": "2026-11-17",
+  "title": "Optimal Erasure Resilience for Binary Two-Way Codes",
+  "summary": "A deterministic constant-rate binary two-way code reaches the optimal two-thirds adversarial erasure threshold, up to an arbitrarily small constant, with linear-time encoding and decoding. The construction combines a simple interactive inner protocol with near-unit-distance outer coding.",
+  "results": [
+    {
+      "title": "Binary Two-Way Codes Achieve Optimal Two-Thirds Erasure Resilience",
+      "summary": "A deterministic linear-time construction closes the gap between three-fifths achievable resilience and the two-thirds impossibility threshold for binary two-way erasure channels.",
+      "publication": "preprint",
+      "formalization": "not-stated",
+      "aiUse": "The authors state: 'The proof was discovered by ChatGPT-6 Astra.' They say they simplified the proof, wrote the manuscript, and verified the correctness and originality of the content, including references.",
+      "body": "Consider the binary two-way erasure channel in which Alice holds an $n$-bit message, Bob has no private input, and a fixed speaking schedule specifies who transmits each bit. An adversary may erase transmitted bits in either direction, with one global budget measured as a fraction of the total transcript. Efremenko, Kol, Komech, Saxena and Zhang prove that, for every fixed $\\varepsilon\\in(0,2/3)$, a deterministic protocol tolerates a fraction $2/3-\\varepsilon$ of adversarial erasures, has constant communication rate, and admits $O_\\varepsilon(n)$-time encoding and decoding (Theorem 1.1). The $2/3$ threshold is optimal for this nonadaptive speaking-order model.\n\nThe contrast with one-way coding is sharp. The binary Plotkin bound limits asymptotic one-way erasure resilience to $1/2$. Gupta, Kalai and Zhang (STOC 2022) showed that interaction can approach $3/5$, while proving the universal $2/3$ upper bound for binary two-way codes; their construction had quadratic block length. Gupta and Zhang (APPROX/RANDOM 2023) achieved constant rate and computational efficiency at resilience approaching $6/11$. Thus the new construction closes the remaining resilience gap while simultaneously obtaining linear-time computation. An adaptive-speaking-order model is different: the paper cites a recent construction reaching $2/3$ there, but its upper bound is $4/5$ rather than $2/3$.\n\nThe construction concatenates a large-constant-alphabet outer error-correcting code of relative distance near one with a fixed-size interactive inner protocol. To transmit an outer symbol $z\\in[q]$, Alice maintains an initially zero binary vector divided into monochromatic blocks. She sends each block; Bob replies with a repetition of a bit indicating whether he received anything. Alice then divides the block into $2q$ subblocks and flips the pair indexed by $z$ when feedback confirms receipt, flips just one indexed subblock when the feedback is wholly erased, or leaves the block unchanged after confirmed nonreceipt. Repeating this refinement causes vectors associated with distinct candidate symbols to diverge, unless the adversary spends erasures suppressing the divergence.\n\nThe quantitative argument considers two hypothetical executions consistent with the same Bob transcript. Its potential is $\\Phi^{(r)}=q\\Delta(S_1^{(r)},S_2^{(r)})+E_r$, where $\\Delta$ is Hamming distance and $E_r$ counts erasures across both executions. Each refinement round increases the potential by at least $2M$, while the distance term is at most $qM$. Consequently, two distinct symbols have transcript-explanation costs satisfying $c_j(z_1)+c_j(z_2)\\ge B$, for $B=(2R-q)M$. This accounts even for adversarially erased feedback: any reduction in distinguishability is paid for by erasures.\n\nFor decoding, Bob tabulates the minimum erasure cost of each possible inner symbol against his observed transcript. As all inner parameters depend only on fixed $\\varepsilon$, the lookup is constant-time per symbol after fixed preprocessing. Generalized minimum-distance decoding of a Guruswami–Indyk outer code converts these costs into a sequence of error-and-erasure decoding trials, recovering the original message in linear time. The result concerns erasures, not adversarial bit flips, and fixes the tolerance gap $\\varepsilon$; constants can depend heavily on it. The work is ECCC technical report TR26-320, posted November 16, 2026, not an established peer-reviewed or proof-assistant-formalized result. The authors explicitly report that ChatGPT-6 Astra discovered the proof, while they simplified it, wrote the manuscript, and checked correctness and originality themselves; this is an author-reported check, not an independent formal verification.",
+      "sources": [
+        {
+          "title": "Binary Two-Way Codes with Optimal Erasure Resilience",
+          "authors": [
+            "Klim Efremenko",
+            "Gillat Kol",
+            "Sergey Komech",
+            "Raghuvansh R. Saxena",
+            "Zhijun Zhang"
+          ],
+          "year": 2026,
+          "venue": "ECCC TR26-320",
+          "url": "https://eccc.weizmann.ac.il/report/2026/320/download",
+          "kind": "preprint",
+          "lang": "en"
+        }
+      ]
+    }
+  ]
+}
