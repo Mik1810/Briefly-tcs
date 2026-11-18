@@ -1,0 +1,29 @@
+{
+  "format": "briefly-post/2",
+  "date": "2026-11-18",
+  "title": "Sublinear Small–Large Quasi-kernel Equivalence and Sharp Power-Law Bounds",
+  "summary": "A new transfer theorem equates sublinear power-law guarantees for small and large quasi-kernels. It also yields explicit n²ᐟ³ one-step coverage and n−Ω(n³ᐟ⁴) size bounds, with proofs attributed to an AI model.",
+  "results": [
+    {
+      "title": "Small and Large Quasi-kernel Bounds Become Equivalent at Every Sublinear Exponent",
+      "summary": "A two-way exponent transfer and a refined eligible-vertex argument give the strongest stated general power-law bounds for quasi-kernels.",
+      "publication": "preprint",
+      "formalization": "not-stated",
+      "aiUse": "The author states that every proof in the paper is due to ChatGPT's Astra 6, that he wrote every word himself, and that he takes full responsibility for the mathematical content. He emphasizes that the main ideas behind the refined bounds originate with Rutschmann.",
+      "body": "A **quasi-kernel** of a finite digraph $D$ is an independent vertex set $Q$ from which every vertex is reachable by a directed path of length at most two. Write $N^+[Q]$ for $Q$ together with its out-neighbors. The 1976 Erdős–Székely Small Quasi-kernel Conjecture asks whether every source-free $n$-vertex digraph admits $|Q|\\le n/2$; the Large Quasi-kernel Conjecture asks whether every digraph admits $|N^+[Q]|\\ge n/2$. Neither conjecture is proved. Sam Spiro establishes an equivalence for **every sublinear power-law guarantee**: for $0<\\alpha<1$, a universal bound $|N^+[Q]|=\\Omega(n^\\alpha)$ holds if and only if every source-free digraph has a quasi-kernel with $|Q|\\le n-\\Omega(n^{1/(2-\\alpha)})$. In particular, he obtains the explicit estimates $|N^+[Q]|\\ge n^{2/3}/64$ and, for source-free digraphs, $|Q|\\le n-n^{3/4}/768$.\n\n**Previous bounds and context.** Chvátal and Lovász proved that quasi-kernels always exist. Earlier transfer theorems by Spiro and by Ai, Gutin, Liu and Meng related *linear* improvements for the small and large conjectures. Very recently, Rutschmann established $n^{2/3-o(1)}$ coverage for large quasi-kernels and the corresponding $n-n^{2/3-o(1)}$ upper bound for small quasi-kernels. Spiro's contribution is both the sharp exponent conversion and removal of the $o(1)$ loss in the large bound, followed by the improved $3/4$ exponent for the small bound. The manuscript explicitly attributes the central ideas behind the latter improvement to Rutschmann.\n\n**Small-to-large transfer.** Assume source-free digraphs have quasi-kernels omitting at least $cn^\\beta$ vertices, with $1/2<\\beta<1$. A minimal-counterexample argument removes sources. Then attach $k$ directed leaves to each original vertex, with $k$ chosen on the scale $n/m$, where $m$ is the maximum possible size of $N^+[Q]$ in the original graph. Any quasi-kernel of the augmented graph must include all $k$ leaves of each vertex not covered in one step by its original-vertex portion. Comparing this forced size with the assumed small-quasi-kernel guarantee yields $m=\\Omega(n^{2-1/\\beta})$.\n\n**Large-to-small transfer.** Repeatedly delete the closed out-neighborhood of a large quasi-kernel. A lifting lemma extends quasi-kernels of residual graphs back to the original graph; concavity bounds the number of rounds by $O(n^{1-\\alpha})$. For a minimum quasi-kernel $Q$, split $Q$ into representatives $Q_1$ accounting for its out-neighbors and a remainder $Q_2$. Let $F=V(D)\\setminus N^+[Q]$. Minimality shows that a residual quasi-kernel $R\\subseteq F$ cannot reach more vertices of $Q_2$ within two steps than $|R|$, since otherwise replacing those vertices would shrink $Q$. A small collection of lifted quasi-kernels covering $F$ therefore bounds $|Q_2|$, and rearrangement yields the exponent $1/(2-\\alpha)$.\n\n**Obtaining the explicit exponent.** Following Rutschmann, mark as *eligible* every vertex belonging to some quasi-kernel. A double iterative deletion produces many disjoint maximal quasi-kernels, each receiving many arcs from eligible vertices. Counting these arcs above and below forces a quasi-kernel to cover $\\Omega(|L|^{2/3})$ eligible vertices. Iterating this reduction, using a potential $|L|^{1/3}$, and lifting residual quasi-kernels gives $n^{2/3}/64$ coverage. The transfer theorem then gives the small bound. These are existential combinatorial results, not a resolution of the half-size conjectures; the constants are not optimized.\n\n**Verification and AI use.** This is arXiv v1, announced November 18, 2026, and not presented as peer-reviewed or formally verified. The author declares that every proof was produced by ChatGPT Astra 6, while he wrote the manuscript and assumes responsibility for its mathematics. The complete HTML manuscript, including both proof sections and references, was examined; no independent proof audit is claimed.",
+      "sources": [
+        {
+          "title": "Equivalence of Small and Large Quasi-kernels",
+          "authors": [
+            "Sam Spiro"
+          ],
+          "year": 2026,
+          "venue": "arXiv:2611.22881v1 [math.CO]",
+          "url": "https://arxiv.org/html/2611.22881v1",
+          "kind": "preprint",
+          "lang": "en"
+        }
+      ]
+    }
+  ]
+}
