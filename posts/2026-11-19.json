@@ -1,0 +1,30 @@
+{
+  "format": "briefly-post/2",
+  "date": "2026-11-19",
+  "title": "El-Zahar–Erdős Conjecture Refuted by High-Girth Graphs",
+  "summary": "Liu and Meng construct graphs of arbitrarily large girth and chromatic number in which every anticomplete pair has a side requiring at most six colors, disproving a longstanding conjecture even for triangle-free graphs.",
+  "results": [
+    {
+      "title": "A disproof of the El-Zahar–Erdős conjecture",
+      "summary": "For every d and g ≥ 4, there is a graph of chromatic number at least d and girth at least g whose every anticomplete pair has a side of chromatic number at most six.",
+      "publication": "preprint",
+      "formalization": "not-stated",
+      "aiUse": "The authors state that they used OpenAI's GPT-6.2 Astra to help construct the counterexample and develop its proof; they take responsibility for the manuscript.",
+      "body": "**Theorem and context.** El-Zahar and Erdős asked whether, for every fixed clique bound $t$ and chromatic threshold $c$, sufficiently high chromatic number forces two *anticomplete* vertex sets $A,B$ with $\\chi(G[A]),\\chi(G[B])\\ge c$. Here anticomplete means that no edge runs between the sets. Their 1985 theorem guarantees an asymmetric version: one side has chromatic number at least three and the other at least $c$. Nguyen, Scott, and Seymour later strengthened the first side to have arbitrarily large minimum degree, but that does not imply arbitrarily large chromatic number. Liu and Meng refute the symmetric conjecture even among graphs with arbitrarily large girth. Precisely, for every pair of integers $d\\ge1$ and $g\\ge4$, there exists a finite graph $G$ of girth at least $g$ and $\\chi(G)\\ge d$ such that every anticomplete pair $A,B$ satisfies $\\min\\{\\chi(G[A]),\\chi(G[B])\\}\\le6$. In particular, triangle-free graphs with unbounded chromatic number need not contain two anticomplete induced subgraphs both requiring seven colors.\n\n**Ordered block construction.** The authors begin with $r=2d+2$ independent blocks $V_1,\\ldots,V_r$, each of size $n$. For each block pair $(i,j)$, independently add cross-edges with probability $D_{ij}/n$. The constants $D_{ij}$ increase extremely rapidly in an order determined by increasing second index and, within each group, decreasing first index: each successive parameter exceeds the twenty-fourth power of the previous one. A pair of blocks is *weak for* a vertex set $X$ if one of its intersections with $X$ has size at most $nD_{ij}^{-8}$. Two high-probability properties are engineered: (L) every two sufficiently large subsets of a block pair have a connecting edge; (S) the graph $W_X$ consisting of weak-pair edges in $H[X]$ has fewer than $3|X|/2$ edges, simultaneously for every nonempty $X$.\n\n**Why six colors suffice.** Weakness is hereditary under taking subsets. Thus (S), applied to every induced subgraph, makes $W_X$ 2-degenerate and hence 3-colorable. Let $F_X$ be the graph on block indices whose edges are the nonweak pairs for $X$. Combining a coloring of $F_X$ with the 3-coloring of $W_X$ gives $\\chi(H[X])\\le3\\chi(F_X)$. For anticomplete $A,B$, consider the earliest nonweak pair across $F_A\\cup F_B$; suppose it belongs to $F_A$. The rapid growth of the parameters and (L) imply that every nonweak pair of $B$ must cross one fixed cut of the ordered blocks. Otherwise, a later pair would force an edge between $A$ and $B$. Consequently $F_B$ is bipartite, so $\\chi(H[B])\\le6$.\n\n**Probability and girth.** Union bounds show (L) from the exponentially small probability of missing all edges between large subsets. For (S), the expected number of weak edges on any $m$-vertex set is bounded in terms of $(m/(rn))^{3/4}$; a binomial tail estimate and a union bound over all vertex sets establish simultaneous sparsity. The expected number of cycles shorter than fixed $g$ is bounded independently of $n$. Deleting at most $\\sqrt n$ vertices removes them. Meanwhile (L) ensures every independent set of the original graph has at most $2n$ vertices, giving $\\chi(G)\\ge(rn-\\sqrt n)/(2n)\\ge d$ for sufficiently large $n$. Taking an induced subgraph preserves the anticomplete-pair obstruction.\n\n**Significance and verification.** This is a probabilistic existence counterexample, not an efficient explicit construction; the constant six is not claimed optimal. The source is arXiv v1, a preprint rather than a peer-reviewed or proof-assistant-verified theorem. The authors state that they used OpenAI's GPT-6.2 Astra to help construct the counterexample and develop its proof, and accept responsibility for the manuscript.",
+      "sources": [
+        {
+          "title": "A disproof of the El-Zahar–Erdős conjecture",
+          "authors": [
+            "Chenghua Liu",
+            "Boning Meng"
+          ],
+          "year": 2026,
+          "venue": "arXiv:2611.24735v1 [math.CO]",
+          "url": "https://arxiv.org/pdf/2611.24735",
+          "kind": "preprint",
+          "lang": "en"
+        }
+      ]
+    }
+  ]
+}
