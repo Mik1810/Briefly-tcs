@@ -1,0 +1,30 @@
+{
+  "format": "briefly-post/2",
+  "date": "2026-11-20",
+  "title": "Symmetric Boolean Functions: A One-Third-Exponent Degree-Deficit Bound",
+  "summary": "Sun and Wang prove a uniform n − O(n¹ᐟ³ log²ᐟ³ n) lower bound for the exact real degree of every nonconstant symmetric Boolean function, breaking the prime-gap barrier. The authors report Lean 4 formalization and extensive AI assistance.",
+  "results": [
+    {
+      "title": "Breaking the Prime-Gap Barrier for Exact Degree of Symmetric Boolean Functions",
+      "summary": "A new arithmetic-recurrence argument improves the uniform degree-deficit exponent from 0.525 to one third.",
+      "publication": "preprint",
+      "formalization": "formalized",
+      "aiUse": "The authors disclose extensive use of Claude Code (Anthropic) and Codex (OpenAI) to search and test proof strategies, draft proofs and notes, write search and validation code and the Lean formalization, check literature, and draft and revise the manuscript. They state that the human authors directed the work, reviewed the final text, and take responsibility.",
+      "body": "For a symmetric Boolean function $f:\\{0,1\\}^n\\to\\{0,1\\}$, write $f(x)=F(|x|)$, where $F$ is its profile on the integer grid $0,\\ldots,n$. Its exact real degree equals the degree of the unique interpolating polynomial $q_F$. Sun and Wang prove that every nonconstant such function satisfies\n$$\n\\deg_{\\mathbb R}(f)\\ge n-Cn^{1/3}(\\log n)^{2/3}\n$$\nfor an absolute constant $C$. Equivalently, the maximum degree deficit $\\Delta(n)=\\max_F(n-\\deg q_F)$ is $O(n^{1/3}(\\log n)^{2/3})$. This is a uniform theorem for all positive integers $n$, not an average-case or approximate-degree statement.\n\n**Earlier bounds.** Von zur Gathen and Roche established $\\deg q_F\\ge p(n)-1$, where $p(n)$ is the largest prime not exceeding $n+1$. Combined with Baker, Harman and Pintz's prime-gap theorem this gives $\\Delta(n)=O(n^{0.525})$; a newer prime-gap preprint claims an exponent $0.52$. Even the Riemann hypothesis would give only $O(\\sqrt n\\log n)$ by that approach, and Legendre's conjecture only $O(\\sqrt n)$. The conjecture of von zur Gathen and Roche remains the much stronger $\\Delta(n)\\le3$, known to be sharp in certain infinite families.\n\n**Proof mechanism.** Encode the profile as signs $Z_k=2F(k)-1$. A deficit of at least $r$ means that every polynomial test of degree below $r$ has zero alternating binomial moment against this sign sequence. The authors first turn these moment identities into a rational linear recurrence governing a long central interval of $Z$. Their quantitative integer-Hankel-determinant argument exploits the fact that sufficiently small integer determinants must vanish; the resulting recurrence has order $O(n^{2/3}(\\log n)^{1/3})$.\n\nThe second stage uses integrality and algebraic-number-theoretic height estimates to constrain characteristic roots of the recurrence. In particular, a further determinant argument bounds how many roots can cluster near $-1$. The binomial transform of a low-degree polynomial test converts a characteristic root into a point where a transformed test can be forced to vanish. Carefully choosing these zeros suppresses unwanted recurrence modes. If the recurrence first disagrees with the sign sequence sufficiently early, an integer annihilator, rational filtering and contour estimates produce a test whose pairing is dominated by that first defect. The pairing is then nonzero, contradicting the moment identities.\n\nIf agreement extends through a sufficiently long interval, arithmetic height bounds instead force the recurrence to be cyclotomic. The root count near $-1$ restricts the orders of the roots of unity, giving a bounded period; a separate low-degree test contradicts this periodic case. Balancing the recurrence order, angular estimates and test degree yields the one-third exponent.\n\n**Consequences and limitations.** The theorem gives a nonzero Fourier coefficient of degree $O(n^{1/3}(\\log n)^{2/3})$ for balanced symmetric sign functions other than parity, and rules out non-parity symmetric resilient functions beyond the corresponding threshold. The conjectured constant deficit of three remains open. The authors report a computer search through $n=8192$, but explicitly exclude that computation from their Lean formalization. The paper is an arXiv v1 preprint, announced November 20, 2026; its numbered mathematical results are reported as formalized in Lean 4 with Mathlib, with public code. This does not imply journal peer review or an independent audit of the formalization.",
+      "sources": [
+        {
+          "title": "Degree Lower Bounds for Symmetric Boolean Functions: Breaking the Prime-Gap Barrier",
+          "authors": [
+            "Xiaoming Sun",
+            "Chengu Wang"
+          ],
+          "year": 2026,
+          "venue": "arXiv:2611.26446v1 [cs.CC]",
+          "url": "https://arxiv.org/html/2611.26446v1",
+          "kind": "preprint",
+          "lang": "en"
+        }
+      ]
+    }
+  ]
+}
