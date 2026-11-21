@@ -1,0 +1,32 @@
+{
+  "format": "briefly-post/2",
+  "date": "2026-11-21",
+  "title": "Tight Communication Lower Bounds for Private Symmetric Boolean Functions",
+  "summary": "A new ECCC report proves an asymptotically tight n log n lower bound for private simultaneous-message computation of OR, even under support privacy. It also improves general symmetric-function protocols to near n to the three-halves communication under perfect privacy.",
+  "results": [
+    {
+      "title": "Private Simultaneous Messages: Tight OR Lower Bounds and Faster Symmetric-Function Protocols",
+      "summary": "Support-private OR requires asymptotically n log n bits, while every symmetric Boolean function admits a perfectly private protocol with near n to the three-halves communication.",
+      "publication": "preprint",
+      "formalization": "not-stated",
+      "aiUse": "The authors state that ChatGPT-5.5 Pro found a viable superlinear OR lower bound in April 2026; they extended that approach without AI. ChatGPT-6.2 Astra helped obtain the tight OR lower bound in November 2026. AI partially assisted upper-bound exploration, parameter verification, proof checking, and editing. The authors take responsibility for the contents.",
+      "body": "In the $n$-party private simultaneous messages (PSM) model, party $i$ holds one bit $x_i$ and sends an encoding computed using randomness shared among the parties but hidden from the evaluator. The evaluator must recover $f(x)$ with perfect correctness. Perfect privacy requires identical transcript distributions for inputs with the same output; the weaker *support privacy* requires only identical sets of possible transcripts. Ball, Crawford-Kahrl, Podolskii, and Prior prove that even support-private protocols for $\\mathrm{OR}_n$ require $(1-o(1))n\\log_2 n$ total communication. The same asymptotic lower bound holds for majority and exact majority, while $\\mathrm{MOD}_q$ requires $\\Omega(n\\log q)$ for $2\\le q\\le n$, with a constant independent of $q$. The OR bound matches the previously known $O(n\\log n)$ upper bound. They also give perfectly private protocols using $\\widetilde O(n^{3/2})$ bits for *every* symmetric Boolean function and support-private protocols using $\\widetilde O(n)$ bits.\n\nThe previous general upper bound for symmetric functions was $O(n^2)$, from Shinagawa, Eriguchi, Satake, and Nuida (2023). The Nechiporuk-style PSM lower-bound method of Ball and collaborators (ITCS 2020) yields only the trivial linear bound on symmetric functions because their restricted subfunctions remain symmetric. Concurrent independent work by Holmgren and Wu gives a superlinear OR lower bound by a related combinatorial method; the authors distinguish that result from their asymptotically tight bound.\n\nThe tight OR argument views each fixed shared-randomness choice as a Boolean cube of possible transcripts. Let $U$ be the union of all transcript supports, $Z$ the transcripts corresponding to the all-zero input, and $k_i$ the alphabet size of player $i$; set $g=(\\prod_i k_i)^{1/n}$. Support privacy forces every coordinate line meeting $U$ to contain a point of $Z$, yielding $|Z|/|U|\\ge 1/g$. Conversely, choose one transcript cube per point of $Z$. Their indicator functions are linearly independent over $\\mathbb F_2$. Removing one selected symbol per coordinate preserves independence: the parity constraint along coordinate lines reconstructs every deleted entry. Greedily removing the most frequent symbols gives $|Z|/|U|\\le\\prod_i(1-1/k_i)\\le e^{-n/g}$. Hence $g\\ln g\\ge n$, implying $\\sum_i\\log_2 k_i\\ge(1-o(1))n\\log_2 n$.\n\nA second lower-bound framework uses *agreement lemmas*: if too few local symbols exist, two transcript cubes can be aligned and flipped to produce an identical transcript for inputs with different outputs, contradicting correctness. The proof combines extremal combinatorics, including Ramsey's theorem and Higman's lemma, with a lifting argument from individual message complexity to total communication. For upper bounds, the authors reconstruct Hamming weight from residues modulo small primes using the Chinese remainder theorem, then privately implement the resulting outer computation through masked inner protocols with telescoping random-function tables. Replacing the outer construction yields the near-linear support-private result.\n\nThese bounds quantify the communication cost of hiding information even for elementary symmetric functions. A remaining gap separates the near-$n\\log n$ lower bounds for some functions from the $\\widetilde O(n^{3/2})$ perfectly private upper bound for arbitrary symmetric functions. This is ECCC technical report TR26-325, dated November 21, 2026: a research preprint, not an established peer-reviewed or proof-assistant-formalized result. The authors disclose that ChatGPT-5.5 Pro helped find an initial superlinear OR bound, ChatGPT-6.2 Astra helped obtain the tight OR lower bound, and AI tools assisted some upper-bound work, proof checking, and editing; they take responsibility for the paper.",
+      "sources": [
+        {
+          "title": "On the Complexity of Symmetric Boolean Functions in Multiparty Private Simultaneous Messages",
+          "authors": [
+            "Marshall Ball",
+            "Peter Crawford-Kahrl",
+            "Vladimir Podolskii",
+            "Morgan Prior"
+          ],
+          "year": 2026,
+          "venue": "ECCC TR26-325",
+          "url": "https://eccc.weizmann.ac.il/report/2026/325/download/",
+          "kind": "preprint",
+          "lang": "en"
+        }
+      ]
+    }
+  ]
+}
