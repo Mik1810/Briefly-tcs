@@ -1,0 +1,30 @@
+{
+  "format": "briefly-post/2",
+  "date": "2026-11-23",
+  "title": "Resolution Automatability and Polynomial Equivalence on Tseitin Formulas",
+  "summary": "Itsykson and Smirnov prove that regular and unrestricted resolution can be automated on all Tseitin contradictions, and that their shortest refutations are polynomially related.",
+  "results": [
+    {
+      "title": "Resolution Is Automatable on Tseitin Formulas",
+      "summary": "A treewidth-sensitive lower bound makes known regular-resolution proof search polynomial in the size of the shortest unrestricted refutation.",
+      "publication": "preprint",
+      "formalization": "not-stated",
+      "aiUse": "The authors state that ChatGPT Astra 6.0 helped find the main argument; they simplified and reorganized it and take full responsibility for the results and proofs.",
+      "body": "### Theorem and model\n\nLet $G=(V,E)$ be a finite undirected loopless graph (parallel edges are allowed), and let $c:V\\to\\{0,1\\}$ assign parity charges. The Tseitin CNF $T(G,c)$ has an edge variable $x_e$ and, at each vertex $v$, encodes $\\bigoplus_{e\\ni v}x_e=c(v)$. For connected $G$ with odd total charge the formula is unsatisfiable. Write $S(F)$ and $S_{\\mathrm{reg}}(F)$ for the minimum numbers of used input and derived clauses in unrestricted and regular resolution refutations; regularity forbids resolving on a variable twice along any proof path. Itsykson and Smirnov prove that **both systems are automatable on Tseitin contradictions**: a deterministic algorithm, given $F$ but not an optimal proof, outputs a regular refutation in time $(\\ell(F)+S(F))^{O(1)}$, where $\\ell(F)$ is the input encoding length. Moreover, an absolute constant $C$ satisfies $S(F)\\le S_{\\mathrm{reg}}(F)\\le S(F)^C$. This polynomial equivalence is weaker than Urquhart's conjecture of equality of the two minimum lengths.\n\n### Earlier bounds and the obstruction\n\nAlekhnovich and Razborov had established automatability for certain graph families, including bounded-cyclicity instances, and posed the general Tseitin question. Atserias and Müller proved that unrestricted resolution is not automatable on arbitrary unsatisfiable CNFs unless $P=NP$, so this positive theorem is specific to parity contradictions. Earlier general unrestricted-resolution lower bounds derived from polynomial grid minors were only $2^{\\Omega(\\mathrm{tw}(G)^\\lambda)}$ for some $\\lambda>0$ (for example any fixed $\\lambda<1/9$ through the cited grid-minor bound). Stronger $2^{\\Omega(\\mathrm{tw}(G))}$ lower bounds were known for regular resolution. The new work establishes that same exponential lower bound for unrestricted resolution on every connected $G$, and $S(T(G,c))+|T(G,c)|\\ge 2^{\\Omega(\\mathrm{tw}(L(G)))}$, where $L(G)$ is the line graph. When $G$ has no bridges, the latter holds for $S$ alone.\n\n### Proof mechanism\n\nThe first step combines the Ben-Sasson–Wigderson balanced-cut measure with random restrictions. For a 3-edge-connected graph the authors construct a distribution on spanning trees with $\\Pr[B\\subseteq T]\\le(2/3)^{|B|}$ for every edge set $B$. Three spanning trees obtained by doubling edges and applying tree packing are merged using randomized exchanges, akin to swap rounding. A restriction leaves the sampled tree free and independently assigns or retains other edges. Either a wide proof clause survives, an exponentially unlikely event, or a narrow clause must contain a balanced cut in the remaining graph, again exponentially unlikely. Union bounds force exponentially many clauses. A treewidth-preserving 3-connected topological minor extends the argument to arbitrary connected graphs.\n\nFor the stronger line-graph parameter, each high-degree vertex is replaced by a bounded-degree expander with ports for incident edges. Separator arguments preserve line-graph treewidth up to constants, while parity summation permits simulation of the original clauses with a degree-dependent overhead. The exponential lower bound absorbs that overhead together with input size. Finally, known primal-treewidth proof-search algorithms run in $\\ell(F)^{O(1)}2^{O(\\mathrm{tw}(L(G)))}$ time; the lower bound makes this polynomial in $\\ell(F)+S(F)$. A bridge-tree decomposition yields polynomial equivalence even when the graph contains bridges.\n\n### Significance and verification\n\nThe result closes a proof-search question dating to Alekhnovich and Razborov, without contradicting hardness of automatability for general CNFs. It does **not** prove the stronger equality conjectured by Urquhart or general resolution automatability. This is ECCC technical report TR26-332, publicly listed on November 22, 2026: a preprint, not established as peer-reviewed or proof-assistant formalized. The authors state that ChatGPT Astra 6.0 helped find the main argument; they simplified and reorganized it and accept responsibility for correctness.",
+      "sources": [
+        {
+          "title": "Resolution Is Automatable on Tseitin Formulas",
+          "authors": [
+            "Dmitry Itsykson",
+            "Petr Smirnov"
+          ],
+          "year": 2026,
+          "venue": "ECCC TR26-332",
+          "url": "https://eccc.weizmann.ac.il/report/2026/332/download",
+          "kind": "preprint",
+          "lang": "en"
+        }
+      ]
+    }
+  ]
+}
