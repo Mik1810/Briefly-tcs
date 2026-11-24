@@ -1,0 +1,31 @@
+{
+  "format": "briefly-post/2",
+  "date": "2026-11-24",
+  "title": "Deterministic Linear-Time Minimum Spanning Trees",
+  "summary": "Khanna, Putterman and Song report an optimal deterministic comparison-based algorithm for minimum spanning trees, resolving the longstanding gap between randomized and deterministic running times.",
+  "results": [
+    {
+      "title": "Minimum Spanning Tree in Deterministic Linear Time",
+      "summary": "Linear decision-tree complexity yields a uniform worst-case linear-time algorithm even on a pointer machine.",
+      "publication": "preprint",
+      "formalization": "not-stated",
+      "aiUse": "Section 1.4 credits OpenAI Astra 6.2 with generating the main ideas with minimal human intellectual intervention. The authors describe iterative agent-assisted improvements and report verifying, simplifying and clarifying the resulting argument.",
+      "body": "### Theorem and context\n\nFor a connected undirected multigraph with $n$ vertices and $m$ edges carrying arbitrary real weights, Theorem 1.1 gives a uniform deterministic algorithm finding a minimum spanning tree in worst-case $O(m)$ time. Weight access is restricted to binary comparisons. Corollary 4.2 explicitly covers both RAM and pointer machines, and gives $O(m+n)$ for minimum spanning forests of disconnected graphs.\n\nThe previous explicit deterministic comparison-based bound was Chazelle's $O(m\\alpha(m,n))$ (JACM 2000), where $\\alpha$ is an inverse-Ackermann function. Karger, Klein and Tarjan (1995) achieved randomized expected linear time, while Fredman and Willard (1994) obtained deterministic linear time for word-sized integer weights using stronger machine operations. Pettie and Ramachandran (2002) reduced the uniform algorithmic question to bounding the optimal deterministic comparison decision tree. That distinction is essential: an inexpensive decision tree need not itself be inexpensive to construct.\n\n### Proof architecture\n\nThe new argument establishes a certificate procedure that constructs a forest and identifies a small residual collection of edges that cannot yet be discarded by the cycle property. Rather than repeatedly comparing every edge at successive contraction levels, the procedure assigns edges to rounds. Vertices acquire spokes leading to representative vertices, and edges can either seek suitable projections or be transferred to a recursive instance on representatives. Projection records track the inequalities required to justify transferring information back to the original graph.\n\nThe central difficulty is choosing the schedule without already knowing the weight ordering. The authors bound the number of possible histories of spokes, forests and preferred edge actions. A combinatorial bound on patterns of maxima over subsets controls the dependence on unknown weights. A probabilistic existence argument then supplies a deterministic schedule with sufficiently few badly scheduled edges, without spending weight comparisons on selecting that schedule.\n\nThe final recursion first applies a constant number of Borůvka phases. These decrease the vertex count while preserving the solution through safe contractions. The certificate bound controls the combined size of the remaining problem and the subsidiary exact forest computations by a term of the form $\\varepsilon m+C_\\varepsilon\\sqrt{mn'}$, where $n'$ is the reduced vertex count. Choosing enough contraction phases makes the total recursive edge volume at most half the original volume. Linear comparison work per level therefore sums geometrically. The Pettie–Ramachandran theorem converts the resulting comparison bound into the uniform time guarantee.\n\n### Significance and status\n\nThe claimed bound removes the inverse-Ackermann overhead without restricting weights to integers or relying on randomness. Its significance is primarily asymptotic: it does not establish that the resulting implementation is faster than conventional MST algorithms on practical inputs. The certificate scheduling argument is also a potential source of techniques for other comparison-based graph problems.\n\nThis is ECCC report TR26-339, released late on November 23, 2026. It is a preprint; peer review and proof-assistant formalization are not established. The authors disclose extensive AI involvement in Section 1.4. The account above describes the theorem and proof architecture, not an independent verification of correctness.",
+      "sources": [
+        {
+          "title": "A Deterministic Linear Time Algorithm for Minimum Spanning Tree",
+          "authors": [
+            "Sanjeev Khanna",
+            "Aaron Putterman",
+            "Junkai Song"
+          ],
+          "year": 2026,
+          "venue": "ECCC TR26-339",
+          "url": "https://eccc.weizmann.ac.il/report/2026/339/download/",
+          "kind": "preprint",
+          "lang": "en"
+        }
+      ]
+    }
+  ]
+}
