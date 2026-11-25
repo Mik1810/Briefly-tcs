@@ -27,17 +27,24 @@ Check at least: the latest announcement blocks of arXiv cs.DS, cs.CC, cs.DM and 
 (https://arxiv.org/list/<category>/recent), the ECCC report index (https://eccc.weizmann.ac.il/reports/),
 Erdős Problems, OpenAI math on GitHub, TheoretiCS, Theory of Computing and other TCS journals. Also check the
 research and news pages of AI labs that announce mathematical or TCS results (OpenAI, Anthropic, Google
-DeepMind), and treat their announcements as unverified claims unless a paper or formal proof is available. Use the arXiv
+DeepMind), and search the web for news of major results announced since the last post. Use the arXiv
 announcement date, not the submission date, to decide what is new. Skip anything already covered in previous
 files in `posts/`.
 
-Select the 1 to 3 most important new results: prefer breakthroughs and significant theoretical advances over
-routine papers, but publish the best available results even on quiet days. Create no file only if the sources
-show nothing new at all since the last post.
+Select 2 to 3 of the most important new results (only 1 if nothing else is worth publishing): prefer
+breakthroughs and significant theoretical advances over routine papers, but publish the best available results
+even on quiet days. Create no file only if the sources show nothing new at all since the last post.
+
+Always include any claim, from any source, of a new bound on a famous constant or a resolution, disproof or major
+progress on a well-known open problem (for example a new exponent of matrix multiplication, or a claimed proof
+or disproof of a famous conjecture), even if there is no paper yet. Such a claim takes precedence over routine
+papers. If no paper is available, use "publication": "announcement", cite the announcement itself as a
+"web-page" source, state clearly in the summary and body that it is an unverified announcement, and report what
+is known about who made it, how, and what evidence was released.
 
 Read each selected paper in full (the arXiv HTML version at https://arxiv.org/html/<id> or the PDF), not only
 the abstract. If the full text is not accessible, say so explicitly in the body and limit the account to what
-you could read.
+you could read. For announcements, read the full announcement and any accompanying material.
 
 Write each result with the depth of a briefing for specialists, about 300 to 600 words in the body:
 - the precise statement, with the model and the parameters;
@@ -69,7 +76,7 @@ The file must be valid JSON with exactly these fields (no others):
     {
       "title": "plain text",
       "summary": "one plain-text sentence",
-      "publication": "preprint" | "accepted" | "published" | "classic-result",
+      "publication": "announcement" | "preprint" | "accepted" | "published" | "classic-result",
       "formalization": "not-stated" | "formalized",
       "aiUse": "plain text: what the authors state about AI use, or that the paper contains no such statement",
       "body": "Markdown; math as $...$ inline and $$...$$ display (LaTeX, escape backslashes in JSON)",
@@ -91,7 +98,8 @@ The file must be valid JSON with exactly these fields (no others):
 Rules:
 - At least one result; every result has at least one source, preferably the primary source (arXiv, ECCC,
   proceedings, authors' pages). Cite the version you actually read.
-- Only state what the sources support. Say clearly whether a result is a preprint, accepted or published.
+- Only state what the sources support. Say clearly whether a result is an announcement, a preprint, accepted or
+  published.
   Do not claim that a proof has been checked: the site labels every post "automated check only".
 - `formalization` is "formalized" only if the source says the proof is formalized in a proof assistant.
 - Plain-text fields (title, summary, aiUse) are shown without math rendering: never use LaTeX, $, backslashes or
@@ -104,6 +112,11 @@ Rules:
 ```
 
 ## Note operative
+
+- Quarta versione (2026-11-25): gli ultimi 12 post avevano un solo risultato arXiv/ECCC e annunci come
+  ω = 9/4 e la GRH non erano stati pubblicati. Aggiunti: stato `announcement` ("announced, no paper yet"),
+  obbligo di includere annunci su grandi problemi aperti o costanti famose da qualunque fonte, ricerca web,
+  2-3 risultati per post. Regola sull'escape dei backslash già presente nel testo dal 2026-11-03.
 
 - Terza versione (2026-11-01, dopo il primo post reale giudicato troppo sommario dall'utente): lettura del paper
   completo, 300-600 parole per risultato con stato dell'arte e idea dell'algoritmo o della dimostrazione,

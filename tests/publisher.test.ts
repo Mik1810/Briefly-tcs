@@ -71,6 +71,17 @@ test('un post valido diventa un briefing pubblicato, non demo, con verifica solo
   assert.equal(result?.sources[0]?.kind, 'preprint');
 });
 
+test('un annuncio senza paper ha lo stato "annuncio" e una pagina web come fonte', () => {
+  const announced = post();
+  Object.assign(announced.results[0] as Record<string, unknown>, {
+    publication: 'announcement',
+    sources: [{ title: 'Lab announcement', authors: ['A Lab'], url: 'https://example.org/news', kind: 'web-page' }],
+  });
+  const [result] = postToBriefing('posts/2026-11-02.json', announced).results;
+  assert.equal(result?.status.publication, 'annuncio');
+  assert.equal(result?.sources[0]?.kind, 'pagina-web');
+});
+
 test('campi sconosciuti, valori fuori vocabolario e nome file errato sono rifiutati', () => {
   const bad = post('2026-11-02', { status: 'pubblicato', demo: true });
   (bad.results[0] as Record<string, unknown>).verification = 'revisione-indipendente';

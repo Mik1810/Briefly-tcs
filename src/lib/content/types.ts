@@ -7,7 +7,8 @@ export const EDITORIAL_STATUSES = ['bozza', 'pubblicato'] as const;
 export type EditorialStatus = (typeof EDITORIAL_STATUSES)[number];
 
 // Lo stato scientifico di un risultato ha dimensioni indipendenti: un preprint può essere formalizzato.
-export const PUBLICATION_STATUSES = ['risultato-classico', 'preprint', 'accettato', 'pubblicato'] as const;
+// "annuncio": risultato annunciato pubblicamente (blog, comunicato, talk) senza ancora un paper disponibile.
+export const PUBLICATION_STATUSES = ['risultato-classico', 'annuncio', 'preprint', 'accettato', 'pubblicato'] as const;
 export type PublicationStatus = (typeof PUBLICATION_STATUSES)[number];
 
 export const FORMALIZATION_STATUSES = ['non-indicata', 'formalizzato'] as const;

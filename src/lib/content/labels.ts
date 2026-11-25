@@ -5,6 +5,7 @@ import type { FormalizationStatus, PublicationStatus, SourceKind, VerificationSt
 
 export const PUBLICATION_LABELS: Record<PublicationStatus, string> = {
   'risultato-classico': 'classic textbook result',
+  annuncio: 'announced, no paper yet',
   preprint: 'preprint, not peer reviewed',
   accettato: 'accepted for publication',
   pubblicato: 'published',

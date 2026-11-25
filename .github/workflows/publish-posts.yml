@@ -72,7 +72,16 @@ jobs:
         if: ${{ always() && steps.publish.outputs.published != '' && steps.publish.outputs.published != '0' }}
         env:
           VERCEL_DEPLOY_HOOK_URL: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
-        run: curl --fail --silent --show-error --max-time 30 -X POST "$VERCEL_DEPLOY_HOOK_URL" > /dev/null
+        # Il hook ha superato i 30 s due volte (issue #16, #18): attesa più lunga e tentativi ripetuti.
+        run: |
+          for attempt in 1 2 3 4; do
+            if curl --fail --silent --show-error --max-time 90 -X POST "$VERCEL_DEPLOY_HOOK_URL" > /dev/null; then
+              exit 0
+            fi
+            echo "Deploy hook attempt $attempt failed"
+            [ "$attempt" -lt 4 ] && sleep $((attempt * 30))
+          done
+          exit 1
 
       # Avviso: una issue per ogni run fallito (notifica email/app al proprietario), con gli errori del publisher.
       # Il publisher non stampa mai chiavi; il log contiene solo percorsi, date ed errori di validazione.

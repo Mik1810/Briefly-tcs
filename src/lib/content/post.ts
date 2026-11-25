@@ -27,6 +27,7 @@ export const AUTOMATED_DISCLOSURE =
 
 const PUBLICATION: Record<string, PublicationStatus> = {
   'classic-result': 'risultato-classico',
+  announcement: 'annuncio',
   preprint: 'preprint',
   accepted: 'accettato',
   published: 'pubblicato',
