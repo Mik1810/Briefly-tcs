@@ -646,3 +646,42 @@ punto, B in negativo, B con ∎, solo ∎, grafo, ".tcs") e poi quattro varianti
 - Nota: i tracciati derivano dal font Georgia di Windows; da riconsiderare se servisse un'icona con licenza
   tipografica diversa.
 
+## Risultati importanti non pubblicati — 2026-11-25
+
+Segnalazione dell'utente: ω = 9/4 (annunciato oggi) e la confutazione della GRH (giorni fa) non sono stati
+pubblicati.
+- Diagnosi (lettura di branch posts, run e issue): post dal 1 al 25/11 tranne 8, 15, 16, 22; gli ultimi 12 con un
+  solo risultato, sempre arXiv o ECCC. Il prompt v3 chiede il paper completo, non ha uno stato per annunci senza
+  paper e tratta gli annunci dei laboratori come "unverified claims": gli annunci restano fuori. Le corse del task
+  in ChatGPT non sono state lette (sessione ChatGPT del pannello scaduta). Issue #13-#15, #17: domeniche/lunedì
+  senza annunci arXiv. #16, #18: publish riuscito, timeout di 30 s del deploy hook Vercel.
+- Decisione dell'utente: "Sì, tutte" (correzioni 1-5 e recupero di ω = 9/4 e GRH nel post di domani).
+- Eseguito: stato `annuncio` (post: `announcement`, etichetta "announced, no paper yet") in types, labels, post.ts;
+  migrazione 20261125120000_publication_announcement.sql (vincolo results_publication_check); test del nuovo
+  stato; deploy hook con --max-time 90 e fino a 4 tentativi; istruzioni del task v4 (annunci su grandi problemi
+  aperti/costanti famose da qualunque fonte con stato announcement, ricerca web, 2-3 risultati).
+- 14:47:22+01:00 verificato: `npm run check` 0 errori, 51/51 test; build fixture con check-dist pulito.
+- Commit locale su main eseguito; push rifiutato: il token gh non ha più lo scope `workflow`. Sincronizzazione del
+  workflow nella branch posts non ancora eseguita.
+- Issue #13, #14, #15, #17 chiuse (not planned) e #16, #18 chiuse (completed) con commento esplicativo.
+- Migrazione cloud non ancora applicata: sessione Supabase del pannello scaduta, in attesa dell'accesso
+  dell'utente. Task ChatGPT non ancora aggiornato (serve accesso a ChatGPT nel pannello).
+- L'utente rinnova lo scope `workflow`. 15:02:06+01:00: push bded41a su main; workflow copiato in posts (bca7362)
+  e verificato identico a main. Nessuna issue aperta su GitHub.
+- 15:02:41: tentativo con `supabase db query --linked --project-ref` (CLI con accesso valido): la prima query di
+  sola lettura non risponde in 180 s; processo interrotto prima della transazione, nessun processo residuo in WSL.
+  Migrazione cloud NON applicata. Pannello: Supabase ancora sulla pagina di accesso.
+- L'utente entra in Supabase nel pannello (GitHub). SQL Editor: transazione con la migrazione e la riga di storico
+  20261125120000. Verificato: vincolo con 'annuncio', storico 7 versioni.
+- Publish dry run 45632839242 su posts (workflow nuovo, codice bded41a): success.
+- ChatGPT nel pannello: pagina di accesso; cookie non essenziali rifiutati; in attesa dell'accesso dell'utente.
+- L'utente entra in ChatGPT. La chat dell'ultima corsa non si carica ("Caricamento della chat…"): motivo dello
+  scarto di ω = 9/4 non letto. Task "Briefing quotidiano ricerca TCS" → Modifica: testo sostituito con la v4 di
+  docs (righe del JSON di esempio unite, chiavi tra virgolette invece dei backtick) più un paragrafo una tantum
+  "only for the post dated 2026-11-26" per recuperare ω = 9/4 e la GRH, con fonte primaria obbligatoria. Salvato;
+  verificato dopo ricarica: 6290 caratteri, v4, regola di escape e paragrafo una tantum presenti. Pianificazione
+  invariata (ogni giorno, 09:00).
+- Da fare: dopo il 26/11 togliere il paragrafo una tantum dal task (ignorato in altre date, ma superfluo).
+- Ordine obbligato: migrazione cloud prima di aggiornare il task, altrimenti un post `announcement` verrebbe
+  rifiutato dal vincolo del database.
+

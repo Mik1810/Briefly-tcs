@@ -117,6 +117,8 @@ Rules:
   ω = 9/4 e la GRH non erano stati pubblicati. Aggiunti: stato `announcement` ("announced, no paper yet"),
   obbligo di includere annunci su grandi problemi aperti o costanti famose da qualunque fonte, ricerca web,
   2-3 risultati per post. Regola sull'escape dei backslash già presente nel testo dal 2026-11-03.
+  Caricata nel task il 2026-11-25 con un paragrafo una tantum valido solo per il post del 2026-11-26 (recupero
+  di ω = 9/4 e della GRH), da rimuovere dopo quella data.
 
 - Terza versione (2026-11-01, dopo il primo post reale giudicato troppo sommario dall'utente): lettura del paper
   completo, 300-600 parole per risultato con stato dell'arte e idea dell'algoritmo o della dimostrazione,
