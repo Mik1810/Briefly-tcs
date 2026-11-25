@@ -1,0 +1,32 @@
+{
+  "format": "briefly-post/2",
+  "date": "2026-11-25",
+  "title": "A Shorter Proof of Seymour’s Second Neighborhood Conjecture",
+  "summary": "A new combinatorial argument replaces the central step of the October proof with an extremal argument using Hall’s theorem and submodularity.",
+  "results": [
+    {
+      "title": "Seymour’s Second Neighborhood Conjecture via Saturated Extensions",
+      "summary": "A new proof establishes the second-neighborhood inequality through a potential on oriented supergraphs.",
+      "publication": "preprint",
+      "formalization": "not-stated",
+      "aiUse": "The authors report exploring approaches with ChatGPT Astra and Claude Fable. Claude Fable found the proof after the authors suggested induction starting from tournaments; ChatGPT Sol assisted with manuscript drafting and revision.",
+      "body": "### Statement and context\n\nFor every finite nonempty oriented graph $G$ (without loops or antiparallel arcs), there exists a vertex $v$ such that\n\n$$|N_G^{++}(v)|\\geq |N_G^+(v)|,$$\n\nwhere the neighborhoods consist of vertices at directed distance exactly two and one, respectively. Fisher settled tournaments in 1996; Havet and Thomassé subsequently supplied a median-order proof. For general orientations, Chen, Shen and Yuster obtained a universal ratio of approximately 0.657298, improved by Huang and Peng to 0.715538. OpenAI's October 2026 preprint reported the full inequality. Today's contribution is an alternative proof, not the first resolution.\n\n### Proof architecture\n\nWrite $X^+=N_G^+[X]$ and $b(X)=|X^+|-|X|$. The earlier reduction allows a hypothetical counterexample to be replaced by a graph satisfying $b(X^+)<b(X)$ for every nonempty proper subset. The authors minimize the aggregate boundary $\\Phi(H)=\\sum_v b(H_v)$ over oriented supergraphs $H$ on the same vertices, with $H_v=N_H^+[v]$. They introduce the residual family $R_v=\\bigcap_{u\\in N_G^-[v]}H_u$. Expanding these residual sets in the original graph produces another admissible supergraph: a pair of opposing arcs would imply an alternating closed walk incompatible with orientation.\n\nThe central inequality is $\\Phi(R)\\leq\\Phi(H)$ for saturated extensions, meaning that adding arcs cannot lower the potential. The induction starts with tournaments, where boundary incidences can be injected into the original boundary incidences by retaining or reversing their ordered pairs. For incomplete orientations, the argument fills missing adjacencies incident to a chosen vertex. Saturation supplies Hall's condition, allowing distinct residual sets to absorb the corresponding potential changes. Submodularity of the boundary function controls intermediate intersections and unions.\n\nEvery residual set is proper and nonempty in the hypothetical counterexample. Consequently, expanding them strictly decreases the aggregate boundary, contradicting minimality.\n\n### Significance and status\n\nThe conceptual benefit is that the difficult global inequality is expressed through familiar combinatorial tools rather than a new approximation constant. The extremal construction is existential; it does not itself provide an efficient implementation of the potential minimization. The paper also notes a two-vertex strengthening for sink-free orientations. The full HTML preprint was read, including its AI declaration. The authors distinguish their argument from the earlier Lean-formalized proof; no formalization of this alternative argument or completed peer review is reported.",
+      "sources": [
+        {
+          "title": "A short proof of Seymour’s Second Neighborhood Conjecture",
+          "authors": [
+            "Romain Bourneuf",
+            "Pierre Charbit",
+            "Samuel Coulomb",
+            "Stéphan Thomassé"
+          ],
+          "year": 2026,
+          "venue": "arXiv:2611.32872 [cs.DM]",
+          "url": "https://arxiv.org/html/2611.32872v1",
+          "kind": "preprint",
+          "lang": "en"
+        }
+      ]
+    }
+  ]
+}
