@@ -31,9 +31,13 @@ DeepMind), and search the web for news of major results announced since the last
 announcement date, not the submission date, to decide what is new. Skip anything already covered in previous
 files in `posts/`.
 
-Select 2 to 3 of the most important new results (only 1 if nothing else is worth publishing): prefer
-breakthroughs and significant theoretical advances over routine papers, but publish the best available results
-even on quiet days. Create no file only if the sources show nothing new at all since the last post.
+Select 1 to 3 of the most important new results, preferably 2 or 3: prefer breakthroughs and significant
+theoretical advances over routine papers, but publish the best available results even on quiet days. Create no
+file only if the sources show nothing new at all since the last post.
+
+Publishing the file is the goal of every run. Work in this order: scan the sources and choose the results, read
+and write them, then create the file. If time or tools run short, publish fewer results or shorter bodies
+rather than nothing: a run that found at least one new result must never end without creating the file.
 
 Always include any claim, from any source, of a new bound on a famous constant or a resolution, disproof or major
 progress on a well-known open problem (for example a new exponent of matrix multiplication, or a claimed proof

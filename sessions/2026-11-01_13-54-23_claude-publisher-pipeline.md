@@ -682,6 +682,30 @@ pubblicati.
   verificato dopo ricarica: 6290 caratteri, v4, regola di escape e paragrafo una tantum presenti. Pianificazione
   invariata (ogni giorno, 09:00).
 - Da fare: dopo il 26/11 togliere il paragrafo una tantum dal task (ignorato in altre date, ma superfluo).
+- Commit 055fca6 (docs e registro) su main.
+
+## Post del 26/11 mancante — 2026-11-26
+
+Segnalazione dell'utente (10:0x): il post del 26 non c'è sul sito.
+- 10:09:55+01:00 verificato: nessun file 2026-11-26.json su posts, nessun run "Publish posts" oggi, pagina 404,
+  nessuna issue aperta (il controllo giornaliero di GitHub parte con molte ore di ritardo: ieri alle 21:22).
+- ChatGPT nel pannello di nuovo disconnesso; l'utente rientra. Chat del task letta: corsa di oggi alle 9:01
+  "Research scan partially completed; publication not completed". Trovati ω = 9/4 (rivendicazione, fonti
+  secondarie e repository OpenAI), "Linear Single-Source Shortest Path, Almost" (arXiv:2611.34911) ed "Extension
+  complexity is not additive under Cartesian products" (arXiv:2611.33631); GRH esclusa per mancanza di fonte
+  primaria credibile. Causa: la corsa ha esaurito tempo/strumenti con il prompt v4 più impegnativo.
+- Correzione (task e docs): "Select 1 to 3 ..., preferably 2 or 3" e nuovo paragrafo "Publishing the file is the
+  goal of every run ... must never end without creating the file". Salvato; verificato dopo ricarica (6590
+  caratteri, regola e paragrafo una tantum presenti).
+- Impostazioni avanzate del task: modello "Modello predefinito", sforzo "Medio" non modificabile (campo
+  disattivato), esecuzione nella stessa chat. Non modificati.
+- "Esegui ora" avviato dal menu del task; attesa del file in background.
+- Verificato: file posts/2026-11-26.json presente alle 10:18:18 con 3 risultati, tutti "preprint": ω = 9/4
+  (PDF e documentazione Lean nel repository openai/math), SSSP non orientato in tempo atteso
+  O(m + n log log log n) (arXiv:2611.34911), extension complexity non additiva (arXiv:2611.33631). GRH non inclusa
+  (nessuna fonte primaria trovata dal task). Run 45790672903 success; /briefing/2026-11-26/ → 200 alle 10:19:21.
+- Residuo: il paragrafo una tantum del 26/11 resta nel task (ignorato nelle altre date); toglierlo alla prossima
+  modifica del task.
 - Ordine obbligato: migrazione cloud prima di aggiornare il task, altrimenti un post `announcement` verrebbe
   rifiutato dal vincolo del database.
 
