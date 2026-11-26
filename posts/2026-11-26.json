@@ -3,7 +3,7 @@
   "date": "2026-11-26",
   "title": "A Claimed Exact Matrix-Multiplication Exponent, Almost-Linear SSSP, and Nonadditive Extension Complexity",
   "summary": "OpenAI claims a matching lower bound fixing the matrix-multiplication exponent at 9/4, while new preprints report almost-linear exact real-weighted SSSP and refute extension-complexity additivity. The matrix lower bound remains a claim requiring independent scrutiny.",
-  "intro": "Three results span algebraic complexity, graph algorithms, and polyhedral combinatorics. The first is an unusually strong preprint claim, distinguished here from an independently verified theorem.",
+  "intro": "Three results span algebraic complexity, graph algorithms, and polyhedral combinatorics. The first is an unusually strong preprint claim, distinguished here from an independently verified theorem. Two further results, added later the same day, were missed by earlier briefings: a claimed proof of the Generalized Riemann Hypothesis for Dirichlet L-functions and a claimed proof of VP ≠ VNP. Both proofs were produced largely by AI and checked by Lean, but no mathematician has yet read either of them in full.",
   "results": [
     {
       "title": "OpenAI claims the exact matrix-multiplication exponent is 9/4",
@@ -75,6 +75,69 @@
           "venue": "arXiv:2611.33631v1 [cs.DM]",
           "url": "https://arxiv.org/html/2611.33631v1",
           "kind": "preprint",
+          "lang": "en"
+        }
+      ]
+    },
+    {
+      "title": "Claimed proof of the Riemann Hypothesis and of GRH for Dirichlet L-functions, released as Lean code",
+      "summary": "Levent Alpöge announces that, working with Claude, he has proved the Riemann Hypothesis and the Generalized Riemann Hypothesis for Dirichlet L-functions; only a Lean formalization has been released, and no mathematician has yet read the proof.",
+      "publication": "announcement",
+      "formalization": "formalized",
+      "aiUse": "Alpöge states that he found the proof working with Claude, that Claude 'far outpaced' him near the end, and that he and Claude formalized the argument in Lean. The shorter Lean edition in grh-lean was produced by Luke Sernau with colleagues at Anthropic and Claude.",
+      "body": "### The claim\n\nIn a four-page note, Levent Alpöge announces a proof of the **Riemann Hypothesis**: every nontrivial zero of $\\zeta(s)$ has real part $\\tfrac12$. The same method, he writes, gives the **Generalized Riemann Hypothesis for Dirichlet L-functions**: for every Dirichlet character $\\chi$, the nontrivial zeros of $L(s,\\chi)$ lie on $\\operatorname{Re}s=\\tfrac12$. He expects the Extended Riemann Hypothesis, for Dedekind zeta functions, to follow with more work. No paper accompanies the claim. The only proof released is a Lean 4 development, which the note says is complete and uses no assumptions.\n\n### Previous state of the art\n\nThe Riemann Hypothesis has been open since 1859. Its function-field analogue was settled by Weil for curves and by Deligne in general, and Stepanov later gave an elementary proof for curves. Over the integers, the best unconditional results concern how many zeros lie on the critical line. The strongest recent bound is that more than two thirds of the zeros are simple and on the line (Alpöge and Furman, arXiv:2608.13637). Anthropic's formal-math repository contains a Lean formalization of that result.\n\n### Outline of the method, as described in the note\n\nThe note gives only a sketch, and its author says it is a lossy summary that may need correction. The argument is described as a descendant of **Stepanov's method**. Over a function field, that method builds an auxiliary function vanishing to high **multiplicity** at the points being counted. Over the integers there is no obvious notion of multiplicity: it would amount to \"differentiating whole numbers\". The proposed replacement is natively automorphic: a chain of **iterated theta lifts** between totally definite unitary groups, with each lift contributing one order of multiplicity. For a von Mangoldt sum of length $X$, the chain has length about $\\sqrt X$. The ingredients listed include:\n\n- Stepanov-type determinants that realize Gan–Gross–Prasad periods;\n- a seesaw identity turning the period of the iterated lift into a Bessel period;\n- divisibility estimates via Chowla–Selberg and Siegel mass formulas;\n- an Iwasawa tower, the Bost slope inequality, and a relative trace formula;\n- a weakened form of Vandiver's conjecture for the classes that twisting cannot remove.\n\nAccording to the note's timeline, the full GRH was reached on 16 November 2026.\n\n### Formalization and verification status\n\nThe repository lsernau/grh-lean, published on 25 November, contains a shorter version produced with colleagues at Anthropic and Claude. It comes in two editions: a readable one of about 300,000 lines and a compact one of about 76,000 lines. Both state the theorems on top of Mathlib and use only the axioms propext, Classical.choice and Quot.sound.\n\nA Lean check certifies that the proofs prove the formal statements. It does not by itself certify that those statements express the Riemann Hypothesis as intended. The repository says the proof has **passed machine checks only**: no mathematician has read it through, and no paper comes with it. Alpöge expects much shorter proofs to follow. This is therefore an **announcement backed by a formal proof**, not an independently verified theorem. Statement fidelity and expert review are the points to watch.",
+      "sources": [
+        {
+          "title": "Remark (announcement of a proof of the Riemann Hypothesis and of GRH, with Claude)",
+          "authors": [
+            "Levent Alpöge"
+          ],
+          "year": 2026,
+          "url": "https://alpo.ge/remark.pdf",
+          "kind": "web-page",
+          "lang": "en"
+        },
+        {
+          "title": "GRH for Dirichlet L-functions, in Lean 4",
+          "authors": [
+            "Luke Sernau"
+          ],
+          "year": 2026,
+          "venue": "GitHub repository lsernau/grh-lean",
+          "url": "https://github.com/lsernau/grh-lean",
+          "kind": "web-page",
+          "lang": "en"
+        }
+      ]
+    },
+    {
+      "title": "VP ≠ VNP over every field: a superpolynomial lower bound for circuits computing the permanent",
+      "summary": "An Anthropic paper written by Claude claims that circuits for the m × m permanent need more than m^(c (log m)^(1/3)) gates over every field of characteristic other than two, separating VP from VNP; the proof is formalized in Lean but has not been checked by a mathematician.",
+      "publication": "preprint",
+      "formalization": "formalized",
+      "aiUse": "The paper states that the result was discovered by an internal research Claude model, and the repository states that both the paper and its Lean formalization were written by AI models. No human mathematician has checked the proof.",
+      "body": "### Statement\n\nThe paper *VP ≠ VNP over every field*, credited to Claude (Anthropic) and released on 23 November, claims the following. There is an absolute constant $c>0$ such that, for every characteristic $p$ and all sufficiently large $m$, every arithmetic circuit for the Hamiltonian cycle polynomial $\\mathrm{HC}_m$ has more than $m^{c(\\log m)^{1/3}}=2^{\\Omega((\\log m)^{4/3})}$ gates. The same holds for the permanent $\\mathrm{PERM}_m$ when $p\\neq2$; in characteristic two the permanent equals the determinant. The circuits are general: there is no restriction on depth, constants or cancellations. Both polynomials are VNP-complete, so **VP is a proper subset of VNP over every field**, confirming Valiant's conjecture of 1979.\n\nThe bound also holds for approximating circuits in the sense of border complexity, so VNP is not contained in the closure of VP. The authors note that this implies, over $\\mathbb C$, that the permanent is not approximated by determinants of polynomial size, the statement targeted by geometric complexity theory. That consequence is the one numbered claim not formalized in Lean. The result concerns algebraic computation only: it does **not** settle P vs NP.\n\n### Previous state of the art\n\nFor general circuits, the best previous lower bound for an explicit polynomial was the $\\Omega(n\\log d)$ bound of Strassen and of Baur–Strassen. In particular, nothing beyond order $m^2\\log m$ was known for $\\mathrm{PERM}_m$. Superpolynomial bounds were known only for restricted models: multilinear formulas (Raz), and circuits of constant depth (Limaye–Srinivasan–Tavenas, extended by Forbes). The new bound is quasipolynomial. The best upper bounds are exponential, so a wide gap remains.\n\n### How the proof works\n\nThe argument replaces ranks with **spectral points**: multiplicative, monotone functionals on tensors in the style of Strassen's asymptotic spectrum, whose existence comes from Zorn's lemma. Each spectral point induces a pseudometric on the parties of a tensor, and limits of these metrics (\"prices\") have nonpositive curvature. A key theorem shows that over every field one of two hypotheses holds, although the paper does not know which:\n\n- **Flat case.** Euclidean configurations are prices. A circuit with $L$ gates for a wire-network polynomial $f_{k,\\ell}$ on the complete graph splits into a sum of tensors of rank at most $L$ across balanced cuts. Comparing lengths forces $\\log L \\ge \\ell k^{3/2}/16$.\n- **Contracting case.** A Poincaré-type inequality yields tree decompositions that let computations be cut. A polynomial $\\Phi$ summing the runs of short nondeterministic programs would then admit \"accelerators\" at every scale, which a diagonal argument rules out.\n\nThe permanent enters only through Valiant's completeness theorem, by substitution. This is why the proof does not apply to the determinant, and why it does not transfer to Boolean circuits.\n\n### Verification status\n\nThe repository holds the 70-page paper and a Lean 4 development whose statement file imports only Mathlib. The proofs use only the standard axioms, and continuous integration re-checks them with an independent kernel. The README warns that **no machine checks that the statement file says what is claimed**; an appendix lists where the Lean statements differ from the paper's. No human mathematician has checked the proof, and there is no peer review. It is a preprint with a machine-checked formalization, pending expert scrutiny of the statements and of the argument.",
+      "sources": [
+        {
+          "title": "VP ≠ VNP over every field",
+          "authors": [
+            "Claude (Anthropic)"
+          ],
+          "year": 2026,
+          "venue": "Anthropic formal-math repository, vp-vnp/paper.pdf",
+          "url": "https://github.com/anthropics/formal-math/blob/main/vp-vnp/paper.pdf",
+          "kind": "preprint",
+          "lang": "en"
+        },
+        {
+          "title": "VP ≠ VNP over every field (Lean 4 formalization)",
+          "authors": [
+            "Anthropic"
+          ],
+          "year": 2026,
+          "venue": "GitHub repository anthropics/formal-math",
+          "url": "https://github.com/anthropics/formal-math/tree/main/vp-vnp",
+          "kind": "web-page",
           "lang": "en"
         }
       ]
