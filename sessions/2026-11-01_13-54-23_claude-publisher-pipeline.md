@@ -757,6 +757,10 @@ Richiesta dell'utente: rifare il post di oggi aggiungendo in fondo GRH e VP ≠ 
 - Note: il paragrafo una tantum del 27/11 nel task resta (salta i risultati già in posts/); da togliere dopo il
   27. La frase della pagina Method "Published briefings are not corrected afterwards" non modificata (in attesa
   di decisione dell'utente). Stack Supabase locale lasciato attivo (55321/55322).
+- Decisioni dell'utente: frase della pagina Method lasciata com'è; "ok fallo" per spegnere lo stack e togliere il
+  paragrafo una tantum. Eseguito: `npm run db:stop` ("stopped"); paragrafo rimosso dal task e salvato. Verificato
+  dopo ricarica: 6487 caratteri, nessun "One-time", repository e regola di pubblicazione presenti.
+- Stato finale: nessun servizio locale attivo; nessuna issue aperta; post del 26 online con 5 risultati.
 - Ordine obbligato: migrazione cloud prima di aggiornare il task, altrimenti un post `announcement` verrebbe
   rifiutato dal vincolo del database.
 

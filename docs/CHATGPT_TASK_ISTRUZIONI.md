@@ -133,6 +133,8 @@ Rules:
   (openai/math, anthropics/formal-math, google-deepmind/formal-conjectures) e sostituito il paragrafo una tantum
   con uno per il post del 2026-11-27: GRH (nota di Levent Alpöge, https://alpo.ge/remark.pdf, con formalizzazione
   Lean) e VP ≠ VNP (anthropics/formal-math, 23/11). Da rimuovere dopo quella data.
+- 2026-11-26, dopo la ripubblicazione del post del 26 con GRH e VP ≠ VNP in coda: paragrafo una tantum rimosso
+  dal task. Il testo qui sopra corrisponde al task (che non ha mai avuto il paragrafo una tantum in questo file).
 
 - Terza versione (2026-11-01, dopo il primo post reale giudicato troppo sommario dall'utente): lettura del paper
   completo, 300-600 parole per risultato con stato dell'arte e idea dell'algoritmo o della dimostrazione,
