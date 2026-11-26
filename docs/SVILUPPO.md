@@ -50,6 +50,12 @@ npm run build:fixture  # build offline dalle fixture demo
 - Avvisi: issue GitHub assegnate al proprietario se il publisher fallisce o se alle 11:00 UTC la pagina del giorno
   non esiste (`.github/workflows/daily-post-check.yml`).
 - Un post pubblicato non viene sovrascritto: se il file cambia, il workflow fallisce in modo visibile.
+- Ripubblicare un giorno (es. risultati aggiunti in coda, 2026-11-26): aggiornare il file su `posts` con un commit
+  il cui messaggio contiene `[skip ci]`, poi Run workflow con `republish_date=YYYY-MM-DD`. La RPC
+  `republish_briefing` sostituisce il briefing in una transazione; serve nessun accesso a Supabase. Gli id dei
+  risultati già pubblicati (ancore `#result-…`) restano invariati.
+- La CLI Supabase da questa rete non raggiunge il database (pooler Postgres in timeout); le modifiche di schema nel
+  cloud passano dal SQL Editor del pannello.
 
 ## Migrazioni del database
 

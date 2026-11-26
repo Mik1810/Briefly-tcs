@@ -720,6 +720,43 @@ Segnalazione dell'utente (10:0x): il post del 26 non c'è sul sito.
   entrambe da dichiarare non verificate in modo indipendente). Salvato; verificato dopo ricarica: 7270 caratteri,
   repository e paragrafo del 27 presenti, nessun "disproved", nessun riferimento al 26.
 - Residuo: togliere il paragrafo una tantum del 27/11 dopo quella data.
+
+## Post del 26/11 rifatto in coda e ripubblicazione da GitHub — 2026-11-26
+
+Richiesta dell'utente: rifare il post di oggi aggiungendo in fondo GRH e VP ≠ VNP "in stile append".
+- Fonti primarie lette: alpo.ge/remark.pdf (pdftotext, 4 pagine), README di lsernau/grh-lean (creato
+  2026-11-25T20:42:55Z), anthropics/formal-math README e vp-vnp/README.md, vp-vnp/paper.pdf (70 pagine; lette
+  le prime 6). Notato in formal-math anche `eth/` (ETH confutata), già coperta nel post del 2/11.
+- Post riscritto con uno script (scratchpad append-post.mjs): risultati 1-3 e titolo invariati, intro con una frase
+  sui due risultati aggiunti, risultato 4 GRH (announcement, formalized, 2 fonti) e 5 VP ≠ VNP (preprint,
+  formalized, 2 fonti), 507 e 528 parole. Validato con publishPosts in dry run e DB in memoria: nessun problema.
+- Supabase nel pannello di nuovo disconnesso. Domanda dell'utente: serve entrare ogni volta? Diagnosi della CLI
+  (`db query --linked --debug`, timeout 60 s): le chiamate HTTPS alla Management API funzionano, la connessione
+  Postgres al pooler aws-1-eu-west-3 va in timeout (porte del database non raggiungibili da questa rete).
+  Opzioni proposte: Management API con il token della CLI, oppure workflow GitHub. Scelta dell'utente: workflow.
+- Eseguito: migrazione 20261126120000_republish_briefing.sql (RPC SECURITY DEFINER, owner postgres, EXECUTE solo
+  service_role: cancella il briefing della data e richiama publish_briefing nella stessa transazione); publisher
+  con opzione `republish` (validazione completa, solo la data indicata, id dei risultati esistenti invariati);
+  CLI `--republish=YYYY-MM-DD`; input `republish_date` del workflow passato come variabile d'ambiente.
+- Verificato: check 0 errori, 52/52 test, build fixture e check-dist puliti. Stack locale avviato (era spento),
+  migrazione applicata: owner postgres, SECURITY DEFINER, service_role sì, anon no. Prova end-to-end locale con il
+  publisher reale: originale pubblicato; nuovo file senza republish rifiutato; dry run ok; republish ok con 5
+  risultati e fonti 2/1/1/2/2; seconda esecuzione "identico"; DELETE diretto con la chiave secret → 403; dati
+  di prova rimossi.
+- 11:00:26: push 570405b su main; workflow copiato in posts (eb69f95), identico a main.
+- L'utente entra in Supabase nel pannello. SQL Editor: transazione con republish_briefing (owner, revoke/grant) e
+  riga di storico 20261126120000. Verificato: publish_briefing e republish_briefing owner postgres, SECURITY
+  DEFINER, EXECUTE service_role sì, anon e authenticated no. (Conteggio dello storico non letto: colonna fuori
+  dalla griglia visibile.)
+- 11:02:56: file remoto ancora identico all'originale; PUT del nuovo file su posts (1cc4724, "[skip ci]"):
+  nessun run da push. Workflow avviato con republish_date=2026-11-26: run 45797666055 success, "Post letti: 22.
+  pubblicati: 2026-11-26. Già presenti e identici: 21." Le righe "Deploy hook attempt" nel log sono l'eco dello
+  script, non tentativi falliti.
+- Verificato online alle 11:04:12: cinque ancore result-…, le tre originali invariate; 60 formule KaTeX, 0 errori;
+  etichetta "announced, no paper yet" presente una volta. Nessuna issue aperta.
+- Note: il paragrafo una tantum del 27/11 nel task resta (salta i risultati già in posts/); da togliere dopo il
+  27. La frase della pagina Method "Published briefings are not corrected afterwards" non modificata (in attesa
+  di decisione dell'utente). Stack Supabase locale lasciato attivo (55321/55322).
 - Ordine obbligato: migrazione cloud prima di aggiornare il task, altrimenti un post `announcement` verrebbe
   rifiutato dal vincolo del database.
 
