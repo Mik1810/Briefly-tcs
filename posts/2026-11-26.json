@@ -1,0 +1,83 @@
+{
+  "format": "briefly-post/2",
+  "date": "2026-11-26",
+  "title": "A Claimed Exact Matrix-Multiplication Exponent, Almost-Linear SSSP, and Nonadditive Extension Complexity",
+  "summary": "OpenAI claims a matching lower bound fixing the matrix-multiplication exponent at 9/4, while new preprints report almost-linear exact real-weighted SSSP and refute extension-complexity additivity. The matrix lower bound remains a claim requiring independent scrutiny.",
+  "intro": "Three results span algebraic complexity, graph algorithms, and polyhedral combinatorics. The first is an unusually strong preprint claim, distinguished here from an independently verified theorem.",
+  "results": [
+    {
+      "title": "OpenAI claims the exact matrix-multiplication exponent is 9/4",
+      "summary": "An OpenAI preprint claims a matching arithmetic-circuit lower bound that would establish the exact square matrix-multiplication exponent as 9/4 over every field; independent verification is not established.",
+      "publication": "preprint",
+      "formalization": "formalized",
+      "aiUse": "The manuscript is attributed to OpenAI. The paper contains no specific statement identifying which AI model generated individual proof steps or separating human and model contributions.",
+      "body": "### Statement and scope\n\nIn a manuscript dated November 24, OpenAI claims to settle the exponent of square matrix multiplication over **every field** $F$:\n\n$$\\omega_F=\\frac94.$$\n\nThe new assertion is the **lower bound**. For every $n\\ge2$, the paper claims that a formal arithmetic circuit computing the polynomial entries of the product of two $n\\times n$ matrices needs at least $\\lceil n^{9/4}/2\\rceil$ nonscalar multiplication or division gates, even with linear operations free. It further claims $\\underline{\\mathrm R}(T_n)\\ge n^{9/4}$ for the geometric border rank of the matrix-multiplication tensor. Its complexity model uses formal rational-function identities, including over finite fields; this should not be confused with numerical floating-point algorithms.\n\n### Earlier bounds\n\nThe elementary output-size barrier is quadratic. The previously established lower bounds for ordinary tensor rank were only quadratic up to constants, including Bläser's $\\tfrac52n^2-3n$ and stronger characteristic-specific results. By contrast, the **upper** bound $\\omega\\le9/4$ was announced by OpenAI in October and subsequently extended to every field and given independent expositions. Thus the November claim is not a new faster multiplication algorithm: it asserts that no asymptotically faster formal arithmetic algorithm exists.\n\n### Proposed proof mechanism\n\nThe argument begins with a contradiction. Assume $\\omega_F<9/4$. Bilinearization of a general arithmetic circuit extracts the mixed coefficient in two perturbation variables; each nonlinear gate contributes at most two products of input-linear forms. A strict circuit improvement would therefore yield a fixed-size low-rank decomposition of a multiplication tensor. The paper then specializes that decomposition to a finite field while preserving the relevant polynomial identities.\n\nOver the finite field, the proposed compression theorem transforms a small trivalent tensor network for a function $V$ into a network for a tensor power $V^{\\otimes d}$, keeping the exterior input bits separate while decreasing network volume per input bit by a power of a logarithm. The proof develops tensor prices, geometric constructions on spheres, incidence expansion, permutation routing, and reductions of network arity to achieve this transformation.\n\nThe opposing lower bound concerns **list distinctness**: testing whether every record in several independently chosen lists is distinct. The paper claims that any tensor network simultaneously evaluating these tests must consume a superconstant power of the record length per input bit. Starting from sorting-based networks and iterating the hypothetical compression a fixed number of times would violate that lower bound, ruling out $\\omega_F<9/4$.\n\n### Significance, limitations, and verification\n\nIf correct, this would refute the famous $\\omega=2$ conjecture, rather than merely improve an upper bound. OpenAI also publishes Lean files described as formalizing the square exponent and rectangular consequences for **division-free** programs with polynomial identities. The published manuscript includes division gates, so the formalization's scope is narrower in that respect. This is an extraordinarily strong **preprint claim**, not an independently established lower bound: neither a complete external proof audit nor peer review is established here. The 111-page manuscript and the public scope note were inspected, but their correctness was not certified.",
+      "sources": [
+        {
+          "title": "The matrix multiplication exponent is nine fourths",
+          "authors": [
+            "OpenAI"
+          ],
+          "year": 2026,
+          "venue": "OpenAI Math Release preprint, November 24, 2026",
+          "url": "https://github.com/openai/math/blob/main/preprints/The-matrix-multiplication-exponent-is-nine-fourths-November-24-2026/paper.pdf",
+          "kind": "preprint",
+          "lang": "en"
+        },
+        {
+          "title": "Exact square and rectangular matrix multiplication exponents over every field",
+          "authors": [
+            "OpenAI"
+          ],
+          "year": 2026,
+          "url": "https://github.com/openai/math/blob/main/lean/docs/107.md",
+          "kind": "web-page",
+          "lang": "en"
+        }
+      ]
+    },
+    {
+      "title": "Exact undirected single-source shortest paths in expected O(m + n log log log n) time",
+      "summary": "Gholami and Hajiaghayi give an exact randomized comparison–addition SSSP algorithm for undirected nonnegative real-weighted graphs with expected time O(m + n log log log n).",
+      "publication": "preprint",
+      "formalization": "not-stated",
+      "aiUse": "The authors state that OpenAI GPT Astra 6.2 and GPT Astra 6 assisted with some proofs, drafting, and exposition; Gemini Neon and GPT Sol assisted with writing. They take responsibility for correctness and link Lean files, without claiming a complete proof-assistant formalization of the principal theorem.",
+      "body": "### Theorem and computational model\n\nIman Gholami and MohammadTaghi Hajiaghayi announce an exact single-source shortest-path algorithm for adjacency-list **undirected multigraphs** with $n$ vertices, $m$ edges, and arbitrary finite nonnegative real lengths. Given a source $s$, it outputs every reachable distance and a shortest-path tree; unreachable vertices are identified. Its expected running time is\n\n$$O(m+n\\log\\log\\log n).$$\n\nThe algorithm terminates almost surely, and **every terminating run is correct**: random choices affect runtime, not correctness. The model permits comparison, addition, and copying of opaque real lengths, together with standard word operations on combinatorial indices; it does not inspect the bits of an edge length. The bound is independent of weight spread, and becomes $O(m)$ once $m=\\Omega(n\\log\\log\\log n)$.\n\n### Previous landscape\n\nDijkstra with Fibonacci heaps gives $O(m+n\\log n)$. Thorup obtained linear time for undirected **integer** lengths using integer-word operations, which does not resolve the opaque-real comparison–addition setting. In that setting, the cited predecessors include randomized undirected SSSP of Duan, Mao, Shu and Yin in $O(m\\sqrt{\\log n\\log\\log n})$ time, its deterministic counterpart due to Yan, and subsequent refinements. The new bound markedly reduces the overhead above input size on sparse graphs and reaches linear time for a broad density range; a worst-case linear algorithm for all sparse real-weighted inputs is not supplied.\n\n### Algorithmic architecture\n\nThe construction deliberately avoids globally sorting vertices by their distance, the step responsible for Dijkstra's familiar $n\\log n$ term. It first cuts a minimum spanning tree into connected owner regions with a selected **pivot** in each. The partition controls both the number of tree edges along owner-to-pivot routes and the maximum tree-edge length relative to any edge crossing owner regions. Consequently, an interregion edge projects to a controlled-length walk connecting its pivots.\n\nA smaller pivot graph is built from these projected edges. Random sampling and a tree-metric estimator give **certificates** bounding detours between pivots. Each successful sampling round certifies at least half the remaining requests, yielding linear expected total sampling work. The certified detours divide edges into radial and macro classes. For radial edges, an auxiliary distance $J_v$ to an identified pivot root acts as a coordinate that controls which transitions can belong to a shortest path. Redundant edges are eliminated whenever a certified detour would be strictly shorter.\n\nThe algorithm then constructs an ordered hierarchy of small local state graphs and outer states. Shortest paths in the original graph have equal-length realizations in this hierarchy, while state arcs project to genuine walks, ensuring exactness rather than approximation. Carefully blocked split–findmin structures, interval-minimum updates, and calendar searches maintain the hierarchy without a global distance ordering. The remaining merge events cost only $O(\\log\\log\\log n)$ per vertex, producing the final expected bound.\n\n### Limitations and AI disclosure\n\nThe approach is undirected, randomized in running time, and depends on the stated comparison–addition/word-index model. The authors acknowledge that OpenAI GPT Astra 6.2 and GPT Astra 6 helped develop some proofs, while Gemini Neon and GPT Sol helped draft text. They link a Lean repository but do not state in the paper that the complete theorem has been formalized. This is an **arXiv v1 preprint**, announced November 26, not a peer-reviewed or independently certified result.",
+      "sources": [
+        {
+          "title": "Linear Single-Source Shortest Path, Almost",
+          "authors": [
+            "Iman Gholami",
+            "MohammadTaghi Hajiaghayi"
+          ],
+          "year": 2026,
+          "venue": "arXiv:2611.34911v1 [cs.DS]",
+          "url": "https://arxiv.org/html/2611.34911v1",
+          "kind": "preprint",
+          "lang": "en"
+        }
+      ]
+    },
+    {
+      "title": "Extension complexity is not additive under Cartesian products",
+      "summary": "Minhao Liu refutes a longstanding additivity conjecture using a rational polytope with extension complexity 40 whose Cartesian square has extension complexity only 79.",
+      "publication": "preprint",
+      "formalization": "not-stated",
+      "aiUse": "The author states that OpenAI Codex (Astra 6.2), Anthropic Claude, and Google Antigravity (Carbon 4) were used to explore constructions and proof strategies, write and run verification code, and edit the manuscript; the author reports checking the proofs and taking responsibility.",
+      "body": "### A counterexample to product additivity\n\nFor a polytope $P$, its linear extension complexity $\\operatorname{xc}(P)$ is the minimum number of inequalities in a polyhedral extended formulation projecting onto $P$; equations are free. Placing formulations side by side gives\n\n$$\\operatorname{xc}(P\\times Q)\\le\\operatorname{xc}(P)+\\operatorname{xc}(Q).$$\n\nA conjecture of Grande, Padrol and Sanyal asserted equality. Minhao Liu disproves it with an explicit rational **24-dimensional polytope** having 50 facets and 150 vertices:\n\n$$\\operatorname{xc}(P)=40,\\qquad\\operatorname{xc}(P\\times P)=79<80.$$\n\nThe paper goes further: for every $t$ there is a rational $R_t$ whose square saves at least $t$ inequalities relative to two independent optimal formulations. With different factors $U_n,V_n$, the saving is at least $\\lceil5n/27\\rceil$ while the sum of their individual complexities is $O(n)$: the saving is a constant fraction.\n\n### Why the obvious construction is not optimal\n\nExtended formulations correspond, through Yannakakis' theorem, to **nonnegative factorizations of slack matrices**. The slack matrix records the gap between each facet inequality and each vertex. A product polytope combines facets of both factors, but a factorization may reuse generators across the two sides, even though the original inequalities involve disjoint coordinates.\n\nThe key combinatorial gadget consists of twelve fixed 'star' generators and a choice among three further generators. Every column of the single-factor matrix permits two of the three; two generators suffice for one factor. For two independently chosen columns, their permitted two-element subsets of a three-element set intersect. Three shared diagonal generators can therefore serve **all pairs**, costing $12+12+3=27$ rather than $2(12+2)=28$.\n\n### Transferring matrix savings to real polytopes\n\nA difficulty is that an arbitrary nonnegative matrix need not be the full slack matrix of a polytope. Liu proves a **facet-wedge transfer theorem**: omit selected facet rows, wedge over those facets, and obtain new polytopes whose extension complexity equals the partial slack matrix's nonnegative rank plus a precisely controlled additive term. This turns a matrix-factorization saving into a genuine geometric counterexample. Matching lower bounds establish that the explicit construction really needs 40 inequalities per factor and 79 for its square.\n\nFor unbounded gaps, the construction replaces the three choices by intersecting set families over growing alphabets. Separate factors must pay for enough local generators, whereas a joint factorization reuses generators across product coordinates. A counting argument establishes the individual lower bounds, preventing the deficit from disappearing when factors are optimized separately.\n\n### Consequences, open questions, and verification\n\nThe result changes assumptions about the compositional cost of linear programming formulations. Whether additivity holds for **0/1 polytopes or matroid base polytopes**, and whether squares can achieve a fixed fractional saving, remain open. The manuscript provides finite verification scripts and integer data, but these do **not** amount to a formal proof-assistant verification. The author reports using OpenAI Codex, Claude, and Google Antigravity for exploration, code, and editing while taking responsibility for the arguments. This is an **arXiv v1 preprint**, announced November 26, without established peer review.",
+      "sources": [
+        {
+          "title": "Extension complexity is not additive under Cartesian products",
+          "authors": [
+            "Minhao Liu"
+          ],
+          "year": 2026,
+          "venue": "arXiv:2611.33631v1 [cs.DM]",
+          "url": "https://arxiv.org/html/2611.33631v1",
+          "kind": "preprint",
+          "lang": "en"
+        }
+      ]
+    }
+  ]
+}
