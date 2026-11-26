@@ -8,6 +8,10 @@
 # Secret richiesti nel repository: TCS_SUPABASE_URL, TCS_SUPABASE_SECRET_KEY, VERCEL_DEPLOY_HOOK_URL.
 # In caso di errore apre una issue con GITHUB_TOKEN (issues: write); vedi anche daily-post-check.yml.
 # Ogni modifica di questo file va copiata anche nella branch posts, da cui GitHub lo esegue.
+#
+# Ripubblicare un giorno già online (es. risultati aggiunti in coda): aggiornare posts/YYYY-MM-DD.json con un
+# commit il cui messaggio contiene "[skip ci]", poi avviare a mano questo workflow con republish_date=YYYY-MM-DD.
+# Il publisher valida il file e sostituisce il briefing in una transazione (RPC republish_briefing).
 
 name: Publish posts
 
@@ -21,6 +25,10 @@ on:
         description: Validate only, do not write to Supabase
         type: boolean
         default: false
+      republish_date:
+        description: Replace the already published briefing of this date (YYYY-MM-DD) with its current file
+        type: string
+        default: ''
 
 permissions:
   contents: read
@@ -63,9 +71,11 @@ jobs:
         env:
           TCS_SUPABASE_URL: ${{ secrets.TCS_SUPABASE_URL }}
           TCS_SUPABASE_SECRET_KEY: ${{ secrets.TCS_SUPABASE_SECRET_KEY }}
+          # Input passato come variabile d'ambiente, mai interpolato nello script; il formato lo valida il publisher.
+          REPUBLISH_DATE: ${{ inputs.republish_date }}
         run: |
           set -o pipefail
-          node scripts/publish-posts.ts ${{ inputs.dry_run && '--dry-run' || '' }} ../content/posts 2>&1 | tee "$RUNNER_TEMP/publish.log"
+          node scripts/publish-posts.ts ${{ inputs.dry_run && '--dry-run' || '' }} ${REPUBLISH_DATE:+"--republish=$REPUBLISH_DATE"} ../content/posts 2>&1 | tee "$RUNNER_TEMP/publish.log"
 
       # Anche se un altro post è fallito, quelli pubblicati devono comparire sul sito.
       - name: Trigger Vercel production build
