@@ -53,6 +53,10 @@ function memoryDb(): PublisherDb & { rows: Map<string, Briefing> } {
       rows.set(briefing.date, structuredClone(briefing));
       return 'published';
     },
+    republish: async (briefing) => {
+      rows.set(briefing.date, structuredClone(briefing));
+      return 'published';
+    },
   };
 }
 
@@ -137,6 +141,37 @@ test('un post già pubblicato con contenuto diverso è un errore e non viene sov
   assert.equal(report.published.length, 0);
   assert.match(report.problems.join('\n'), /già pubblicato con contenuto diverso/);
   assert.equal(db.rows.get('2026-11-02')?.title, 'A test briefing');
+});
+
+test('republish sostituisce solo il briefing della data indicata, dopo la validazione', async () => {
+  const db = memoryDb();
+  await publishPosts([file(post()), file(post('2026-11-01'), '2026-11-01')], db, { today: TODAY });
+  const firstId = db.rows.get('2026-11-02')?.results[0]?.id;
+  const appended = post();
+  appended.results.push({ ...appended.results[0]!, title: 'Second result', summary: 'Appended later.' });
+
+  const dry = await publishPosts([file(appended)], db, { today: TODAY, republish: '2026-11-02', dryRun: true });
+  assert.deepEqual(dry, { published: ['2026-11-02'], unchanged: [], problems: [] });
+  assert.equal(db.rows.get('2026-11-02')?.results.length, 1, 'il dry run non scrive');
+
+  const changedOther = post('2026-11-01', { title: 'Changed' });
+  const report = await publishPosts([file(appended), file(changedOther, '2026-11-01')], db, {
+    today: TODAY,
+    republish: '2026-11-02',
+  });
+  assert.deepEqual(report.published, ['2026-11-02']);
+  assert.match(report.problems.join('\n'), /2026-11-01.*già pubblicato con contenuto diverso/);
+  // Gli id (ancore #result-…) dei risultati già pubblicati restano gli stessi.
+  assert.deepEqual(db.rows.get('2026-11-02')?.results.map((r) => r.id), [firstId, 'second-result']);
+  assert.equal(db.rows.get('2026-11-01')?.title, 'A test briefing');
+
+  const invalid = post('2026-11-02', { title: '' });
+  const rejected = await publishPosts([file(invalid)], db, { today: TODAY, republish: '2026-11-02' });
+  assert.equal(rejected.published.length, 0);
+  assert.equal(db.rows.get('2026-11-02')?.results.length, 2, 'un post non valido non sostituisce nulla');
+
+  assert.match((await publishPosts([file(appended)], db, { republish: '26-11-2026' })).problems[0]!, /formato/);
+  assert.match((await publishPosts([file(appended)], db, { republish: '2026-11-05' })).problems[0]!, /nessun file/);
 });
 
 test('id derivato già usato in un altro giorno riceve la data; un post invalido non blocca gli altri', async () => {

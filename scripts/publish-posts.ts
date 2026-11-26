@@ -1,5 +1,6 @@
 // Pubblica su Supabase i post JSON della cartella posts/ non ancora presenti. Uso:
-//   node scripts/publish-posts.ts [--dry-run] [cartella]
+//   node scripts/publish-posts.ts [--dry-run] [--republish=YYYY-MM-DD] [cartella]
+// --republish sostituisce il briefing già pubblicato di quella data con il contenuto attuale del suo file.
 // Ambiente: TCS_SUPABASE_URL, TCS_SUPABASE_SECRET_KEY (secret di GitHub Actions; mai la chiave nei log).
 // --dry-run legge dal database e valida, senza scrivere. Uscita 1 se un post non è valido o non pubblicabile.
 // In GitHub Actions scrive `published=<numero>` in GITHUB_OUTPUT per decidere se avviare la build Vercel.
@@ -11,6 +12,7 @@ import { createRestDb, publishPosts, readPublisherConfig } from './lib/publisher
 
 const args = process.argv.slice(2);
 const dryRun = args.includes('--dry-run');
+const republish = args.find((arg) => arg.startsWith('--republish='))?.slice('--republish='.length) || undefined;
 const dir = args.find((arg) => !arg.startsWith('--')) ?? 'posts';
 
 const files = readdirSync(dir)
@@ -19,7 +21,7 @@ const files = readdirSync(dir)
 
 let report: Awaited<ReturnType<typeof publishPosts>>;
 try {
-  report = await publishPosts(files, createRestDb(readPublisherConfig()), { dryRun });
+  report = await publishPosts(files, createRestDb(readPublisherConfig()), { dryRun, republish });
 } catch (error) {
   // Configurazione o database non utilizzabili: nessun post toccato.
   console.error(`ERRORE ${error instanceof Error ? error.message : String(error)}`);

@@ -62,6 +62,8 @@ export interface PublisherDb {
   resultIds(): Promise<Map<string, string>>;
   briefing(date: string): Promise<Briefing | undefined>;
   publish(briefing: Briefing): Promise<'published' | 'exists'>;
+  /** Sostituisce in una transazione il briefing della stessa data (RPC republish_briefing). */
+  republish(briefing: Briefing): Promise<'published'>;
 }
 
 export function createRestDb(config: PublisherConfig): PublisherDb {
@@ -99,6 +101,13 @@ export function createRestDb(config: PublisherConfig): PublisherDb {
       const outcome = await request('POST', 'rpc/publish_briefing', { post: briefing });
       if (outcome !== 'published' && outcome !== 'exists') {
         throw new Error(`publish_briefing ha restituito un valore inatteso: ${JSON.stringify(outcome)}`);
+      }
+      return outcome;
+    },
+    republish: async (briefing) => {
+      const outcome = await request('POST', 'rpc/republish_briefing', { post: briefing });
+      if (outcome !== 'published') {
+        throw new Error(`republish_briefing ha restituito un valore inatteso: ${JSON.stringify(outcome)}`);
       }
       return outcome;
     },
@@ -150,20 +159,31 @@ interface PublishOptions {
   dryRun?: boolean;
   /** Data odierna UTC `YYYY-MM-DD`; iniettabile nei test. */
   today?: string;
+  /** Data `YYYY-MM-DD` di un briefing già pubblicato da sostituire con il contenuto attuale del suo file. */
+  republish?: string;
 }
 
 /**
  * Pubblica i post non ancora presenti, in ordine di data. Ogni post è indipendente: uno non valido viene
  * riportato e non blocca gli altri. Un post già pubblicato con contenuto identico è ignorato (riprova sicura);
- * con contenuto diverso è un errore visibile, perché correzioni e modifiche non sono ancora automatizzate.
+ * con contenuto diverso è un errore visibile, salvo per la data indicata in `republish`, che viene validata
+ * come un post nuovo e sostituita in una transazione.
  */
 export async function publishPosts(
   files: PostFile[],
   db: PublisherDb,
-  { dryRun = false, today = new Date().toISOString().slice(0, 10) }: PublishOptions = {},
+  { dryRun = false, today = new Date().toISOString().slice(0, 10), republish }: PublishOptions = {},
 ): Promise<PublishReport> {
   const report: PublishReport = { published: [], unchanged: [], problems: [] };
   const fail = (path: string, message: string) => report.problems.push(`${path}: ${message}`);
+  if (republish !== undefined && !/^\d{4}-\d{2}-\d{2}$/.test(republish)) {
+    report.problems.push(`republish: data "${republish}" non nel formato YYYY-MM-DD`);
+    return report;
+  }
+  if (republish && !files.some((file) => file.path.endsWith(`${republish}.json`))) {
+    report.problems.push(`republish: nessun file ${republish}.json tra i post letti`);
+    return report;
+  }
 
   const resultIds = await db.resultIds();
 
@@ -188,12 +208,16 @@ export async function publishPosts(
       const authoredCoverage = typeof raw === 'object' && raw !== null && 'coverage' in raw;
       if (!authoredCoverage) briefing.coverage = coverageSinceLastPost(date, resultIds.values());
 
+      const replacing = existing !== undefined && date === republish;
       if (existing) {
         if (canonical(comparable(existing, authoredCoverage)) === canonical(comparable(briefing, authoredCoverage))) {
           report.unchanged.push(date);
+          continue;
         }
-        else fail(path, `il ${date} è già pubblicato con contenuto diverso; modifiche e correzioni non sono automatiche`);
-        continue;
+        if (!replacing) {
+          fail(path, `il ${date} è già pubblicato con contenuto diverso; per sostituirlo usare republish_date`);
+          continue;
+        }
       }
       if (date > addDays(today, MAX_DAYS_AHEAD)) {
         fail(path, `data ${date} troppo nel futuro rispetto a oggi (${today} UTC)`);
@@ -229,7 +253,10 @@ export async function publishPosts(
         report.published.push(date);
         continue;
       }
-      if ((await db.publish(briefing)) === 'exists') {
+      if (replacing) {
+        await db.republish(briefing);
+        for (const result of existing?.results ?? []) resultIds.delete(result.id);
+      } else if ((await db.publish(briefing)) === 'exists') {
         fail(path, `il ${date} è stato pubblicato da un'altra esecuzione durante questa; rieseguire per confrontarlo`);
         continue;
       }
