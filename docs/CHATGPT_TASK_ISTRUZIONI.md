@@ -27,7 +27,11 @@ Check at least: the latest announcement blocks of arXiv cs.DS, cs.CC, cs.DM and 
 (https://arxiv.org/list/<category>/recent), the ECCC report index (https://eccc.weizmann.ac.il/reports/),
 Erdős Problems, OpenAI math on GitHub, TheoretiCS, Theory of Computing and other TCS journals. Also check the
 research and news pages of AI labs that announce mathematical or TCS results (OpenAI, Anthropic, Google
-DeepMind), and search the web for news of major results announced since the last post. Use the arXiv
+DeepMind), and their GitHub repositories of mathematics and formal proofs: https://github.com/openai/math,
+https://github.com/anthropics/formal-math, https://github.com/google-deepmind/formal-conjectures, and any new
+mathematics or Lean repository in the GitHub organizations openai, anthropics and google-deepmind. Search the web
+for news of major results announced since the last post, including results released only as a note or a
+repository by researchers working with AI labs. Use the arXiv
 announcement date, not the submission date, to decide what is new. Skip anything already covered in previous
 files in `posts/`.
 
@@ -123,6 +127,12 @@ Rules:
   2-3 risultati per post. Regola sull'escape dei backslash già presente nel testo dal 2026-11-03.
   Caricata nel task il 2026-11-25 con un paragrafo una tantum valido solo per il post del 2026-11-26 (recupero
   di ω = 9/4 e della GRH), da rimuovere dopo quella data.
+- 2026-11-26: corsa delle 9:01 interrotta prima di pubblicare; aggiunta la regola "Publishing the file is the
+  goal of every run" e "1 to 3, preferably 2 or 3". Il paragrafo una tantum descriveva per errore la GRH come
+  "disproved" (è una dimostrazione): il task non l'ha trovata. Aggiunti i repository GitHub dei laboratori
+  (openai/math, anthropics/formal-math, google-deepmind/formal-conjectures) e sostituito il paragrafo una tantum
+  con uno per il post del 2026-11-27: GRH (nota di Levent Alpöge, https://alpo.ge/remark.pdf, con formalizzazione
+  Lean) e VP ≠ VNP (anthropics/formal-math, 23/11). Da rimuovere dopo quella data.
 
 - Terza versione (2026-11-01, dopo il primo post reale giudicato troppo sommario dall'utente): lettura del paper
   completo, 300-600 parole per risultato con stato dell'arte e idea dell'algoritmo o della dimostrazione,

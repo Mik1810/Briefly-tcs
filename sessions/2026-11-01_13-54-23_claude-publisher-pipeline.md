@@ -706,6 +706,20 @@ Segnalazione dell'utente (10:0x): il post del 26 non c'è sul sito.
   (nessuna fonte primaria trovata dal task). Run 45790672903 success; /briefing/2026-11-26/ → 200 alle 10:19:21.
 - Residuo: il paragrafo una tantum del 26/11 resta nel task (ignorato nelle altre date); toglierlo alla prossima
   modifica del task.
+- Domanda dell'utente: il task segue openai/math e i repository di Anthropic? Verificato: nel task solo
+  "OpenAI math on GitHub"; per Anthropic e DeepMind solo pagine research/news. `gh api orgs/anthropics/repos`:
+  anthropics/formal-math (23/11, VP ≠ VNP secondo fonti secondarie), anthropics/fermats-last-theorem;
+  GRH in lsernau/grh-lean (account personale); google-deepmind/formal-conjectures. Errore di Claude: nel
+  paragrafo una tantum la GRH era descritta come "disproved", mentre è una dimostrazione.
+- L'utente indica un articolo Medium (WebFetch 403; letto nel pannello): fonte primaria https://alpo.ge/remark.pdf
+  (Levent Alpöge, con Claude; RH e GRH per le L-funzioni di Dirichlet, formalizzazione Lean). PDF verificato:
+  200 application/pdf, 245114 byte.
+- Richiesta dell'utente: aggiungere i repository e sostituire il paragrafo di recupero. Eseguito nel task e in
+  docs: repository openai/math, anthropics/formal-math, google-deepmind/formal-conjectures e nuovi repository di
+  matematica/Lean nelle tre organizzazioni; paragrafo una tantum per il 2026-11-27 (GRH di Alpöge e VP ≠ VNP,
+  entrambe da dichiarare non verificate in modo indipendente). Salvato; verificato dopo ricarica: 7270 caratteri,
+  repository e paragrafo del 27 presenti, nessun "disproved", nessun riferimento al 26.
+- Residuo: togliere il paragrafo una tantum del 27/11 dopo quella data.
 - Ordine obbligato: migrazione cloud prima di aggiornare il task, altrimenti un post `announcement` verrebbe
   rifiutato dal vincolo del database.
 
