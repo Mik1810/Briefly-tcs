@@ -1,0 +1,70 @@
+{
+  "format": "briefly-post/2",
+  "date": "2026-11-27",
+  "title": "A Shorter Formal Proof of RH and GRH, and Explicit Constant-Rate Tree Codes",
+  "summary": "A new verification report documents substantially shorter Lean proofs of RH and Dirichlet GRH, while Dittmer and Ostrovsky claim an explicit infinite tree code with constant rate and distance and linear total encoding time.",
+  "results": [
+    {
+      "title": "Shorter Lean proofs of RH and Dirichlet GRH",
+      "summary": "A repository release and November 26 verification report document a claimed resolution of RH and Dirichlet GRH in two substantially shorter formal developments, without a peer-reviewed paper.",
+      "publication": "announcement",
+      "formalization": "formalized",
+      "aiUse": "Luke Sernau states that the shorter development builds on Levent Alpöge's proof with Claude and was produced with Anthropic colleagues and Claude. Andrew Sutherland reports using Claude Code for his verification work.",
+      "body": "### Statement and new development\n\nThe November 26 update to Andrew Sutherland's verification report concerns Luke Sernau's shorter formal development of Levent Alpöge's November 20 claimed proof of the Riemann hypothesis and its generalization to Dirichlet L-functions. For a primitive Dirichlet character $\\chi$, the claimed conclusion places every nontrivial zero of $L(s,\\chi)$ on $\\operatorname{Re}(s)=1/2$. This includes the classical zeta-function case, not an assertion about arbitrary automorphic L-functions.\n\nThe original formal development comprised approximately 17 million lines. The new repository provides a readable version of about 300,000 lines and a compact version of about 76,000 lines. Both target the same five headline theorems. This is a new development in the accessibility and reproducibility of the claimed resolution, not a second independent mathematical proof.\n\n### Architecture of the argument\n\nThe repository's reading guide reduces the zero-location statement to a one-sided estimate for weighted prime sums. Its central construction compares lattices of automorphic forms through a chain of theta lifts on hermitian spaces. Three ingredients are combined: short integral source forms, a spanning result ensuring enough target forms, and a lower bound on the sizes of integral forms. The comparison tracks both archimedean sizes and denominators at finite primes.\n\nThe guide describes a second-moment argument for spanning, determinant comparisons for the lifts, and congruence arguments controlling denominators. In particular, anticyclotomic twists and Selmer-group estimates enter the latter step. The resulting inequality bounds a prime-sum remainder by a constant times $x^{-1/2+6\\varepsilon}$ for arbitrarily small positive $\\varepsilon$ and sufficiently large $x$, leading to the one-sided zero exclusion. This account follows the authors' guide, not a complete reading of the enormous formal development.\n\n### Verification status and significance\n\nNo conventional paper accompanies the shorter release. It remains an announcement rather than a peer-reviewed publication. Sutherland's report, updated November 26 at 20:46 UTC, documents external checker runs, statement comparisons, and axiom audits for both versions; it also records a formal derivation of Schoenfeld's explicit Chebyshev-function bound. These are reported machine-verification results, not checks performed by this briefing. The repository explicitly notes the absence of a complete human review. The shorter source makes mathematical scrutiny more feasible, but understanding and independently explaining the argument remain substantial tasks.",
+      "sources": [
+        {
+          "title": "GRH for Dirichlet L-functions, in Lean 4",
+          "authors": [
+            "Luke Sernau"
+          ],
+          "year": 2026,
+          "url": "https://github.com/lsernau/grh-lean",
+          "kind": "web-page",
+          "lang": "en"
+        },
+        {
+          "title": "Reading guide",
+          "authors": [
+            "Luke Sernau"
+          ],
+          "year": 2026,
+          "url": "https://raw.githubusercontent.com/lsernau/grh-lean/main/grh/GUIDE.md",
+          "kind": "web-page",
+          "lang": "en"
+        },
+        {
+          "title": "Verification files for the shorter Lean proof of RH and of GRH for Dirichlet L-functions",
+          "authors": [
+            "Andrew Sutherland"
+          ],
+          "year": 2026,
+          "url": "https://math.mit.edu/~drew/shortgrh/",
+          "kind": "web-page",
+          "lang": "en"
+        }
+      ]
+    },
+    {
+      "title": "Explicit infinite tree codes with constant rate and distance",
+      "summary": "A new ECCC preprint claims a deterministic online encoder with constant alphabet and relative distance, using O(t) total word operations for t input bits.",
+      "publication": "preprint",
+      "formalization": "not-stated",
+      "aiUse": "The authors acknowledge AI assistance for literature searches and error checking; no model is named.",
+      "body": "### Statement\n\nSamuel Dittmer and Rafail Ostrovsky claim a uniform infinite binary tree code over a fixed finite alphabet $\\Sigma$ with relative distance $\\delta>0$. If two streams first diverge at position $a$, their encoded prefixes through any position $t\\ge a$ disagree in at least $\\delta(t-a+1)$ output positions from $a$ onward. The deterministic encoder emits each symbol online without knowing the eventual stream length.\n\nThe first $t$ symbols require $O(t)$ total word operations, with $O(\\log^2(t+2))$ worst-case work per arrival. The RAM model permits multiplication and division on words of $O(\\log(N+2))$ bits for streams of length at most $N$. The encoder itself does not depend on $N$.\n\n### Previous bounds\n\nSchulman's foundational work established existence of constant-rate, constant-distance tree codes in the 1990s. Explicit efficient constructions had generally sacrificed one parameter: Cohen, Haeupler and Schulman obtained rate $\\Omega(1/\\log\\log n)$ at constant distance, while Yankovitz's 2026 construction achieved constant rate with distance $\\Omega(1/\\log\\log n)$. Braverman obtained both constants with subexponential construction time.\n\n### Construction\n\nThe encoder separates short divergence intervals from long ones. A small convolutional code is found by exhaustive search justified by a probabilistic existence argument. Applying a second convolution independently along residue classes extends the protected interval quadratically while retaining a fixed-size local output.\n\nFor longer intervals, packets are vectors over a prime field. Their checksums combine earlier packet values using reciprocal coefficients $1/(t-j)$. Clearing denominators shows that a nonzero sum with $k$ terms has at most $k-1$ roots. Address-dependent shifts of the vectors, determined by common binary prefixes, prevent cancellation from destroying the distance guarantee across long gaps. A combinatorial interval argument yields packet distance at least $1/24$.\n\nThe packet checks are transmitted alongside the local encoder using ordinary error-correcting codes. Two overlapping finite horizons extend the construction indefinitely. Block convolution and advance scheduling of future horizons amortize the encoding work; the paper uses bounded-precision FFT calculations with exact integer rounding.\n\n### Significance and limitations\n\nIf correct, the construction resolves the longstanding explicit constant-parameter tree-code problem in its original distance formulation. It does not assert efficient decoding or the stronger immediacy condition for intervals beginning at later disagreements. Constants are not optimized. The ECCC report became public on November 26 at 15:14. It is a preprint, with no stated proof-assistant formalization or established peer review. The theorem, construction overview, local-code argument and computational analysis were accessible; the full proof has not been independently audited.",
+      "sources": [
+        {
+          "title": "Explicit O(1) Tree Code",
+          "authors": [
+            "Samuel Dittmer",
+            "Rafail Ostrovsky"
+          ],
+          "year": 2026,
+          "venue": "ECCC TR26-346",
+          "url": "https://eccc.weizmann.ac.il/report/2026/346/download/",
+          "kind": "preprint",
+          "lang": "en"
+        }
+      ]
+    }
+  ]
+}
